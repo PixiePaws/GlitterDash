@@ -1,11 +1,15 @@
 [gd_scene load_steps=2 format=3 uid="uid://cvl311e3g082f"]
 
-[ext_resource type="Texture2D" uid="uid://t75gsvlhv18t" path="res://icon.svg" id="1_05fn6"]
+[ext_resource type="Texture2D" uid="uid://65ie81p03sls" path="res://Art/Character/Unicorn.png" id="1_xlb60"]
 
 [node name="PlayerCharacter" type="RigidBody2D"]
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
-texture = ExtResource("1_05fn6")
+scale = Vector2(0.3, 0.3)
+texture = ExtResource("1_xlb60")
+flip_h = true
 
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="."]
-polygon = PackedVector2Array(-56, -54, -20, -61, 29, -61, 56, -51, 59, 0, 58, 43, 41, 57, -36, 58, -57, 45)
+position = Vector2(-3, 0)
+scale = Vector2(1.05522, 1)
+polygon = PackedVector2Array(-26.9351, -33, -35.4641, -61, -29.7781, -84, -11, -90, 2.44272, -85, 7.18108, -73, 13.8148, -91, 16.6578, -74, 25.1868, -87, 32.7682, -62, 40.7499, -42, 44.1403, -23, 47.9309, -14, 47.9309, -2, 44.1403, 4, 52.6693, 24, 51.7216, 39, 38.8545, 39, 33.1685, 53, 31.2731, 83, 16.1104, 81, 14.2151, 63, 4.73836, 62, 0.947671, 85, -14, 80, -13.2674, 49, -18.0058, 41, -24.6395, 38, -20.8488, 5, -35.0638, 9, -47.3836, -1, -44.9408, -13, -31.6734, -8)

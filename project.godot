@@ -11,7 +11,7 @@ config_version=5
 [application]
 
 config/name="UnicornGame"
-config/features=PackedStringArray("4.3", "Forward Plus")
+config/features=PackedStringArray("4.3", "C#", "Forward Plus")
 config/icon="res://icon.svg"
 
 [display]
@@ -23,6 +23,23 @@ window/size/mode=3
 [dotnet]
 
 project/assembly_name="New Game Project"
+
+[editor]
+
+naming/scene_name_casing=1
+naming/script_name_casing=1
+
+[file_customization]
+
+folder_colors={
+"res://Art/": "yellow",
+"res://Characters/": "purple",
+"res://Items/": "pink",
+"res://Levels/": "red",
+"res://MainMenu/": "orange",
+"res://Settings/": "green",
+"res://UI/": "blue"
+}
 
 [input]
 
