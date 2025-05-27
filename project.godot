@@ -17,3 +17,13 @@ config/icon="res://icon.svg"
 [dotnet]
 
 project/assembly_name="New Game Project"
+
+[file_customization]
+
+folder_colors={
+"res://Art/": "yellow",
+"res://Levels/": "red",
+"res://MainMenu/": "orange",
+"res://Settings/": "green",
+"res://UI/": "blue"
+}
