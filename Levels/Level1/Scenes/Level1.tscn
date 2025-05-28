@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" path="res://Levels/Level1/Scripts/Camera.cs" id="1_ttao5"]
 [ext_resource type="Texture2D" uid="uid://bayp2ayx78r5j" path="res://Art/PlaceHolders/PlaceHolderBlock.png" id="1_x4oj7"]
-[ext_resource type="PackedScene" uid="uid://cvl311e3g082f" path="res://Characters/Scenes/PlayerCharacter.tscn" id="2_n6ngs"]
+[ext_resource type="PackedScene" uid="uid://cvl311e3g082f" path="res://Player/Scenes/PlayerCharacter.tscn" id="2_n6ngs"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_enkug"]
 texture = ExtResource("1_x4oj7")
