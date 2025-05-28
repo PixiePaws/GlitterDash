@@ -1,10 +1,17 @@
-[gd_scene load_steps=2 format=3 uid="uid://cy5h05rfe3seb"]
+[gd_scene load_steps=3 format=3 uid="uid://cy5h05rfe3seb"]
+
+[ext_resource type="Texture2D" uid="uid://dtoum8uii2oop" path="res://Art/Items/TerrainPlaceHolder.png" id="1_7fnd6"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_1hexx"]
+size = Vector2(102, 102)
 
 [node name="Terrain" type="StaticBody2D"]
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(1, 0)
+scale = Vector2(0.05, 0.05)
+texture = ExtResource("1_7fnd6")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(1, 0)
 shape = SubResource("RectangleShape2D_1hexx")
