@@ -11,6 +11,7 @@ config_version=5
 [application]
 
 config/name="UnicornGame"
+run/main_scene="res://Levels/Level1/Scenes/Level1.tscn"
 config/features=PackedStringArray("4.3", "C#", "Forward Plus")
 config/icon="res://icon.svg"
 
@@ -29,16 +30,30 @@ project/assembly_name="New Game Project"
 naming/scene_name_casing=1
 naming/script_name_casing=1
 
+[file_customization]
+
+folder_colors={
+"res://Art/": "yellow",
+"res://Items/": "pink",
+"res://Levels/": "red",
+"res://MainMenu/": "orange",
+"res://Player/": "purple",
+"res://Settings/": "green",
+"res://UI/": "blue"
+}
+
 [input]
 
 "Move left"={
 "deadzone": 0.5,
 "events": [Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":0,"window_id":0,"alt_pressed":false,"shift_pressed":false,"ctrl_pressed":false,"meta_pressed":false,"pressed":false,"keycode":0,"physical_keycode":65,"key_label":0,"unicode":0,"location":0,"echo":false,"script":null)
+, Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":-1,"window_id":0,"alt_pressed":false,"shift_pressed":false,"ctrl_pressed":false,"meta_pressed":false,"pressed":false,"keycode":0,"physical_keycode":4194319,"key_label":0,"unicode":0,"location":0,"echo":false,"script":null)
 ]
 }
 "Move right"={
 "deadzone": 0.5,
 "events": [Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":0,"window_id":0,"alt_pressed":false,"shift_pressed":false,"ctrl_pressed":false,"meta_pressed":false,"pressed":false,"keycode":0,"physical_keycode":68,"key_label":0,"unicode":0,"location":0,"echo":false,"script":null)
+, Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":-1,"window_id":0,"alt_pressed":false,"shift_pressed":false,"ctrl_pressed":false,"meta_pressed":false,"pressed":false,"keycode":0,"physical_keycode":4194321,"key_label":0,"unicode":0,"location":0,"echo":false,"script":null)
 ]
 }
 Jump={
