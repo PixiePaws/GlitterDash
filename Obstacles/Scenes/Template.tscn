@@ -1,0 +1,3 @@
+[gd_scene format=3 uid="uid://bg6p5xh7rb6rq"]
+
+[node name="Template" type="Node2D" groups=["Obstacles"]]

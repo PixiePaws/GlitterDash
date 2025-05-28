@@ -1,8 +1,9 @@
-[gd_scene load_steps=6 format=4 uid="uid://cuch5yonnwbtt"]
+[gd_scene load_steps=7 format=4 uid="uid://cuch5yonnwbtt"]
 
 [ext_resource type="Script" path="res://Levels/Level1/Scripts/Camera.cs" id="1_ttao5"]
 [ext_resource type="Texture2D" uid="uid://bayp2ayx78r5j" path="res://Art/PlaceHolders/PlaceHolderBlock.png" id="1_x4oj7"]
 [ext_resource type="PackedScene" uid="uid://cvl311e3g082f" path="res://Player/Scenes/PlayerCharacter.tscn" id="2_n6ngs"]
+[ext_resource type="PackedScene" uid="uid://b6upcof87f3dd" path="res://Obstacles/Scenes/CircularSaw.tscn" id="4_346tb"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_enkug"]
 texture = ExtResource("1_x4oj7")
@@ -613,7 +614,7 @@ texture_region_size = Vector2i(100, 100)
 
 [sub_resource type="TileSet" id="TileSet_dgrhb"]
 tile_size = Vector2i(100, 100)
-physics_layer_0/collision_layer = 1
+physics_layer_0/collision_layer = 2
 sources/0 = SubResource("TileSetAtlasSource_enkug")
 
 [node name="Level1" type="Node2D"]
@@ -626,7 +627,10 @@ script = ExtResource("1_ttao5")
 Player = NodePath("../PlayerCharacter")
 
 [node name="PlayerCharacter" parent="." instance=ExtResource("2_n6ngs")]
-position = Vector2(3660, 1776)
+
+position = Vector2(564, 504)
+collision_mask = 2
+
 
 [node name="TileMapLayer" type="TileMapLayer" parent="."]
 position = Vector2(10, 0)
@@ -674,3 +678,6 @@ visible = false
 offset_left = 3840.0
 offset_top = -1080.0
 offset_right = 5760.0
+
+[node name="CircularSaw" parent="." instance=ExtResource("4_346tb")]
+position = Vector2(936, 520)
