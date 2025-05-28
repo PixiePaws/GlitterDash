@@ -1,3 +1,15 @@
-[gd_scene format=3 uid="uid://cfxhq7geyh62o"]
+[gd_scene load_steps=2 format=3 uid="uid://cfxhq7geyh62o"]
+
+[ext_resource type="PackedScene" uid="uid://cy5h05rfe3seb" path="res://Items/Scenes/Terrain.tscn" id="1_ywbw6"]
 
 [node name="Node2D" type="Node2D"]
+
+[node name="Terrain" parent="." instance=ExtResource("1_ywbw6")]
+
+[node name="Terrain2" parent="." instance=ExtResource("1_ywbw6")]
+
+[node name="Terrain3" parent="." instance=ExtResource("1_ywbw6")]
+
+[node name="Terrain4" parent="." instance=ExtResource("1_ywbw6")]
+
+[node name="Terrain5" parent="." instance=ExtResource("1_ywbw6")]

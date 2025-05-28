@@ -3,9 +3,9 @@ using System;
 
 public partial class Player : CharacterBody2D
 {
-    public const float Speed = 200f;
-    public const float JumpVelocity = -400f;
-    public float Gravity = 1000f;
+    [Export] public float Speed = 200f;
+    [Export] public float JumpVelocity = -400f;
+    [Export] public float Gravity = 1000f;
 
     [Export]
     public AnimatedSprite2D AnimatedSprite { get; set; } // tarvitaan animaatioita varten

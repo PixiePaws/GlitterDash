@@ -1,0 +1,19 @@
+[gd_scene load_steps=4 format=3 uid="uid://b6upcof87f3dd"]
+
+[ext_resource type="Texture2D" uid="uid://x1md5t8br1ve" path="res://Art/Obstacles/DemoSawBlade.png" id="1_4grcw"]
+[ext_resource type="Script" path="res://Obstacles/Scripts/CircularSaw.cs" id="2_7kiyw"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_kalxr"]
+radius = 131.187
+
+[node name="CircularSaw" type="StaticBody2D" groups=["Obstacles"]]
+collision_layer = 8
+collision_mask = 4
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+scale = Vector2(2, 2)
+texture = ExtResource("1_4grcw")
+script = ExtResource("2_7kiyw")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_kalxr")
