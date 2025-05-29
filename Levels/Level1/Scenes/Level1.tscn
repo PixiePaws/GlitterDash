@@ -1,10 +1,10 @@
 [gd_scene load_steps=16 format=4 uid="uid://cuch5yonnwbtt"]
 
-[ext_resource type="Script" path="res://Levels/Level1/Scripts/Level1.cs" id="1_chrjm"]
 [ext_resource type="Script" path="res://Levels/Level1/Scripts/Camera.cs" id="1_ttao5"]
 [ext_resource type="Texture2D" uid="uid://bayp2ayx78r5j" path="res://Art/PlaceHolders/PlaceHolderBlock.png" id="1_x4oj7"]
 [ext_resource type="PackedScene" uid="uid://cvl311e3g082f" path="res://Player/Scenes/PlayerCharacter.tscn" id="2_n6ngs"]
 [ext_resource type="PackedScene" uid="uid://b6upcof87f3dd" path="res://Obstacles/Scenes/CircularSaw.tscn" id="4_346tb"]
+[ext_resource type="PackedScene" uid="uid://dnx3j4auf00wv" path="res://UI/Scenes/GUI.tscn" id="5_7vyyi"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_enkug"]
 texture = ExtResource("1_x4oj7")
@@ -650,8 +650,7 @@ a = Vector2(3838, -1102)
 b = Vector2(3838, 1)
 
 [node name="Level1" type="Node2D"]
-script = ExtResource("1_chrjm")
-metadata/_edit_vertical_guides_ = [3840.0, 5760.0, 1920.0]
+metadata/_edit_vertical_guides_ = [3840.0, 6275.0, 1920.0]
 metadata/_edit_horizontal_guides_ = [1080.0, 2160.0, -1080.0]
 
 [node name="Camera2D" type="Camera2D" parent="." node_paths=PackedStringArray("Player")]
@@ -713,38 +712,4 @@ offset_right = 5760.0
 [node name="CircularSaw" parent="." instance=ExtResource("4_346tb")]
 position = Vector2(1034, 428)
 
-[node name="CanvasLayer" type="CanvasLayer" parent="."]
-
-[node name="QuitButton" type="Button" parent="CanvasLayer"]
-offset_left = 1725.0
-offset_top = 67.0
-offset_right = 1825.0
-offset_bottom = 167.0
-text = "Quit"
-
-[node name="MapBorders" type="StaticBody2D" parent="."]
-
-[node name="Top" type="CollisionShape2D" parent="MapBorders"]
-position = Vector2(527.5, -13)
-shape = SubResource("SegmentShape2D_oefmr")
-
-[node name="Left" type="CollisionShape2D" parent="MapBorders"]
-shape = SubResource("SegmentShape2D_hwds7")
-
-[node name="Bottom" type="CollisionShape2D" parent="MapBorders"]
-shape = SubResource("SegmentShape2D_e1w53")
-
-[node name="Left3" type="CollisionShape2D" parent="MapBorders"]
-shape = SubResource("SegmentShape2D_x4gpo")
-
-[node name="Bottom3&4" type="CollisionShape2D" parent="MapBorders"]
-shape = SubResource("SegmentShape2D_khvbs")
-
-[node name="Right" type="CollisionShape2D" parent="MapBorders"]
-shape = SubResource("SegmentShape2D_ixh7n")
-
-[node name="Top6" type="CollisionShape2D" parent="MapBorders"]
-shape = SubResource("SegmentShape2D_v0npo")
-
-[node name="Left6" type="CollisionShape2D" parent="MapBorders"]
-shape = SubResource("SegmentShape2D_i2eaj")
+[node name="Gui" parent="." instance=ExtResource("5_7vyyi")]
