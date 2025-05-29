@@ -1,41 +1,45 @@
 using Godot;
 using System;
 
-public partial class CollisionDetector : Area2D
+namespace UnicornGame
 {
-    private bool _isPaused = false;
-    //private String _gameOverPath = "";
-    //private PackedScene _gameOverScene;
 
-    public override void _Ready()
+    public partial class CollisionDetector : Area2D
     {
-        //_gameOverScene = ResourceLoader.Load<PackedScene>(_gameOverPath);
-        BodyEntered += OnCollisionDetected;
-    }
+        private bool _isPaused = false;
+        //private String _gameOverPath = "";
+        //private PackedScene _gameOverScene;
 
-    public void OnCollisionDetected(Node node)
-    {
-        if (node.IsInGroup("Obstacles"))
+        public override void _Ready()
         {
-            GD.Print("Collided with obstacle!");
-            GD.Print("Game over!");
-            InstantiateGameOverScene();
+            //_gameOverScene = ResourceLoader.Load<PackedScene>(_gameOverPath);
+            BodyEntered += OnCollisionDetected;
         }
-        
-    }
 
-    public void InstantiateGameOverScene()
-    {
-        GD.Print("InstantiateGameOverScene() was called");
-        /*if (_gameOverScene != null)
+        public void OnCollisionDetected(Node node)
         {
-            Node GameOverPanel = _gameOverScene.Instantiate();
-            AddChild(GameOverPanel);
-            GD.Print("Game over scene was instantiated");
+            if (node.IsInGroup("Obstacles"))
+            {
+                GD.Print("Collided with obstacle!");
+                GD.Print("Game over!");
+                InstantiateGameOverScene();
+            }
+
         }
-        else
+
+        public void InstantiateGameOverScene()
         {
-            GD.Print("Game over scene not found!");
-        }*/
+            GD.Print("InstantiateGameOverScene() was called");
+            /*if (_gameOverScene != null)
+            {
+                Node GameOverPanel = _gameOverScene.Instantiate();
+                AddChild(GameOverPanel);
+                GD.Print("Game over scene was instantiated");
+            }
+            else
+            {
+                GD.Print("Game over scene not found!");
+            }*/
+        }
     }
 }
