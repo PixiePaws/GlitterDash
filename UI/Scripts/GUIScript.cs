@@ -1,7 +1,7 @@
 using Godot;
 using System;
 
-public partial class GUI : Node
+public partial class GUIScript : Node
 {
 	// Called when the node enters the scene tree for the first time.
 	private Button _quitButton;
