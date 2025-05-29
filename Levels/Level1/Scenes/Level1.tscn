@@ -1,5 +1,6 @@
-[gd_scene load_steps=6 format=4 uid="uid://cuch5yonnwbtt"]
+[gd_scene load_steps=8 format=4 uid="uid://cuch5yonnwbtt"]
 
+[ext_resource type="Script" path="res://Levels/Level1/Scripts/Level1.cs" id="1_chrjm"]
 [ext_resource type="Script" path="res://Levels/Level1/Scripts/Camera.cs" id="1_ttao5"]
 [ext_resource type="Texture2D" uid="uid://bayp2ayx78r5j" path="res://Art/PlaceHolders/PlaceHolderBlock.png" id="1_x4oj7"]
 [ext_resource type="PackedScene" uid="uid://cvl311e3g082f" path="res://Player/Scenes/PlayerCharacter.tscn" id="2_n6ngs"]
@@ -617,6 +618,7 @@ physics_layer_0/collision_layer = 1
 sources/0 = SubResource("TileSetAtlasSource_enkug")
 
 [node name="Level1" type="Node2D"]
+script = ExtResource("1_chrjm")
 metadata/_edit_vertical_guides_ = [3840.0, 6275.0, 1920.0]
 metadata/_edit_horizontal_guides_ = [1080.0, 2160.0, -1080.0]
 
@@ -626,7 +628,8 @@ script = ExtResource("1_ttao5")
 Player = NodePath("../PlayerCharacter")
 
 [node name="PlayerCharacter" parent="." instance=ExtResource("2_n6ngs")]
-position = Vector2(706, 482)
+position = Vector2(564, 504)
+collision_mask = 2
 
 [node name="TileMapLayer" type="TileMapLayer" parent="."]
 position = Vector2(10, 0)
@@ -674,3 +677,15 @@ visible = false
 offset_left = 3840.0
 offset_top = -1080.0
 offset_right = 5760.0
+
+[node name="CircularSaw" parent="." instance=ExtResource("4_346tb")]
+position = Vector2(936, 520)
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="QuitButton" type="Button" parent="CanvasLayer"]
+offset_left = 1725.0
+offset_top = 67.0
+offset_right = 1825.0
+offset_bottom = 167.0
+text = "Quit"
