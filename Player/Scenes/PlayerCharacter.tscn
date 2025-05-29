@@ -1,22 +1,27 @@
 [gd_scene load_steps=4 format=3 uid="uid://cvl311e3g082f"]
 
 [ext_resource type="Script" path="res://Player/Scripts/Player.cs" id="1_l5nv5"]
-[ext_resource type="Texture2D" uid="uid://65ie81p03sls" path="res://Art/Character/Unicorn.png" id="1_xlb60"]
+[ext_resource type="Texture2D" uid="uid://b48y12wyscq7f" path="res://Art/Character/UnicornSmaller.png" id="2_hubrt"]
 [ext_resource type="Script" path="res://Player/Scripts/CollisionDetector.cs" id="3_udxmi"]
 
-[node name="PlayerCharacter" type="CharacterBody2D"]
+[node name="PlayerCharacter" type="CharacterBody2D" node_paths=PackedStringArray("AnimatedSprite")]
 script = ExtResource("1_l5nv5")
+JumpVelocity = -500.0
+WallJumpVelocity = -500.0
+WallJumpPush = 2000.0
+Gravity = 1500.0
+AnimatedSprite = NodePath("AnimatedSprite2D")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
-scale = Vector2(0.3, 0.3)
-texture = ExtResource("1_xlb60")
+scale = Vector2(0.6, 0.6)
+texture = ExtResource("2_hubrt")
 flip_h = true
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="."]
-position = Vector2(-3, 0)
-scale = Vector2(1.05522, 1)
+position = Vector2(-4, 0)
+scale = Vector2(1.055, 1)
 polygon = PackedVector2Array(-26.9351, -33, -35.4641, -61, -29.7781, -84, -11, -90, 2.44272, -85, 7.18108, -73, 13.8148, -91, 16.6578, -74, 25.1868, -87, 32.7682, -62, 40.7499, -42, 44.1403, -23, 47.9309, -14, 47.9309, -2, 44.1403, 4, 52.6693, 24, 51.7216, 39, 38.8545, 39, 33.1685, 53, 31.2731, 83, 16.1104, 81, 14.2151, 63, 4.73836, 62, 0.947671, 85, -14, 80, -13.2674, 49, -18.0058, 41, -24.6395, 38, -20.8488, 5, -35.0638, 9, -47.3836, -1, -44.9408, -13, -31.6734, -8)
 
 [node name="DashTimer" type="Timer" parent="."]
