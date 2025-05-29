@@ -1,0 +1,15 @@
+[gd_scene load_steps=2 format=3 uid="uid://dnx3j4auf00wv"]
+
+[ext_resource type="Script" path="res://UI/Scripts/GUI.cs" id="1_1hd7s"]
+
+[node name="Gui" type="CanvasLayer"]
+script = ExtResource("1_1hd7s")
+
+[node name="QuitButton" type="Button" parent="."]
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -47.0
+offset_bottom = 31.0
+grow_horizontal = 0
+text = "QUIT"
