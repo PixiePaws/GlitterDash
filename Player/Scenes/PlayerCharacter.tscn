@@ -12,10 +12,16 @@ scale = Vector2(0.3, 0.3)
 texture = ExtResource("1_xlb60")
 flip_h = true
 
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="."]
 position = Vector2(-3, 0)
 scale = Vector2(1.05522, 1)
 polygon = PackedVector2Array(-26.9351, -33, -35.4641, -61, -29.7781, -84, -11, -90, 2.44272, -85, 7.18108, -73, 13.8148, -91, 16.6578, -74, 25.1868, -87, 32.7682, -62, 40.7499, -42, 44.1403, -23, 47.9309, -14, 47.9309, -2, 44.1403, 4, 52.6693, 24, 51.7216, 39, 38.8545, 39, 33.1685, 53, 31.2731, 83, 16.1104, 81, 14.2151, 63, 4.73836, 62, 0.947671, 85, -14, 80, -13.2674, 49, -18.0058, 41, -24.6395, 38, -20.8488, 5, -35.0638, 9, -47.3836, -1, -44.9408, -13, -31.6734, -8)
+
+[node name="DashTimer" type="Timer" parent="."]
+wait_time = 0.4
+one_shot = true
 
 [node name="CollisionDetector" type="Area2D" parent="."]
 collision_layer = 4

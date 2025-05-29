@@ -5,11 +5,9 @@ public partial class Camera : Camera2D
 {
 
 	[Export]
-	public Node2D Player;
-
+	public Player Player { get; set; }
 	private Vector2I size;
 
-	/*
 	public override void _Ready()
 	{
 		size = (Vector2I)GetViewportRect().Size;
@@ -23,7 +21,7 @@ public partial class Camera : Camera2D
 
 	private void UpdateCameraPosition()
 	{
-		Vector2 currentCell = (Vector2)(Player.GlobalPosition / size);
-		GlobalPosition = currentCell * size;
-	} */
+		Vector2I currentCell = (Vector2I)(Player.GlobalPosition / size);
+		GlobalPosition = (Vector2)currentCell * size;
+	}
 }
