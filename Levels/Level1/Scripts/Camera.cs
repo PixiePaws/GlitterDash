@@ -8,12 +8,12 @@ namespace UnicornGame
 	{
 
 		[Export]
-		public Player Player { get; set; }
-		private Vector2I size;
+		public Player _player { get; set; }
+		private Vector2I _size;
 
 		public override void _Ready()
 		{
-			size = (Vector2I)GetViewportRect().Size;
+			_size = (Vector2I)GetViewportRect()._size;
 			UpdateCameraPosition();
 		}
 
@@ -24,8 +24,8 @@ namespace UnicornGame
 
 		private void UpdateCameraPosition()
 		{
-			Vector2I currentCell = (Vector2I)(Player.GlobalPosition / size);
-			GlobalPosition = (Vector2)currentCell * size;
+			Vector2I currentCell = (Vector2I)(Player.GlobalPosition / _size);
+			GlobalPosition = (Vector2)currentCell * _size;
 		}
 	}
 }
