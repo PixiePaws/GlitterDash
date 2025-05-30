@@ -6,6 +6,7 @@ public partial class CollisionDetector : Area2D
     private bool _isPaused = false;
     //private String _gameOverPath = "";
     //private PackedScene _gameOverScene;
+    public int health = 1;
 
     public override void _Ready()
     {
@@ -19,9 +20,10 @@ public partial class CollisionDetector : Area2D
         {
             GD.Print("Collided with obstacle!");
             GD.Print("Game over!");
+            health = 0;
             InstantiateGameOverScene();
         }
-        
+
     }
 
     public void InstantiateGameOverScene()
