@@ -1,0 +1,98 @@
+using Godot;
+using System;
+
+namespace UnicornGame
+{
+	public partial class Portal : Area2D
+	{
+		[Export] public string _level2ScenePath = "res://Game/Level2/Scenes/Level2.tscn";
+        [Export] public string _level3ScenePath = "res://Game/Level3/Scenes/Level3.tscn";
+        [Export] public string _level4ScenePath = "res://Game/Level4/Scenes/Level4.tscn";
+        [Export] public string _level5ScenePath = "res://Game/Level5/Scenes/Level5.tscn";
+
+        private string _nextLevelPath = "";
+        
+		public override void _Ready()
+        {
+            BodyEntered += OnBodyEntered; // Signal to detect when a body enters the portal area
+        }
+
+        /// <summary>
+        /// This method is called when a body enters the portal area.
+        /// </summary>
+        /// <param name="body"></param>
+        public void OnBodyEntered(Node body)
+        {
+            if (body is Player)
+            {
+                GD.Print("Player entered the portal, transferring to Level 2.");
+                CallDeferred(nameof(PortalTransfer));
+            }
+        }
+
+        /// <summary>
+        /// Transfers the player to the next level based on the current scene.
+        /// This method is called when the player enters the portal.
+        /// It checks the current scene and determines the next level to load.
+        /// </summary>
+        public void PortalTransfer()
+        {
+            Node currentScene = GetTree().CurrentScene;
+
+            if (currentScene == null)
+            {
+                GD.PrintErr("[ERROR] No active scene found!");
+                return;
+            }
+
+            int nextLevel = 0;
+
+            // Choosing the next level based on the current scene name.
+            switch (currentScene.Name)
+            {
+                case "Level1":
+                    nextLevel = 2;
+                    break;
+
+                case "Level2":
+                    nextLevel = 3;
+                    break;
+
+                case "Level3":
+                    nextLevel = 4;
+                    break;
+
+                case "Level4":
+                    nextLevel = 5;
+                    break;
+
+                default:
+                    GD.PrintErr("[ERROR] No active level found!");
+                    return;
+            }
+
+            // Load and change the scene
+            _nextLevelPath = GetLevelScenePath(nextLevel);
+
+            PackedScene nextSceneLevel = (PackedScene)GD.Load(_nextLevelPath);
+
+            GetTree().ChangeSceneToPacked(nextSceneLevel);
+        }
+
+        /// <summary>
+		/// Returns the scene path for the next level based on the current level.
+		/// </summary>
+		/// <param name="nextLevel"></param>
+		private string GetLevelScenePath(int nextLevel)
+		{
+			return nextLevel switch
+			{
+				2 => _level2ScenePath,
+				3 => _level3ScenePath,
+				4 => _level4ScenePath,
+				5 => _level5ScenePath,
+				_ => string.Empty
+			};
+		}
+	}
+}

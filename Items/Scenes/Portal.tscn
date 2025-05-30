@@ -1,0 +1,15 @@
+[gd_scene load_steps=3 format=3 uid="uid://breqli4rgs6dk"]
+
+[ext_resource type="Texture2D" uid="uid://t75gsvlhv18t" path="res://icon.svg" id="1_87pcd"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_u5l30"]
+size = Vector2(129, 127)
+
+[node name="Portal" type="Area2D"]
+
+[node name="Icon" type="Sprite2D" parent="."]
+texture = ExtResource("1_87pcd")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(-0.5, -0.5)
+shape = SubResource("RectangleShape2D_u5l30")

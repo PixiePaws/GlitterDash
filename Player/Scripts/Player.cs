@@ -25,6 +25,7 @@ namespace UnicornGame
         private float _dashCooldownTimer = 0f;
         private float _lastMoveDirection = 1f; // initial direction to the right
         private Godot.Vector2 _dashDirection = Godot.Vector2.Zero;
+        // private CollisionDetector _collisionDetector;
 
         [Export]
         public AnimatedSprite2D AnimatedSprite { get; set; } // tarvitaan animaatioita varten
@@ -32,47 +33,52 @@ namespace UnicornGame
 
         public override void _PhysicsProcess(double delta)
         {
-            Godot.Vector2 velocity = Velocity;
-            float inputDirection = Input.GetAxis("Move left", "Move right");
+            //_collisionDetector = GetNode<CollisionDetector>("res://Player/Scripts/CollisionDetector.cs");
 
-            // Handle dashing
-            // Add timers
-            if (_dashCooldownTimer > 0)
-            {
-                _dashCooldownTimer -= (float)delta;
-            }
+            //if (_collisionDetector.health > 0)
+            //{
+                Godot.Vector2 velocity = Velocity;
+                float inputDirection = Input.GetAxis("Move left", "Move right");
 
-            if (_isDashing)
-            {
-                _dashTimer -= (float)delta;
-
-                if (_dashTimer <= 0)
+                // Handle dashing
+                // Add timers
+                if (_dashCooldownTimer > 0)
                 {
-                    _isDashing = false;
+                    _dashCooldownTimer -= (float)delta;
                 }
-                else
+
+                if (_isDashing)
                 {
-                    velocity = _dashDirection * DashSpeed;
-                    Velocity = velocity;
-                    MoveAndSlide();
-                    return;
+                    _dashTimer -= (float)delta;
+
+                    if (_dashTimer <= 0)
+                    {
+                        _isDashing = false;
+                    }
+                    else
+                    {
+                        velocity = _dashDirection * DashSpeed;
+                        Velocity = velocity;
+                        MoveAndSlide();
+                        return;
+                    }
                 }
-            }
-            // Apply gravity
-            if (!IsOnFloor() && !_isWallSliding)
-            {
-                velocity.Y += (float)(Gravity * delta);
-            }
+                // Apply gravity
+                if (!IsOnFloor() && !_isWallSliding)
+                {
+                    velocity.Y += (float)(Gravity * delta);
+                }
 
-            HandleDash(inputDirection);
+                HandleDash(inputDirection);
 
-            BasicMovement(ref velocity, inputDirection);
-            Jumping(ref velocity, inputDirection);
-            WallSlidingWallJumping(ref velocity, inputDirection, (float)delta);
+                BasicMovement(ref velocity, inputDirection);
+                Jumping(ref velocity, inputDirection);
+                WallSlidingWallJumping(ref velocity, inputDirection, (float)delta);
 
-            // Updates the velocity based on the current state
-            Velocity = velocity;
-            MoveAndSlide();
+                // Updates the velocity based on the current state
+                Velocity = velocity;
+                MoveAndSlide();
+            //}
         }
 
         /// <summary>
@@ -140,6 +146,7 @@ namespace UnicornGame
                 {
                     _isWallSliding = true;
                     velocity.Y = Mathf.Min(velocity.Y + Gravity * 0.5f, WallSlideSpeed);
+                    _jumpCount = 0;
                 }
             }
 
@@ -206,6 +213,18 @@ namespace UnicornGame
                 _dashTimer = DashDuration;
                 _dashCooldownTimer = DashCooldown;
             }
+        }
+
+        public void Die()
+        {
+            // kuolemis animaation käynnistäminen
+            // kuolemis äänen soittaminen
+        }
+
+        public void RespawnPlayer()
+        {
+            Show();
+            //_collisionDetector.health = 1; // Reset health
         }
     }
 }

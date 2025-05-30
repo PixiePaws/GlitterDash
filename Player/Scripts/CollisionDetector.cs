@@ -4,11 +4,12 @@ using System;
 namespace UnicornGame
 {
 
-    public partial class CollisionDetector : Area2D
-    {
-        private bool _isPaused = false;
-        //private String _gameOverPath = "";
-        //private PackedScene _gameOverScene;
+public partial class CollisionDetector : Area2D
+{
+    private bool _isPaused = false;
+    //private String _gameOverPath = "";
+    //private PackedScene _gameOverScene;
+    public int health = 1;
 
         public override void _Ready()
         {
@@ -16,16 +17,17 @@ namespace UnicornGame
             BodyEntered += OnCollisionDetected;
         }
 
-        public void OnCollisionDetected(Node node)
+    public void OnCollisionDetected(Node node)
+    {
+        if (node.IsInGroup("Obstacles"))
         {
-            if (node.IsInGroup("Obstacles"))
-            {
-                GD.Print("Collided with obstacle!");
-                GD.Print("Game over!");
-                InstantiateGameOverScene();
-            }
-
+            GD.Print("Collided with obstacle!");
+            GD.Print("Game over!");
+            health = 0;
+            InstantiateGameOverScene();
         }
+
+    }
 
         public void InstantiateGameOverScene()
         {
