@@ -6,10 +6,6 @@
 
 [node name="PlayerCharacter" type="CharacterBody2D" node_paths=PackedStringArray("AnimatedSprite")]
 script = ExtResource("1_l5nv5")
-JumpVelocity = -500.0
-WallJumpVelocity = -500.0
-WallJumpPush = 2000.0
-Gravity = 1500.0
 AnimatedSprite = NodePath("AnimatedSprite2D")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
