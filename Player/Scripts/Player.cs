@@ -7,60 +7,64 @@ namespace UnicornGame
 
     public partial class Player : CharacterBody2D
     {
-        public const float Speed = 200f;
-        public const float JumpVelocity = -600f;
-        public const float WallJumpVelocity = 1000f;
-        public const float WallJumpPush = 1200f;
-        public const float WallSlideSpeed = 100f;
-        public const float DashSpeed = 500f;
-        public const float DashDuration = 0.4f;
-        public float Gravity = 1000f;
+        [Export] public float Speed = 200f;
+        [Export] public float JumpVelocity = -600f;
+        [Export] public float WallJumpVelocity = -1000f;
+        [Export] public float WallJumpPush = 1200f;
+        [Export] public float WallSlideSpeed = 100f;
+        [Export] public float Gravity = 1000f;
+        [Export] public float DashSpeed = 800f;
+        [Export] public float DashDuration = 0.2f;
+        [Export] public float DashCooldown = 0.5f;
 
         private bool _isWallSliding = false;
-        private bool _isDashing = false;
         private float _wallJumpDirection = 0;
         private int _jumpCount = 0;
-        private Timer _dashTimer;
+        private bool _isDashing = false;
+        private float _dashTimer = 0f;
+        private float _dashCooldownTimer = 0f;
+        private float _lastMoveDirection = 1f; // initial direction to the right
+        private Godot.Vector2 _dashDirection = Godot.Vector2.Zero;
 
         [Export]
         public AnimatedSprite2D AnimatedSprite { get; set; } // tarvitaan animaatioita varten
-
-
-        public override void _Ready()
-        {
-            _dashTimer = GetNode<Timer>("DashTimer");
-            _dashTimer.Timeout += StopDash;
-        }
+        
 
         public override void _PhysicsProcess(double delta)
         {
             Godot.Vector2 velocity = Velocity;
             float inputDirection = Input.GetAxis("Move left", "Move right");
 
-            // Dash logic
-            if (Input.IsActionJustPressed("Dash"))
+            // Handle dashing
+            // Add timers
+            if (_dashCooldownTimer > 0)
             {
-                if (!_isDashing && inputDirection != 0)
-                {
-                    StartDash(inputDirection);
-                }
+                _dashCooldownTimer -= (float)delta;
             }
 
-            // Check the direction and apply dash speed
-            if (inputDirection == 1 || inputDirection == -1)
+            if (_isDashing)
             {
-                inputDirection = Mathf.Sign(inputDirection); // Varmistetaan, että inputDirection on -1 tai 1
-                if (_isDashing)
+                _dashTimer -= (float)delta;
+
+                if (_dashTimer <= 0)
                 {
-                    velocity.X = inputDirection * DashSpeed;
+                    _isDashing = false;
+                }
+                else
+                {
+                    velocity = _dashDirection * DashSpeed;
+                    Velocity = velocity;
+                    MoveAndSlide();
+                    return;
                 }
             }
-
             // Apply gravity
-            if (!IsOnFloor() && !_isWallSliding && !_isDashing)
+            if (!IsOnFloor() && !_isWallSliding)
             {
                 velocity.Y += (float)(Gravity * delta);
             }
+
+            HandleDash(inputDirection);
 
             BasicMovement(ref velocity, inputDirection);
             Jumping(ref velocity, inputDirection);
@@ -80,6 +84,7 @@ namespace UnicornGame
             if (inputDirection != 0)
             {
                 velocity.X = inputDirection * Speed;
+                _lastMoveDirection = inputDirection; // Update last move direction
             }
             else
             {
@@ -125,7 +130,7 @@ namespace UnicornGame
             _isWallSliding = false;
 
             // Wall slide
-            if (IsOnWall() && !IsOnFloor())
+            if (IsOnWall())
             {
                 bool isPressingTowardsWall =
                     (GetWallDirection() == 1 && Input.IsActionPressed("Move left")) ||
@@ -141,7 +146,7 @@ namespace UnicornGame
             // Wall jump
             if (_isWallSliding && Input.IsActionJustPressed("Jump"))
             {
-                velocity.Y = JumpVelocity;
+                velocity.Y = WallJumpVelocity;
 
                 int wallDirection = GetWallDirection();
 
@@ -176,27 +181,31 @@ namespace UnicornGame
         }
 
         /// <summary>
-        /// Starts the dash action for the player.
-        /// The dash direction is determined by the input direction.
+        /// Handles dashing. Dash moves to the direction that has last been applied.
+        /// The dash is activated only if the cooldown is zero and the player is not
+        /// already dashing.
         /// </summary>
-        private void StartDash(float inputDirection)
+        private void HandleDash(float inputDirection)
         {
-            if (inputDirection != 0)
+            // Checks if the player presses the dash button and is not already dashing
+            // and if the cooldown is over.
+            if (Input.IsActionJustPressed("Dash") && !_isDashing && _dashCooldownTimer <= 0)
             {
-                inputDirection = Mathf.Sign(inputDirection); // Varmistetaan, että dash suunta on -1 tai 1
+                // Dash direction based on input
+                float direction;
+                if (_lastMoveDirection != 0)
+                {
+                    direction = _lastMoveDirection;
+                }
+
+                // Dash Direction
+                _dashDirection = new Godot.Vector2(_lastMoveDirection, 0).Normalized();
+
+                // Dashing on and initialize timers
                 _isDashing = true;
-                _dashTimer.Start(DashDuration);
-
+                _dashTimer = DashDuration;
+                _dashCooldownTimer = DashCooldown;
             }
-        }
-
-        /// <summary>
-        /// Stops the dash action for the player.
-        /// This method is called when the dash timer times out.
-        /// </summary>
-        private void StopDash()
-        {
-            _isDashing = false;
         }
     }
 }

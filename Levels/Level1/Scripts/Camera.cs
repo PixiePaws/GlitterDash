@@ -3,9 +3,8 @@ using System;
 
 namespace UnicornGame
 {
-
 	public partial class Camera : Camera2D
-	{
+		{
 
 		[Export]
 		public Player _player { get; set; }
@@ -13,7 +12,7 @@ namespace UnicornGame
 
 		public override void _Ready()
 		{
-			_size = (Vector2I)GetViewportRect()._size;
+			_size = (Vector2I)GetViewportRect().Size;
 			UpdateCameraPosition();
 		}
 
@@ -21,10 +20,9 @@ namespace UnicornGame
 		{
 			UpdateCameraPosition();
 		}
-
 		private void UpdateCameraPosition()
 		{
-			Vector2I currentCell = (Vector2I)(Player.GlobalPosition / _size);
+			Vector2I currentCell = (Vector2I)(_player.GlobalPosition / _size);
 			GlobalPosition = (Vector2)currentCell * _size;
 		}
 	}
