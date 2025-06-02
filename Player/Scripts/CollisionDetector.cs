@@ -1,6 +1,9 @@
 using Godot;
 using System;
 
+namespace UnicornGame
+{
+
 public partial class CollisionDetector : Area2D
 {
     private bool _isPaused = false;
@@ -8,11 +11,11 @@ public partial class CollisionDetector : Area2D
     //private PackedScene _gameOverScene;
     public int health = 1;
 
-    public override void _Ready()
-    {
-        //_gameOverScene = ResourceLoader.Load<PackedScene>(_gameOverPath);
-        BodyEntered += OnCollisionDetected;
-    }
+        public override void _Ready()
+        {
+            //_gameOverScene = ResourceLoader.Load<PackedScene>(_gameOverPath);
+            BodyEntered += OnCollisionDetected;
+        }
 
     public void OnCollisionDetected(Node node)
     {
@@ -26,18 +29,19 @@ public partial class CollisionDetector : Area2D
 
     }
 
-    public void InstantiateGameOverScene()
-    {
-        GD.Print("InstantiateGameOverScene() was called");
-        /*if (_gameOverScene != null)
+        public void InstantiateGameOverScene()
         {
-            Node GameOverPanel = _gameOverScene.Instantiate();
-            AddChild(GameOverPanel);
-            GD.Print("Game over scene was instantiated");
+            GD.Print("InstantiateGameOverScene() was called");
+            /*if (_gameOverScene != null)
+            {
+                Node GameOverPanel = _gameOverScene.Instantiate();
+                AddChild(GameOverPanel);
+                GD.Print("Game over scene was instantiated");
+            }
+            else
+            {
+                GD.Print("Game over scene not found!");
+            }*/
         }
-        else
-        {
-            GD.Print("Game over scene not found!");
-        }*/
     }
 }

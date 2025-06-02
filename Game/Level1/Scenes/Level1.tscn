@@ -5,7 +5,7 @@
 [ext_resource type="Texture2D" uid="uid://deh5vusrmsqsu" path="res://Art/Backgrounds/UnicornGameBG.png" id="2_5govx"]
 [ext_resource type="PackedScene" uid="uid://cvl311e3g082f" path="res://Player/Scenes/PlayerCharacter.tscn" id="2_n6ngs"]
 [ext_resource type="PackedScene" uid="uid://b6upcof87f3dd" path="res://Obstacles/Scenes/CircularSaw.tscn" id="4_346tb"]
-[ext_resource type="PackedScene" uid="uid://dnx3j4auf00wv" path="res://UI/Scenes/GUI.tscn" id="5_7vyyi"]
+[ext_resource type="PackedScene" path="res://UI/Scenes/GUI.tscn" id="5_7vyyi"]
 [ext_resource type="PackedScene" uid="uid://breqli4rgs6dk" path="res://Items/Scenes/Portal.tscn" id="6_0yaxk"]
 [ext_resource type="Script" path="res://Game/Portal.cs" id="8_iqa1o"]
 
