@@ -16,6 +16,7 @@ namespace UnicornGame
         [Export] public float DashSpeed = 800f;
         [Export] public float DashDuration = 0.2f;
         [Export] public float DashCooldown = 0.5f;
+        //[Export] public TileMap TileMap;
 
         private bool _isWallSliding = false;
         private float _wallJumpDirection = 0;
@@ -29,7 +30,7 @@ namespace UnicornGame
 
         [Export]
         public AnimatedSprite2D AnimatedSprite { get; set; } // tarvitaan animaatioita varten
-        
+
 
         public override void _PhysicsProcess(double delta)
         {
@@ -135,36 +136,43 @@ namespace UnicornGame
         {
             _isWallSliding = false;
 
+            /*
+            int wallLayerId = 2;
+            Vector2I tilePos = TileMap.LocalToMap(GlobalPosition);
+            int wallTileId = TileMap.GetCellSourceId(wallLayerId, tilePos);
+
             // Wall slide
-            if (IsOnWall())
-            {
-                bool isPressingTowardsWall =
-                    (GetWallDirection() == 1 && Input.IsActionPressed("Move left")) ||
-                    (GetWallDirection() == -1 && Input.IsActionPressed("Move right"));
-
-                if (isPressingTowardsWall)
+            if (wallTileId != -1)
+            { */
+                if (IsOnWall())
                 {
-                    _isWallSliding = true;
-                    velocity.Y = Mathf.Min(velocity.Y + Gravity * 0.5f, WallSlideSpeed);
-                    _jumpCount = 0;
-                }
-            }
+                    bool isPressingTowardsWall =
+                        (GetWallDirection() == 1 && Input.IsActionPressed("Move left")) ||
+                        (GetWallDirection() == -1 && Input.IsActionPressed("Move right"));
 
-            // Wall jump
-            if (_isWallSliding && Input.IsActionJustPressed("Jump"))
-            {
-                velocity.Y = WallJumpVelocity;
-
-                int wallDirection = GetWallDirection();
-
-                if (wallDirection != 0)
-                {
-                    velocity.X = wallDirection * WallJumpPush;
+                    if (isPressingTowardsWall)
+                    {
+                        _isWallSliding = true;
+                        velocity.Y = Mathf.Min(velocity.Y + Gravity * 0.5f, WallSlideSpeed);
+                        _jumpCount = 0;
+                    }
                 }
 
-                _isWallSliding = false; // Reset wall sliding state after jumping
+                // Wall jump
+                if (_isWallSliding && Input.IsActionJustPressed("Jump"))
+                {
+                    velocity.Y = WallJumpVelocity;
+
+                    int wallDirection = GetWallDirection();
+
+                    if (wallDirection != 0)
+                    {
+                        velocity.X = wallDirection * WallJumpPush;
+                    }
+
+                    _isWallSliding = false; // Reset wall sliding state after jumping
+                }
             }
-        }
 
         /// <summary>
         /// Gets the direction of the wall the player is currently sliding against.
