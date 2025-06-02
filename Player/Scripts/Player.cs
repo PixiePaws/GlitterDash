@@ -29,6 +29,7 @@ namespace UnicornGame
 
         [Export]
         public AnimatedSprite2D AnimatedSprite { get; set; } // tarvitaan animaatioita varten
+        
 
         public override void _PhysicsProcess(double delta)
         {
