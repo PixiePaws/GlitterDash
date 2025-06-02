@@ -1,8 +1,11 @@
-[gd_scene load_steps=2 format=3 uid="uid://dc80kpobg6kp3"]
+[gd_scene load_steps=4 format=3 uid="uid://dc80kpobg6kp3"]
 
+[ext_resource type="Script" path="res://MainMenu/Scripts/MainMenu.cs" id="1_rier1"]
 [ext_resource type="Script" path="res://MainMenu/Scripts/MainMenuScript.cs" id="1_ys428"]
+[ext_resource type="PackedScene" uid="uid://cnu4eae42h74o" path="res://Settings/Scenes/Settings.tscn" id="2_opxph"]
 
 [node name="MainMenu" type="CanvasLayer"]
+script = ExtResource("1_rier1")
 
 [node name="Control" type="Control" parent="."]
 layout_mode = 3
@@ -36,3 +39,5 @@ text = "Settings"
 [node name="QuitButton" type="Button" parent="Control/MarginContainer/VBoxContainer"]
 layout_mode = 2
 text = "Quit"
+
+[node name="SettingsScene" parent="." instance=ExtResource("2_opxph")]

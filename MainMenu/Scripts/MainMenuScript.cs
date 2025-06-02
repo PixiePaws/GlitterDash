@@ -46,7 +46,16 @@ namespace UnicornGame
 		}
 		private void OnSettingsButtonPressed()
 		{
-
+			CanvasLayer settingsScene = GetNode<CanvasLayer>("../SettingsScene");
+			if (settingsScene != null)
+			{
+				if (settingsScene.Visible == false)
+				{
+					settingsScene.Visible = true; // Show settings scene
+					GetTree().Paused = true; // Pause the game
+					GD.Print("Settings scene opened and game paused");
+				}
+			}
 		}
 }
 }

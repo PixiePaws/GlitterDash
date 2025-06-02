@@ -681,4 +681,4 @@ offset_right = 5760.0
 [node name="CircularSaw" parent="." instance=ExtResource("4_346tb")]
 position = Vector2(936, 520)
 
-[node name="Gui" parent="." instance=ExtResource("5_7vyyi")]
+[node name="GUI" parent="." instance=ExtResource("5_7vyyi")]
