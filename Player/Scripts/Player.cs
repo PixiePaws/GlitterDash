@@ -29,7 +29,7 @@ namespace UnicornGame
 
         [Export]
         public AnimatedSprite2D AnimatedSprite { get; set; } // tarvitaan animaatioita varten
-        
+
 
         public override void _PhysicsProcess(double delta)
         {
@@ -37,48 +37,52 @@ namespace UnicornGame
 
             //if (_collisionDetector.health > 0)
             //{
-                Godot.Vector2 velocity = Velocity;
-                float inputDirection = Input.GetAxis("Move left", "Move right");
+            Godot.Vector2 velocity = Velocity;
+            float inputDirection = Input.GetAxis("Move left", "Move right");
 
-                // Handle dashing
-                // Add timers
-                if (_dashCooldownTimer > 0)
+            // Handle dashing
+            // Add timers
+            if (_dashCooldownTimer > 0)
+            {
+                _dashCooldownTimer -= (float)delta;
+            }
+
+            if (_isDashing)
+            {
+                _dashTimer -= (float)delta;
+
+                if (_dashTimer <= 0)
                 {
-                    _dashCooldownTimer -= (float)delta;
+                    _isDashing = false;
                 }
-
-                if (_isDashing)
+                else
                 {
-                    _dashTimer -= (float)delta;
-
-                    if (_dashTimer <= 0)
-                    {
-                        _isDashing = false;
-                    }
-                    else
-                    {
-                        velocity = _dashDirection * DashSpeed;
-                        Velocity = velocity;
-                        MoveAndSlide();
-                        return;
-                    }
+                    velocity = _dashDirection * DashSpeed;
+                    Velocity = velocity;
+                    MoveAndSlide();
+                    return;
                 }
-                // Apply gravity
-                if (!IsOnFloor() && !_isWallSliding)
-                {
-                    velocity.Y += (float)(Gravity * delta);
-                }
+            }
+            // Apply gravity
+            if (!IsOnFloor() && !_isWallSliding)
+            {
+                velocity.Y += (float)(Gravity * delta);
+            }
 
-                HandleDash(inputDirection);
+            HandleDash(inputDirection);
 
-                BasicMovement(ref velocity, inputDirection);
-                Jumping(ref velocity, inputDirection);
-                WallSlidingWallJumping(ref velocity, inputDirection, (float)delta);
+            BasicMovement(ref velocity, inputDirection);
+            Jumping(ref velocity, inputDirection);
+            WallSlidingWallJumping(ref velocity, inputDirection, (float)delta);
 
-                // Updates the velocity based on the current state
-                Velocity = velocity;
-                MoveAndSlide();
+            // Updates the velocity based on the current state
+            Velocity = velocity;
+            MoveAndSlide();
             //}
+            if (Input.IsActionJustPressed("Die"))
+            {
+                Die();
+            }
         }
 
         /// <summary>
@@ -217,6 +221,12 @@ namespace UnicornGame
 
         public void Die()
         {
+            var BloodyDeath = GD.Load<PackedScene>("res://Art/Effects/blood_particle_effect.tscn");
+            var BloodEffect = BloodyDeath.Instantiate<BloodParticleEffect>();
+            BloodEffect.GlobalPosition = GlobalPosition; // Set the position of the blood effect
+            GetTree().CurrentScene.AddChild(BloodEffect); // Add the effect to the scene
+            BloodEffect.BloodSpray(); // Start the blood spray effect
+            Hide(); // Hide the player
             // kuolemis animaation käynnistäminen
             // kuolemis äänen soittaminen
         }
