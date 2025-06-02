@@ -39,6 +39,9 @@ namespace UnicornGame
 			_animatedSprite = GetNode<AnimatedSprite2D>("AnimatedSprite2D");
 			_respawner = GetNode<Respawner>("../Respawner");
 		}
+        [Export]
+        public AnimatedSprite2D AnimatedSprite { get; set; } // tarvitaan animaatioita varten
+
 
 		public override void _PhysicsProcess(double delta)
 		{
@@ -242,6 +245,17 @@ namespace UnicornGame
 			var wallChecker = GetNode<RayCast2D>("WallChecker");
 			return wallChecker.IsColliding();
 		}
+        public void Die()
+        {
+            var BloodyDeath = GD.Load<PackedScene>("res://Art/Effects/blood_particle_effect.tscn");
+            var BloodEffect = BloodyDeath.Instantiate<BloodParticleEffect>();
+            BloodEffect.GlobalPosition = GlobalPosition; // Set the position of the blood effect
+            GetTree().CurrentScene.AddChild(BloodEffect); // Add the effect to the scene
+            BloodEffect.BloodSpray(); // Start the blood spray effect
+            Hide(); // Hide the player
+            // kuolemis animaation käynnistäminen
+            // kuolemis äänen soittaminen
+        }
 
 		/// <summary>
 		/// Gets the direction of the wall the player is currently sliding against.

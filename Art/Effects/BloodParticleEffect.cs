@@ -6,9 +6,12 @@ public partial class BloodParticleEffect : CpuParticles2D
 	// Called when the node enters the scene tree for the first time.
 	public override void _Ready()
 	{
-		Emitting = true; // Start emitting particles immediately
 	}
-
+	public void BloodSpray()
+	{
+		Emitting = true;
+		GD.Print("Blood spray effect started.");
+	}
 	// Called every frame. 'delta' is the elapsed time since the previous frame.
 	public override void _Process(double delta)
 	{
