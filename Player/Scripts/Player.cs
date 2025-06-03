@@ -1,6 +1,7 @@
 using Godot;
 using System;
 using System.ComponentModel.DataAnnotations;
+using System.Threading.Tasks;
 
 namespace UnicornGame
 {
@@ -27,6 +28,7 @@ namespace UnicornGame
         private float _lastMoveDirection = 1f; // initial direction to the right
         private Godot.Vector2 _dashDirection = Godot.Vector2.Zero;
         // private CollisionDetector _collisionDetector;
+        private bool _canControl = true;
 
         [Export]
         public AnimatedSprite2D AnimatedSprite { get; set; } // tarvitaan animaatioita varten
@@ -34,51 +36,58 @@ namespace UnicornGame
 
         public override void _PhysicsProcess(double delta)
         {
+            if (!_canControl)
+            {
+                // If the player cannot control the character, skip the physics process
+                return;
+            }
             //_collisionDetector = GetNode<CollisionDetector>("res://Player/Scripts/CollisionDetector.cs");
 
             //if (_collisionDetector.health > 0)
             //{
-                Godot.Vector2 velocity = Velocity;
-                float inputDirection = Input.GetAxis("Move left", "Move right");
+            Godot.Vector2 velocity = Velocity;
+            float inputDirection = Input.GetAxis("Move left", "Move right");
 
-                // Handle dashing
-                // Add timers
-                if (_dashCooldownTimer > 0)
+            // Handle dashing
+            // Add timers
+            if (_dashCooldownTimer > 0)
+            {
+                _dashCooldownTimer -= (float)delta;
+            }
+
+            if (_isDashing)
+            {
+                _dashTimer -= (float)delta;
+
+                if (_dashTimer <= 0)
                 {
-                    _dashCooldownTimer -= (float)delta;
+                    _isDashing = false;
                 }
-
-                if (_isDashing)
+                else
                 {
-                    _dashTimer -= (float)delta;
-
-                    if (_dashTimer <= 0)
-                    {
-                        _isDashing = false;
-                    }
-                    else
-                    {
-                        velocity = _dashDirection * DashSpeed;
-                        Velocity = velocity;
-                        MoveAndSlide();
-                        return;
-                    }
+                    velocity = _dashDirection * DashSpeed;
+                    Velocity = velocity;
+                    MoveAndSlide();
+                    return;
                 }
-                // Apply gravity
-                if (!IsOnFloor() && !_isWallSliding)
-                {
-                    velocity.Y += (float)(Gravity * delta);
-                }
+            }
+            // Apply gravity
+            if (!IsOnFloor() && !_isWallSliding)
+            {
+                velocity.Y += (float)(Gravity * delta);
+            }
 
-                HandleDash(inputDirection);
+            HandleDash(inputDirection);
 
-                BasicMovement(ref velocity, inputDirection);
-                Jumping(ref velocity, inputDirection);
-                WallSlidingWallJumping(ref velocity, inputDirection, (float)delta);
+            BasicMovement(ref velocity, inputDirection);
+            Jumping(ref velocity, inputDirection);
+            WallSlidingWallJumping(ref velocity, inputDirection, (float)delta);
 
-                // Updates the velocity based on the current state
-                Velocity = velocity;
-                MoveAndSlide();
+            // Updates the velocity based on the current state
+            Velocity = velocity;
+            MoveAndSlide();
+
+            GD.Print(IsNearWall());
             //}
         }
 
@@ -136,6 +145,8 @@ namespace UnicornGame
         {
             _isWallSliding = false;
 
+            int wallDirection = GetWallDirection();
+
             /*
             int wallLayerId = 2;
             Vector2I tilePos = TileMap.LocalToMap(GlobalPosition);
@@ -144,35 +155,35 @@ namespace UnicornGame
             // Wall slide
             if (wallTileId != -1)
             { */
-                if (IsOnWall())
+            if (IsOnWall() && !IsOnFloor())
+            {
+                _isWallSliding = true;
+                velocity.Y = Mathf.Min(velocity.Y + Gravity * 0.5f, WallSlideSpeed);
+                _jumpCount = 0;
+            }
+
+            // Wall jump
+            if (_isWallSliding && Input.IsActionJustPressed("Jump"))
+            {
+                // If the player is wall sliding and presses jump while pressing towards the wall
                 {
-                    bool isPressingTowardsWall =
-                        (GetWallDirection() == 1 && Input.IsActionPressed("Move left")) ||
-                        (GetWallDirection() == -1 && Input.IsActionPressed("Move right"));
-
-                    if (isPressingTowardsWall)
-                    {
-                        _isWallSliding = true;
-                        velocity.Y = Mathf.Min(velocity.Y + Gravity * 0.5f, WallSlideSpeed);
-                        _jumpCount = 0;
-                    }
-                }
-
-                // Wall jump
-                if (_isWallSliding && Input.IsActionJustPressed("Jump"))
-                {
-                    velocity.Y = WallJumpVelocity;
-
-                    int wallDirection = GetWallDirection();
 
                     if (wallDirection != 0)
                     {
-                        velocity.X = wallDirection * WallJumpPush;
+                        velocity.X = WallJumpPush * -wallDirection; // Push away from the wall
+                        velocity.Y = WallJumpVelocity;
                     }
 
                     _isWallSliding = false; // Reset wall sliding state after jumping
                 }
             }
+        }
+
+        public bool IsNearWall()
+        {
+            var wallChecker = GetNode<RayCast2D>("WallChecker");
+            return wallChecker.IsColliding();
+        }
 
         /// <summary>
         /// Gets the direction of the wall the player is currently sliding against.
@@ -225,14 +236,39 @@ namespace UnicornGame
 
         public void Die()
         {
+            GD.Print("Player died");
             // kuolemis animaation käynnistäminen
             // kuolemis äänen soittaminen
+
+            Visible = false;
+            _canControl = false;
+
+            ResetPlayer();
         }
 
         public void RespawnPlayer()
         {
             Show();
+            // kameran resetointi
             //_collisionDetector.health = 1; // Reset health
+        }
+
+        public async Task HandleDanger()
+        {
+            GD.Print("Player died");
+            Visible = false;
+            _canControl = false;
+            await ToSignal(GetTree().CreateTimer(1.0f), Timer.SignalName.Timeout);
+
+            ResetPlayer();
+        }
+
+        public void ResetPlayer()
+        {
+            GlobalPosition = GetNode<Node2D>("../RespawnPoint").GlobalPosition; // Assuming RespawnPoint is a Node2D
+            Visible = true;
+            _canControl = true;
+            _jumpCount = 0;
         }
     }
 }

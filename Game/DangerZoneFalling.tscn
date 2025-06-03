@@ -1,0 +1,8 @@
+[gd_scene load_steps=2 format=3 uid="uid://dol5g5hc7xj1e"]
+
+[ext_resource type="Script" path="res://Game/DangerZoneFalling.cs" id="1_y3g7w"]
+
+[node name="DangerZone" type="Area2D"]
+collision_layer = 4
+monitorable = false
+script = ExtResource("1_y3g7w")

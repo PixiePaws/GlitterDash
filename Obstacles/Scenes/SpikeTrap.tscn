@@ -1,6 +1,7 @@
-[gd_scene load_steps=3 format=3 uid="uid://cer6xkecwmj1s"]
+[gd_scene load_steps=4 format=3 uid="uid://cer6xkecwmj1s"]
 
 [ext_resource type="Script" path="res://Obstacles/Scripts/SpikeTrap.cs" id="1_avmjo"]
+[ext_resource type="PackedScene" uid="uid://brivbnkaqcv3f" path="res://Game/DangerZoneTraps.tscn" id="2_kn4fy"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_xvl3v"]
 size = Vector2(97, 121)
@@ -12,5 +13,7 @@ script = ExtResource("1_avmjo")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+[node name="DangerZoneTraps" parent="." instance=ExtResource("2_kn4fy")]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="DangerZoneTraps"]
 shape = SubResource("RectangleShape2D_xvl3v")
