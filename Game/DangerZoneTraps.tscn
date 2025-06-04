@@ -1,0 +1,5 @@
+[gd_scene format=3 uid="uid://brivbnkaqcv3f"]
+
+[node name="DangerZoneTraps" type="Area2D"]
+collision_layer = 4
+monitorable = false
