@@ -771,6 +771,10 @@ Player = NodePath("../PlayerCharacter")
 [node name="PlayerCharacter" parent="." instance=ExtResource("2_3ku83")]
 position = Vector2(181, 528)
 collision_mask = 3
+WallJumpVelocity = -600.0
+WallJumpPush = 1500.0
+DashSpeed = 800.0
+DashDuration = 0.2
 
 [node name="TileMapLayer" type="TileMapLayer" parent="."]
 position = Vector2(0, 2)
