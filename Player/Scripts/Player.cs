@@ -10,10 +10,10 @@ namespace UnicornGame
     {
         [Export] public float Speed = 200f;
         [Export] public float JumpVelocity = -600f;
-        [Export] public float WallJumpVelocity = -1000f;
-        [Export] public float WallJumpPush = 1200f;
+        [Export] public float WallJumpVelocity = -600f;
+        [Export] public float WallJumpPush = 1500f;
         [Export] public float WallSlideSpeed = 100f;
-        [Export] public float Gravity = 1000f;
+        [Export] public float Gravity = 1500f;
         [Export] public float DashSpeed = 800f;
         [Export] public float DashDuration = 0.2f;
         [Export] public float DashCooldown = 0.5f;
@@ -26,6 +26,7 @@ namespace UnicornGame
         private float _dashTimer = 0f;
         private float _dashCooldownTimer = 0f;
         private float _lastMoveDirection = 1f; // initial direction to the right
+        private bool _justWallJumped = false;
         private Godot.Vector2 _dashDirection = Godot.Vector2.Zero;
         // private CollisionDetector _collisionDetector;
         private bool _canControl = true;
@@ -79,12 +80,22 @@ namespace UnicornGame
 
             HandleDash(inputDirection);
 
-            BasicMovement(ref velocity, inputDirection);
+
+            if (!_justWallJumped)
+            {
+                BasicMovement(ref velocity, inputDirection);
+            }
+            else
+            {
+                _justWallJumped = false;
+            }
+
             Jumping(ref velocity, inputDirection);
             WallSlidingWallJumping(ref velocity, inputDirection, (float)delta);
 
             // Updates the velocity based on the current state
             Velocity = velocity;
+            SetDirection(inputDirection); // Update the direction based on input
             MoveAndSlide();
 
             GD.Print(IsNearWall());
@@ -155,7 +166,7 @@ namespace UnicornGame
             // Wall slide
             if (wallTileId != -1)
             { */
-            if (IsOnWall() && !IsOnFloor())
+            if (IsNearWall() && !IsOnFloor())
             {
                 _isWallSliding = true;
                 velocity.Y = Mathf.Min(velocity.Y + Gravity * 0.5f, WallSlideSpeed);
@@ -167,15 +178,32 @@ namespace UnicornGame
             {
                 // If the player is wall sliding and presses jump while pressing towards the wall
                 {
-
+                    GD.Print("WallDirection: " + wallDirection);
                     if (wallDirection != 0)
                     {
-                        velocity.X = WallJumpPush * -wallDirection; // Push away from the wall
-                        velocity.Y = WallJumpVelocity;
+                        // Velocity.X = WallJumpPush * -wallDirection;
+                        // Velocity.Y = WallJumpVelocity;
+                        Vector2 WallJumpDirectionVector = new Godot.Vector2(-wallDirection * 3f, -1).Normalized();
+                        velocity = WallJumpDirectionVector * WallJumpPush;
+                        _justWallJumped = true;
                     }
 
                     _isWallSliding = false; // Reset wall sliding state after jumping
                 }
+            }
+        }
+
+        public void SetDirection(float direction)
+        {
+            if (direction == 1)
+            {
+                //AnimatedSprite.FlipH = false; // Facing right
+                GetNode<RayCast2D>("WallChecker").RotationDegrees = 0;
+            }
+            else if (direction == -1)
+            {
+                //AnimatedSprite.FlipH = true; // Facing left
+                GetNode<RayCast2D>("WallChecker").RotationDegrees = 180; // Wall checker should also flip
             }
         }
 
@@ -199,7 +227,7 @@ namespace UnicornGame
                     var normal = collision.GetNormal(); // Oikea tapa hakea normaali Godot 4:ssa
                     if (Math.Abs(normal.X) > 0.9f)
                     {
-                        return (int)Mathf.Sign(normal.X); // 1 = seinä oikealla, -1 = vasemmalla
+                        return -(int)Mathf.Sign(normal.X); // 1 = seinä oikealla, -1 = vasemmalla
                     }
                 }
             }

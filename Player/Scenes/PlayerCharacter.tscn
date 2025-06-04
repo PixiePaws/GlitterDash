@@ -4,15 +4,10 @@
 [ext_resource type="Texture2D" uid="uid://b48y12wyscq7f" path="res://Art/Character/UnicornSmaller.png" id="2_hubrt"]
 [ext_resource type="Script" path="res://Player/Scripts/CollisionDetector.cs" id="3_udxmi"]
 
-[node name="PlayerCharacter" type="CharacterBody2D" node_paths=PackedStringArray("AnimatedSprite")]
+[node name="PlayerCharacter" type="CharacterBody2D"]
 collision_layer = 7
 collision_mask = 7
 script = ExtResource("1_l5nv5")
-WallJumpVelocity = -500.0
-WallJumpPush = 2000.0
-DashSpeed = 1000.0
-DashDuration = 0.3
-AnimatedSprite = NodePath("AnimatedSprite2D")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 scale = Vector2(0.6, 0.6)

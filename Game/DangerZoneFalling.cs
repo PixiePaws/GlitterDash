@@ -16,7 +16,7 @@ namespace UnicornGame
 		{
 			if (body is Player player)
 			{
-				player.HandleDanger();
+				//player.HandleDanger();
 			}
 		}
 	}
