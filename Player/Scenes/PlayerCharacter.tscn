@@ -4,15 +4,10 @@
 [ext_resource type="Texture2D" uid="uid://b48y12wyscq7f" path="res://Art/Character/UnicornSmaller.png" id="2_hubrt"]
 [ext_resource type="Script" path="res://Player/Scripts/CollisionDetector.cs" id="3_udxmi"]
 
-[node name="PlayerCharacter" type="CharacterBody2D" node_paths=PackedStringArray("AnimatedSprite")]
+[node name="PlayerCharacter" type="CharacterBody2D"]
+collision_layer = 7
+collision_mask = 7
 script = ExtResource("1_l5nv5")
-JumpVelocity = -500.0
-WallJumpVelocity = -500.0
-WallJumpPush = 2000.0
-Gravity = 1500.0
-DashSpeed = 1000.0
-DashDuration = 0.3
-AnimatedSprite = NodePath("AnimatedSprite2D")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 scale = Vector2(0.6, 0.6)
@@ -24,7 +19,7 @@ flip_h = true
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="."]
 position = Vector2(-4, 0)
 scale = Vector2(1.055, 1)
-polygon = PackedVector2Array(-26.9351, -33, -35.4641, -61, -29.7781, -84, -11, -90, 2.44272, -85, 7.18108, -73, 13.8148, -91, 16.6578, -74, 25.1868, -87, 32.7682, -62, 40.7499, -42, 44.1403, -23, 47.9309, -14, 47.9309, -2, 44.1403, 4, 52.6693, 24, 51.7216, 39, 38.8545, 39, 33.1685, 53, 31.2731, 83, 16.1104, 81, 14.2151, 63, 4.73836, 62, 0.947671, 85, -14, 80, -13.2674, 49, -18.0058, 41, -24.6395, 38, -20.8488, 5, -35.0638, 9, -47.3836, -1, -44.9408, -13, -31.6734, -8)
+polygon = PackedVector2Array(-19.9052, -32, -19.9052, -48, -18.9573, -74, -9.47867, -64, 0, -68, 4.73934, -70, 10.4265, -86, 14.218, -69, 20.8531, -81, 26.5403, -75, 28.436, -59, 37.9147, -42, 37.9147, -27, 44.5498, -9, 40.7583, 2, 45.4976, 33, 35.0711, 34, 30.3318, 48, 29.3839, 73, 28.436, 77, -8.53081, 78, -14.218, 72, -13.2674, 49, -18.0095, 35, -23.6967, 33, -20.8488, 5, -10.4265, -7)
 
 [node name="DashTimer" type="Timer" parent="."]
 wait_time = 0.4
@@ -36,4 +31,8 @@ collision_mask = 8
 script = ExtResource("3_udxmi")
 
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="CollisionDetector"]
-polygon = PackedVector2Array(-53, -2, -49, -14, -39, -9, -32, -21, -37, -53, -41, -64, -37, -81, -26, -90, -3, -86, 4, -76, 10, -91, 14, -75, 21, -87, 38, -47, 41, -25, 46, -9, 44, 2, 50, 17, 52, 27, 51, 39, 45, 41, 38, 39, 32, 51, 30, 83, 17, 84, 12, 80, 12, 63, 2, 61, 0, 80, -2, 85, -17, 83, -19, 66, -17, 49, -23, 41, -29, 38, -31, 25, -29, 12, -26, 5, -41, 9, -51, 3)
+polygon = PackedVector2Array(-14, -5, -24, -26, -25, -49, -24, -74, -14, -63, 0, -70, 7, -86, 11, -70, 18, -81, 24, -76, 26, -59, 35, -46, 37, -27, 43, -9, 39, 2, 44, 32, 33, 34, 28, 48, 26, 77, -13, 78, -19, 72, -19, 66, -17, 49, -23, 35, -28, 34, -31, 25, -29, 12, -26, 5)
+
+[node name="WallChecker" type="RayCast2D" parent="."]
+target_position = Vector2(64, 0)
+collision_mask = 15
