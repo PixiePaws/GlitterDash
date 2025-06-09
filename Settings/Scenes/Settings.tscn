@@ -1,6 +1,8 @@
-[gd_scene load_steps=2 format=3 uid="uid://cnu4eae42h74o"]
+[gd_scene load_steps=4 format=3 uid="uid://cnu4eae42h74o"]
 
 [ext_resource type="Script" path="res://Settings/Scripts/SettingsScript.cs" id="1_r7oxh"]
+[ext_resource type="PackedScene" uid="uid://b1kh6r6r608f8" path="res://Settings/Scenes/ScreenMode.tscn" id="2_diy0d"]
+[ext_resource type="PackedScene" uid="uid://8bfhyrrwcngu" path="res://Settings/Scenes/ResolutionMode.tscn" id="3_kx7qs"]
 
 [node name="SettingsScene" type="CanvasLayer"]
 process_mode = 3
@@ -40,18 +42,18 @@ theme_override_constants/margin_top = 24
 theme_override_constants/margin_right = 24
 theme_override_constants/margin_bottom = 24
 
-[node name="VBoxContainer" type="VBoxContainer" parent="Settings/TabContainer/Video/MarginContainer"]
+[node name="ScrollContainer" type="ScrollContainer" parent="Settings/TabContainer/Video/MarginContainer"]
 layout_mode = 2
-theme_override_constants/separation = 64
-alignment = 1
 
-[node name="Label" type="Label" parent="Settings/TabContainer/Video/MarginContainer/VBoxContainer"]
+[node name="VBoxContainer" type="VBoxContainer" parent="Settings/TabContainer/Video/MarginContainer/ScrollContainer"]
 layout_mode = 2
-text = "Resolution"
+theme_override_constants/separation = 256
 
-[node name="Label2" type="Label" parent="Settings/TabContainer/Video/MarginContainer/VBoxContainer"]
+[node name="ScreenMode" parent="Settings/TabContainer/Video/MarginContainer/ScrollContainer/VBoxContainer" instance=ExtResource("2_diy0d")]
 layout_mode = 2
-text = "Window mode"
+
+[node name="ResolutionMode" parent="Settings/TabContainer/Video/MarginContainer/ScrollContainer/VBoxContainer" instance=ExtResource("3_kx7qs")]
+layout_mode = 2
 
 [node name="Controls" type="TabBar" parent="Settings/TabContainer"]
 visible = false
