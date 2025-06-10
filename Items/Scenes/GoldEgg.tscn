@@ -1,0 +1,33 @@
+[gd_scene load_steps=5 format=3 uid="uid://dsnvu8ioiw0ff"]
+
+[ext_resource type="Texture2D" uid="uid://b0sbah8r3vm8x" path="res://Art/PlaceHolders/star.png" id="1_elewf"]
+[ext_resource type="Script" path="res://Items/Scripts/GoldEgg.cs" id="1_g52bi"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_0lke3"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("1_elewf")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_r2j1v"]
+radius = 70.0
+
+[node name="GoldEgg" type="Area2D"]
+collision_layer = 2
+script = ExtResource("1_g52bi")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+scale = Vector2(0.5, 0.5)
+sprite_frames = SubResource("SpriteFrames_0lke3")
+autoplay = "default"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+scale = Vector2(0.5, 0.5)
+shape = SubResource("CircleShape2D_r2j1v")
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]
