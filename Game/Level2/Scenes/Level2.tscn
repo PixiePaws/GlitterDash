@@ -1,4 +1,4 @@
-[gd_scene load_steps=18 format=4 uid="uid://dpqb4kmsngt4k"]
+[gd_scene load_steps=18 format=4 uid="uid://dtna0nd34a7vt"]
 
 [ext_resource type="Script" path="res://Game/Level1/Scripts/Camera.cs" id="1_v3j5d"]
 [ext_resource type="PackedScene" uid="uid://cvl311e3g082f" path="res://Player/Scenes/PlayerCharacter.tscn" id="2_3ku83"]

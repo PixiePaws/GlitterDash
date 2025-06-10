@@ -30,10 +30,13 @@ namespace UnicornGame
         private Godot.Vector2 _dashDirection = Godot.Vector2.Zero;
         // private CollisionDetector _collisionDetector;
         private bool _canControl = true;
+        public AnimatedSprite2D _animatedSprite; // tarvitaan animaatioita varten
 
-        [Export]
-        public AnimatedSprite2D AnimatedSprite { get; set; } // tarvitaan animaatioita varten
 
+        public override void _Ready()
+        {
+            _animatedSprite = GetNode<AnimatedSprite2D>("AnimatedSprite2D");
+        }
 
         public override void _PhysicsProcess(double delta)
         {
@@ -56,6 +59,8 @@ namespace UnicornGame
                 _dashCooldownTimer -= (float)delta;
             }
 
+            HandleDash(inputDirection);
+
             if (_isDashing)
             {
                 _dashTimer -= (float)delta;
@@ -67,6 +72,7 @@ namespace UnicornGame
                 else
                 {
                     velocity = _dashDirection * DashSpeed;
+                    _animatedSprite.Play("Dash");
                     Velocity = velocity;
                     MoveAndSlide();
                     return;
@@ -77,8 +83,6 @@ namespace UnicornGame
             {
                 velocity.Y += (float)(Gravity * delta);
             }
-
-            HandleDash(inputDirection);
 
 
             if (!_justWallJumped)
@@ -112,10 +116,16 @@ namespace UnicornGame
             {
                 velocity.X = inputDirection * Speed;
                 _lastMoveDirection = inputDirection; // Update last move direction
+                _animatedSprite.Play("Walk");
             }
             else
             {
                 velocity.X = Mathf.MoveToward(velocity.X, 0, Speed);
+
+                if (IsOnFloor() && !_isWallSliding && !_isDashing)
+                {
+                    _animatedSprite.Play("Basic");
+                }
             }
         }
 
@@ -133,12 +143,14 @@ namespace UnicornGame
             {
                 velocity.Y = JumpVelocity;
                 _jumpCount = 2;
+                _animatedSprite.Play("Jump");
             }
 
             if (Input.IsActionJustPressed("Jump") && IsOnFloor())
             {
                 velocity.Y = JumpVelocity;
                 _jumpCount = 1;
+                _animatedSprite.Play("Jump");
             }
 
             if (!Input.IsActionPressed("Jump") && IsOnFloor())
@@ -171,6 +183,7 @@ namespace UnicornGame
                 _isWallSliding = true;
                 velocity.Y = Mathf.Min(velocity.Y + Gravity * 0.5f, WallSlideSpeed);
                 _jumpCount = 0;
+                _animatedSprite.Play("OnWall");
             }
 
             // Wall jump
@@ -186,6 +199,7 @@ namespace UnicornGame
                         Vector2 WallJumpDirectionVector = new Godot.Vector2(-wallDirection * 3f, -1).Normalized();
                         velocity = WallJumpDirectionVector * WallJumpPush;
                         _justWallJumped = true;
+                        _animatedSprite.Play("Jump");
                     }
 
                     _isWallSliding = false; // Reset wall sliding state after jumping
@@ -193,20 +207,29 @@ namespace UnicornGame
             }
         }
 
+        /// <summary>
+        /// Sets the direction of the player based on the input.
+        /// This method also updates the wall checker raycast direction to match the player's facing direction.
+        /// </summary>
+        /// <param name="direction"></param>
         public void SetDirection(float direction)
         {
             if (direction == 1)
             {
-                //AnimatedSprite.FlipH = false; // Facing right
-                GetNode<RayCast2D>("WallChecker").RotationDegrees = 0;
+                _animatedSprite.FlipH = false; // Facing right
+                GetNode<RayCast2D>("WallChecker").RotationDegrees = 0; // Wall checker fliped
             }
             else if (direction == -1)
             {
-                //AnimatedSprite.FlipH = true; // Facing left
-                GetNode<RayCast2D>("WallChecker").RotationDegrees = 180; // Wall checker should also flip
+                _animatedSprite.FlipH = true; // Facing left
+                GetNode<RayCast2D>("WallChecker").RotationDegrees = 180; // Wall checker fliped
             }
         }
 
+        /// <summary>
+        /// Checks if the player is near a wall using a RayCast2D node.
+        /// </summary>
+        /// <returns></returns>
         public bool IsNearWall()
         {
             var wallChecker = GetNode<RayCast2D>("WallChecker");
@@ -245,13 +268,6 @@ namespace UnicornGame
             // and if the cooldown is over.
             if (Input.IsActionJustPressed("Dash") && !_isDashing && _dashCooldownTimer <= 0)
             {
-                // Dash direction based on input
-                float direction;
-                if (_lastMoveDirection != 0)
-                {
-                    direction = _lastMoveDirection;
-                }
-
                 // Dash Direction
                 _dashDirection = new Godot.Vector2(_lastMoveDirection, 0).Normalized();
 
@@ -262,18 +278,26 @@ namespace UnicornGame
             }
         }
 
+        /// <summary>
+        /// Handles the player's death logic.
+        /// </summary>
         public void Die()
         {
             GD.Print("Player died");
             // kuolemis animaation käynnistäminen
             // kuolemis äänen soittaminen
 
+            _animatedSprite.Play("Die");
             Visible = false;
             _canControl = false;
 
             ResetPlayer();
         }
 
+        /// <summary>
+        /// Respawns the player at the respawn point and resets the player's state.
+        /// This method is called when the player needs to respawn after dying.
+        /// </summary>
         public void RespawnPlayer()
         {
             Show();
@@ -281,6 +305,9 @@ namespace UnicornGame
             //_collisionDetector.health = 1; // Reset health
         }
 
+        /// <summary>
+        /// Handles the player's death and respawn logic.
+        /// </summary>
         public async Task HandleDanger()
         {
             GD.Print("Player died");
@@ -291,12 +318,16 @@ namespace UnicornGame
             ResetPlayer();
         }
 
+        /// <summary>
+        /// Resets the player's position and state to the respawn point.
+        /// </summary>
         public void ResetPlayer()
         {
             GlobalPosition = GetNode<Node2D>("../RespawnPoint").GlobalPosition; // Assuming RespawnPoint is a Node2D
             Visible = true;
             _canControl = true;
             _jumpCount = 0;
+            _animatedSprite.Play("Falling");
         }
     }
 }
