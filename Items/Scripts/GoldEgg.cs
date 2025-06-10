@@ -6,14 +6,19 @@ namespace UnicornGame
 	public partial class GoldEgg : Area2D
 	{
 		[Export] private GameManager GameManager;
-		// Called when the node enters the scene tree for the first time.
+
 		public override void _Ready()
 		{
-			GameManager = GetNode<GameManager>("GameManager");
+			GameManager = GetNode<GameManager>("/root/Level1/GameManager");
 			BodyEntered += OnBodyEntered;
 		}
 
-		// Called every frame. 'delta' is the elapsed time since the previous frame.
+		/// <summary>
+		/// Called when a body enters the area.
+		/// This method calls for AddScore method in GameManager and then frees the GoldEgg node.
+		/// It is connected to the BodyEntered signal of the Area2D node.
+		/// </summary>
+		/// <param name="body"></param>
 		public void OnBodyEntered(Node body)
 		{
 			GameManager.AddScore();

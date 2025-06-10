@@ -72,25 +72,34 @@ RespawnPoint = NodePath("RespawnPoint")
 metadata/_edit_vertical_guides_ = [3840.0, 5760.0, 1920.0]
 metadata/_edit_horizontal_guides_ = [1080.0, 2160.0, -1080.0]
 
-[node name="GameManager" type="Node" parent="." node_paths=PackedStringArray("RespawnPoint")]
+[node name="GameManager" type="Node" parent="." node_paths=PackedStringArray("RespawnPoint", "ScoreLabel")]
 unique_name_in_owner = true
 script = ExtResource("2_gdrdi")
 RespawnPoint = NodePath("../RespawnPoint")
+ScoreLabel = NodePath("../Camera2D/ScoreLabel")
 
 [node name="TextureRect" type="TextureRect" parent="."]
 offset_right = 1920.0
 offset_bottom = 1080.0
 texture = ExtResource("2_5govx")
 
+[node name="PlayerCharacter" parent="." instance=ExtResource("2_n6ngs")]
+position = Vector2(251, 650)
+collision_mask = 3
+WallJumpVelocity = 400.0
+
 [node name="Camera2D" type="Camera2D" parent="." node_paths=PackedStringArray("Player")]
 offset = Vector2(960, 540)
 script = ExtResource("1_ttao5")
 Player = NodePath("../PlayerCharacter")
 
-[node name="PlayerCharacter" parent="." instance=ExtResource("2_n6ngs")]
-position = Vector2(251, 650)
-collision_mask = 3
-WallJumpVelocity = 400.0
+[node name="ScoreLabel" type="Label" parent="Camera2D"]
+offset_left = 35.0
+offset_top = 3.0
+offset_right = 333.0
+offset_bottom = 110.0
+theme_override_font_sizes/font_size = 78
+text = "Score: 0"
 
 [node name="Map" type="Node" parent="."]
 
@@ -166,7 +175,7 @@ one_way_collision = true
 position = Vector2(1380, 868)
 
 [node name="Portal" parent="." instance=ExtResource("6_0yaxk")]
-position = Vector2(5555, -922)
+position = Vector2(7642, -667)
 script = ExtResource("8_iqa1o")
 
 [node name="MainTileMap" type="TileMapLayer" parent="."]
@@ -186,91 +195,40 @@ polygon = PackedVector2Array(37, 2878, 30, 1048, 1953, 1042, 1953, 2121, 5804, 2
 [node name="GoldEggs" type="Node" parent="."]
 
 [node name="GoldEgg" parent="GoldEggs" instance=ExtResource("11_508a1")]
-position = Vector2(771, 724)
-
-[node name="GoldEgg2" parent="GoldEggs" instance=ExtResource("11_508a1")]
 position = Vector2(1102, 562)
 
-[node name="GoldEgg3" parent="GoldEggs" instance=ExtResource("11_508a1")]
-position = Vector2(1423, 694)
-
-[node name="GoldEgg4" parent="GoldEggs" instance=ExtResource("11_508a1")]
-position = Vector2(1835, 483)
-
-[node name="GoldEgg5" parent="GoldEggs" instance=ExtResource("11_508a1")]
-position = Vector2(2124, 492)
-
-[node name="GoldEgg6" parent="GoldEggs" instance=ExtResource("11_508a1")]
+[node name="GoldEgg2" parent="GoldEggs" instance=ExtResource("11_508a1")]
 position = Vector2(4838, 84)
 
-[node name="GoldEgg7" parent="GoldEggs" instance=ExtResource("11_508a1")]
+[node name="GoldEgg3" parent="GoldEggs" instance=ExtResource("11_508a1")]
 position = Vector2(2618, 332)
 
-[node name="GoldEgg8" parent="GoldEggs" instance=ExtResource("11_508a1")]
-position = Vector2(3091, 496)
-
-[node name="GoldEgg9" parent="GoldEggs" instance=ExtResource("11_508a1")]
+[node name="GoldEgg4" parent="GoldEggs" instance=ExtResource("11_508a1")]
 position = Vector2(3737, 172)
 
-[node name="GoldEgg10" parent="GoldEggs" instance=ExtResource("11_508a1")]
-position = Vector2(4272, 180)
-
-[node name="GoldEgg11" parent="GoldEggs" instance=ExtResource("11_508a1")]
-position = Vector2(4089, 620)
-
-[node name="GoldEgg12" parent="GoldEggs" instance=ExtResource("11_508a1")]
+[node name="GoldEgg5" parent="GoldEggs" instance=ExtResource("11_508a1")]
 position = Vector2(4296, 788)
 
-[node name="GoldEgg13" parent="GoldEggs" instance=ExtResource("11_508a1")]
-position = Vector2(4518, 516)
-
-[node name="GoldEgg14" parent="GoldEggs" instance=ExtResource("11_508a1")]
-position = Vector2(3492, 670)
-
-[node name="GoldEgg15" parent="GoldEggs" instance=ExtResource("11_508a1")]
-position = Vector2(3489, 856)
-
-[node name="GoldEgg16" parent="GoldEggs" instance=ExtResource("11_508a1")]
-position = Vector2(3482, 1067)
-
-[node name="GoldEgg17" parent="GoldEggs" instance=ExtResource("11_508a1")]
+[node name="GoldEgg6" parent="GoldEggs" instance=ExtResource("11_508a1")]
 position = Vector2(4889, -916)
 
-[node name="GoldEgg18" parent="GoldEggs" instance=ExtResource("11_508a1")]
+[node name="GoldEgg7" parent="GoldEggs" instance=ExtResource("11_508a1")]
 position = Vector2(3028, 1283)
 
-[node name="GoldEgg19" parent="GoldEggs" instance=ExtResource("11_508a1")]
+[node name="GoldEgg8" parent="GoldEggs" instance=ExtResource("11_508a1")]
 position = Vector2(2362, 1404)
 
-[node name="GoldEgg20" parent="GoldEggs" instance=ExtResource("11_508a1")]
-position = Vector2(2569, 1765)
-
-[node name="GoldEgg21" parent="GoldEggs" instance=ExtResource("11_508a1")]
-position = Vector2(4154, -905)
-
-[node name="GoldEgg22" parent="GoldEggs" instance=ExtResource("11_508a1")]
+[node name="GoldEgg9" parent="GoldEggs" instance=ExtResource("11_508a1")]
 position = Vector2(4133, -424)
 
-[node name="GoldEgg23" parent="GoldEggs" instance=ExtResource("11_508a1")]
+[node name="GoldEgg10" parent="GoldEggs" instance=ExtResource("11_508a1")]
 position = Vector2(3701, 1792)
 
-[node name="GoldEgg24" parent="GoldEggs" instance=ExtResource("11_508a1")]
+[node name="GoldEgg11" parent="GoldEggs" instance=ExtResource("11_508a1")]
 position = Vector2(4903, 1504)
 
-[node name="GoldEgg25" parent="GoldEggs" instance=ExtResource("11_508a1")]
-position = Vector2(4779, 1289)
+[node name="GoldEgg12" parent="GoldEggs" instance=ExtResource("11_508a1")]
+position = Vector2(4852, 648)
 
-[node name="GoldEgg26" parent="GoldEggs" instance=ExtResource("11_508a1")]
-position = Vector2(4928, 1055)
-
-[node name="GoldEgg27" parent="GoldEggs" instance=ExtResource("11_508a1")]
-position = Vector2(4776, 814)
-
-[node name="GoldEgg28" parent="GoldEggs" instance=ExtResource("11_508a1")]
-position = Vector2(5114, 850)
-
-[node name="GoldEgg29" parent="GoldEggs" instance=ExtResource("11_508a1")]
-position = Vector2(5466, 602)
-
-[node name="GoldEgg30" parent="GoldEggs" instance=ExtResource("11_508a1")]
+[node name="GoldEgg13" parent="GoldEggs" instance=ExtResource("11_508a1")]
 position = Vector2(5696, 327)
