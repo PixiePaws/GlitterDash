@@ -78,28 +78,30 @@ script = ExtResource("2_gdrdi")
 RespawnPoint = NodePath("../RespawnPoint")
 ScoreLabel = NodePath("../Camera2D/ScoreLabel")
 
-[node name="TextureRect" type="TextureRect" parent="."]
-offset_right = 1920.0
-offset_bottom = 1080.0
-texture = ExtResource("2_5govx")
-
-[node name="PlayerCharacter" parent="." instance=ExtResource("2_n6ngs")]
-position = Vector2(251, 650)
-collision_mask = 3
-WallJumpVelocity = 400.0
-
 [node name="Camera2D" type="Camera2D" parent="." node_paths=PackedStringArray("Player")]
 offset = Vector2(960, 540)
 script = ExtResource("1_ttao5")
 Player = NodePath("../PlayerCharacter")
 
 [node name="ScoreLabel" type="Label" parent="Camera2D"]
+z_index = 10
 offset_left = 35.0
 offset_top = 3.0
 offset_right = 333.0
 offset_bottom = 110.0
 theme_override_font_sizes/font_size = 78
 text = "Score: 0"
+
+[node name="TextureRect" type="TextureRect" parent="."]
+offset_right = 1920.0
+offset_bottom = 1080.0
+texture = ExtResource("2_5govx")
+
+[node name="PlayerCharacter" parent="." instance=ExtResource("2_n6ngs")]
+position = Vector2(4589, 1808)
+collision_mask = 3
+WallJumpVelocity = 1500.0
+WallJumpPush = 2000.0
 
 [node name="Map" type="Node" parent="."]
 
@@ -175,7 +177,7 @@ one_way_collision = true
 position = Vector2(1380, 868)
 
 [node name="Portal" parent="." instance=ExtResource("6_0yaxk")]
-position = Vector2(7642, -667)
+position = Vector2(5572, -925)
 script = ExtResource("8_iqa1o")
 
 [node name="MainTileMap" type="TileMapLayer" parent="."]

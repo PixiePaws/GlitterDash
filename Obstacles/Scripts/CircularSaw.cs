@@ -3,7 +3,6 @@ using System;
 
 namespace UnicornGame
 {
-
     public partial class CircularSaw : Sprite2D
     {
         [Export] private float RotationAmount = 2.0f;
