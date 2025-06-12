@@ -96,6 +96,7 @@ animations = [{
 collision_layer = 7
 collision_mask = 7
 script = ExtResource("1_l5nv5")
+WallJumpPush = 1300.0
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 visible = false

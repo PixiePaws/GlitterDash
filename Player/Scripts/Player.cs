@@ -27,6 +27,7 @@ namespace UnicornGame
         private float _dashCooldownTimer = 0f;
         private float _lastMoveDirection = 1f; // initial direction to the right
         private bool _justWallJumped = false;
+        private float _justWallJumpedTimer = 0f;
         private Godot.Vector2 _dashDirection = Godot.Vector2.Zero;
         // private CollisionDetector _collisionDetector;
         private bool _canControl = true;
@@ -78,23 +79,28 @@ namespace UnicornGame
                     return;
                 }
             }
-            // Apply gravity
-            if (!IsOnFloor() && !_isWallSliding)
-            {
-                velocity.Y += (float)(Gravity * delta);
-            }
 
-
-            if (!_justWallJumped)
+            if (_justWallJumpedTimer > 0)
             {
-                BasicMovement(ref velocity, inputDirection);
+                _justWallJumpedTimer -= (float)delta;
+                _justWallJumped = true; // Reset the wall jump state after the timer expires
             }
             else
             {
-                _justWallJumped = false;
+                _justWallJumped = false; // Reset the wall jump state after the timer expires
             }
 
-            Jumping(ref velocity, inputDirection);
+            if (!_justWallJumped)
+            {
+                // Apply gravity
+                if (!IsOnFloor() && !_isWallSliding)
+                {
+                    velocity.Y += (float)(Gravity * delta);
+                }
+                BasicMovement(ref velocity, inputDirection);
+                Jumping(ref velocity, inputDirection);
+            }
+
             WallSlidingWallJumping(ref velocity, inputDirection, (float)delta);
 
             // Updates the velocity based on the current state
@@ -162,7 +168,6 @@ namespace UnicornGame
         /// <summary>
         /// Handles wall sliding and wall jumping logic for the player.
         /// Wall sliding occurs when the player is against a wall and not on the floor.
-        /// Wall jumping allows the player to jump off.
         /// </summary>
         private void WallSlidingWallJumping(ref Godot.Vector2 velocity, float inputDirection, float delta)
         {
@@ -196,9 +201,10 @@ namespace UnicornGame
                     {
                         // Velocity.X = WallJumpPush * -wallDirection;
                         // Velocity.Y = WallJumpVelocity;
-                        Vector2 WallJumpDirectionVector = new Godot.Vector2(-wallDirection * 3f, -1).Normalized();
-                        velocity = WallJumpDirectionVector * WallJumpPush;
+                        Vector2 direction = new Godot.Vector2(-wallDirection, -1).Normalized();
+                        velocity = direction * WallJumpPush;
                         _justWallJumped = true;
+                        _justWallJumpedTimer = 0.15f;
                         _animatedSprite.Play("Jump");
                     }
 
