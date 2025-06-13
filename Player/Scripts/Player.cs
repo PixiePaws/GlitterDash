@@ -201,7 +201,7 @@ namespace UnicornGame
                     {
                         // Velocity.X = WallJumpPush * -wallDirection;
                         // Velocity.Y = WallJumpVelocity;
-                        Vector2 direction = new Godot.Vector2(-wallDirection, -1).Normalized();
+                        Vector2 direction = new Godot.Vector2(-wallDirection, -2).Normalized();
                         velocity = direction * WallJumpPush;
                         _justWallJumped = true;
                         _justWallJumpedTimer = 0.15f;
