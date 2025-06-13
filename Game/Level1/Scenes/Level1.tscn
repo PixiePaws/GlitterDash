@@ -100,8 +100,7 @@ texture = ExtResource("2_5govx")
 [node name="PlayerCharacter" parent="." instance=ExtResource("2_n6ngs")]
 position = Vector2(4589, 1808)
 collision_mask = 3
-WallJumpVelocity = 1500.0
-WallJumpPush = 2000.0
+WallJumpPush = 1500.0
 
 [node name="Map" type="Node" parent="."]
 
