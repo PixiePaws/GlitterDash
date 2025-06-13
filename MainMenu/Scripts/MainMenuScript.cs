@@ -10,7 +10,7 @@ namespace UnicornGame
 		// It connects button signals to their respective methods for handling user interactions.
 
 		// Change this to level selection when there is one
-		private string _levelScenePath = "res://Levels/Level1/Scenes/Level1.tscn"; // Path to the level scene
+		private string _levelScenePath = "res://Game/Level1/Scenes/Level1.tscn"; // Path to the level scene
 		private string _settingsScenePath = "res://Settings/Scenes/Settings.tscn"; // Path to the settings scene
 		private Button _quitButton;
 		private Button _startButton;

@@ -1,0 +1,16 @@
+[gd_scene load_steps=3 format=3 uid="uid://cer6xkecwmj1s"]
+
+[ext_resource type="Script" path="res://Obstacles/Scripts/SpikeTrap.cs" id="1_avmjo"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_xvl3v"]
+size = Vector2(97, 121)
+
+[node name="SpikeTrap" type="StaticBody2D" groups=["Obstacles"]]
+collision_layer = 8
+collision_mask = 4
+script = ExtResource("1_avmjo")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_xvl3v")

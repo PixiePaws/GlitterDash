@@ -10,10 +10,10 @@ radius = 131.187
 collision_layer = 8
 collision_mask = 4
 
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_kalxr")
+
 [node name="Sprite2D" type="Sprite2D" parent="."]
 scale = Vector2(2, 2)
 texture = ExtResource("1_4grcw")
 script = ExtResource("2_7kiyw")
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-shape = SubResource("CircleShape2D_kalxr")
