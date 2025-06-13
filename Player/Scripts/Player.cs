@@ -108,7 +108,7 @@ namespace UnicornGame
             SetDirection(inputDirection); // Update the direction based on input
             MoveAndSlide();
 
-            GD.Print(IsNearWall());
+            //GD.Print(IsNearWall());
             //}
         }
 

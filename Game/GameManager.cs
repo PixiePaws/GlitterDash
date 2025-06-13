@@ -25,7 +25,7 @@ namespace UnicornGame
         public void AddScore()
         {
             score += 1;
-            ScoreLabel.Text = "Score: " + score.ToString();
+            ScoreLabel.Text = score.ToString() + "/13";
         }
     }
 }

@@ -1,10 +1,11 @@
-[gd_scene load_steps=23 format=4 uid="uid://cuch5yonnwbtt"]
+[gd_scene load_steps=24 format=4 uid="uid://cuch5yonnwbtt"]
 
 [ext_resource type="Script" path="res://Game/Level1/Scripts/Level1.cs" id="1_r7umx"]
 [ext_resource type="Script" path="res://Game/Level1/Scripts/Camera.cs" id="1_ttao5"]
 [ext_resource type="Texture2D" uid="uid://deh5vusrmsqsu" path="res://Art/Backgrounds/UnicornGameBG.png" id="2_5govx"]
 [ext_resource type="Script" path="res://Game/GameManager.cs" id="2_gdrdi"]
 [ext_resource type="PackedScene" uid="uid://cvl311e3g082f" path="res://Player/Scenes/PlayerCharacter.tscn" id="2_n6ngs"]
+[ext_resource type="Texture2D" uid="uid://uprybvy2gmww" path="res://Art/Items/TheEgg.png" id="4_8klg8"]
 [ext_resource type="PackedScene" uid="uid://dnx3j4auf00wv" path="res://UI/Scenes/GUI.tscn" id="5_7vyyi"]
 [ext_resource type="PackedScene" uid="uid://breqli4rgs6dk" path="res://Items/Scenes/Portal.tscn" id="6_0yaxk"]
 [ext_resource type="Texture2D" uid="uid://dxxm417mx0341" path="res://Art/PlaceHolders/GreenBlockPlaceholder.png" id="8_41xka"]
@@ -85,12 +86,19 @@ Player = NodePath("../PlayerCharacter")
 
 [node name="ScoreLabel" type="Label" parent="Camera2D"]
 z_index = 10
-offset_left = 35.0
-offset_top = 3.0
-offset_right = 333.0
-offset_bottom = 110.0
+offset_left = 160.0
+offset_top = 28.0
+offset_right = 458.0
+offset_bottom = 135.0
 theme_override_font_sizes/font_size = 78
-text = "Score: 0"
+text = "0/13"
+
+[node name="GoldEggs" type="TextureRect" parent="Camera2D"]
+z_index = 9
+offset_left = 24.0
+offset_right = 138.0
+offset_bottom = 163.0
+texture = ExtResource("4_8klg8")
 
 [node name="TextureRect" type="TextureRect" parent="."]
 offset_right = 1920.0
