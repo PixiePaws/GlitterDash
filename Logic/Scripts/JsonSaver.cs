@@ -12,6 +12,7 @@ namespace UnicornGame
         [Export] private string _fileName;
         public override void _Ready()
         {
+            GD.Print("JsonSave _Ready()");
             _saveData = new Godot.Collections.Dictionary();
             _saveData.Add("name", "Teuvo");
             _saveData.Add("Age", 48);
@@ -24,6 +25,7 @@ namespace UnicornGame
         }
         public void WriteTextToFile(string DirectoryPath, string FileName, string GameData)
         {
+            GD.Print("JsonSaver WriteTextToFile");
             if (!Directory.Exists(DirectoryPath))
             {
                 Directory.CreateDirectory(DirectoryPath);
