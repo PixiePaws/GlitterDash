@@ -1,15 +1,17 @@
-[gd_scene load_steps=21 format=4 uid="uid://cuch5yonnwbtt"]
+[gd_scene load_steps=23 format=4 uid="uid://cuch5yonnwbtt"]
 
 [ext_resource type="Script" path="res://Game/Level1/Scripts/Level1.cs" id="1_r7umx"]
 [ext_resource type="Script" path="res://Game/Level1/Scripts/Camera.cs" id="1_ttao5"]
 [ext_resource type="Texture2D" uid="uid://deh5vusrmsqsu" path="res://Art/Backgrounds/UnicornGameBG.png" id="2_5govx"]
+[ext_resource type="Script" path="res://Game/GameManager.cs" id="2_gdrdi"]
 [ext_resource type="PackedScene" uid="uid://cvl311e3g082f" path="res://Player/Scenes/PlayerCharacter.tscn" id="2_n6ngs"]
 [ext_resource type="PackedScene" uid="uid://dx3ceusucwe23" path="res://UI/Scenes/GUI.tscn" id="5_7vyyi"]
 [ext_resource type="PackedScene" uid="uid://breqli4rgs6dk" path="res://Items/Scenes/Portal.tscn" id="6_0yaxk"]
 [ext_resource type="Texture2D" uid="uid://dxxm417mx0341" path="res://Art/PlaceHolders/GreenBlockPlaceholder.png" id="8_41xka"]
 [ext_resource type="Script" path="res://Game/Portal.cs" id="8_iqa1o"]
 [ext_resource type="Texture2D" uid="uid://t75gsvlhv18t" path="res://icon.svg" id="9_2t5gx"]
-[ext_resource type="PackedScene" path="res://Game/DangerZoneFalling.tscn" id="11_v4ol5"]
+[ext_resource type="PackedScene" uid="uid://dsnvu8ioiw0ff" path="res://Items/Scenes/GoldEgg.tscn" id="11_508a1"]
+[ext_resource type="PackedScene" uid="uid://dol5g5hc7xj1e" path="res://Game/DangerZoneFalling.tscn" id="11_v4ol5"]
 
 [sub_resource type="SegmentShape2D" id="SegmentShape2D_oefmr"]
 a = Vector2(-625.5, 13)
@@ -71,25 +73,35 @@ _saveFormat = 1
 metadata/_edit_vertical_guides_ = [3840.0, 5760.0, 1920.0]
 metadata/_edit_horizontal_guides_ = [1080.0, 2160.0, -1080.0]
 
-[node name="Parallax2D" type="Parallax2D" parent="."]
-scroll_scale = Vector2(1, 0)
-repeat_size = Vector2(1920, 0)
-repeat_times = 4
-follow_viewport = false
-ignore_camera_scroll = true
-
-[node name="Sprite2D" type="Sprite2D" parent="Parallax2D"]
-texture = ExtResource("2_5govx")
-centered = false
+[node name="GameManager" type="Node" parent="." node_paths=PackedStringArray("RespawnPoint", "ScoreLabel")]
+unique_name_in_owner = true
+script = ExtResource("2_gdrdi")
+RespawnPoint = NodePath("../RespawnPoint")
+ScoreLabel = NodePath("../Camera2D/ScoreLabel")
 
 [node name="Camera2D" type="Camera2D" parent="." node_paths=PackedStringArray("Player")]
 offset = Vector2(960, 540)
 script = ExtResource("1_ttao5")
 Player = NodePath("../PlayerCharacter")
 
+[node name="ScoreLabel" type="Label" parent="Camera2D"]
+z_index = 10
+offset_left = 35.0
+offset_top = 3.0
+offset_right = 333.0
+offset_bottom = 110.0
+theme_override_font_sizes/font_size = 78
+text = "Score: 0"
+
+[node name="TextureRect" type="TextureRect" parent="."]
+offset_right = 1920.0
+offset_bottom = 1080.0
+texture = ExtResource("2_5govx")
+
 [node name="PlayerCharacter" parent="." instance=ExtResource("2_n6ngs")]
-position = Vector2(92, 682)
+position = Vector2(4589, 1808)
 collision_mask = 3
+WallJumpPush = 1500.0
 
 [node name="Map" type="Node" parent="."]
 
@@ -165,7 +177,7 @@ one_way_collision = true
 position = Vector2(1380, 868)
 
 [node name="Portal" parent="." instance=ExtResource("6_0yaxk")]
-position = Vector2(5555, -922)
+position = Vector2(5572, -925)
 script = ExtResource("8_iqa1o")
 
 [node name="MainTileMap" type="TileMapLayer" parent="."]
@@ -175,7 +187,50 @@ tile_set = SubResource("TileSet_sok5l")
 
 [node name="DangerZoneFalling" parent="MainTileMap" instance=ExtResource("11_v4ol5")]
 position = Vector2(0, 47)
+collision_layer = 7
+monitorable = true
 
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="MainTileMap/DangerZoneFalling"]
 position = Vector2(-41, 43)
-polygon = PackedVector2Array(33, 2992, 30, 1048, 1953, 1042, 1953, 2121, 5804, 2118, 5799, 2864)
+polygon = PackedVector2Array(37, 2878, 30, 1048, 1953, 1042, 1953, 2121, 5804, 2118, 5799, 2864)
+
+[node name="GoldEggs" type="Node" parent="."]
+
+[node name="GoldEgg" parent="GoldEggs" instance=ExtResource("11_508a1")]
+position = Vector2(1102, 562)
+
+[node name="GoldEgg2" parent="GoldEggs" instance=ExtResource("11_508a1")]
+position = Vector2(4838, 84)
+
+[node name="GoldEgg3" parent="GoldEggs" instance=ExtResource("11_508a1")]
+position = Vector2(2618, 332)
+
+[node name="GoldEgg4" parent="GoldEggs" instance=ExtResource("11_508a1")]
+position = Vector2(3737, 172)
+
+[node name="GoldEgg5" parent="GoldEggs" instance=ExtResource("11_508a1")]
+position = Vector2(4296, 788)
+
+[node name="GoldEgg6" parent="GoldEggs" instance=ExtResource("11_508a1")]
+position = Vector2(4889, -916)
+
+[node name="GoldEgg7" parent="GoldEggs" instance=ExtResource("11_508a1")]
+position = Vector2(3028, 1283)
+
+[node name="GoldEgg8" parent="GoldEggs" instance=ExtResource("11_508a1")]
+position = Vector2(2362, 1404)
+
+[node name="GoldEgg9" parent="GoldEggs" instance=ExtResource("11_508a1")]
+position = Vector2(4133, -424)
+
+[node name="GoldEgg10" parent="GoldEggs" instance=ExtResource("11_508a1")]
+position = Vector2(3701, 1792)
+
+[node name="GoldEgg11" parent="GoldEggs" instance=ExtResource("11_508a1")]
+position = Vector2(4903, 1504)
+
+[node name="GoldEgg12" parent="GoldEggs" instance=ExtResource("11_508a1")]
+position = Vector2(4852, 648)
+
+[node name="GoldEgg13" parent="GoldEggs" instance=ExtResource("11_508a1")]
+position = Vector2(5696, 327)

@@ -1,17 +1,22 @@
-[gd_scene load_steps=2 format=3 uid="uid://cnu4eae42h74o"]
+[gd_scene load_steps=4 format=3 uid="uid://cnu4eae42h74o"]
 
-[ext_resource type="Script" path="res://Settings/Scrtipts/SettingsScript.cs" id="1_r7oxh"]
+[ext_resource type="Script" path="res://Settings/Scripts/SettingsScript.cs" id="1_r7oxh"]
+[ext_resource type="PackedScene" uid="uid://b1kh6r6r608f8" path="res://Settings/Scenes/ScreenMode.tscn" id="2_diy0d"]
+[ext_resource type="PackedScene" uid="uid://8bfhyrrwcngu" path="res://Settings/Scenes/ResolutionMode.tscn" id="3_kx7qs"]
 
-[node name="Settings" type="Control"]
+[node name="SettingsScene" type="CanvasLayer"]
+process_mode = 3
+script = ExtResource("1_r7oxh")
+
+[node name="Settings" type="Control" parent="."]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-script = ExtResource("1_r7oxh")
 
-[node name="TabContainer" type="TabContainer" parent="."]
+[node name="TabContainer" type="TabContainer" parent="Settings"]
 layout_mode = 1
 anchors_preset = -1
 anchor_right = 1.0
@@ -23,13 +28,14 @@ offset_bottom = -50.0
 grow_horizontal = 2
 grow_vertical = 2
 tab_alignment = 1
-current_tab = 0
+current_tab = 1
 
-[node name="Video" type="TabBar" parent="TabContainer"]
+[node name="Video" type="TabBar" parent="Settings/TabContainer"]
+visible = false
 layout_mode = 2
 metadata/_tab_index = 0
 
-[node name="MarginContainer" type="MarginContainer" parent="TabContainer/Video"]
+[node name="MarginContainer" type="MarginContainer" parent="Settings/TabContainer/Video"]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -41,25 +47,24 @@ theme_override_constants/margin_top = 24
 theme_override_constants/margin_right = 24
 theme_override_constants/margin_bottom = 24
 
-[node name="VBoxContainer" type="VBoxContainer" parent="TabContainer/Video/MarginContainer"]
+[node name="ScrollContainer" type="ScrollContainer" parent="Settings/TabContainer/Video/MarginContainer"]
 layout_mode = 2
-theme_override_constants/separation = 64
-alignment = 1
 
-[node name="Label" type="Label" parent="TabContainer/Video/MarginContainer/VBoxContainer"]
+[node name="VBoxContainer" type="VBoxContainer" parent="Settings/TabContainer/Video/MarginContainer/ScrollContainer"]
 layout_mode = 2
-text = "Resolution"
+theme_override_constants/separation = 256
 
-[node name="Label2" type="Label" parent="TabContainer/Video/MarginContainer/VBoxContainer"]
+[node name="ScreenMode" parent="Settings/TabContainer/Video/MarginContainer/ScrollContainer/VBoxContainer" instance=ExtResource("2_diy0d")]
 layout_mode = 2
-text = "Window mode"
 
-[node name="Controls" type="TabBar" parent="TabContainer"]
-visible = false
+[node name="ResolutionMode" parent="Settings/TabContainer/Video/MarginContainer/ScrollContainer/VBoxContainer" instance=ExtResource("3_kx7qs")]
+layout_mode = 2
+
+[node name="Controls" type="TabBar" parent="Settings/TabContainer"]
 layout_mode = 2
 metadata/_tab_index = 1
 
-[node name="MarginContainer" type="MarginContainer" parent="TabContainer/Controls"]
+[node name="MarginContainer" type="MarginContainer" parent="Settings/TabContainer/Controls"]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -71,20 +76,18 @@ theme_override_constants/margin_top = 24
 theme_override_constants/margin_right = 24
 theme_override_constants/margin_bottom = 24
 
-[node name="VBoxContainer" type="VBoxContainer" parent="TabContainer/Controls/MarginContainer"]
-layout_mode = 2
-theme_override_constants/separation = 64
-alignment = 1
-
-[node name="Label" type="Label" parent="TabContainer/Controls/MarginContainer/VBoxContainer"]
+[node name="ScrollContainer" type="ScrollContainer" parent="Settings/TabContainer/Controls/MarginContainer"]
 layout_mode = 2
 
-[node name="Sounds" type="TabBar" parent="TabContainer"]
+[node name="Label" type="Label" parent="Settings/TabContainer/Controls/MarginContainer/ScrollContainer"]
+layout_mode = 2
+
+[node name="Sounds" type="TabBar" parent="Settings/TabContainer"]
 visible = false
 layout_mode = 2
 metadata/_tab_index = 2
 
-[node name="MarginContainer" type="MarginContainer" parent="TabContainer/Sounds"]
+[node name="MarginContainer" type="MarginContainer" parent="Settings/TabContainer/Sounds"]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -96,20 +99,20 @@ theme_override_constants/margin_top = 24
 theme_override_constants/margin_right = 24
 theme_override_constants/margin_bottom = 24
 
-[node name="VBoxContainer" type="VBoxContainer" parent="TabContainer/Sounds/MarginContainer"]
+[node name="VBoxContainer" type="VBoxContainer" parent="Settings/TabContainer/Sounds/MarginContainer"]
 layout_mode = 2
 theme_override_constants/separation = 64
 alignment = 1
 
-[node name="Label" type="Label" parent="TabContainer/Sounds/MarginContainer/VBoxContainer"]
+[node name="Label" type="Label" parent="Settings/TabContainer/Sounds/MarginContainer/VBoxContainer"]
 layout_mode = 2
 
-[node name="Accessibility" type="TabBar" parent="TabContainer"]
+[node name="Accessibility" type="TabBar" parent="Settings/TabContainer"]
 visible = false
 layout_mode = 2
 metadata/_tab_index = 3
 
-[node name="MarginContainer" type="MarginContainer" parent="TabContainer/Accessibility"]
+[node name="MarginContainer" type="MarginContainer" parent="Settings/TabContainer/Accessibility"]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -121,10 +124,10 @@ theme_override_constants/margin_top = 24
 theme_override_constants/margin_right = 24
 theme_override_constants/margin_bottom = 24
 
-[node name="VBoxContainer" type="VBoxContainer" parent="TabContainer/Accessibility/MarginContainer"]
+[node name="VBoxContainer" type="VBoxContainer" parent="Settings/TabContainer/Accessibility/MarginContainer"]
 layout_mode = 2
 theme_override_constants/separation = 64
 alignment = 1
 
-[node name="Label" type="Label" parent="TabContainer/Accessibility/MarginContainer/VBoxContainer"]
+[node name="Label" type="Label" parent="Settings/TabContainer/Accessibility/MarginContainer/VBoxContainer"]
 layout_mode = 2

@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://uprybvy2gmww"
-path="res://.godot/imported/TheEgg.png-58638f74906c3b318cb81f8cb0a59cae.ctex"
+uid="uid://dyv6o0rxv58oe"
+path="res://.godot/imported/UnicornGameBG.png-76d1734eb7b50df9cbf8bc0509556678.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Art/Items/TheEgg.png"
-dest_files=["res://.godot/imported/TheEgg.png-58638f74906c3b318cb81f8cb0a59cae.ctex"]
+source_file="res://Art/MainMenu/UnicornGameBG.png"
+dest_files=["res://.godot/imported/UnicornGameBG.png-76d1734eb7b50df9cbf8bc0509556678.ctex"]
 
 [params]
 

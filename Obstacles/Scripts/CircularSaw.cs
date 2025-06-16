@@ -4,7 +4,6 @@ using System.IO;
 
 namespace UnicornGame
 {
-
     public partial class CircularSaw : Sprite2D
     {
         [Export] private float _rotationAmount = 2.0f;
