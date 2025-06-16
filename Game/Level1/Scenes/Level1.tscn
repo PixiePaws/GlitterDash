@@ -1,9 +1,10 @@
-[gd_scene load_steps=21 format=4 uid="uid://cuch5yonnwbtt"]
+[gd_scene load_steps=22 format=4 uid="uid://cuch5yonnwbtt"]
 
 [ext_resource type="Script" path="res://Game/Level1/Scripts/Level1.cs" id="1_r7umx"]
 [ext_resource type="Script" path="res://Game/Level1/Scripts/Camera.cs" id="1_ttao5"]
 [ext_resource type="Texture2D" uid="uid://deh5vusrmsqsu" path="res://Art/Backgrounds/UnicornGameBG.png" id="2_5govx"]
 [ext_resource type="PackedScene" uid="uid://cvl311e3g082f" path="res://Player/Scenes/PlayerCharacter.tscn" id="2_n6ngs"]
+[ext_resource type="Script" path="res://Game/Level1/Scripts/ParallaxScrolling.cs" id="2_xhksy"]
 [ext_resource type="PackedScene" uid="uid://dx3ceusucwe23" path="res://UI/Scenes/GUI.tscn" id="5_7vyyi"]
 [ext_resource type="PackedScene" uid="uid://breqli4rgs6dk" path="res://Items/Scenes/Portal.tscn" id="6_0yaxk"]
 [ext_resource type="Texture2D" uid="uid://dxxm417mx0341" path="res://Art/PlaceHolders/GreenBlockPlaceholder.png" id="8_41xka"]
@@ -71,8 +72,12 @@ metadata/_edit_vertical_guides_ = [3840.0, 5760.0, 1920.0]
 metadata/_edit_horizontal_guides_ = [1080.0, 2160.0, -1080.0]
 
 [node name="Parallax2D" type="Parallax2D" parent="."]
+scroll_scale = Vector2(1, 0)
 repeat_size = Vector2(1920, 0)
 repeat_times = 4
+follow_viewport = false
+ignore_camera_scroll = true
+script = ExtResource("2_xhksy")
 
 [node name="Sprite2D" type="Sprite2D" parent="Parallax2D"]
 texture = ExtResource("2_5govx")
@@ -86,7 +91,6 @@ Player = NodePath("../PlayerCharacter")
 [node name="PlayerCharacter" parent="." instance=ExtResource("2_n6ngs")]
 position = Vector2(92, 682)
 collision_mask = 3
-WallJumpVelocity = 400.0
 
 [node name="Map" type="Node" parent="."]
 

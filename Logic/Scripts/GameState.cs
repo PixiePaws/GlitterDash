@@ -18,6 +18,12 @@ namespace UnicornGame
                 { "Parent", GetParent().GetPath()},
                 { "PlayerPositionX", GetNode<Player>("/root/")},
                 { "PlayerPositionY", GetNode<Player>("/root/")},
+                { "SoundVolume", ""},
+                { "SoundEffectsVolume", ""},
+                { "ResolutionX", ""},
+                { "ResolutionY", ""},
+                { "EggsCollected", ""},
+
             };
         }
 

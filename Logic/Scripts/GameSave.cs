@@ -4,11 +4,12 @@ using System.IO;
 
 namespace UnicornGame
 {
-    public partial class GameSave : Node2D
+    public partial class JsonSaver : Node2D, IGameSaver
     {
         private Godot.Collections.Dictionary _saveData;
-        private string _savePath;
-        private string _fileName;
+        [Export] private string _directoryPath;
+        [Export] private string _savePath;
+        [Export] private string _fileName;
         public override void _Ready()
         {
             _saveData = new Godot.Collections.Dictionary();
@@ -16,16 +17,28 @@ namespace UnicornGame
             _saveData.Add("Age", 48);
 
             string jsonString = Json.Stringify(_saveData);
-            _savePath = ProjectSettings.GlobalizePath("user://");
+            _directoryPath = ProjectSettings.GlobalizePath("user://");
+            _fileName = "Save1";
 
-
+            WriteTextToFile(_directoryPath, _fileName, jsonString);
         }
-        private void WriteTextToFile(string SavePath, string FileName, string GameData)
+        public void WriteTextToFile(string DirectoryPath, string FileName, string GameData)
         {
-            if (!Directory.Exists(SavePath))
+            if (!Directory.Exists(DirectoryPath))
             {
-                Directory.CreateDirectory(SavePath);
+                Directory.CreateDirectory(DirectoryPath);
             }
+            _savePath = Path.Join(_directoryPath, FileName);
+            GD.Print(_savePath);
+            try
+            {
+                File.WriteAllText(_savePath, GameData);
+            }
+            catch (Exception Error)
+            {
+                GD.Print(Error);
+            }
+
         }
 
     }
