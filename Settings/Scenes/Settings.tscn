@@ -79,7 +79,13 @@ theme_override_constants/margin_bottom = 24
 [node name="ScrollContainer" type="ScrollContainer" parent="Settings/TabContainer/Controls/MarginContainer"]
 layout_mode = 2
 
-[node name="Label" type="Label" parent="Settings/TabContainer/Controls/MarginContainer/ScrollContainer"]
+[node name="VBoxContainer" type="VBoxContainer" parent="Settings/TabContainer/Controls/MarginContainer/ScrollContainer"]
+layout_mode = 2
+
+[node name="HSeparator" type="HSeparator" parent="Settings/TabContainer/Controls/MarginContainer/ScrollContainer/VBoxContainer"]
+layout_mode = 2
+
+[node name="HSeparator2" type="HSeparator" parent="Settings/TabContainer/Controls/MarginContainer/ScrollContainer/VBoxContainer"]
 layout_mode = 2
 
 [node name="Sounds" type="TabBar" parent="Settings/TabContainer"]
@@ -106,6 +112,11 @@ alignment = 1
 
 [node name="Label" type="Label" parent="Settings/TabContainer/Sounds/MarginContainer/VBoxContainer"]
 layout_mode = 2
+text = "Music"
+
+[node name="Label2" type="Label" parent="Settings/TabContainer/Sounds/MarginContainer/VBoxContainer"]
+layout_mode = 2
+text = "SFX"
 
 [node name="Accessibility" type="TabBar" parent="Settings/TabContainer"]
 visible = false

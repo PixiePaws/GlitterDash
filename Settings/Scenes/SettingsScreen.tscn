@@ -1,0 +1,48 @@
+[gd_scene load_steps=3 format=3 uid="uid://h0ockvtcv2g2"]
+
+[ext_resource type="Script" path="res://Settings/Scripts/SettingsScreen.cs" id="1_rtcbh"]
+[ext_resource type="PackedScene" uid="uid://cnu4eae42h74o" path="res://Settings/Scenes/Settings.tscn" id="2_ujr46"]
+
+[node name="Settings" type="CanvasLayer"]
+process_mode = 3
+script = ExtResource("1_rtcbh")
+
+[node name="Control" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Control"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -144.5
+offset_top = -70.5
+offset_right = 144.5
+offset_bottom = 70.5
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="ResumeButton" type="Button" parent="Control/VBoxContainer"]
+layout_mode = 2
+text = "Resume"
+
+[node name="SettingsButton" type="Button" parent="Control/VBoxContainer"]
+layout_mode = 2
+text = "Settings"
+
+[node name="MainMenuButton" type="Button" parent="Control/VBoxContainer"]
+layout_mode = 2
+text = "Main Menu"
+
+[node name="QuitButton" type="Button" parent="Control/VBoxContainer"]
+layout_mode = 2
+text = "Quit Game"
+
+[node name="SettingsScene" parent="." instance=ExtResource("2_ujr46")]

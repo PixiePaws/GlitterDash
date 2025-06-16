@@ -32,6 +32,15 @@ public partial class CollisionDetector : Area2D
         public void InstantiateGameOverScene()
         {
             GD.Print("InstantiateGameOverScene() was called");
+            Node currentScene = GetTree().CurrentScene;
+            if (currentScene != null)
+            {
+                GetTree().ReloadCurrentScene();
+            }
+            else
+            {
+                GD.Print("Current scene is null, cannot reload.");
+            }
             /*if (_gameOverScene != null)
             {
                 Node GameOverPanel = _gameOverScene.Instantiate();

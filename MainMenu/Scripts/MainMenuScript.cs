@@ -14,18 +14,38 @@ namespace UnicornGame
 		private string _settingsScenePath = "res://Settings/Scenes/Settings.tscn"; // Path to the settings scene
 		private Button _quitButton;
 		private Button _startButton;
-		// private Button _settingsButton;
+		private Button _settingsButton;
 		public override void _Ready()
 		{
+			int primaryScreen = DisplayServer.GetPrimaryScreen();
+
+			Vector2I screenSize = DisplayServer.ScreenGetSize(primaryScreen);
+
+			DisplayServer.WindowSetSize(screenSize);
+
+			DisplayServer.WindowSetMode(DisplayServer.WindowMode.Fullscreen);
+
 			_quitButton = GetNode<Button>("MarginContainer/VBoxContainer/QuitButton");
 			_quitButton.Pressed += OnQuitButtonPressed;
 
 			_startButton = GetNode<Button>("MarginContainer/VBoxContainer/StartButton");
 			_startButton.Pressed += OnStartButtonPressed;
 
-			// _settingsButton = GetNode<Button>("MarginContainer/VBoxContainer/SettingsButton");
-			// _settingsButton.Pressed += OnSettingsButtonPressed;
+			_settingsButton = GetNode<Button>("MarginContainer/VBoxContainer/SettingsButton");
+			_settingsButton.Pressed += OnSettingsButtonPressed;
 		}
+
+		// public override void _Input(InputEvent @event)
+		// {
+		// 	Control settingsPanel = GetNodeOrNull<Control>("SettingsScene/Settings");
+		// 	if (settingsPanel != null && !settingsPanel.Visible)
+		// 	{
+		// 		if (Input.IsActionJustPressed("Settings"))
+		// 		{
+		// 			OnSettingsButtonPressed();
+		// 		}
+		// 	}
+		// }
 
 		// Called every frame. 'delta' is the elapsed time since the previous frame.
 		private void OnQuitButtonPressed()
@@ -44,20 +64,19 @@ namespace UnicornGame
 				GD.Print("Level selection scene not found");
 			}
 		}
-		// private void OnSettingsButtonPressed()
-		// {
-		// 	CanvasLayer settingsScene = GetNode<CanvasLayer>("SettingsScene");
-		// 	if (settingsScene != null)
-		// 	{
-		// 		if (settingsScene.Visible == false)
-		// 		{
-		// 			settingsScene.Visible = true; // Show settings scene
-		// 			GetTree().Paused = true; // Pause the game
-		// 			GD.Print("Settings scene opened and game paused");
-		// 		}
-		// 	}
-		// }
-}
+		private void OnSettingsButtonPressed()
+		{
+			Control settingsPanel = GetNodeOrNull<Control>("SettingsScene/Settings");
+			if (settingsPanel != null)
+			{
+				if (settingsPanel.Visible == false)
+				{
+					settingsPanel.Visible = true; // Show settings scene
+					GD.Print("Settings scene opened and game paused");
+				}
+			}
+		}
+	}
 }
 
 

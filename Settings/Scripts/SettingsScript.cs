@@ -5,7 +5,8 @@ namespace UnicornGame
 {
 	public partial class SettingsScript : Node
 	{
-		public Control _settingsScene;
+		// TO DO - Make some kind of saving system for settings
+		private Control _settingsScene;
 		// Called when the node enters the scene tree for the first time.
 		public override void _Ready()
 		{
@@ -29,27 +30,11 @@ namespace UnicornGame
 		}
 		private void OnSettingsPressed()
 		{
-			if (_settingsScene.Visible == false && Input.IsActionJustPressed("Settings"))
+			if (Input.IsActionJustPressed("Settings"))
 			{
-
-				GD.Print("Settings button pressed in GUI");
-
-				_settingsScene.Visible = true; // Show settings scene
-
-				GetTree().Paused = true; // Pause the game
-				GD.Print("Game paused");
-
-			}
-			else
-			{
-				if (_settingsScene.Visible == true && Input.IsActionJustPressed("Settings"))
+				if (_settingsScene.Visible)
 				{
-					GD.Print("Settings button pressed in GUI to hide settings");
-
-					_settingsScene.Visible = false; // Hide settings scene
-
-					GetTree().Paused = false; // Unpause the game
-					GD.Print("Game unpaused");
+					_settingsScene.Visible = false;
 				}
 			}
 		}
