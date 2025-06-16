@@ -3,7 +3,7 @@ using System;
 
 namespace UnicornGame
 {
-    public partial class Respawner : Node2D
+    public partial class Respawner : Node
     {
         public int score = 0;
         [Export] public Node2D RespawnPoint;
