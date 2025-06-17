@@ -10,7 +10,7 @@ namespace UnicornGame
 		public Player Player { get; set; }
 		private Vector2I size;
 		private Vector2 targetPosition;
-		private float cameraSpeed = 1000f;
+		[Export] private float cameraSpeed = 1000f;
 
 		public override void _Ready()
 		{

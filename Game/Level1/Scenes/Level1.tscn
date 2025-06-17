@@ -79,16 +79,18 @@ _saveFormat = 1
 metadata/_edit_vertical_guides_ = [3840.0, 5760.0, 1920.0]
 metadata/_edit_horizontal_guides_ = [1080.0, 2160.0, -1080.0]
 
-[node name="Respawner" type="Node" parent="." node_paths=PackedStringArray("RespawnPoint", "ScoreLabel")]
+[node name="Respawner" type="Node" parent="." node_paths=PackedStringArray("_respawnPoint", "_scoreLabel", "_player")]
 unique_name_in_owner = true
 script = ExtResource("2_gdrdi")
-RespawnPoint = NodePath("../RespawnPoint")
-ScoreLabel = NodePath("../Camera2D/ScoreLabel")
+_respawnPoint = NodePath("../RespawnPoint")
+_scoreLabel = NodePath("../Camera2D/ScoreLabel")
+_player = NodePath("../PlayerCharacter")
 
 [node name="Camera2D" type="Camera2D" parent="." node_paths=PackedStringArray("Player")]
 offset = Vector2(960, 540)
 script = ExtResource("1_ttao5")
 Player = NodePath("../PlayerCharacter")
+cameraSpeed = 5000.0
 
 [node name="ScoreLabel" type="Label" parent="Camera2D"]
 z_index = 10

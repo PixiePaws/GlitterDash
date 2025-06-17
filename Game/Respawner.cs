@@ -5,22 +5,45 @@ namespace UnicornGame
 {
     public partial class Respawner : Node
     {
-        public int score = 0;
+        private int _score = 0;
 
-        [Export] public Node2D RespawnPoint;
-        [Export] public Label ScoreLabel;
-        [Export] public CollisionDetector Detector;
+        [Export] private Node2D _respawnPoint;
+        [Export] private Label _scoreLabel;
+        [Export] private Player _player;
+
 
 
         /// <summary>
         /// Respawn method that resets the player's position when they fall off the map.
         /// </summary>
+
         public void RespawnPlayer()
         {
-            var parent = GetParent();
-            Player p = GetNode<Player>("/root/Level1/PlayerCharacter");
-            p.GlobalPosition = RespawnPoint.GlobalPosition;
-            p.RespawnPlayer();
+            var ParentName = GetParent().Name;
+            GD.Print($"Parent Name : {ParentName}");
+            string PlayerPath = $"/root/{ParentName}/PlayerCharacter";
+            GD.Print(PlayerPath);
+            _player = GetNode<Player>(PlayerPath);
+            if (_player != null)
+            {
+                GD.Print("Got player reference");
+            }
+            else
+            {
+                GD.Print("Could not get player reference");
+            }
+            string RespawnPointPath = $"/root/{ParentName}/RespawnPoint";
+            _respawnPoint = GetNode<Node2D>(RespawnPointPath);
+            if (_respawnPoint != null)
+            {
+                GD.Print("Got respawnpoint reference");
+            }
+            else
+            {
+                GD.Print("Could not get respawnpoint reference");
+            }
+            _player.GlobalPosition = _respawnPoint.GlobalPosition;
+            _player.RespawnPlayer();
         }
 
         /// <summary>
@@ -28,8 +51,12 @@ namespace UnicornGame
         /// </summary>
         public void AddScore()
         {
-            score += 1;
-            ScoreLabel.Text = score.ToString() + "/13";
+            var ParentName = GetParent().Name;
+            GD.Print($"Parent Name : {ParentName}");
+            string ScoreLabelPath = $"/root/{ParentName}/Camera2D/ScoreLabel";
+            _scoreLabel = GetNode<Label>(ScoreLabelPath);
+            _score += 1;
+            _scoreLabel.Text = _score.ToString() + "/13";
         }
     }
 }
