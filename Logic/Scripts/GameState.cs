@@ -16,13 +16,14 @@ namespace UnicornGame
             {
                 { "Filename", GetSceneFilePath()},
                 { "Parent", GetParent().GetPath()},
-                { "PlayerPositionX", GetNode<Player>("/root/")},
-                { "PlayerPositionY", GetNode<Player>("/root/")},
-                { "SoundVolume", ""},
+                { "PlayerPositionX", GetNode<Player>($"/root/{GetParent().Name}/PlayerCharacter")},
+                { "PlayerPositionY", GetNode<Player>($"/root/{GetParent().Name}/PlayerCharacter")},
+                { "EggsCollected", GetNode<Respawner>($"/root/{GetParent().Name}/Respawner").Score}
+                /*{ "SoundVolume", ""},
                 { "SoundEffectsVolume", ""},
                 { "ResolutionX", ""},
                 { "ResolutionY", ""},
-                { "EggsCollected", ""},
+                */
 
             };
         }

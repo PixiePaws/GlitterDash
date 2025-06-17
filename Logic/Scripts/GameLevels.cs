@@ -5,6 +5,7 @@ using UnicornGame;
 public abstract partial class GameLevels : Node2D
 {
     protected GameManager _gameManager;
+    protected GameState _gameState;
     private PackedScene _gameManagerScene;
     private string _gameManagerScenePath;
     
@@ -37,5 +38,6 @@ public abstract partial class GameLevels : Node2D
         {
             GD.Print("_gameManager could not be added to tree");
         }
+        _gameState = new GameState();
     }
 }

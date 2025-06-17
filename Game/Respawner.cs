@@ -6,6 +6,10 @@ namespace UnicornGame
     public partial class Respawner : Node
     {
         private int _score = 0;
+        public int Score
+        {
+            get { return _score; }
+        }
 
         [Export] private Node2D _respawnPoint;
         [Export] private Label _scoreLabel;
