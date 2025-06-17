@@ -108,7 +108,7 @@ namespace UnicornGame
             SetDirection(inputDirection); // Update the direction based on input
             MoveAndSlide();
 
-            GD.Print(IsNearWall());
+            //GD.Print(IsNearWall());
             //}
         }
 
@@ -308,7 +308,6 @@ namespace UnicornGame
         {
             Show();
             // kameran resetointi
-            //_collisionDetector.health = 1; // Reset health
         }
 
         /// <summary>
