@@ -6,15 +6,19 @@ namespace UnicornGame
     public partial class GameManager : Node
     {
         public int score = 0;
+
         [Export] public Node2D RespawnPoint;
         [Export] public Label ScoreLabel;
+        [Export] public CollisionDetector Detector;
+
 
         /// <summary>
-        /// Respawn method that resets the player's position when they die or fall off the map.
+        /// Respawn method that resets the player's position when they fall off the map.
         /// </summary>
         public void RespawnPlayer()
         {
-            Player p = GetNode<Player>("PlayerCharacter");
+            var parent = GetParent();
+            Player p = GetNode<Player>("/root/Level1/PlayerCharacter");
             p.GlobalPosition = RespawnPoint.GlobalPosition;
             p.RespawnPlayer();
         }

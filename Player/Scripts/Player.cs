@@ -308,7 +308,6 @@ namespace UnicornGame
         {
             Show();
             // kameran resetointi
-            //_collisionDetector.health = 1; // Reset health
         }
 
         /// <summary>
