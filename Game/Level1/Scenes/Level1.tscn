@@ -12,8 +12,8 @@
 [ext_resource type="Script" path="res://Game/Portal.cs" id="8_iqa1o"]
 [ext_resource type="Texture2D" uid="uid://t75gsvlhv18t" path="res://icon.svg" id="9_2t5gx"]
 [ext_resource type="PackedScene" uid="uid://b6upcof87f3dd" path="res://Obstacles/Scenes/CircularSaw.tscn" id="10_8eb1d"]
-[ext_resource type="PackedScene" uid="uid://dsnvu8ioiw0ff" path="res://Items/Scenes/GoldEgg.tscn" id="11_508a1"]
-[ext_resource type="PackedScene" uid="uid://dol5g5hc7xj1e" path="res://Game/DangerZoneFalling.tscn" id="11_v4ol5"]
+[ext_resource type="PackedScene" uid="uid://mu1by1prm8kh" path="res://Items/Scenes/GoldEgg.tscn" id="11_508a1"]
+[ext_resource type="PackedScene" path="res://Game/DangerZoneFalling.tscn" id="11_v4ol5"]
 [ext_resource type="Shader" path="res://Game/Black&White.gdshader" id="14_cylb3"]
 
 [sub_resource type="SegmentShape2D" id="SegmentShape2D_oefmr"]
