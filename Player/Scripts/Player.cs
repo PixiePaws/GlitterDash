@@ -32,11 +32,13 @@ namespace UnicornGame
         // private CollisionDetector _collisionDetector;
         private bool _canControl = true;
         public AnimatedSprite2D _animatedSprite; // tarvitaan animaatioita varten
+        public Respawner _respawner;
 
 
         public override void _Ready()
         {
             _animatedSprite = GetNode<AnimatedSprite2D>("AnimatedSprite2D");
+            _respawner = GetNode<Respawner>("../Respawner");
         }
 
         public override void _PhysicsProcess(double delta)
@@ -253,7 +255,7 @@ namespace UnicornGame
                 var collision = GetSlideCollision(i);
                 if (collision != null)
                 {
-                    var normal = collision.GetNormal(); // Oikea tapa hakea normaali Godot 4:ssa
+                    var normal = collision.GetNormal();
                     if (Math.Abs(normal.X) > 0.9f)
                     {
                         return -(int)Mathf.Sign(normal.X); // 1 = seinä oikealla, -1 = vasemmalla
@@ -320,6 +322,7 @@ namespace UnicornGame
             _canControl = false;
             await ToSignal(GetTree().CreateTimer(1.0f), Timer.SignalName.Timeout);
 
+            //_respawner.ResetScore();
             ResetPlayer();
         }
 
@@ -328,7 +331,7 @@ namespace UnicornGame
         /// </summary>
         public void ResetPlayer()
         {
-            GlobalPosition = GetNode<Node2D>("../RespawnPoint").GlobalPosition; // Assuming RespawnPoint is a Node2D
+            GlobalPosition = GetNode<Node2D>("../RespawnPoint").GlobalPosition;
             Visible = true;
             _canControl = true;
             _jumpCount = 0;

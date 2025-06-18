@@ -15,8 +15,6 @@ namespace UnicornGame
         [Export] private Label _scoreLabel;
         [Export] private Player _player;
 
-
-
         /// <summary>
         /// Respawn method that resets the player's position when they fall off the map.
         /// </summary>
@@ -24,7 +22,7 @@ namespace UnicornGame
         public void RespawnPlayer()
         {
             var ParentName = GetParent().Name;
-            GD.Print($"Parent Name : {ParentName}");
+            //GD.Print($"Parent Name : {ParentName}");
             string PlayerPath = $"/root/{ParentName}/PlayerCharacter";
             GD.Print(PlayerPath);
             _player = GetNode<Player>(PlayerPath);
@@ -46,6 +44,7 @@ namespace UnicornGame
             {
                 GD.Print("Could not get respawnpoint reference");
             }
+            ResetScore();
             _player.GlobalPosition = _respawnPoint.GlobalPosition;
             _player.RespawnPlayer();
         }
@@ -60,6 +59,12 @@ namespace UnicornGame
             string ScoreLabelPath = $"/root/{ParentName}/Camera2D/ScoreLabel";
             _scoreLabel = GetNode<Label>(ScoreLabelPath);
             _score += 1;
+            _scoreLabel.Text = _score.ToString() + "/13";
+        }
+
+        public void ResetScore()
+        {
+            _score = 0;
             _scoreLabel.Text = _score.ToString() + "/13";
         }
     }

@@ -11,12 +11,11 @@ namespace UnicornGame
 			BodyEntered += OnBodyEntered;
 		}
 
-
 		public void OnBodyEntered(Node body)
 		{
 			if (body is Player player)
 			{
-				//player.HandleDanger();
+                player?.HandleDanger();
 			}
 		}
 	}
