@@ -5,7 +5,6 @@ using System.Threading.Tasks;
 
 namespace UnicornGame
 {
-
     public partial class Player : CharacterBody2D
     {
         [Export] public float Speed = 200f;
@@ -287,29 +286,12 @@ namespace UnicornGame
         }
 
         /// <summary>
-        /// Handles the player's death logic.
-        /// </summary>
-        public void Die()
-        {
-            GD.Print("Player died");
-            // kuolemis animaation käynnistäminen
-            // kuolemis äänen soittaminen
-
-            _animatedSprite.Play("Die");
-            Visible = false;
-            _canControl = false;
-
-            ResetPlayer();
-        }
-
-        /// <summary>
         /// Respawns the player at the respawn point and resets the player's state.
         /// This method is called when the player needs to respawn after dying.
         /// </summary>
         public void RespawnPlayer()
         {
             Show();
-            // kameran resetointi
         }
 
         /// <summary>
@@ -321,8 +303,6 @@ namespace UnicornGame
             Visible = false;
             _canControl = false;
             await ToSignal(GetTree().CreateTimer(1.0f), Timer.SignalName.Timeout);
-
-            //_respawner.ResetScore();
             ResetPlayer();
         }
 

@@ -46,7 +46,6 @@ namespace UnicornGame
             }
             ResetScore();
             _player.GlobalPosition = _respawnPoint.GlobalPosition;
-            _player.RespawnPlayer();
         }
 
         /// <summary>
@@ -55,7 +54,7 @@ namespace UnicornGame
         public void AddScore()
         {
             var ParentName = GetParent().Name;
-            GD.Print($"Parent Name : {ParentName}");
+            GD.Print("Score added");
             string ScoreLabelPath = $"/root/{ParentName}/Camera2D/ScoreLabel";
             _scoreLabel = GetNode<Label>(ScoreLabelPath);
             _score += 1;
@@ -64,6 +63,7 @@ namespace UnicornGame
 
         public void ResetScore()
         {
+            GD.Print("Score reset");
             _score = 0;
             _scoreLabel.Text = _score.ToString() + "/13";
         }

@@ -1,5 +1,6 @@
 using Godot;
 using System;
+using System.Threading.Tasks;
 
 namespace UnicornGame
 {
@@ -8,8 +9,11 @@ namespace UnicornGame
     {
         [Export] public Node2D RespawnPoint;
         [Export] public ColorRect Fliter;
+        [Export] public GoldEggManager _goldeggmanager;
+        [Export] public Camera Camera;
+        [Export] public Player player;
         private bool _isPaused = false;
-        private Respawner _respawner;
+        [Export] private Respawner _respawner;
         //private String _gameOverPath = "";
         //private PackedScene _gameOverScene;
 
@@ -26,14 +30,18 @@ namespace UnicornGame
             {
                 GD.Print("Collided with obstacle!");
                 GD.Print("Game over!");
-                TurnOnFliter();
+                DieRestart();
             }
         }
 
-        public void TurnOnFliter()
+        public async void DieRestart()
         {
             Fliter.Visible = true;
+            Camera?.ResetCameraDie();
+            player?.HandleDanger();
             _respawner.RespawnPlayer();
+            await ToSignal(GetTree().CreateTimer(5f), "timeout");
+            _goldeggmanager.ResetEggs();
             GD.Print("InstantiateGameOverScene() was called");
             /*if (_gameOverScene != null)
             {
