@@ -19,15 +19,20 @@ namespace UnicornGame
 			GetTree().CreateTimer(0.5f).Timeout += () => _gameStarted = true;
 		}
 
+		/// <summary>
+		/// When player falls of the map the method calls for respawning the player
+		/// and reseting the eggs
+		/// </summary>
+		/// <param name="body"></param>
 		public void OnBodyEntered(Node body)
 		{
 			if (!_gameStarted) return;
 
-			Camera?.ResetCameraFall();
+			Camera?.ResetCamera("fall");
 
 			if (body is Player player)
 			{
-				player?.HandleDanger();
+				player?.HandleDanger("fall");
 			}
 			_respawner.RespawnPlayer();
 			_goldeggmanager.ResetEggs();

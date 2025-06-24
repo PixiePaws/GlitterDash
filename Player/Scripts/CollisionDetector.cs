@@ -24,6 +24,10 @@ namespace UnicornGame
             _respawner = GetNode<Respawner>($"../../Respawner");
         }
 
+        /// <summary>
+        /// Check if the player collides with an obstacle and then calls for game restart
+        /// </summary>
+        /// <param name="node"></param>
         public void OnCollisionDetected(Node node)
         {
             if (node.IsInGroup("Obstacles"))
@@ -34,16 +38,19 @@ namespace UnicornGame
             }
         }
 
+        /// <summary>
+        /// Puts on the gray filter, calls for player and egg resets
+        /// </summary>
         public async void DieRestart()
         {
             Fliter.Visible = true;
-            Camera?.ResetCameraDie();
-            player?.HandleDanger();
-            _respawner.RespawnPlayer();
-            await ToSignal(GetTree().CreateTimer(5f), "timeout");
+            Camera?.ResetCamera("die");
+            player?.HandleDanger("dead");
+            //_respawner.RespawnPlayer();
+            await ToSignal(GetTree().CreateTimer(5f), "timeout"); // tämä 1 pienempi kun resetcameradie timer niin score resettaa samaan aikaan
             _goldeggmanager.ResetEggs();
-            GD.Print("InstantiateGameOverScene() was called");
-            /*if (_gameOverScene != null)
+            /*GD.Print("InstantiateGameOverScene() was called");
+            if (_gameOverScene != null)
             {
                 Node GameOverPanel = _gameOverScene.Instantiate();
                 AddChild(GameOverPanel);

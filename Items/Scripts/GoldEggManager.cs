@@ -22,11 +22,14 @@ namespace UnicornGame
             }
         }
 
+        /// <summary>
+        /// Resets collected egg to the places they were and calls for score reset
+        /// </summary>
         public async void ResetEggs()
         {
-            _respawner.ResetScore();
-
             await ToSignal(GetTree().CreateTimer(1.0f), Timer.SignalName.Timeout);
+
+            _respawner.ResetScore();
 
             // Make new eggs at the original positions
             foreach (Vector2 pos in _originalPositions)

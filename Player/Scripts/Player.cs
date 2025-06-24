@@ -295,14 +295,23 @@ namespace UnicornGame
         }
 
         /// <summary>
-        /// Handles the player's death and respawn logic.
+        /// Handles the player's death and respawn logic based on the type of danger encountered.
         /// </summary>
-        public async Task HandleDanger()
+        public async Task HandleDanger(string dangerType)
         {
             GD.Print("Player died");
             Visible = false;
             _canControl = false;
-            await ToSignal(GetTree().CreateTimer(1.0f), Timer.SignalName.Timeout);
+
+            if (dangerType == "dead")
+            {
+                await ToSignal(GetTree().CreateTimer(6f), Timer.SignalName.Timeout); // sama aika kun resetcameradie odotus
+            }
+            else if (dangerType == "fall")
+            {
+                await ToSignal(GetTree().CreateTimer(1f), Timer.SignalName.Timeout);
+            }
+
             ResetPlayer();
         }
 

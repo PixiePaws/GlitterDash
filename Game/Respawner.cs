@@ -18,7 +18,6 @@ namespace UnicornGame
         /// <summary>
         /// Respawn method that resets the player's position when they fall off the map.
         /// </summary>
-
         public void RespawnPlayer()
         {
             var ParentName = GetParent().Name;
@@ -44,7 +43,6 @@ namespace UnicornGame
             {
                 GD.Print("Could not get respawnpoint reference");
             }
-            ResetScore();
             _player.GlobalPosition = _respawnPoint.GlobalPosition;
         }
 
@@ -61,6 +59,9 @@ namespace UnicornGame
             _scoreLabel.Text = _score.ToString() + "/13";
         }
 
+        /// <summary>
+        /// Resets the score to zero
+        /// </summary>
         public void ResetScore()
         {
             GD.Print("Score reset");

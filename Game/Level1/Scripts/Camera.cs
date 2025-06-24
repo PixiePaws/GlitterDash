@@ -5,7 +5,6 @@ namespace UnicornGame
 {
 	public partial class Camera : Camera2D
 	{
-
 		[Export]
 		public Player Player { get; set; }
 		private Vector2I size;
@@ -46,6 +45,9 @@ namespace UnicornGame
 			}
 		}
 
+		/// <summary>
+		/// Method for the camera to follow the player
+		/// </summary>
 		private void UpdateCameraPosition()
 		{
 			Vector2 playerPosition = Player.GlobalPosition;
@@ -57,25 +59,29 @@ namespace UnicornGame
 			targetPosition = cell * size;
 		}
 
-		public async void ResetCameraDie()
+		/// <summary>
+		/// Resets the camera position to start position and waits for the player respawn.
+		/// The method pauses the camera that the player gets to see the die or
+		/// the fall animation.
+		/// </summary>
+		/// <param name="type"></param>
+		public async void ResetCamera(string type)
 		{
 			GD.Print("Resetting camera position to start");
 			cameraToStart = true;
 
 			_pauseCamera = true;
-			await ToSignal(GetTree().CreateTimer(5f), "timeout");
-			_pauseCamera = false;
-			UpdateCameraPosition();
-		}
 
-		public async void ResetCameraFall()
-		{
-			GD.Print("Resetting camera position to start");
-			cameraToStart = true;
-
-			_pauseCamera = true;
-			await ToSignal(GetTree().CreateTimer(1f), "timeout");
+			if (type == "die")
+			{
+				await ToSignal(GetTree().CreateTimer(6f), "timeout");
+			}
+			else if (type == "fall")
+			{
+				await ToSignal(GetTree().CreateTimer(1f), "timeout");
+			}
 			_pauseCamera = false;
+
 			UpdateCameraPosition();
 		}
 	}
