@@ -10,18 +10,27 @@ namespace UnicornGame
         [Export] private string _directoryPath;
         [Export] private string _savePath;
         [Export] private string _fileName;
+
+        public string DirectoryPath
+        {
+            get { return _directoryPath;}
+        }
+        public string FileName
+        {
+            get { return _fileName;}
+        }
         public override void _Ready()
         {
             GD.Print("JsonSave _Ready()");
-            _saveData = new Godot.Collections.Dictionary();
-            _saveData.Add("name", "Teuvo");
-            _saveData.Add("Age", 48);
+            //_saveData = new Godot.Collections.Dictionary();
+            //_saveData.Add("name", "Matti");
+            //_saveData.Add("Age", 50);
 
-            string jsonString = Json.Stringify(_saveData);
+            //string jsonString = Json.Stringify(_saveData);
             _directoryPath = ProjectSettings.GlobalizePath("user://");
             _fileName = "Save1";
 
-            WriteTextToFile(_directoryPath, _fileName, jsonString);
+            //WriteTextToFile(_directoryPath, _fileName, jsonString);
         }
         public void WriteTextToFile(string DirectoryPath, string FileName, string GameData)
         {
@@ -40,9 +49,7 @@ namespace UnicornGame
             {
                 GD.Print(Error);
             }
-
         }
-
     }
 }
 

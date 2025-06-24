@@ -18,7 +18,7 @@ namespace UnicornGame
             //_gameOverScene = ResourceLoader.Load<PackedScene>(_gameOverPath);
             BodyEntered += OnCollisionDetected;
             string ParentName = GetParent().Name;
-            _respawner = GetNode<Respawner>($"/root/{ParentName}/Respawner");
+            _respawner = GetNode<Respawner>($"../../Respawner");
         }
 
         public void OnCollisionDetected(Node node)
