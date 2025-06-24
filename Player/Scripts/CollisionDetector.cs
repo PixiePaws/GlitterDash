@@ -1,5 +1,6 @@
 using Godot;
 using System;
+using System.Threading.Tasks;
 
 namespace UnicornGame
 {
@@ -8,8 +9,11 @@ namespace UnicornGame
     {
         [Export] public Node2D RespawnPoint;
         [Export] public ColorRect Fliter;
+        [Export] public GoldEggManager _goldeggmanager;
+        [Export] public Camera Camera;
+        [Export] public Player player;
         private bool _isPaused = false;
-        private Respawner _respawner;
+        [Export] private Respawner _respawner;
         //private String _gameOverPath = "";
         //private PackedScene _gameOverScene;
 
@@ -17,26 +21,36 @@ namespace UnicornGame
         {
             //_gameOverScene = ResourceLoader.Load<PackedScene>(_gameOverPath);
             BodyEntered += OnCollisionDetected;
-            string ParentName = GetParent().Name;
-            _respawner = GetNode<Respawner>($"/root/{ParentName}/Respawner");
+            _respawner = GetNode<Respawner>($"../../Respawner");
         }
 
+        /// <summary>
+        /// Check if the player collides with an obstacle and then calls for game restart
+        /// </summary>
+        /// <param name="node"></param>
         public void OnCollisionDetected(Node node)
         {
             if (node.IsInGroup("Obstacles"))
             {
                 GD.Print("Collided with obstacle!");
                 GD.Print("Game over!");
-                TurnOnFliter();
+                DieRestart();
             }
         }
 
-        public void TurnOnFliter()
+        /// <summary>
+        /// Puts on the gray filter, calls for player and egg resets
+        /// </summary>
+        public async void DieRestart()
         {
             Fliter.Visible = true;
-            _respawner.RespawnPlayer();
-            GD.Print("InstantiateGameOverScene() was called");
-            /*if (_gameOverScene != null)
+            Camera?.ResetCamera("die");
+            player?.HandleDanger("dead");
+            //_respawner.RespawnPlayer();
+            await ToSignal(GetTree().CreateTimer(5f), "timeout"); // tämä 1 pienempi kun resetcameradie timer niin score resettaa samaan aikaan
+            _goldeggmanager.ResetEggs();
+            /*GD.Print("InstantiateGameOverScene() was called");
+            if (_gameOverScene != null)
             {
                 Node GameOverPanel = _gameOverScene.Instantiate();
                 AddChild(GameOverPanel);

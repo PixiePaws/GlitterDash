@@ -1,15 +1,18 @@
 using Godot;
 using System;
+using System.Collections.Generic;
 
 namespace UnicornGame
 {
 	public partial class GoldEgg : Area2D
 	{
 		[Export] private Respawner _respawner;
+		[Export] public PackedScene GoldEggScene;
+		[Export] public Node2D EggContainer;
 
 		public override void _Ready()
 		{
-			_respawner = GetNode<Respawner>("/root/Level1/Respawner");
+			_respawner = GetNode<Respawner>("../../Respawner");
 			BodyEntered += OnBodyEntered;
 		}
 
@@ -24,5 +27,6 @@ namespace UnicornGame
 			_respawner.AddScore();
 			QueueFree();
 		}
-	}
+
+    }
 }
