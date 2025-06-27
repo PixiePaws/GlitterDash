@@ -9,16 +9,24 @@ namespace UnicornGame
 		[Export] private string _hotKeyActionName = ""; // Action name for the hotkey, set in the editor
 		private Label _hotKeyLabel;
 		private Button _hotKeyButton;
+		private bool _buttonToggle = true;
 		public override void _Ready()
 		{
-			SetProcessUnhandledInput(false); // Disable unhandled input processing
 			SetActionKeyName(); // Set the action key name on ready
 
-		}
+			_hotKeyButton.ButtonDown += OnButtonPressed;
 
-		// Called every frame. 'delta' is the elapsed time since the previous frame.
-		public override void _Process(double delta)
+		}
+		public override void _Input(InputEvent @event)
 		{
+			if (!_buttonToggle && @event is InputEventKey keyEvent && keyEvent.Pressed && !keyEvent.Echo)
+			{
+				RebindKey(keyEvent); // Rebind action to this key
+				GD.Print("Pressed key: ", keyEvent.Keycode);
+				_buttonToggle = true; // Reset toggle
+				SetProcessInput(false); // Stop listening
+				SetActionKeyName(); // Update UI
+			}
 		}
 
 		private void SetActionKeyName()
@@ -35,11 +43,15 @@ namespace UnicornGame
 
 			if (keyEvent != null)
 			{
-				displayKey = keyEvent.Keycode.ToString();
-			}
-			else if (keyEvent.PhysicalKeycode != Key.None)
-			{
-				displayKey = keyEvent.PhysicalKeycode.ToString();
+				// If the key event has a physical keycode, use it; otherwise, use the keycode
+				if (keyEvent.PhysicalKeycode != Key.None)
+				{
+					displayKey = keyEvent.PhysicalKeycode.ToString();
+				}
+				else
+				{
+					displayKey = keyEvent.Keycode.ToString();
+				}
 			}
 			else
 			{
@@ -47,6 +59,23 @@ namespace UnicornGame
 			}
 			_hotKeyLabel.Text = _hotKeyActionName;
 			_hotKeyButton.Text = displayKey;
+		}
+		private void OnButtonPressed()
+		{
+			if (_buttonToggle)
+			{
+				_buttonToggle = false;
+				_hotKeyButton.Text = "Press any key...";
+				_hotKeyButton.ReleaseFocus();
+				SetProcessInput(true);
+			}
+		}
+		private void RebindKey(InputEventKey newKeyEvent)
+		{
+
+			InputMap.ActionEraseEvents(_hotKeyActionName);
+
+			InputMap.ActionAddEvent(_hotKeyActionName, newKeyEvent);
 		}
 	}
 }

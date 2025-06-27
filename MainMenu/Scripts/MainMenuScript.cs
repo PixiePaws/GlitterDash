@@ -46,8 +46,6 @@ namespace UnicornGame
 		// 		}
 		// 	}
 		// }
-
-		// Called every frame. 'delta' is the elapsed time since the previous frame.
 		private void OnQuitButtonPressed()
 		{
 			GetTree().Quit();
