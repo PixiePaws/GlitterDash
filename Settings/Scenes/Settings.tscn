@@ -29,10 +29,9 @@ offset_bottom = -50.0
 grow_horizontal = 2
 grow_vertical = 2
 tab_alignment = 1
-current_tab = 2
+current_tab = 0
 
 [node name="Video" type="TabBar" parent="Settings/TabContainer"]
-visible = false
 layout_mode = 2
 metadata/_tab_index = 0
 
@@ -113,6 +112,7 @@ layout_mode = 2
 theme_override_constants/separation = 12
 
 [node name="Sounds" type="TabBar" parent="Settings/TabContainer"]
+visible = false
 layout_mode = 2
 metadata/_tab_index = 2
 
