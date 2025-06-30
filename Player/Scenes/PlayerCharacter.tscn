@@ -100,7 +100,6 @@ Speed = 500.0
 WallJumpPush = 1300.0
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
-visible = false
 scale = Vector2(0.6, 0.6)
 texture = ExtResource("2_hubrt")
 flip_h = true

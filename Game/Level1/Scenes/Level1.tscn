@@ -115,7 +115,7 @@ offset_bottom = 1080.0
 texture = ExtResource("2_5govx")
 
 [node name="PlayerCharacter" parent="." instance=ExtResource("2_n6ngs")]
-position = Vector2(48, 648)
+position = Vector2(4567, -977)
 collision_layer = 1
 WallJumpVelocity = 1500.0
 WallJumpPush = 2000.0
