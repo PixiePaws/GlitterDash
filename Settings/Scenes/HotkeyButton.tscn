@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" path="res://Settings/Scripts/HotKey.cs" id="1_hxcc2"]
 
-[node name="HotkeyButton" type="Control"]
+[node name="HotkeyButton" type="Control" groups=["hotKeyButton"]]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0

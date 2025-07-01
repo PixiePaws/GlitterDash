@@ -14,12 +14,12 @@ namespace UnicornGame
 		{
 			SetActionKeyName(); // Set the action key name on ready
 
-			_hotKeyButton.ButtonDown += OnButtonPressed;
+			_hotKeyButton.Pressed += OnButtonPressed;
 
 		}
 		public override void _Input(InputEvent @event)
 		{
-			if (!_buttonToggle && @event is InputEventKey keyEvent && keyEvent.Pressed && !keyEvent.Echo)
+			if (!_buttonToggle && @event is InputEventKey keyEvent && keyEvent.Pressed)
 			{
 				RebindKey(keyEvent); // Rebind action to this key
 				GD.Print("Pressed key: ", keyEvent.Keycode);
@@ -37,7 +37,7 @@ namespace UnicornGame
 			_hotKeyButton = GetNode<Button>("HBoxContainer/Button");
 			_hotKeyButton.Text = "Unassigned"; // Default text for unassigned hotkey
 
-			InputEventKey keyEvent = InputMap.ActionGetEvents(_hotKeyActionName).OfType<InputEventKey>().FirstOrDefault();
+			InputEventKey keyEvent = InputMap.ActionGetEvents(_hotKeyActionName).OfType<InputEventKey>().FirstOrDefault(); // This needs "using System.Linq"
 
 			string displayKey;
 
@@ -70,12 +70,47 @@ namespace UnicornGame
 				SetProcessInput(true);
 			}
 		}
-		private void RebindKey(InputEventKey newKeyEvent)
+		private void RebindKey(InputEventKey newKeyEvent) //This method rebinds the keys. if it finds a dublicate it also removes the old key.
 		{
+			string newKeyString = OS.GetKeycodeString(newKeyEvent.PhysicalKeycode);
+
+			foreach (Node key in GetTree().GetNodesInGroup("hotKeyButton"))
+			{
+				if (key is HotKey otherKey)
+				{
+					string otherActionName = otherKey._hotKeyActionName;
+					Godot.Collections.Array<InputEvent> currentKeyEvents = InputMap.ActionGetEvents(otherActionName);
+					foreach (InputEvent inputEvent in currentKeyEvents)
+					{
+						if (inputEvent is InputEventKey keyEvent)
+						{
+							string currentKeyString = OS.GetKeycodeString(keyEvent.PhysicalKeycode);
+							if (currentKeyString == newKeyString && otherActionName != _hotKeyActionName)
+							{
+								InputMap.ActionEraseEvent(otherActionName, keyEvent);
+								GD.Print($"HotKey vaihdettu, {newKeyString} vaihdettiin {currentKeyString}");
+							}
+						}
+					}
+				}
+
+			}
 
 			InputMap.ActionEraseEvents(_hotKeyActionName);
 
 			InputMap.ActionAddEvent(_hotKeyActionName, newKeyEvent);
+
+			UpdateAllHotKeyUIs();
+		}
+		private void UpdateAllHotKeyUIs() // This updates the ui to make sure that the user can see that the keys have been changed if its a dublicate.
+		{
+			foreach (Node node in GetTree().GetNodesInGroup("hotKeyButton"))
+			{
+				if (node is HotKey hotkey)
+				{
+					hotkey.SetActionKeyName();
+				}
+			}
 		}
 	}
 }

@@ -7,9 +7,7 @@
 script = ExtResource("2_i0jbr")
 
 [node name="HBoxContainer" parent="." index="0"]
-offset_left = 150.0
 offset_top = 4.0
-offset_right = 682.0
 offset_bottom = 68.0
 
 [node name="Label" parent="HBoxContainer" index="0"]
