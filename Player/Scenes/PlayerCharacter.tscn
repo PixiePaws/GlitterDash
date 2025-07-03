@@ -93,8 +93,7 @@ animations = [{
 }]
 
 [node name="PlayerCharacter" type="CharacterBody2D"]
-collision_layer = 7
-collision_mask = 7
+collision_mask = 2
 script = ExtResource("1_l5nv5")
 Speed = 500.0
 WallJumpPush = 1300.0

@@ -43,6 +43,19 @@ namespace UnicornGame
             {
                 GD.Print("Could not get respawnpoint reference");
             }
+            GameState CurrentState = GetNode<GameLevels>($"/root/{ParentName}/").CurrentGameState;
+            if (CurrentState != null)
+            {
+                GD.Print("Got CurrentGameState reference");
+            }
+            else
+            {
+                GD.Print("Could not get CurrentGameState reference");
+            }
+            Godot.Collections.Dictionary<string, Variant> SaveData = CurrentState.SaveGameState();
+            string JsonString = Json.Stringify(SaveData);
+            IGameSaver GameSaver = GetNode<GameLevels>($"/root/{ParentName}/").GameManager.GameSaver;
+            GameSaver.WriteTextToFile(GameSaver.DirectoryPath, GameSaver.FileName, JsonString);
             _player.GlobalPosition = _respawnPoint.GlobalPosition;
         }
 

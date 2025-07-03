@@ -8,7 +8,7 @@ public abstract partial class GameLevels : Node2D
     protected GameState _gameState;
     private PackedScene _gameManagerScene;
     private string _gameManagerScenePath;
-    
+
     [Export] private SaveFormat _saveFormat;
 
     public enum SaveFormat
@@ -17,9 +17,17 @@ public abstract partial class GameLevels : Node2D
         Json,
         None
     }
+    public GameState CurrentGameState
+    {
+        get { return _gameState; }
+    }
     public SaveFormat CurrentSaveFormat
     {
         get { return _saveFormat; }
+    }
+    public GameManager GameManager
+    {
+        get { return _gameManager; }
     }
     public void InstantiateGameManager()
     {
@@ -39,5 +47,18 @@ public abstract partial class GameLevels : Node2D
             GD.Print("_gameManager could not be added to tree");
         }
         _gameState = new GameState();
+        AddChild(_gameState);
+        if (_gameState != null)
+        {
+            GD.Print("_gameState in GameLevels successfully created");
+        }
+        else
+        {
+            GD.Print("_gameState in GameLevels is null!");
+        }
+    }
+    public void LoadSave(string FileName)
+    {
+
     }
 }

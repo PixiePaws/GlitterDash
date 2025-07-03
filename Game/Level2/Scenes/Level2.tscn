@@ -11,9 +11,9 @@
 [ext_resource type="Script" path="res://Game/Portal.cs" id="9_qlokc"]
 [ext_resource type="Texture2D" uid="uid://dxxm417mx0341" path="res://Art/PlaceHolders/GreenBlockPlaceholder.png" id="10_ml3u2"]
 [ext_resource type="Texture2D" uid="uid://t75gsvlhv18t" path="res://icon.svg" id="11_ey6m8"]
-[ext_resource type="PackedScene" uid="uid://dol5g5hc7xj1e" path="res://Game/DangerZoneFalling.tscn" id="12_ne7dl"]
+[ext_resource type="PackedScene" path="res://Game/DangerZoneFalling.tscn" id="12_ne7dl"]
 [ext_resource type="Script" path="res://Items/Scripts/GoldEggManager.cs" id="13_3vpso"]
-[ext_resource type="PackedScene" uid="uid://dsnvu8ioiw0ff" path="res://Items/Scenes/GoldEgg.tscn" id="14_6bruh"]
+[ext_resource type="PackedScene" uid="uid://mu1by1prm8kh" path="res://Items/Scenes/GoldEgg.tscn" id="14_6bruh"]
 [ext_resource type="Shader" path="res://Game/Black&White.gdshader" id="15_206x5"]
 [ext_resource type="PackedScene" uid="uid://b6upcof87f3dd" path="res://Obstacles/Scenes/CircularSaw.tscn" id="16_8s5p2"]
 [ext_resource type="PackedScene" uid="uid://ti05fy42timf" path="res://Obstacles/Scenes/Pendulum.tscn" id="17_ljtf2"]
@@ -67,7 +67,7 @@ texture_region_size = Vector2i(48, 49)
 
 [sub_resource type="TileSet" id="TileSet_sok5l"]
 tile_size = Vector2i(48, 49)
-physics_layer_0/collision_layer = 1
+physics_layer_0/collision_layer = 2
 sources/0 = SubResource("TileSetAtlasSource_67wqi")
 sources/1 = SubResource("TileSetAtlasSource_k5m74")
 
@@ -119,13 +119,12 @@ texture = ExtResource("5_f16ya")
 
 [node name="PlayerCharacter" parent="." instance=ExtResource("6_0x36j")]
 position = Vector2(79, -316)
-collision_layer = 1
 WallJumpVelocity = 1500.0
 WallJumpPush = 2000.0
 
-[node name="CollisionDetector" parent="PlayerCharacter" index="4" node_paths=PackedStringArray("RespawnPoint", "Fliter", "_goldeggmanager", "Camera", "player", "_respawner")]
+[node name="CollisionDetector" parent="PlayerCharacter" index="4" node_paths=PackedStringArray("RespawnPoint", "Filter", "_goldeggmanager", "Camera", "player", "_respawner")]
 RespawnPoint = NodePath("../../RespawnPoint")
-Fliter = NodePath("../../BlackWhite")
+Filter = NodePath("../../BlackWhite")
 _goldeggmanager = NodePath("../../GoldEggs")
 Camera = NodePath("../../Camera2D")
 player = NodePath("..")

@@ -8,7 +8,7 @@ namespace UnicornGame
     public partial class CollisionDetector : Area2D
     {
         [Export] public Node2D RespawnPoint;
-        [Export] public ColorRect Fliter;
+        [Export] public ColorRect Filter;
         [Export] public GoldEggManager _goldeggmanager;
         [Export] public Camera Camera;
         [Export] public Player player;
@@ -43,7 +43,7 @@ namespace UnicornGame
         /// </summary>
         public async void DieRestart()
         {
-            Fliter.Visible = true;
+            Filter.Visible = true;
             Camera?.ResetCamera("die");
             player?.HandleDanger("dead");
             //_respawner.RespawnPlayer();

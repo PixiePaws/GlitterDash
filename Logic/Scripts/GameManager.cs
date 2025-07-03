@@ -10,6 +10,11 @@ namespace UnicornGame
         private PackedScene _jsonSaverScene;
         private GameLevels _parentNode;
         private GameLevels.SaveFormat _saveFormat;
+        
+        public IGameSaver GameSaver
+        {
+            get { return _gameSaver; }
+        }
 
         public override void _Ready()
         {
@@ -21,9 +26,9 @@ namespace UnicornGame
                     _gameSaver = (IGameSaver)_jsonSaverScene.Instantiate();
                     AddChild((JsonSaver)_gameSaver);
                     break;
-                /*case GameLevels.SaveFormat.Xml:
-                    _gameSaver = new XmlSaver();
-                    break;*/
+                    /*case GameLevels.SaveFormat.Xml:
+                        _gameSaver = new XmlSaver();
+                        break;*/
             }
         }
         public GameLevels.SaveFormat GetSaveFormat()
