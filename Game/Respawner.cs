@@ -15,16 +15,13 @@ namespace UnicornGame
         [Export] private Label _scoreLabel;
         [Export] private Player _player;
 
-
-
         /// <summary>
         /// Respawn method that resets the player's position when they fall off the map.
         /// </summary>
-
         public void RespawnPlayer()
         {
             var ParentName = GetParent().Name;
-            GD.Print($"Parent Name : {ParentName}");
+            //GD.Print($"Parent Name : {ParentName}");
             string PlayerPath = $"/root/{ParentName}/PlayerCharacter";
             GD.Print(PlayerPath);
             _player = GetNode<Player>(PlayerPath);
@@ -60,7 +57,6 @@ namespace UnicornGame
             IGameSaver GameSaver = GetNode<GameLevels>($"/root/{ParentName}/").GameManager.GameSaver;
             GameSaver.WriteTextToFile(GameSaver.DirectoryPath, GameSaver.FileName, JsonString);
             _player.GlobalPosition = _respawnPoint.GlobalPosition;
-            _player.RespawnPlayer();
         }
 
         /// <summary>
@@ -69,10 +65,20 @@ namespace UnicornGame
         public void AddScore()
         {
             var ParentName = GetParent().Name;
-            GD.Print($"Parent Name : {ParentName}");
+            GD.Print("Score added");
             string ScoreLabelPath = $"/root/{ParentName}/Camera2D/ScoreLabel";
             _scoreLabel = GetNode<Label>(ScoreLabelPath);
             _score += 1;
+            _scoreLabel.Text = _score.ToString() + "/13";
+        }
+
+        /// <summary>
+        /// Resets the score to zero
+        /// </summary>
+        public void ResetScore()
+        {
+            GD.Print("Score reset");
+            _score = 0;
             _scoreLabel.Text = _score.ToString() + "/13";
         }
     }

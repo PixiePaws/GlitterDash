@@ -5,7 +5,6 @@ using System.Threading.Tasks;
 
 namespace UnicornGame
 {
-
     public partial class Player : CharacterBody2D
     {
         [Export] public float Speed = 200f;
@@ -32,11 +31,13 @@ namespace UnicornGame
         // private CollisionDetector _collisionDetector;
         private bool _canControl = true;
         public AnimatedSprite2D _animatedSprite; // tarvitaan animaatioita varten
+        public Respawner _respawner;
 
 
         public override void _Ready()
         {
             _animatedSprite = GetNode<AnimatedSprite2D>("AnimatedSprite2D");
+            _respawner = GetNode<Respawner>("../Respawner");
         }
 
         public override void _PhysicsProcess(double delta)
@@ -253,7 +254,7 @@ namespace UnicornGame
                 var collision = GetSlideCollision(i);
                 if (collision != null)
                 {
-                    var normal = collision.GetNormal(); // Oikea tapa hakea normaali Godot 4:ssa
+                    var normal = collision.GetNormal();
                     if (Math.Abs(normal.X) > 0.9f)
                     {
                         return -(int)Mathf.Sign(normal.X); // 1 = seinä oikealla, -1 = vasemmalla
@@ -285,40 +286,31 @@ namespace UnicornGame
         }
 
         /// <summary>
-        /// Handles the player's death logic.
-        /// </summary>
-        public void Die()
-        {
-            GD.Print("Player died");
-            // kuolemis animaation käynnistäminen
-            // kuolemis äänen soittaminen
-
-            _animatedSprite.Play("Die");
-            Visible = false;
-            _canControl = false;
-
-            ResetPlayer();
-        }
-
-        /// <summary>
         /// Respawns the player at the respawn point and resets the player's state.
         /// This method is called when the player needs to respawn after dying.
         /// </summary>
         public void RespawnPlayer()
         {
             Show();
-            // kameran resetointi
         }
 
         /// <summary>
-        /// Handles the player's death and respawn logic.
+        /// Handles the player's death and respawn logic based on the type of danger encountered.
         /// </summary>
-        public async Task HandleDanger()
+        public async Task HandleDanger(string dangerType)
         {
             GD.Print("Player died");
             Visible = false;
             _canControl = false;
-            await ToSignal(GetTree().CreateTimer(1.0f), Timer.SignalName.Timeout);
+
+            if (dangerType == "dead")
+            {
+                await ToSignal(GetTree().CreateTimer(6f), Timer.SignalName.Timeout); // sama aika kun resetcameradie odotus
+            }
+            else if (dangerType == "fall")
+            {
+                await ToSignal(GetTree().CreateTimer(1f), Timer.SignalName.Timeout);
+            }
 
             ResetPlayer();
         }
@@ -328,7 +320,7 @@ namespace UnicornGame
         /// </summary>
         public void ResetPlayer()
         {
-            GlobalPosition = GetNode<Node2D>("../RespawnPoint").GlobalPosition; // Assuming RespawnPoint is a Node2D
+            GlobalPosition = GetNode<Node2D>("../RespawnPoint").GlobalPosition;
             Visible = true;
             _canControl = true;
             _jumpCount = 0;
