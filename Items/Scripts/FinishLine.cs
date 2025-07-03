@@ -12,6 +12,7 @@ namespace UnicornGame
         }
         public void OnBodyEntered(Node node)
         {
+            GD.Print($"FinishLine OnBodyEntered() was triggered by: {node.Name}");
             if (node is Player)
             {
                 GD.Print("Level complete");
