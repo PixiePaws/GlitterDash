@@ -122,8 +122,9 @@ position = Vector2(79, -316)
 WallJumpVelocity = 1500.0
 WallJumpPush = 2000.0
 
-[node name="CollisionDetector" parent="PlayerCharacter" index="4" node_paths=PackedStringArray("RespawnPoint", "_goldeggmanager", "Camera", "player", "_respawner")]
+[node name="CollisionDetector" parent="PlayerCharacter" index="4" node_paths=PackedStringArray("RespawnPoint", "Filter", "_goldeggmanager", "Camera", "player", "_respawner")]
 RespawnPoint = NodePath("../../RespawnPoint")
+Filter = NodePath("../../BlackWhite")
 _goldeggmanager = NodePath("../../GoldEggs")
 Camera = NodePath("../../Camera2D")
 player = NodePath("..")
