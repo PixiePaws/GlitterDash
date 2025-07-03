@@ -7,7 +7,7 @@ namespace UnicornGame
     public partial class CollisionDetector : Area2D
     {
         [Export] public Node2D RespawnPoint;
-        [Export] public ColorRect Fliter;
+        [Export] public ColorRect Filter;
         private bool _isPaused = false;
         private Respawner _respawner;
         //private String _gameOverPath = "";
@@ -27,13 +27,13 @@ namespace UnicornGame
             {
                 GD.Print("Collided with obstacle!");
                 GD.Print("Game over!");
-                TurnOnFliter();
+                TurnOnFilter();
             }
         }
 
-        public void TurnOnFliter()
+        public void TurnOnFilter()
         {
-            Fliter.Visible = true;
+            Filter.Visible = true;
             _respawner.RespawnPlayer();
             GD.Print("InstantiateGameOverScene() was called");
             /*if (_gameOverScene != null)
