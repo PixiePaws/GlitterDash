@@ -19,6 +19,10 @@ namespace UnicornGame
         {
             get { return _fileName;}
         }
+        public string SavePath
+        {
+            get { return _savePath;}
+        }
         public override void _Ready()
         {
             GD.Print("JsonSave _Ready()");

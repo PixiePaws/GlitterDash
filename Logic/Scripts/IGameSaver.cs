@@ -7,6 +7,7 @@ namespace UnicornGame
     {
         string DirectoryPath { get; }
         string FileName { get; }
+        string SavePath { get; }
         public void WriteTextToFile(string DirectoryPath, string FileName, string GameData);
     }
 }

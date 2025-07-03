@@ -12,16 +12,26 @@ namespace UnicornGame
 		// Change this to level selection when there is one
 		private string _levelScenePath = "res://Game/Level1/Scenes/Level1.tscn"; // Path to the level scene
 		private string _settingsScenePath = "res://Settings/Scenes/Settings.tscn"; // Path to the settings scene
+		private string _selectSaveScenePath = "res://MainMenu/Scenes/LoadGame.tscn";
 		private Button _quitButton;
 		private Button _startButton;
+		private Button _loadGameButton;
 		// private Button _settingsButton;
 		public override void _Ready()
 		{
+
+			int primaryScreen = DisplayServer.GetPrimaryScreen();
+			Vector2I screenSize = DisplayServer.ScreenGetSize(primaryScreen);
+			DisplayServer.WindowSetSize(screenSize);
+			DisplayServer.WindowSetMode(DisplayServer.WindowMode.Fullscreen);
 			_quitButton = GetNode<Button>("MarginContainer/VBoxContainer/QuitButton");
 			_quitButton.Pressed += OnQuitButtonPressed;
 
 			_startButton = GetNode<Button>("MarginContainer/VBoxContainer/StartButton");
 			_startButton.Pressed += OnStartButtonPressed;
+
+			_loadGameButton = GetNode<Button>("MarginContainer/VBoxContainer/LoadGameButton");
+			_loadGameButton.Pressed += OnLoadGameButtonPressed;
 
 			// _settingsButton = GetNode<Button>("MarginContainer/VBoxContainer/SettingsButton");
 			// _settingsButton.Pressed += OnSettingsButtonPressed;
@@ -44,6 +54,12 @@ namespace UnicornGame
 				GD.Print("Level selection scene not found");
 			}
 		}
+		private void OnLoadGameButtonPressed()
+		{
+			PackedScene SelectSaveScene = ResourceLoader.Load<PackedScene>(_selectSaveScenePath);
+			LoadGame LoadGameScene = (LoadGame)SelectSaveScene.Instantiate();
+			AddChild(LoadGameScene);
+		}
 		// private void OnSettingsButtonPressed()
 		// {
 		// 	CanvasLayer settingsScene = GetNode<CanvasLayer>("SettingsScene");
@@ -57,7 +73,7 @@ namespace UnicornGame
 		// 		}
 		// 	}
 		// }
-}
+	}
 }
 
 

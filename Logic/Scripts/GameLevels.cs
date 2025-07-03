@@ -8,7 +8,7 @@ public abstract partial class GameLevels : Node2D
     protected GameState _gameState;
     private PackedScene _gameManagerScene;
     private string _gameManagerScenePath;
-    
+
     [Export] private SaveFormat _saveFormat;
 
     public enum SaveFormat
@@ -19,7 +19,7 @@ public abstract partial class GameLevels : Node2D
     }
     public GameState CurrentGameState
     {
-        get { return _gameState;  }
+        get { return _gameState; }
     }
     public SaveFormat CurrentSaveFormat
     {
@@ -56,5 +56,9 @@ public abstract partial class GameLevels : Node2D
         {
             GD.Print("_gameState in GameLevels is null!");
         }
+    }
+    public void LoadSave(string FileName)
+    {
+
     }
 }
