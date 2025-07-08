@@ -26,15 +26,32 @@ namespace UnicornGame
 		public override void _Input(InputEvent @event)
 		{
 			OnSettingsPressed();
-
 		}
 		private void OnSettingsPressed()
 		{
-			if (Input.IsActionJustPressed("Settings"))
+			Node currentScene = GetTree().CurrentScene;
+			if (currentScene.Name == "MainMenu")
 			{
-				if (_settingsScene.Visible)
+				if (Input.IsActionJustPressed("Settings"))
 				{
-					_settingsScene.Visible = false;
+					if (_settingsScene.Visible)
+					{
+						_settingsScene.Visible = false;
+					}
+					else
+					{
+						_settingsScene.Visible = true;
+					}
+				}
+			}
+			else
+			{
+				if (Input.IsActionJustPressed("Settings"))
+				{
+					if (_settingsScene.Visible)
+					{
+						_settingsScene.Visible = false;
+					}
 				}
 			}
 		}

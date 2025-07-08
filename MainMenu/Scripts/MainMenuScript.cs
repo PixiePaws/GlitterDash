@@ -34,18 +34,6 @@ namespace UnicornGame
 			_settingsButton = GetNode<Button>("MarginContainer/VBoxContainer/SettingsButton");
 			_settingsButton.Pressed += OnSettingsButtonPressed;
 		}
-
-		// public override void _Input(InputEvent @event)
-		// {
-		// 	Control settingsPanel = GetNodeOrNull<Control>("SettingsScene/Settings");
-		// 	if (settingsPanel != null && !settingsPanel.Visible)
-		// 	{
-		// 		if (Input.IsActionJustPressed("Settings"))
-		// 		{
-		// 			OnSettingsButtonPressed();
-		// 		}
-		// 	}
-		// }
 		private void OnQuitButtonPressed()
 		{
 			GetTree().Quit();
@@ -71,6 +59,11 @@ namespace UnicornGame
 				{
 					settingsPanel.Visible = true; // Show settings scene
 					GD.Print("Settings scene opened and game paused");
+				}
+				else
+				{
+					settingsPanel.Visible = false;
+					GD.Print("Settings scene closed, and game unpaused.");
 				}
 			}
 		}

@@ -14,9 +14,13 @@ namespace UnicornGame
 		private Button _mainMenuButton;
 		private Button _quitButton;
 		private Button _settingsButton;
+		private Control _settingsScenePanel;
 		public override void _Ready()
 		{
 			GetTree().Paused = true; // Pause the game when settings screen is ready
+
+			_settingsScenePanel = GetNodeOrNull<Control>("Control");
+
 			_resumeButton = GetNode<Button>("Control/VBoxContainer/ResumeButton");
 			_resumeButton.Pressed += OnResumeButtonPressed;
 
@@ -31,14 +35,18 @@ namespace UnicornGame
 		}
 
 
-		// public override void _Input(InputEvent @event)
-		// {
-		// 	if (Input.IsActionJustPressed("Settings"))
-		// 	{
-		// 		this.QueueFree(); // Remove the settings screen from the scene tree
-		// 		GetTree().Paused = false; // Unpause the game
-		// 	}
-		// }
+		public override void _Input(InputEvent @event)
+		{
+			if (Input.IsActionJustPressed("Settings") && _settingsScenePanel.Visible == true)
+			{
+				this.QueueFree(); // Remove the settings screen from the scene tree
+				GetTree().Paused = false; // Unpause the game
+			}
+			if (Input.IsActionJustPressed("Settings") && _settingsScenePanel.Visible == false)
+			{
+				_settingsScenePanel.Visible = true;
+			}
+		}
 
 		// Called every frame. 'delta' is the elapsed time since the previous frame.
 		private void OnResumeButtonPressed()
@@ -69,13 +77,15 @@ namespace UnicornGame
 		}
 		private void OnSettingsButtonPressed()
 		{
+
 			Control settingsPanel = GetNodeOrNull<Control>("SettingsScene/Settings");
 			if (settingsPanel != null)
 			{
 				if (settingsPanel.Visible == false)
 				{
 					settingsPanel.Visible = true; // Show settings scene
-					GD.Print("Settings scene opened and game paused");
+					_settingsScenePanel.Visible = false;
+					GD.Print("Settings scene opened and game paused + settingsScenePanel hidden");
 				}
 			}
 			else
