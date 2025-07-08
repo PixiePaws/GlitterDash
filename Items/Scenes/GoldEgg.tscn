@@ -1,4 +1,4 @@
-[gd_scene load_steps=5 format=3 uid="uid://mu1by1prm8kh"]
+[gd_scene load_steps=5 format=3 uid="uid://dsnvu8ioiw0ff"]
 
 [ext_resource type="Script" path="res://Items/Scripts/GoldEgg.cs" id="1_g52bi"]
 [ext_resource type="Texture2D" uid="uid://uprybvy2gmww" path="res://Art/Items/TheEgg.png" id="2_vc8fw"]

@@ -47,7 +47,7 @@ namespace UnicornGame
         public void MoveBackGround(float PlayerPositionChangeX)
         {
             //GD.Print($"Original offset: {ScrollOffset}");
-            GD.Print($"Original Player position change: {PlayerPositionChangeX}");
+            //GD.Print($"Original Player position change: {PlayerPositionChangeX}");
             //Moving right
             if (PlayerPositionChangeX > 0)
             {

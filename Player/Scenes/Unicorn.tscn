@@ -1,0 +1,182 @@
+[gd_scene load_steps=14 format=3 uid="uid://bun0lpg7lkpq6"]
+
+[ext_resource type="Texture2D" uid="uid://bcl7d7y3cjvky" path="res://Art/Character/UnicornVersion2.png" id="1_s5dvs"]
+[ext_resource type="Texture2D" uid="uid://daub4x8scnsdc" path="res://Art/Character/BodyParts/UniHead.png" id="2_n7x20"]
+[ext_resource type="Texture2D" uid="uid://d2y58f1myxcdb" path="res://Art/Character/BodyParts/UniHair.png" id="3_lchxc"]
+[ext_resource type="Texture2D" uid="uid://kysvqi1528xw" path="res://Art/Character/BodyParts/UniBody.png" id="4_jk86r"]
+[ext_resource type="Texture2D" uid="uid://0eru13kklpq5" path="res://Art/Character/BodyParts/UniLHand.png" id="5_ujh60"]
+[ext_resource type="Texture2D" uid="uid://ckyurqqc8swtq" path="res://Art/Character/BodyParts/UniRLeg.png" id="6_trv5l"]
+[ext_resource type="Texture2D" uid="uid://d11gl2ty7tj42" path="res://Art/Character/BodyParts/UniRHand.png" id="7_kgyik"]
+[ext_resource type="Texture2D" uid="uid://bydqq8gylp65j" path="res://Art/Character/BodyParts/UniLLeg.png" id="8_b1arr"]
+[ext_resource type="Texture2D" uid="uid://3jyyw7oceo1j" path="res://Art/Character/BodyParts/UniTail.png" id="9_eel1i"]
+[ext_resource type="Script" path="res://Player/Scripts/CollisionDetector.cs" id="10_on172"]
+
+[sub_resource type="SkeletonModificationStack2D" id="SkeletonModificationStack2D_1qhgq"]
+modification_count = 1
+
+[sub_resource type="Animation" id="Animation_5mpup"]
+resource_name = "Walk"
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_k5q52"]
+_data = {
+"Walk": SubResource("Animation_5mpup")
+}
+
+[node name="Unicorn" type="CharacterBody2D"]
+collision_mask = 2
+
+[node name="UnicornVersion2" type="Sprite2D" parent="."]
+visible = false
+position = Vector2(18, 0)
+texture = ExtResource("1_s5dvs")
+
+[node name="PartsSkeletonContainer" type="Node2D" parent="."]
+
+[node name="Parts" type="Node2D" parent="PartsSkeletonContainer"]
+
+[node name="UniHead" type="Sprite2D" parent="PartsSkeletonContainer/Parts"]
+position = Vector2(9, 121)
+texture = ExtResource("2_n7x20")
+
+[node name="UniHair" type="Sprite2D" parent="PartsSkeletonContainer/Parts/UniHead"]
+z_index = -1
+texture = ExtResource("3_lchxc")
+
+[node name="UniBody" type="Sprite2D" parent="PartsSkeletonContainer"]
+z_index = -1
+position = Vector2(15, 122)
+texture = ExtResource("4_jk86r")
+
+[node name="UniLHand" type="Sprite2D" parent="PartsSkeletonContainer"]
+z_index = -2
+position = Vector2(11.7281, 116.837)
+rotation = 0.0240233
+scale = Vector2(1, 1)
+texture = ExtResource("5_ujh60")
+
+[node name="UniRLeg" type="Sprite2D" parent="PartsSkeletonContainer"]
+z_index = -2
+position = Vector2(10, 122)
+rotation = -0.0709897
+scale = Vector2(1, 1)
+texture = ExtResource("6_trv5l")
+
+[node name="UniRHand" type="Sprite2D" parent="PartsSkeletonContainer"]
+position = Vector2(9, 120)
+rotation = -0.00220872
+texture = ExtResource("7_kgyik")
+
+[node name="UniLLeg" type="Sprite2D" parent="PartsSkeletonContainer"]
+z_index = -2
+position = Vector2(11, 122)
+rotation = -0.000404405
+texture = ExtResource("8_b1arr")
+
+[node name="UniTail" type="Sprite2D" parent="PartsSkeletonContainer"]
+z_index = -2
+position = Vector2(10, 119)
+texture = ExtResource("9_eel1i")
+
+[node name="Skeleton2D" type="Skeleton2D" parent="PartsSkeletonContainer"]
+modification_stack = SubResource("SkeletonModificationStack2D_1qhgq")
+
+[node name="Base" type="Bone2D" parent="PartsSkeletonContainer/Skeleton2D"]
+position = Vector2(-9, 198)
+rest = Transform2D(1, 0, 0, 1, -9, 198)
+
+[node name="Body" type="Bone2D" parent="PartsSkeletonContainer/Skeleton2D/Base"]
+position = Vector2(-1, -94)
+rest = Transform2D(1, 0, 0, 1, -1, -94)
+
+[node name="RemoteTransform2D" type="RemoteTransform2D" parent="PartsSkeletonContainer/Skeleton2D/Base/Body"]
+position = Vector2(25, 18)
+remote_path = NodePath("../../../../UniBody")
+
+[node name="Head" type="Bone2D" parent="PartsSkeletonContainer/Skeleton2D/Base/Body"]
+position = Vector2(0, -97)
+rest = Transform2D(1, 0, 0, 1, 0, -97)
+auto_calculate_length_and_angle = false
+length = 289.388
+bone_angle = -93.103
+
+[node name="RemoteTransform2D" type="RemoteTransform2D" parent="PartsSkeletonContainer/Skeleton2D/Base/Body/Head"]
+position = Vector2(19, 114)
+remote_path = NodePath("../../../../../Parts/UniHead")
+
+[node name="FrontArm" type="Bone2D" parent="PartsSkeletonContainer/Skeleton2D/Base/Body"]
+position = Vector2(151, -90)
+rest = Transform2D(1, 0, 0, 1, 151, -90)
+auto_calculate_length_and_angle = false
+length = 148.284
+bone_angle = 86.897
+
+[node name="RemoteTransform2D" type="RemoteTransform2D" parent="PartsSkeletonContainer/Skeleton2D/Base/Body/FrontArm"]
+position = Vector2(-132, 106)
+rotation = -0.00220872
+remote_path = NodePath("../../../../../UniRHand")
+
+[node name="BackArm" type="Bone2D" parent="PartsSkeletonContainer/Skeleton2D/Base/Body"]
+position = Vector2(-126, -81)
+rotation = -0.0284402
+rest = Transform2D(1, 0, 0, 1, -126, -81)
+auto_calculate_length_and_angle = false
+length = 121.828
+bone_angle = 105.517
+
+[node name="RemoteTransform2D" type="RemoteTransform2D" parent="PartsSkeletonContainer/Skeleton2D/Base/Body/BackArm"]
+position = Vector2(145, 98)
+rotation = 0.0524636
+remote_path = NodePath("../../../../../UniLHand")
+
+[node name="FrontLeg" type="Bone2D" parent="PartsSkeletonContainer/Skeleton2D/Base"]
+position = Vector2(80, 29)
+rest = Transform2D(1, 0, 0, 1, 80, 29)
+auto_calculate_length_and_angle = false
+length = 121.828
+bone_angle = 86.897
+
+[node name="RemoteTransform2D" type="RemoteTransform2D" parent="PartsSkeletonContainer/Skeleton2D/Base/FrontLeg"]
+position = Vector2(-61, -105)
+rotation = -0.0709897
+remote_path = NodePath("../../../../UniRLeg")
+
+[node name="BackLeg" type="Bone2D" parent="PartsSkeletonContainer/Skeleton2D/Base"]
+position = Vector2(-61, 39)
+rest = Transform2D(1, 0, 0, 1, -61, 39)
+auto_calculate_length_and_angle = false
+length = 130.647
+bone_angle = 93.103
+
+[node name="RemoteTransform2D" type="RemoteTransform2D" parent="PartsSkeletonContainer/Skeleton2D/Base/BackLeg"]
+position = Vector2(81, -115)
+rotation = -0.000404405
+remote_path = NodePath("../../../../UniLLeg")
+
+[node name="IKTargetFrontLeg" type="Node2D" parent="."]
+
+[node name="IKTargetBackLeg" type="Node2D" parent="."]
+
+[node name="IKTargetFrontArm" type="Node2D" parent="."]
+
+[node name="IKTargetBackArm" type="Node2D" parent="."]
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_k5q52")
+}
+
+[node name="DashTimer" type="Timer" parent="."]
+wait_time = 0.4
+one_shot = true
+
+[node name="CollisionDetector" type="Area2D" parent="."]
+collision_layer = 4
+collision_mask = 8
+script = ExtResource("10_on172")
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="CollisionDetector"]
+polygon = PackedVector2Array(-14, -5, -24, -26, -25, -49, -24, -74, -14, -63, 0, -70, 7, -86, 11, -70, 18, -81, 24, -76, 26, -59, 35, -46, 37, -27, 43, -9, 39, 2, 44, 32, 33, 34, 28, 48, 26, 77, -13, 78, -19, 72, -19, 66, -17, 49, -23, 35, -28, 34, -31, 25, -29, 12, -26, 5)
+
+[node name="WallChecker" type="RayCast2D" parent="."]
+target_position = Vector2(64, 0)
+collision_mask = 15

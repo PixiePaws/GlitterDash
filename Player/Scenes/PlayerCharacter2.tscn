@@ -1,36 +1,36 @@
-[gd_scene load_steps=13 format=3 uid="uid://cvl311e3g082f"]
+[gd_scene load_steps=13 format=3 uid="uid://ycglcntbmhss"]
 
-[ext_resource type="Script" path="res://Player/Scripts/Player.cs" id="1_l5nv5"]
-[ext_resource type="Texture2D" uid="uid://b48y12wyscq7f" path="res://Art/Character/UnicornSmaller.png" id="2_hubrt"]
-[ext_resource type="Script" path="res://Player/Scripts/CollisionDetector.cs" id="3_udxmi"]
-[ext_resource type="Texture2D" uid="uid://c6cqi6emsltch" path="res://Art/Character/TestAnimation.png" id="3_xg0i1"]
+[ext_resource type="Script" path="res://Player/Scripts/Player.cs" id="1_txltl"]
+[ext_resource type="Texture2D" uid="uid://b48y12wyscq7f" path="res://Art/Character/UnicornSmaller.png" id="2_4gxhp"]
+[ext_resource type="Texture2D" uid="uid://c6cqi6emsltch" path="res://Art/Character/TestAnimation.png" id="3_srnfu"]
+[ext_resource type="Script" path="res://Player/Scripts/CollisionDetector.cs" id="4_pnfxm"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_hj528"]
-atlas = ExtResource("3_xg0i1")
+atlas = ExtResource("3_srnfu")
 region = Rect2(0, 0, 16, 32)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_ywos7"]
-atlas = ExtResource("3_xg0i1")
+atlas = ExtResource("3_srnfu")
 region = Rect2(16, 0, 16, 32)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_7i3ng"]
-atlas = ExtResource("3_xg0i1")
+atlas = ExtResource("3_srnfu")
 region = Rect2(32, 0, 16, 32)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_0jug5"]
-atlas = ExtResource("3_xg0i1")
+atlas = ExtResource("3_srnfu")
 region = Rect2(48, 0, 16, 32)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_hpxef"]
-atlas = ExtResource("3_xg0i1")
+atlas = ExtResource("3_srnfu")
 region = Rect2(0, 32, 16, 32)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_1m77j"]
-atlas = ExtResource("3_xg0i1")
+atlas = ExtResource("3_srnfu")
 region = Rect2(16, 32, 16, 32)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_ib0xh"]
-atlas = ExtResource("3_xg0i1")
+atlas = ExtResource("3_srnfu")
 region = Rect2(32, 32, 16, 32)
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_3va3p"]
@@ -94,13 +94,13 @@ animations = [{
 
 [node name="PlayerCharacter" type="CharacterBody2D"]
 collision_mask = 2
-script = ExtResource("1_l5nv5")
+script = ExtResource("1_txltl")
 Speed = 500.0
 WallJumpPush = 1300.0
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 scale = Vector2(0.6, 0.6)
-texture = ExtResource("2_hubrt")
+texture = ExtResource("2_4gxhp")
 flip_h = true
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
@@ -125,7 +125,7 @@ one_shot = true
 visible = false
 collision_layer = 4
 collision_mask = 8
-script = ExtResource("3_udxmi")
+script = ExtResource("4_pnfxm")
 
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="CollisionDetector"]
 polygon = PackedVector2Array(-14, -5, -24, -26, -25, -49, -24, -74, -14, -63, 0, -70, 7, -86, 11, -70, 18, -81, 24, -76, 26, -59, 35, -46, 37, -27, 43, -9, 39, 2, 44, 32, 33, 34, 28, 48, 26, 77, -13, 78, -19, 72, -19, 66, -17, 49, -23, 35, -28, 34, -31, 25, -29, 12, -26, 5)
