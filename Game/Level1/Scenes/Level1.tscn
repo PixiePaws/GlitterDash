@@ -389,7 +389,7 @@ vertical_alignment = 1
 
 [node name="Unicorn" parent="." instance=ExtResource("18_hg87w")]
 z_index = 10
-position = Vector2(167, 701)
+position = Vector2(217, 696)
 scale = Vector2(0.21, 0.21)
 
 [editable path="PlayerCharacter"]
