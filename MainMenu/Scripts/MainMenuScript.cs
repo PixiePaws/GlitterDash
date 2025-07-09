@@ -17,13 +17,17 @@ namespace UnicornGame
 		private Button _startButton;
 		private Button _loadGameButton;
 		// private Button _settingsButton;
+		private Button _settingsButton;
 		public override void _Ready()
 		{
-
 			int primaryScreen = DisplayServer.GetPrimaryScreen();
+
 			Vector2I screenSize = DisplayServer.ScreenGetSize(primaryScreen);
+
 			DisplayServer.WindowSetSize(screenSize);
+
 			DisplayServer.WindowSetMode(DisplayServer.WindowMode.Fullscreen);
+
 			_quitButton = GetNode<Button>("MarginContainer/VBoxContainer/QuitButton");
 			_quitButton.Pressed += OnQuitButtonPressed;
 
@@ -33,11 +37,9 @@ namespace UnicornGame
 			_loadGameButton = GetNode<Button>("MarginContainer/VBoxContainer/LoadGameButton");
 			_loadGameButton.Pressed += OnLoadGameButtonPressed;
 
-			// _settingsButton = GetNode<Button>("MarginContainer/VBoxContainer/SettingsButton");
-			// _settingsButton.Pressed += OnSettingsButtonPressed;
+			_settingsButton = GetNode<Button>("MarginContainer/VBoxContainer/SettingsButton");
+			_settingsButton.Pressed += OnSettingsButtonPressed;
 		}
-
-		// Called every frame. 'delta' is the elapsed time since the previous frame.
 		private void OnQuitButtonPressed()
 		{
 			GetTree().Quit();
@@ -54,6 +56,24 @@ namespace UnicornGame
 				GD.Print("Level selection scene not found");
 			}
 		}
+		private void OnSettingsButtonPressed()
+		{
+			Control settingsPanel = GetNodeOrNull<Control>("SettingsScene/Settings");
+			if (settingsPanel != null)
+			{
+				if (settingsPanel.Visible == false)
+				{
+					settingsPanel.Visible = true; // Show settings scene
+					GD.Print("Settings scene opened and game paused");
+				}
+				else
+				{
+					settingsPanel.Visible = false;
+					GD.Print("Settings scene closed, and game unpaused.");
+				}
+			}
+		}
+
 		private void OnLoadGameButtonPressed()
 		{
 			PackedScene SelectSaveScene = ResourceLoader.Load<PackedScene>(_selectSaveScenePath);
@@ -75,6 +95,5 @@ namespace UnicornGame
 		// }
 	}
 }
-
 
 

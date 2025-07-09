@@ -1,7 +1,6 @@
-[gd_scene load_steps=3 format=3 uid="uid://dnx3j4auf00wv"]
+[gd_scene load_steps=2 format=3 uid="uid://dnx3j4auf00wv"]
 
 [ext_resource type="Script" path="res://UI/Scripts/GUI.cs" id="1_pf356"]
-[ext_resource type="PackedScene" uid="uid://cnu4eae42h74o" path="res://Settings/Scenes/Settings.tscn" id="2_7373p"]
 
 [node name="GUI" type="CanvasLayer"]
 script = ExtResource("1_pf356")
@@ -14,5 +13,3 @@ offset_left = -47.0
 offset_bottom = 31.0
 grow_horizontal = 0
 text = "QUIT"
-
-[node name="SettingsScene" parent="." instance=ExtResource("2_7373p")]

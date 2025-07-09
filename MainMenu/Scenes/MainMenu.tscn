@@ -8,8 +8,6 @@
 [node name="MainMenu" type="CanvasLayer"]
 script = ExtResource("1_rier1")
 
-[node name="SettingsScene" parent="." instance=ExtResource("2_opxph")]
-
 [node name="Sprite2D" type="Sprite2D" parent="."]
 position = Vector2(960, 540)
 texture = ExtResource("3_rc2yd")
@@ -58,3 +56,5 @@ text = "Settings"
 [node name="QuitButton" type="Button" parent="Control/MarginContainer/VBoxContainer"]
 layout_mode = 2
 text = "Quit"
+
+[node name="SettingsScene" parent="Control" instance=ExtResource("2_opxph")]
