@@ -16,6 +16,7 @@ namespace UnicornGame
         [Export] public float DashSpeed = 800f;
         [Export] public float DashDuration = 0.2f;
         [Export] public float DashCooldown = 0.5f;
+        [Export] public Node2D bloodEffect;
 
         private bool _isWallSliding = false;
         private float _wallJumpDirection = 0;
@@ -221,14 +222,28 @@ namespace UnicornGame
 
         public void Die()
         {
-            var BloodyDeath = GD.Load<PackedScene>("res://Art/Effects/blood_particle_effect.tscn");
-            var BloodEffect = BloodyDeath.Instantiate<BloodParticleEffect>();
-            BloodEffect.GlobalPosition = GlobalPosition; // Set the position of the blood effect
-            GetTree().CurrentScene.AddChild(BloodEffect); // Add the effect to the scene
-            BloodEffect.BloodSpray(); // Start the blood spray effect
-            Hide(); // Hide the player
-            // kuolemis animaation käynnistäminen
-            // kuolemis äänen soittaminen
+            //CollisionLayer = 0; // <-- Remove player collision layer so the blood drops don't collide with it 
+            // !!!!!!!!!^^^^^^ Might have to change this manually back to CollisionLayer 1 when respawning ^^^^^^^^!!!!!!!!!!!!!!!
+
+            // Load and instantiate the blood spray effect
+            var bloodEffectScene = GD.Load<PackedScene>("res://Effects/Scenes/blood_particle_effect.tscn");
+            var bloodEffect = bloodEffectScene.Instantiate<BloodParticleEffect>();
+
+            // Place the effect at the GlobalPosition of the player
+            bloodEffect.GlobalPosition = GlobalPosition;
+
+            // Add it to the scene
+            GetTree().CurrentScene.AddChild(bloodEffect);
+
+            // Trigger spray logic
+            bloodEffect.BloodSpray();
+
+            // Remove the player (Doesn't work DON'T USE THIS)
+            // QueueFree();
+
+            // Hide the player <- This works
+            Hide();
+            
         }
 
         public void RespawnPlayer()

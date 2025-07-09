@@ -1,0 +1,8 @@
+[gd_scene load_steps=2 format=3 uid="uid://dyp3e24j0hrr5"]
+
+[ext_resource type="Texture2D" uid="uid://cjhh0bq4448mj" path="res://Art/Effects/BloodStain.png" id="1_ph02c"]
+
+[node name="Blood" type="Sprite2D"]
+z_index = 4096
+scale = Vector2(4, 4)
+texture = ExtResource("1_ph02c")

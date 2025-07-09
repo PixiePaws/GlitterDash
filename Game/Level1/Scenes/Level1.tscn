@@ -769,7 +769,7 @@ script = ExtResource("1_ttao5")
 Player = NodePath("../PlayerCharacter")
 
 [node name="PlayerCharacter" parent="." instance=ExtResource("2_n6ngs")]
-position = Vector2(4842, -977)
+position = Vector2(804, 623)
 collision_mask = 3
 JumpVelocity = -600.0
 

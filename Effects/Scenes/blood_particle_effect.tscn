@@ -1,7 +1,7 @@
 [gd_scene load_steps=3 format=3 uid="uid://du0e12v6panoa"]
 
-[ext_resource type="Texture2D" uid="uid://bnb2jqcown01t" path="res://Art/Effects/BloodSplatter.png" id="1_awaoa"]
-[ext_resource type="Script" path="res://Art/Effects/BloodParticleEffect.cs" id="2_p54l0"]
+[ext_resource type="Texture2D" uid="uid://wht4s5n71udo" path="res://Art/Effects/BloodSplatter.png" id="1_3sprb"]
+[ext_resource type="Script" path="res://Effects/Scripts/BloodParticleEffect.cs" id="2_4j3mh"]
 
 [node name="BloodParticleEffect" type="CPUParticles2D"]
 z_index = -4096
@@ -11,7 +11,7 @@ lifetime = 8.0
 one_shot = true
 explosiveness = 0.95
 local_coords = true
-texture = ExtResource("1_awaoa")
+texture = ExtResource("1_3sprb")
 spread = 180.0
 initial_velocity_min = 500.0
 initial_velocity_max = 650.0
@@ -20,4 +20,6 @@ linear_accel_max = 100.0
 damping_min = 100.0
 damping_max = 100.0
 color = Color(1, 0.0235294, 0.105882, 0.392157)
-script = ExtResource("2_p54l0")
+script = ExtResource("2_4j3mh")
+_DropCount = 500
+_SpraySpeed = 650.0
