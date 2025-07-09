@@ -1,5 +1,6 @@
 using Godot;
 using System;
+using System.IO;
 using Godot.Collections;
 using Godot.NativeInterop;
 
@@ -86,17 +87,31 @@ namespace UnicornGame
             {
                 if (_buttonList[i] is Button button)
                 {
-                    button.Pressed += OnButtonPressed;
+                    button.Pressed += () => OnButtonPressed(button);
                 }
             }
             GD.Print("Signals connected");
         }
-        public void OnButtonPressed()
+        public void OnButtonPressed(Button button)
         {
-            for (int i = 0; i < _saveFileList.Length; i++)
+            /*for (int i = 0; i < _saveFileList.Length; i++)
             {
                 GD.Print(_saveFileList[i]);
+            }*/
+            int SignalSenderIndex = button.GetIndex();
+            GD.Print($"Button index: {SignalSenderIndex}");
+            //Read the save file dynamically
+            string FilePath = Path.Join(_directoryPath, _saveFileList[SignalSenderIndex]);
+            GD.Print($"File path: {FilePath}");
+            try
+            {
+                using var File = Godot.FileAccess.Open(FilePath, Godot.FileAccess.ModeFlags.Read);
             }
+            catch (System.Exception error)
+            {
+                GD.Print(error);
+            }
+            
             GD.Print("OnButtonPressed() was called");
         }
         public void GetSaveDirectory()
@@ -125,7 +140,7 @@ namespace UnicornGame
             {
                 if (i > SaveFileAmount - 1)
                 {
-                    _buttonList[i].Disabled = true;
+                    //_buttonList[i].Disabled = true;
                     Color NewColor = _buttonList[i].Modulate;
                     NewColor.A = 0.7f;
                     _buttonList[i].Modulate = NewColor;

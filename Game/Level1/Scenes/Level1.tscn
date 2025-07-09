@@ -92,7 +92,7 @@ _player = NodePath("../PlayerCharacter")
 offset = Vector2(960, 540)
 script = ExtResource("1_ttao5")
 Player = NodePath("../PlayerCharacter")
-cameraSpeed = 5000.0
+cameraSpeed = 10000.0
 
 [node name="ScoreLabel" type="Label" parent="Camera2D"]
 z_index = 10
