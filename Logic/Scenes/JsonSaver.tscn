@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://c18vm3pl4eshy"]
+
+[ext_resource type="Script" path="res://Logic/Scripts/JsonSaver.cs" id="1_7j55d"]
+
+[node name="JsonSaver" type="Node2D"]
+script = ExtResource("1_7j55d")

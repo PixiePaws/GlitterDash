@@ -1,0 +1,11 @@
+[gd_scene load_steps=3 format=3 uid="uid://dwk4od1pm025u"]
+
+[ext_resource type="Texture2D" uid="uid://deh5vusrmsqsu" path="res://Art/Backgrounds/UnicornGameBG.png" id="1_nhssb"]
+[ext_resource type="Script" path="res://Items/Scripts/ParallaxScrolling.cs" id="1_twamy"]
+
+[node name="ParallaxScrolling" type="Parallax2D"]
+script = ExtResource("1_twamy")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("1_nhssb")
+centered = false
