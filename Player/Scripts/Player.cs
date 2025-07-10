@@ -27,21 +27,25 @@ namespace UnicornGame
 		private float _lastMoveDirection = 1f; // initial direction to the right
 		private bool _justWallJumped = false;
 		private float _justWallJumpedTimer = 0f;
+		private bool _justJumped = false;
 		private Godot.Vector2 _dashDirection = Godot.Vector2.Zero;
 		// private CollisionDetector _collisionDetector;
 		private bool _canControl = true;
-		public AnimatedSprite2D _animatedSprite; // tarvitaan animaatioita varten
+		public AnimationPlayer _animatedSprite; // tarvitaan animaatioita varten
 		public Respawner _respawner;
-
 
 		public override void _Ready()
 		{
-			_animatedSprite = GetNode<AnimatedSprite2D>("AnimatedSprite2D");
+			_animatedSprite = GetNode<AnimationPlayer>("AnimationPlayer");
 			_respawner = GetNode<Respawner>("../Respawner");
 		}
 
 		public override void _PhysicsProcess(double delta)
 		{
+			// set the character facing right
+			var skeleton = GetNode<Node2D>("PartsSkeletonContainer");
+			skeleton.Scale = new Vector2(-1, 1);
+
 			if (!_canControl)
 			{
 				// If the player cannot control the character, skip the physics process
@@ -49,8 +53,6 @@ namespace UnicornGame
 			}
 			//_collisionDetector = GetNode<CollisionDetector>("res://Player/Scripts/CollisionDetector.cs");
 
-			//if (_collisionDetector.health > 0)
-			//{
 			Godot.Vector2 velocity = Velocity;
 			float inputDirection = Input.GetAxis("Move left", "Move right");
 
@@ -110,7 +112,6 @@ namespace UnicornGame
 			MoveAndSlide();
 
 			//GD.Print(IsNearWall());
-			//}
 		}
 
 		/// <summary>
@@ -119,19 +120,26 @@ namespace UnicornGame
 		/// </summary>
 		private void BasicMovement(ref Godot.Vector2 velocity, float inputDirection)
 		{
-			if (inputDirection != 0)
+			if (!_justJumped)
 			{
-				velocity.X = inputDirection * Speed;
-				_lastMoveDirection = inputDirection; // Update last move direction
-				_animatedSprite.Play("Walk");
-			}
-			else
-			{
-				velocity.X = Mathf.MoveToward(velocity.X, 0, Speed);
-
-				if (IsOnFloor() && !_isWallSliding && !_isDashing)
+				if (inputDirection != 0)
 				{
-					_animatedSprite.Play("Basic");
+					velocity.X = inputDirection * Speed;
+					_lastMoveDirection = inputDirection; // Update last move direction
+
+					if (IsOnFloor() && !_isWallSliding && !_isDashing)
+					{
+						_animatedSprite.Play("Walk");
+					}
+				}
+				else
+				{
+					velocity.X = Mathf.MoveToward(velocity.X, 0, Speed);
+
+					if (IsOnFloor() && !_isWallSliding && !_isDashing)
+					{
+						_animatedSprite.Play("Idle");
+					}
 				}
 			}
 		}
@@ -150,7 +158,9 @@ namespace UnicornGame
 			{
 				velocity.Y = JumpVelocity;
 				_jumpCount = 2;
+				_animatedSprite.Stop();
 				_animatedSprite.Play("Jump");
+				_justJumped = true;
 			}
 
 			if (Input.IsActionJustPressed("Jump") && IsOnFloor())
@@ -158,11 +168,13 @@ namespace UnicornGame
 				velocity.Y = JumpVelocity;
 				_jumpCount = 1;
 				_animatedSprite.Play("Jump");
+				_justJumped = true;
 			}
 
 			if (!Input.IsActionPressed("Jump") && IsOnFloor())
 			{
 				_jumpCount = 0;
+				_justJumped = false;
 			}
 		}
 
@@ -189,7 +201,7 @@ namespace UnicornGame
 				_isWallSliding = true;
 				velocity.Y = Mathf.Min(velocity.Y + Gravity * 0.5f, WallSlideSpeed);
 				_jumpCount = 0;
-				_animatedSprite.Play("OnWall");
+				_animatedSprite.Play("WallSlide");
 			}
 
 			// Wall jump
@@ -223,12 +235,16 @@ namespace UnicornGame
 		{
 			if (direction == 1)
 			{
-				_animatedSprite.FlipH = false; // Facing right
+				var skeleton = GetNode<Node2D>("PartsSkeletonContainer");
+				skeleton.Scale = new Vector2(-1, 1);
+				//_animatedSprite.FlipH = false; // Facing right
 				GetNode<RayCast2D>("WallChecker").RotationDegrees = 0; // Wall checker fliped
 			}
 			else if (direction == -1)
 			{
-				_animatedSprite.FlipH = true; // Facing left
+				var skeleton = GetNode<Node2D>("PartsSkeletonContainer");
+				skeleton.Scale = new Vector2(1, 1);
+				//_animatedSprite.FlipH = true; // Facing left
 				GetNode<RayCast2D>("WallChecker").RotationDegrees = 180; // Wall checker fliped
 			}
 		}
