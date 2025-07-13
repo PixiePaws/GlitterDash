@@ -45,6 +45,10 @@ namespace UnicornGame
 
 		public override void _PhysicsProcess(double delta)
 		{
+			if (Input.IsActionJustPressed("Die"))
+			{
+				Die();
+			}
 			if (!_canControl)
 			{
 				// If the player cannot control the character, skip the physics process
@@ -246,30 +250,30 @@ namespace UnicornGame
 			return wallChecker.IsColliding();
 		}
         public void Die()
-        {
-            //CollisionLayer = 0; // <-- Remove player collision layer so the blood drops don't collide with it 
-            // !!!!!!!!!^^^^^^ Might have to change this manually back to CollisionLayer 1 when respawning ^^^^^^^^!!!!!!!!!!!!!!!
+		{
+			//CollisionLayer = 0; // <-- Remove player collision layer so the blood drops don't collide with it 
+			// !!!!!!!!!^^^^^^ Might have to change this manually back to CollisionLayer 1 when respawning ^^^^^^^^!!!!!!!!!!!!!!!
 
-            // Load and instantiate the blood spray effect
-            var bloodEffectScene = GD.Load<PackedScene>("res://Effects/Scenes/blood_particle_effect.tscn");
-            var bloodEffect = bloodEffectScene.Instantiate<BloodParticleEffect>();
+			// Load and instantiate the blood spray effect
+			var bloodEffectScene = GD.Load<PackedScene>("res://Effects/Scenes/blood_particle_effect.tscn");
+			var bloodEffect = bloodEffectScene.Instantiate<BloodParticleEffect>();
 
-            // Place the effect at the GlobalPosition of the player
-            bloodEffect.GlobalPosition = GlobalPosition;
+			// Place the effect at the GlobalPosition of the player
+			bloodEffect.GlobalPosition = GlobalPosition;
 
-            // Add it to the scene
-            GetTree().CurrentScene.AddChild(bloodEffect);
+			// Add it to the scene
+			GetTree().CurrentScene.AddChild(bloodEffect);
 
-            // Trigger spray logic
-            bloodEffect.BloodSpray();
+			// Trigger spray logic
+			bloodEffect.BloodSpray();
 
-            // Remove the player (Doesn't work DON'T USE THIS)
-            // QueueFree();
+			// Remove the player (Doesn't work DON'T USE THIS)
+			// QueueFree();
 
-            // Hide the player <- This works
-            Hide();
-            
-        }
+			// Hide the player <- This works
+			Hide();
+
+		}
 
 		/// <summary>
 		/// Gets the direction of the wall the player is currently sliding against.
