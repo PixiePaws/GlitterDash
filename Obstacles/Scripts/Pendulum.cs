@@ -51,32 +51,32 @@ namespace UnicornGame
 
         public void AddAngularVelocity(bool MovingClockwise)
         {
-            GD.Print("Adding Angular Velocity");
+            //GD.Print("Adding Angular Velocity");
 
-            GD.Print($"Pendulum inertia : {PendulumInertia}");
+            //GD.Print($"Pendulum inertia : {PendulumInertia}");
             float NeededAngularVelocity = calculateNeededAngularVelocity();
-            GD.Print($"Needed angular velocity : {NeededAngularVelocity}");
+            //GD.Print($"Needed angular velocity : {NeededAngularVelocity}");
             float TorqueI = PendulumInertia * NeededAngularVelocity;
-            GD.Print($"Torque impulse : {TorqueI}");
+           // GD.Print($"Torque impulse : {TorqueI}");
             if (MovingClockwise)
             {
-                GD.Print("Clockwise");
+                //GD.Print("Clockwise");
                 ApplyTorqueImpulse(-32000);
             }
             if (!MovingClockwise)
             {
-                GD.Print("Clockwise");
+                //GD.Print("Clockwise");
                 ApplyTorqueImpulse(32000);
                 //GD.Print(TorqueI);
             }
         }
         public float calculateNeededAngularVelocity()
         {
-            GD.Print("Calculating needed AngularVelocity");
+            //GD.Print("Calculating needed AngularVelocity");
             float Height = Mathf.Abs(GetCenterOfMassHeight(_anchorPoint, _ballCenterOfMass));
-            GD.Print($"Gravity : {Gravity}");
+            /*GD.Print($"Gravity : {Gravity}");
             GD.Print($"Center of mass height : {Height}");
-            GD.Print($"arm length : {_armLength}");
+            GD.Print($"arm length : {_armLength}");*/
             float NeededAngularVelocity = Mathf.Sqrt(2 * Gravity * Height) / _armLength;
 
             return NeededAngularVelocity;
@@ -91,20 +91,20 @@ namespace UnicornGame
             if (Ball != null)
             {
                 _ballCenterOfMass = Ball.GlobalPosition;
-                GD.Print($"Center of mass position : {_ballCenterOfMass}");
+                //GD.Print($"Center of mass position : {_ballCenterOfMass}");
             }
             else
             {
-                GD.Print("Cannot update center of mass position, ball is null");
+                //GD.Print("Cannot update center of mass position, ball is null");
             }
         }
         public float GetCenterOfMassHeight(Vector2 Anchor, Vector2 CenterOfMass)
         {
-            GD.Print("Getting center of mass height");
+            //GD.Print("Getting center of mass height");
             UpdateCenterOfMassPosition(_ball);
             float MassHeight = Anchor.Y - CenterOfMass.Y;
-            GD.Print($"Anchor Y : {Anchor.Y} Center of mass Y : {CenterOfMass.Y}");
-            GD.Print($"Mass height : {MassHeight}");
+            //GD.Print($"Anchor Y : {Anchor.Y} Center of mass Y : {CenterOfMass.Y}");
+            //GD.Print($"Mass height : {MassHeight}");
             return MassHeight;
         }
         public void UpdateRotation()
@@ -116,14 +116,14 @@ namespace UnicornGame
 
                 GD.Print(_previousRotation);
                 GD.Print(CurrentRotation);
-                GD.Print("Counter-clockwise");
+                //GD.Print("Counter-clockwise");
                 AddAngularVelocity(true);
             }
             else if (_previousRotation <= 0 && CurrentRotation >= 0)
             {
                 GD.Print(_previousRotation);
                 GD.Print(CurrentRotation);
-                GD.Print("Clockwise");
+                //GD.Print("Clockwise");
                 AddAngularVelocity(false);
             }
             _previousRotation = Rotation;

@@ -87,7 +87,8 @@ namespace UnicornGame
             {
                 if (_buttonList[i] is Button button)
                 {
-                    button.Pressed += () => OnButtonPressed(button);
+                    Button ButtonCopy = button;
+                    button.Pressed += () => OnButtonPressed(ButtonCopy);
                 }
             }
             GD.Print("Signals connected");
@@ -103,17 +104,36 @@ namespace UnicornGame
             //Read the save file dynamically
             string FilePath = Path.Join(_directoryPath, _saveFileList[SignalSenderIndex]);
             GD.Print($"File path: {FilePath}");
-            try
-            {
-                using var File = Godot.FileAccess.Open(FilePath, Godot.FileAccess.ModeFlags.Read);
-            }
-            catch (System.Exception error)
-            {
-                GD.Print(error);
-            }
-            
-            GD.Print("OnButtonPressed() was called");
+            Godot.Collections.Dictionary LoadedDictionary = GetSaveFileAsDictionary(FilePath);
+            //GD.Print("OnButtonPressed() was called");
         }
+        public Godot.Collections.Dictionary GetSaveFileAsDictionary(string FilePath)
+        {
+            if (!File.Exists(FilePath))
+            {
+                GD.Print("LoadGame OnButtonPressed() no save file at FilePath exists");
+            }
+            Godot.Collections.Dictionary LoadedData = new Godot.Collections.Dictionary();
+            using var SaveFile = Godot.FileAccess.Open(FilePath, Godot.FileAccess.ModeFlags.Read);
+            while (SaveFile.GetPosition() < SaveFile.GetLength())
+            {
+                var JsonString = SaveFile.GetLine();
+                var JsonInstance = new Json();
+                Error error = JsonInstance.Parse(JsonString);
+                if (error != Error.Ok)
+                {
+                    GD.Print(error);
+                    return LoadedData;
+                }
+                
+                //LoadedData.Add((Godot.Collections.Dictionary)JsonInstance.Data);
+
+
+
+            }
+            return LoadedData;
+        }
+
         public void GetSaveDirectory()
         {
             PackedScene SaverScene = ResourceLoader.Load<PackedScene>(_saverScenePath);
