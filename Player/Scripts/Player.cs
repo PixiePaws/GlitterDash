@@ -16,6 +16,7 @@ namespace UnicornGame
 		[Export] public float DashSpeed = 800f;
 		[Export] public float DashDuration = 0.2f;
 		[Export] public float DashCooldown = 0.5f;
+		[Export] public ColorRect Filter;
 		//[Export] public TileMap TileMap;
 
 		private bool _isWallSliding = false;
@@ -38,13 +39,14 @@ namespace UnicornGame
 		{
 			_animatedSprite = GetNode<AnimationPlayer>("AnimationPlayer");
 			_respawner = GetNode<Respawner>("../Respawner");
+
+			// set the character facing right
+			var skeleton = GetNode<Node2D>("PartsSkeletonContainer");
+			skeleton.Scale = new Vector2(-1, 1);
 		}
 
 		public override void _PhysicsProcess(double delta)
 		{
-			// set the character facing right
-			var skeleton = GetNode<Node2D>("PartsSkeletonContainer");
-			skeleton.Scale = new Vector2(-1, 1);
 
 			if (!_canControl)
 			{
@@ -198,6 +200,7 @@ namespace UnicornGame
 			{ */
 			if (IsNearWall() && !IsOnFloor())
 			{
+				GD.Print("Is near wall and not on the floor");
 				_isWallSliding = true;
 				velocity.Y = Mathf.Min(velocity.Y + Gravity * 0.5f, WallSlideSpeed);
 				_jumpCount = 0;
@@ -336,10 +339,24 @@ namespace UnicornGame
 		/// </summary>
 		public void ResetPlayer()
 		{
+			var skeleton = GetNode<Node2D>("PartsSkeletonContainer");
+			skeleton.Scale = new Vector2(-1, 1);
 			GlobalPosition = GetNode<Node2D>("../RespawnPoint").GlobalPosition;
 			Visible = true;
 			_canControl = true;
+			Filter.Visible = false;
 			_jumpCount = 0;
+
+			// Reset the movements
+			Velocity = Vector2.Zero;
+    		_isDashing = false;
+    		_dashTimer = 0f;
+    		_dashCooldownTimer = 0f;
+    		_justWallJumped = false;
+    		_justWallJumpedTimer = 0f;
+    		_isWallSliding = false;
+    		_justJumped = false;
+
 			_animatedSprite.Play("Falling");
 		}
 	}

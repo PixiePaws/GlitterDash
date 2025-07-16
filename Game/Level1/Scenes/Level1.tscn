@@ -16,7 +16,7 @@
 [ext_resource type="Shader" path="res://Game/Black&White.gdshader" id="14_cylb3"]
 [ext_resource type="Script" path="res://Items/Scripts/GoldEggManager.cs" id="14_qnefm"]
 [ext_resource type="Theme" uid="uid://toxmj1vwp6m" path="res://UI/TextTheme.tres" id="17_rwmuo"]
-[ext_resource type="PackedScene" uid="uid://bun0lpg7lkpq6" path="res://Player/Scenes/Unicorn.tscn" id="18_hg87w"]
+[ext_resource type="PackedScene" uid="uid://bun0lpg7lkpq6" path="res://Player/Scenes/PlayerCharacter.tscn" id="18_hg87w"]
 
 [sub_resource type="SegmentShape2D" id="SegmentShape2D_oefmr"]
 a = Vector2(-625.5, 13)
@@ -81,39 +81,34 @@ RespawnPoint = NodePath("RespawnPoint")
 metadata/_edit_vertical_guides_ = [3840.0, 5760.0, 1920.0, 433.0, 960.0, 1247.0]
 metadata/_edit_horizontal_guides_ = [1080.0, 2160.0, -1080.0, 680.0, 839.0]
 
-[node name="PlayerCharacter" parent="." instance=ExtResource("18_hg87w")]
+[node name="PlayerCharacter" parent="." node_paths=PackedStringArray("Filter") instance=ExtResource("18_hg87w")]
 z_index = 10
-position = Vector2(127, 334)
+position = Vector2(96, 223)
 scale = Vector2(0.21, 0.21)
+Filter = NodePath("../BlackWhite")
 
 [node name="UniHead" parent="PlayerCharacter/PartsSkeletonContainer/Parts" index="0"]
-position = Vector2(23.1559, 114.795)
-rotation = -0.21492
+position = Vector2(13.7908, 118.077)
 scale = Vector2(0.999833, 0.999833)
 
 [node name="UniBody" parent="PlayerCharacter/PartsSkeletonContainer/Parts" index="1"]
 position = Vector2(16.6767, 119.406)
-rotation = -0.100297
 scale = Vector2(1, 1)
 
 [node name="UniLHand" parent="PlayerCharacter/PartsSkeletonContainer/Parts" index="2"]
-position = Vector2(-245.732, 178.024)
-rotation = 1.65301
+position = Vector2(10.5848, 119)
 scale = Vector2(0.999858, 0.999858)
 
 [node name="UniRLeg" parent="PlayerCharacter/PartsSkeletonContainer/Parts" index="3"]
-position = Vector2(-22.9336, 141.616)
-rotation = -0.429288
+position = Vector2(10.0092, 113.561)
 scale = Vector2(0.99985, 0.99985)
 
 [node name="UniRHand" parent="PlayerCharacter/PartsSkeletonContainer/Parts" index="4"]
-position = Vector2(75.975, 173.996)
-rotation = -0.687775
+position = Vector2(-9.66873, 127.067)
 scale = Vector2(0.999849, 0.999849)
 
 [node name="UniLLeg" parent="PlayerCharacter/PartsSkeletonContainer/Parts" index="5"]
-position = Vector2(-25.5486, 101.21)
-rotation = -0.262334
+position = Vector2(6.98795, 118.259)
 scale = Vector2(0.999851, 0.999851)
 
 [node name="Head" parent="PlayerCharacter/PartsSkeletonContainer/Skeleton2D/Base/Body" index="1"]
@@ -124,9 +119,6 @@ scale = Vector2(0.999849, 0.999849)
 
 [node name="BackArm" parent="PlayerCharacter/PartsSkeletonContainer/Skeleton2D/Base/Body" index="3"]
 scale = Vector2(0.999858, 0.999858)
-
-[node name="FrontLeg" parent="PlayerCharacter/PartsSkeletonContainer/Skeleton2D/Base" index="1"]
-scale = Vector2(0.99985, 0.99985)
 
 [node name="CollisionDetector" parent="PlayerCharacter" index="3" node_paths=PackedStringArray("RespawnPoint", "Filter", "_goldeggmanager", "Camera", "player", "_respawner")]
 RespawnPoint = NodePath("../../RespawnPoint")
@@ -166,6 +158,7 @@ offset_bottom = 163.0
 texture = ExtResource("4_8klg8")
 
 [node name="ParallaxScrolling" parent="." node_paths=PackedStringArray("_playerCharacter") instance=ExtResource("5_8ae5m")]
+scroll_offset = Vector2(0, -4)
 repeat_size = Vector2(1920, 0)
 repeat_times = 2
 _playerCharacter = NodePath("../PlayerCharacter")
@@ -243,7 +236,7 @@ shape = SubResource("SegmentShape2D_u24kw")
 one_way_collision = true
 
 [node name="RespawnPoint" type="Node2D" parent="."]
-position = Vector2(94, 537)
+position = Vector2(95, 231)
 
 [node name="FinishLine" parent="." instance=ExtResource("8_olng6")]
 z_index = 10
@@ -268,7 +261,7 @@ _respawner = NodePath("../../Respawner")
 
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="MainTileMap/DangerZoneFalling"]
 position = Vector2(-41, 43)
-polygon = PackedVector2Array(37, 2878, 30, 1048, 1953, 1042, 1953, 2121, 5804, 2118, 5799, 2864)
+polygon = PackedVector2Array(36, 2288, 30, 1048, 1953, 1042, 1953, 2121, 5804, 2118, 5804, 2281)
 
 [node name="GoldEggs" type="Node" parent="." node_paths=PackedStringArray("_respawner")]
 script = ExtResource("14_qnefm")
@@ -279,41 +272,53 @@ GoldEggScene = ExtResource("11_508a1")
 position = Vector2(1102, 562)
 _respawner = NodePath("../../Respawner")
 
-[node name="GoldEgg2" parent="GoldEggs" instance=ExtResource("11_508a1")]
+[node name="GoldEgg2" parent="GoldEggs" node_paths=PackedStringArray("_respawner") instance=ExtResource("11_508a1")]
 position = Vector2(4838, 84)
+_respawner = NodePath("../../Respawner")
 
-[node name="GoldEgg3" parent="GoldEggs" instance=ExtResource("11_508a1")]
+[node name="GoldEgg3" parent="GoldEggs" node_paths=PackedStringArray("_respawner") instance=ExtResource("11_508a1")]
 position = Vector2(1367, 627)
+_respawner = NodePath("../../Respawner")
 
-[node name="GoldEgg4" parent="GoldEggs" instance=ExtResource("11_508a1")]
+[node name="GoldEgg4" parent="GoldEggs" node_paths=PackedStringArray("_respawner") instance=ExtResource("11_508a1")]
 position = Vector2(3737, 172)
+_respawner = NodePath("../../Respawner")
 
-[node name="GoldEgg5" parent="GoldEggs" instance=ExtResource("11_508a1")]
+[node name="GoldEgg5" parent="GoldEggs" node_paths=PackedStringArray("_respawner") instance=ExtResource("11_508a1")]
 position = Vector2(4296, 788)
+_respawner = NodePath("../../Respawner")
 
-[node name="GoldEgg6" parent="GoldEggs" instance=ExtResource("11_508a1")]
+[node name="GoldEgg6" parent="GoldEggs" node_paths=PackedStringArray("_respawner") instance=ExtResource("11_508a1")]
 position = Vector2(4889, -916)
+_respawner = NodePath("../../Respawner")
 
-[node name="GoldEgg7" parent="GoldEggs" instance=ExtResource("11_508a1")]
+[node name="GoldEgg7" parent="GoldEggs" node_paths=PackedStringArray("_respawner") instance=ExtResource("11_508a1")]
 position = Vector2(3028, 1283)
+_respawner = NodePath("../../Respawner")
 
-[node name="GoldEgg8" parent="GoldEggs" instance=ExtResource("11_508a1")]
+[node name="GoldEgg8" parent="GoldEggs" node_paths=PackedStringArray("_respawner") instance=ExtResource("11_508a1")]
 position = Vector2(2362, 1404)
+_respawner = NodePath("../../Respawner")
 
-[node name="GoldEgg9" parent="GoldEggs" instance=ExtResource("11_508a1")]
+[node name="GoldEgg9" parent="GoldEggs" node_paths=PackedStringArray("_respawner") instance=ExtResource("11_508a1")]
 position = Vector2(4133, -424)
+_respawner = NodePath("../../Respawner")
 
-[node name="GoldEgg10" parent="GoldEggs" instance=ExtResource("11_508a1")]
+[node name="GoldEgg10" parent="GoldEggs" node_paths=PackedStringArray("_respawner") instance=ExtResource("11_508a1")]
 position = Vector2(3900, 1809)
+_respawner = NodePath("../../Respawner")
 
-[node name="GoldEgg11" parent="GoldEggs" instance=ExtResource("11_508a1")]
+[node name="GoldEgg11" parent="GoldEggs" node_paths=PackedStringArray("_respawner") instance=ExtResource("11_508a1")]
 position = Vector2(4903, 1504)
+_respawner = NodePath("../../Respawner")
 
-[node name="GoldEgg12" parent="GoldEggs" instance=ExtResource("11_508a1")]
+[node name="GoldEgg12" parent="GoldEggs" node_paths=PackedStringArray("_respawner") instance=ExtResource("11_508a1")]
 position = Vector2(4852, 648)
+_respawner = NodePath("../../Respawner")
 
-[node name="GoldEgg13" parent="GoldEggs" instance=ExtResource("11_508a1")]
+[node name="GoldEgg13" parent="GoldEggs" node_paths=PackedStringArray("_respawner") instance=ExtResource("11_508a1")]
 position = Vector2(5696, 327)
+_respawner = NodePath("../../Respawner")
 
 [node name="BlackWhite" type="ColorRect" parent="."]
 visible = false
