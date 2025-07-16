@@ -52,17 +52,17 @@ namespace UnicornGame
             if (PlayerPositionChangeX > 0)
             {
                 Vector2 tempRightVector = new Vector2(PlayerPositionChangeX, 0) * _parallaxMagnitude;
-                GD.Print($"right vector: {tempRightVector}");
+                //GD.Print($"right vector: {tempRightVector}");
                 ScrollOffset -= tempRightVector;
                 //GD.Print($"Subtracted ScrollOffset: ");
-                GD.Print($"Magnitude: {_parallaxMagnitude}");
-                GD.Print($"New offset: {ScrollOffset}");
+                //GD.Print($"Magnitude: {_parallaxMagnitude}");
+                //GD.Print($"New offset: {ScrollOffset}");
             }
             //Moving left
             else if (PlayerPositionChangeX < 0)
             {
                 Vector2 tempLeftVector = new Vector2(Mathf.Abs(PlayerPositionChangeX), 0) * _parallaxMagnitude;
-                GD.Print($"left vector: {tempLeftVector}");
+                //GD.Print($"left vector: {tempLeftVector}");
                 ScrollOffset += tempLeftVector;
             }
 
@@ -74,7 +74,7 @@ namespace UnicornGame
             {
                 ScrollOffset = new Vector2((ScrollOffset.X + RepeatSize.X), ScrollOffset.Y);
             }
-            GD.Print(ScrollOffset);
+            //GD.Print(ScrollOffset);
         }
     }
 }

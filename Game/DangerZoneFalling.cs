@@ -12,6 +12,7 @@ namespace UnicornGame
 
 		public override void _Ready()
 		{
+			GD.Print("DZF ready");
 			// Connect the body entered signal to the OnBodyEntered method
 			BodyEntered += OnBodyEntered;
 
@@ -26,7 +27,12 @@ namespace UnicornGame
 		/// <param name="body"></param>
 		public void OnBodyEntered(Node body)
 		{
-			if (!_gameStarted) return;
+			GD.Print("inside DZF onbodyentered");
+			if (!_gameStarted)
+    		{
+        		GD.Print("Game not started yet, skipping");
+        		return;
+    		}
 
 			Camera?.ResetCamera("fall");
 
@@ -35,7 +41,12 @@ namespace UnicornGame
 				player?.HandleDanger("fall");
 			}
 			_respawner.RespawnPlayer();
-			_goldeggmanager.ResetEggs();
+			
+			
+			GD.Print($"_goldeggmanager null? {_goldeggmanager == null}");
+    		GD.Print("Calling ResetEggs");
+    		_goldeggmanager?.ResetEggs();
+    		GD.Print("ResetEggs should have been called");
 		}
 	}
 }
