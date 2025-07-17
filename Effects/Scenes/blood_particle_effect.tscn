@@ -4,7 +4,7 @@
 [ext_resource type="Script" path="res://Effects/Scripts/BloodParticleEffect.cs" id="2_4j3mh"]
 
 [node name="BloodParticleEffect" type="CPUParticles2D"]
-z_index = -4096
+z_index = 4096
 emitting = false
 amount = 2500
 lifetime = 8.0
