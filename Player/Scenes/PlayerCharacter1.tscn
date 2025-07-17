@@ -1,0 +1,134 @@
+[gd_scene load_steps=13 format=3 uid="uid://cvl311e3g082f"]
+
+[ext_resource type="Script" path="res://Player/Scripts/Player.cs" id="1_l5nv5"]
+[ext_resource type="Texture2D" uid="uid://b48y12wyscq7f" path="res://Art/Character/UnicornSmaller.png" id="2_hubrt"]
+[ext_resource type="Script" path="res://Player/Scripts/CollisionDetector.cs" id="3_udxmi"]
+[ext_resource type="Texture2D" uid="uid://c6cqi6emsltch" path="res://Art/Character/TestAnimation.png" id="3_xg0i1"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_hj528"]
+atlas = ExtResource("3_xg0i1")
+region = Rect2(0, 0, 16, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ywos7"]
+atlas = ExtResource("3_xg0i1")
+region = Rect2(16, 0, 16, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_7i3ng"]
+atlas = ExtResource("3_xg0i1")
+region = Rect2(32, 0, 16, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_0jug5"]
+atlas = ExtResource("3_xg0i1")
+region = Rect2(48, 0, 16, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_hpxef"]
+atlas = ExtResource("3_xg0i1")
+region = Rect2(0, 32, 16, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_1m77j"]
+atlas = ExtResource("3_xg0i1")
+region = Rect2(16, 32, 16, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ib0xh"]
+atlas = ExtResource("3_xg0i1")
+region = Rect2(32, 32, 16, 32)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_3va3p"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_hj528")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ywos7")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_7i3ng")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_0jug5")
+}],
+"loop": true,
+"name": &"Basic",
+"speed": 5.0
+}, {
+"frames": [],
+"loop": true,
+"name": &"Dash",
+"speed": 5.0
+}, {
+"frames": [],
+"loop": true,
+"name": &"Die",
+"speed": 5.0
+}, {
+"frames": [],
+"loop": true,
+"name": &"Falling",
+"speed": 5.0
+}, {
+"frames": [],
+"loop": true,
+"name": &"Jump",
+"speed": 5.0
+}, {
+"frames": [],
+"loop": true,
+"name": &"OnWall",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_hpxef")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_1m77j")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ib0xh")
+}],
+"loop": true,
+"name": &"Walk",
+"speed": 5.0
+}]
+
+[node name="PlayerCharacter" type="CharacterBody2D"]
+collision_mask = 2
+script = ExtResource("1_l5nv5")
+Speed = 500.0
+WallJumpPush = 1300.0
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+scale = Vector2(0.6, 0.6)
+texture = ExtResource("2_hubrt")
+flip_h = true
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+visible = false
+z_index = 10
+scale = Vector2(5, 5)
+sprite_frames = SubResource("SpriteFrames_3va3p")
+animation = &"Walk"
+autoplay = "Basic"
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="."]
+position = Vector2(-4, 0)
+scale = Vector2(1.055, 1)
+polygon = PackedVector2Array(-19.9052, -32, -19.9052, -48, -18.9573, -74, -9.47867, -64, 0, -68, 4.73934, -70, 10.4265, -86, 14.218, -69, 20.8531, -81, 26.5403, -75, 28.436, -59, 37.9147, -42, 37.9147, -27, 44.5498, -9, 40.7583, 2, 45.4976, 33, 35.0711, 34, 30.3318, 48, 29.3839, 73, 28.436, 77, -8.53081, 78, -14.218, 72, -13.2674, 49, -18.0095, 35, -23.6967, 33, -20.8488, 5, -10.4265, -7)
+
+[node name="DashTimer" type="Timer" parent="."]
+wait_time = 0.4
+one_shot = true
+
+[node name="CollisionDetector" type="Area2D" parent="."]
+visible = false
+collision_layer = 4
+collision_mask = 8
+script = ExtResource("3_udxmi")
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="CollisionDetector"]
+polygon = PackedVector2Array(-14, -5, -24, -26, -25, -49, -24, -74, -14, -63, 0, -70, 7, -86, 11, -70, 18, -81, 24, -76, 26, -59, 35, -46, 37, -27, 43, -9, 39, 2, 44, 32, 33, 34, 28, 48, 26, 77, -13, 78, -19, 72, -19, 66, -17, 49, -23, 35, -28, 34, -31, 25, -29, 12, -26, 5)
+
+[node name="WallChecker" type="RayCast2D" parent="."]
+target_position = Vector2(64, 0)
+collision_mask = 15
