@@ -1,11 +1,10 @@
-[gd_scene load_steps=29 format=4 uid="uid://dtna0nd34a7vt"]
+[gd_scene load_steps=30 format=4 uid="uid://dtna0nd34a7vt"]
 
 [ext_resource type="Script" path="res://Game/Level1/Scripts/Level1.cs" id="1_vj158"]
 [ext_resource type="Script" path="res://Game/Respawner.cs" id="2_0pn7e"]
 [ext_resource type="Script" path="res://Game/Level1/Scripts/Camera.cs" id="3_af4u8"]
 [ext_resource type="Texture2D" uid="uid://uprybvy2gmww" path="res://Art/Items/TheEgg.png" id="4_qf7g4"]
 [ext_resource type="Texture2D" uid="uid://deh5vusrmsqsu" path="res://Art/Backgrounds/UnicornGameBG.png" id="5_f16ya"]
-[ext_resource type="PackedScene" uid="uid://cvl311e3g082f" path="res://Player/Scenes/PlayerCharacter.tscn" id="6_0x36j"]
 [ext_resource type="PackedScene" path="res://UI/Scenes/GUI.tscn" id="7_8jcuf"]
 [ext_resource type="PackedScene" path="res://Items/Scenes/Portal.tscn" id="8_qya7y"]
 [ext_resource type="Script" path="res://Game/Portal.cs" id="9_qlokc"]
@@ -16,7 +15,9 @@
 [ext_resource type="PackedScene" path="res://Items/Scenes/GoldEgg.tscn" id="14_6bruh"]
 [ext_resource type="Shader" path="res://Game/Black&White.gdshader" id="15_206x5"]
 [ext_resource type="PackedScene" uid="uid://b6upcof87f3dd" path="res://Obstacles/Scenes/CircularSaw.tscn" id="16_8s5p2"]
+[ext_resource type="PackedScene" uid="uid://iq14uiljlje1" path="res://Player/Scenes/Unicorn.tscn" id="17_0iy3j"]
 [ext_resource type="PackedScene" uid="uid://ti05fy42timf" path="res://Obstacles/Scenes/Pendulum.tscn" id="17_ljtf2"]
+[ext_resource type="Script" path="res://Player/Scripts/Player.cs" id="18_u1njq"]
 
 [sub_resource type="SegmentShape2D" id="SegmentShape2D_oefmr"]
 a = Vector2(-625.5, 13)
@@ -81,17 +82,15 @@ RespawnPoint = NodePath("RespawnPoint")
 metadata/_edit_vertical_guides_ = [3840.0, 5760.0, 1920.0]
 metadata/_edit_horizontal_guides_ = [1080.0, 2160.0, -1080.0]
 
-[node name="Respawner" type="Node" parent="." node_paths=PackedStringArray("_respawnPoint", "_scoreLabel", "_player")]
+[node name="Respawner" type="Node" parent="." node_paths=PackedStringArray("_respawnPoint", "_scoreLabel")]
 unique_name_in_owner = true
 script = ExtResource("2_0pn7e")
 _respawnPoint = NodePath("../RespawnPoint")
 _scoreLabel = NodePath("../Camera2D/ScoreLabel")
-_player = NodePath("../PlayerCharacter")
 
-[node name="Camera2D" type="Camera2D" parent="." node_paths=PackedStringArray("Player")]
+[node name="Camera2D" type="Camera2D" parent="."]
 offset = Vector2(960, 540)
 script = ExtResource("3_af4u8")
-Player = NodePath("../PlayerCharacter")
 
 [node name="ScoreLabel" type="Label" parent="Camera2D"]
 z_index = 10
@@ -116,18 +115,6 @@ offset_left = -3.0
 offset_right = 1917.0
 offset_bottom = 1080.0
 texture = ExtResource("5_f16ya")
-
-[node name="PlayerCharacter" parent="." instance=ExtResource("6_0x36j")]
-position = Vector2(79, -316)
-WallJumpVelocity = 1500.0
-WallJumpPush = 2000.0
-
-[node name="CollisionDetector" parent="PlayerCharacter" index="4" node_paths=PackedStringArray("RespawnPoint", "_goldeggmanager", "Camera", "player", "_respawner")]
-RespawnPoint = NodePath("../../RespawnPoint")
-_goldeggmanager = NodePath("../../GoldEggs")
-Camera = NodePath("../../Camera2D")
-player = NodePath("..")
-_respawner = NodePath("../../Respawner")
 
 [node name="Map" type="Node" parent="."]
 
@@ -345,4 +332,7 @@ z_index = -1
 position = Vector2(2919, 2111)
 scale = Vector2(0.6, 0.6)
 
-[editable path="PlayerCharacter"]
+[node name="Unicorn" parent="." instance=ExtResource("17_0iy3j")]
+position = Vector2(308, -148)
+scale = Vector2(0.21, 0.21)
+script = ExtResource("18_u1njq")

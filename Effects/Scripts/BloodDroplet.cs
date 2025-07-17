@@ -5,7 +5,7 @@ using System;
 public partial class BloodDroplet : Node2D
 {
 	[Export] public float _Gravity = 980f; // Gravity applied to the blood droplet
-										   //[Export] public Vector2 _Velocity = new Vector2(80, -150); // Innitial velocity
+	//[Export] public Vector2 _Velocity = new Vector2(80, -150); // Innitial velocity
 	[Export] public float _AccelMin = 50f;
 	[Export] public float _AccelMax = 100f;
 	[Export] public float _Damping = 100f;
@@ -28,7 +28,7 @@ public partial class BloodDroplet : Node2D
 		_RayCast.Enabled = true;
 
 		//Optimization removes the collision droplets if they leave the screen
-		var Notifier = GetNode<VisibleOnScreenNotifier2D>("VisibilityNotifier2D");
+		var Notifier = GetNode<VisibleOnScreenNotifier2D>("VisibleOnScreenNotifier2D");
 		Notifier.ScreenExited += OnScreenExited;
 	}
 
@@ -68,6 +68,7 @@ public partial class BloodDroplet : Node2D
 			if (_RayCast.IsColliding())
 			{
 				Vector2 ImpactPoint = _RayCast.GetCollisionPoint();
+				//GD.Print("hit at ", ImpactPoint, " existed for ", _LifeTimer); <-- Debugging
 				SpawnDecal(ImpactPoint);
 				QueueFree();
 			}

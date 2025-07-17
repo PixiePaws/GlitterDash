@@ -13,18 +13,24 @@ public partial class BloodDecalManager : Node2D
 
     public override void _Ready()
     {
+
         GD.Print("Is BloodTexture null? ", BloodTexture == null);
         GD.Print("MultiMeshInstance: ", MultiMeshInstance);
         Instance = this;
 
-        _MultiMesh = new MultiMesh
-        {
-            TransformFormat = MultiMesh.TransformFormatEnum.Transform2D,
-            InstanceCount = MaxDecals
-        };
+        // _MultiMesh = new MultiMesh <-- This is all garbage that doesn't work
+        // {
+        //     TransformFormat = MultiMesh.TransformFormatEnum.Transform2D,
+        //     InstanceCount = MaxDecals
+        // };
+        // //MultiMeshInstance.Multimesh = _MultiMesh;
 
-        MultiMeshInstance.Multimesh = _MultiMesh;
+        _MultiMesh = MultiMeshInstance.Multimesh;
+        _MultiMesh.InstanceCount = MaxDecals;
+        MultiMeshInstance.ZIndex = 100;
         MultiMeshInstance.Texture = BloodTexture;
+        GD.Print("MultiMeshInstance. Multimesh = ", MultiMeshInstance.Multimesh);
+
     }
 
     public void AddDecal(Vector2 position)
@@ -34,7 +40,7 @@ public partial class BloodDecalManager : Node2D
 
         int index = _DecalCount % MaxDecals;
         _MultiMesh.SetInstanceTransform2D(index, xform);
-
+        GD.Print("Adding decal at ", position, " to index ", index);
         _DecalCount++;
     }
 }
