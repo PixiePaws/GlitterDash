@@ -12,8 +12,15 @@ namespace UnicornGame
         private string[] _saveFileList;
         private string _saverScenePath;
         private string _directoryPath;
+        private Button _quitButton;
         public override void _Ready()
         {
+            _quitButton = GetNode<Button>("LoadControl/TabBar/QuitButton");
+            if (_quitButton != null)
+            {
+                GD.Print("Got Quit Button reference in LoadGame");
+            }
+            _quitButton.Pressed += OnQuitButtonPressed;
             string ParentName = GetParent().Name;
             //GD.Print($"Parent name in LoadGame _Ready() :{ParentName}");
             /*IGameSaver GameSaver = GetNode<GameLevels>($"/root/../").GameManager.GameSaver;
@@ -42,7 +49,7 @@ namespace UnicornGame
             {
                 GD.Print("Couldn't get control node");
             }
-            var MarginNode = ControlNode.GetNode<MarginContainer>("MarginContainer");
+            var MarginNode = ControlNode.GetNode<MarginContainer>("TabBar/MarginContainer");
             if (MarginNode != null)
             {
                 GD.Print("Couldn't get margin node node");
@@ -104,16 +111,18 @@ namespace UnicornGame
             //Read the save file dynamically
             string FilePath = Path.Join(_directoryPath, _saveFileList[SignalSenderIndex]);
             GD.Print($"File path: {FilePath}");
-            Godot.Collections.Dictionary LoadedDictionary = GetSaveFileAsDictionary(FilePath);
+            Godot.Collections.Dictionary<string, Variant> LoadedDictionary = GetSaveFileAsDictionary(FilePath);
+            GD.Print(LoadedDictionary);
             //GD.Print("OnButtonPressed() was called");
+            
         }
-        public Godot.Collections.Dictionary GetSaveFileAsDictionary(string FilePath)
+        public Godot.Collections.Dictionary<string, Variant> GetSaveFileAsDictionary(string FilePath)
         {
             if (!File.Exists(FilePath))
             {
                 GD.Print("LoadGame OnButtonPressed() no save file at FilePath exists");
             }
-            Godot.Collections.Dictionary LoadedData = new Godot.Collections.Dictionary();
+            Godot.Collections.Dictionary<string, Variant> LoadedData = new Godot.Collections.Dictionary<string, Variant>();
             using var SaveFile = Godot.FileAccess.Open(FilePath, Godot.FileAccess.ModeFlags.Read);
             while (SaveFile.GetPosition() < SaveFile.GetLength())
             {
@@ -125,11 +134,7 @@ namespace UnicornGame
                     GD.Print(error);
                     return LoadedData;
                 }
-                
-                //LoadedData.Add((Godot.Collections.Dictionary)JsonInstance.Data);
-
-
-
+                LoadedData = (Godot.Collections.Dictionary<string, Variant>)JsonInstance.Data;
             }
             return LoadedData;
         }
@@ -171,6 +176,10 @@ namespace UnicornGame
                     _buttonList[i].Text = TempArray[i];
                 }
             }
+        }
+        public void OnQuitButtonPressed()
+        {
+            QueueFree();
         }
     }
 }
