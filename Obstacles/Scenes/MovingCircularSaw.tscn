@@ -9,7 +9,3 @@ _movementMagnitude = 50.0
 _targetPosition = Vector2(200, 0)
 
 [node name="CircularSaw" parent="." instance=ExtResource("1_2j6wp")]
-
-[node name="Camera2D" type="Camera2D" parent="."]
-anchor_mode = 0
-zoom = Vector2(0.2, 0.2)
