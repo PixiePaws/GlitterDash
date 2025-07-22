@@ -13,6 +13,7 @@ namespace UnicornGame
 		[Export] public float WallJumpPush = 1500f;
 		[Export] public float WallSlideSpeed = 100f;
 		[Export] public float Gravity = 1500f;
+		[Export] public float JumpDuration = 0.2f; 
 		[Export] public float DashSpeed = 800f;
 		[Export] public float DashDuration = 0.2f;
 		[Export] public float DashCooldown = 0.5f;
@@ -22,6 +23,7 @@ namespace UnicornGame
 		private bool _isWallSliding = false;
 		private float _wallJumpDirection = 0;
 		private int _jumpCount = 0;
+		private float _jumpTimer = 0f;
 		private bool _isDashing = false;
 		private float _dashTimer = 0f;
 		private float _dashCooldownTimer = 0f;
@@ -163,6 +165,7 @@ namespace UnicornGame
 				_animatedSprite.Stop();
 				_animatedSprite.Play("Jump");
 				_justJumped = true;
+				_jumpTimer = JumpDuration;
 			}
 
 			if (Input.IsActionJustPressed("Jump") && IsOnFloor())
@@ -171,6 +174,7 @@ namespace UnicornGame
 				_jumpCount = 1;
 				_animatedSprite.Play("Jump");
 				_justJumped = true;
+				_jumpTimer = JumpDuration;
 			}
 
 			if (!Input.IsActionPressed("Jump") && IsOnFloor())
@@ -178,6 +182,12 @@ namespace UnicornGame
 				_jumpCount = 0;
 				_justJumped = false;
 			}
+
+			if (!IsOnFloor() && !_isWallSliding && !_justJumped && _jumpTimer <= 0)
+				{
+					if (_animatedSprite.CurrentAnimation != "Falling")
+						_animatedSprite.Play("Falling");
+				}
 		}
 
 		/// <summary>
@@ -198,34 +208,39 @@ namespace UnicornGame
 				// Wall slide
 				if (wallTileId != -1)
 				{ */
-				if (IsNearWall() && !IsOnFloor())
-				{
-					_isWallSliding = true;
-					velocity.Y = Mathf.Min(velocity.Y + Gravity * 0.5f, WallSlideSpeed);
-					_jumpCount = 0;
-					_animatedSprite.Play("WallSlide");
-				}
+			if (IsNearWall() && !IsOnFloor() && inputDirection != 0 && MathF.Sign(inputDirection) == GetWallDirection())
+			{
+				_isWallSliding = true;
+				velocity.Y = Mathf.Min(velocity.Y + Gravity * 0.5f, WallSlideSpeed);
+				_jumpCount = 0;
+				_animatedSprite.Play("WallSlide");
+			}
+			else if (IsNearWall() && !IsOnFloor() && inputDirection == 0)
+			{
+				_isWallSliding = false;
+				_animatedSprite.Play("Falling");
+			}
 
 			// Wall jump
-			if (_isWallSliding && Input.IsActionJustPressed("Jump"))
-			{
-				// If the player is wall sliding and presses jump while pressing towards the wall
+				if (_isWallSliding && Input.IsActionJustPressed("Jump"))
 				{
-					GD.Print("WallDirection: " + wallDirection);
-					if (wallDirection != 0)
+					// If the player is wall sliding and presses jump while pressing towards the wall
 					{
-						// Velocity.X = WallJumpPush * -wallDirection;
-						// Velocity.Y = WallJumpVelocity;
-						Vector2 direction = new Godot.Vector2(-wallDirection, -2).Normalized();
-						velocity = direction * WallJumpPush;
-						_justWallJumped = true;
-						_justWallJumpedTimer = 0.15f;
-						_animatedSprite.Play("Jump");
-					}
+						GD.Print("WallDirection: " + wallDirection);
+						if (wallDirection != 0)
+						{
+							// Velocity.X = WallJumpPush * -wallDirection;
+							// Velocity.Y = WallJumpVelocity;
+							Vector2 direction = new Godot.Vector2(-wallDirection, -2).Normalized();
+							velocity = direction * WallJumpPush;
+							_justWallJumped = true;
+							_justWallJumpedTimer = 0.15f;
+							_animatedSprite.Play("Jump");
+						}
 
-					_isWallSliding = false; // Reset wall sliding state after jumping
+						_isWallSliding = false; // Reset wall sliding state after jumping
+					}
 				}
-			}
 		}
 
 		/// <summary>
