@@ -7,8 +7,6 @@ namespace UnicornGame
 	public partial class GoldEgg : Area2D
 	{
 		[Export] private Respawner _respawner;
-		[Export] public PackedScene GoldEggScene;
-		[Export] public Node2D EggContainer;
 
 		public override void _Ready()
 		{

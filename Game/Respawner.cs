@@ -20,43 +20,58 @@ namespace UnicornGame
         /// </summary>
         public void RespawnPlayer()
         {
-            var ParentName = GetParent().Name;
-            //GD.Print($"Parent Name : {ParentName}");
-            string PlayerPath = $"/root/{ParentName}/PlayerCharacter";
-            GD.Print(PlayerPath);
-            _player = GetNode<Player>(PlayerPath);
-            if (_player != null)
+            try
             {
-                GD.Print("Got player reference");
-            }
-            else
+                GD.Print("Respawning player");
+                var ParentName = GetParent().Name;
+                //GD.Print($"Parent Name : {ParentName}");
+                string PlayerPath = $"/root/{ParentName}/PlayerCharacter";
+                GD.Print(PlayerPath);
+                _player = GetNode<Player>(PlayerPath);
+                if (_player != null)
+                {
+                    GD.Print("Got player reference");
+                }
+                else
+                {
+                    GD.Print("Could not get player reference");
+                }
+                string RespawnPointPath = $"/root/{ParentName}/RespawnPoint";
+                _respawnPoint = GetNode<Node2D>(RespawnPointPath);
+                if (_respawnPoint != null)
+                {
+                    GD.Print("Got respawnpoint reference");
+                }
+                else
+                {
+                    GD.Print("Could not get respawnpoint reference");
+                }
+                GameState CurrentState = GetNode<GameLevels>($"/root/{ParentName}/").CurrentGameState;
+                if (CurrentState != null)
+                {
+                    GD.Print("Got CurrentGameState reference");
+                }
+                else
+                {
+                    GD.Print("Could not get CurrentGameState reference");
+                }
+                Godot.Collections.Dictionary<string, Variant> SaveData = CurrentState.SaveGameState();
+                string JsonString = Json.Stringify(SaveData);
+                IGameSaver GameSaver = GetNode<GameLevels>($"/root/{ParentName}/").GameManager.GameSaver;
+                if (GameSaver != null)
+                {
+                    GD.Print("Got Game Saver reference succesfully");    
+                }
+                //GD.Print(GameSaver.DirectoryPath);
+                //GD.Print(GameSaver.FileName);
+                //GD.Print(JsonString);
+                GameSaver.WriteTextToFile(GameSaver.DirectoryPath, GameSaver.FileName, JsonString);
+                _player.GlobalPosition = _respawnPoint.GlobalPosition;
+                }
+            catch (Exception e)
             {
-                GD.Print("Could not get player reference");
+                GD.PrintErr($"Exception in RespawnPlayer: {e}");
             }
-            string RespawnPointPath = $"/root/{ParentName}/RespawnPoint";
-            _respawnPoint = GetNode<Node2D>(RespawnPointPath);
-            if (_respawnPoint != null)
-            {
-                GD.Print("Got respawnpoint reference");
-            }
-            else
-            {
-                GD.Print("Could not get respawnpoint reference");
-            }
-            GameState CurrentState = GetNode<GameLevels>($"/root/{ParentName}/").CurrentGameState;
-            if (CurrentState != null)
-            {
-                GD.Print("Got CurrentGameState reference");
-            }
-            else
-            {
-                GD.Print("Could not get CurrentGameState reference");
-            }
-            Godot.Collections.Dictionary<string, Variant> SaveData = CurrentState.SaveGameState();
-            string JsonString = Json.Stringify(SaveData);
-            IGameSaver GameSaver = GetNode<GameLevels>($"/root/{ParentName}/").GameManager.GameSaver;
-            GameSaver.WriteTextToFile(GameSaver.DirectoryPath, GameSaver.FileName, JsonString);
-            _player.GlobalPosition = _respawnPoint.GlobalPosition;
         }
 
         /// <summary>

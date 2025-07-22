@@ -1,0 +1,61 @@
+[gd_scene load_steps=10 format=3 uid="uid://geklh6g8glov"]
+
+[ext_resource type="Texture2D" uid="uid://bcl7d7y3cjvky" path="res://Art/Character/UnicornVersion2.png" id="1_i85cc"]
+[ext_resource type="Texture2D" uid="uid://kysvqi1528xw" path="res://Art/Character/BodyParts/UniBody.png" id="1_jp2va"]
+[ext_resource type="Texture2D" uid="uid://daub4x8scnsdc" path="res://Art/Character/BodyParts/UniHead.png" id="2_t17cx"]
+[ext_resource type="Texture2D" uid="uid://d2y58f1myxcdb" path="res://Art/Character/BodyParts/UniHair.png" id="3_7xmbx"]
+[ext_resource type="Texture2D" uid="uid://d11gl2ty7tj42" path="res://Art/Character/BodyParts/UniRHand.png" id="3_gxrgv"]
+[ext_resource type="Texture2D" uid="uid://0eru13kklpq5" path="res://Art/Character/BodyParts/UniLHand.png" id="5_wr0dm"]
+[ext_resource type="Texture2D" uid="uid://ckyurqqc8swtq" path="res://Art/Character/BodyParts/UniRLeg.png" id="6_4b2vt"]
+[ext_resource type="Texture2D" uid="uid://bydqq8gylp65j" path="res://Art/Character/BodyParts/UniLLeg.png" id="8_s23pf"]
+[ext_resource type="Texture2D" uid="uid://3jyyw7oceo1j" path="res://Art/Character/BodyParts/UniTail.png" id="9_upwb8"]
+
+[node name="Unicorn" type="Node2D"]
+
+[node name="UnicornVersion2" type="Sprite2D" parent="."]
+position = Vector2(18, 0)
+texture = ExtResource("1_i85cc")
+
+[node name="PartsSkeletonContainer" type="Node2D" parent="."]
+
+[node name="Parts" type="Node2D" parent="PartsSkeletonContainer"]
+
+[node name="UniHead" type="Sprite2D" parent="PartsSkeletonContainer/Parts"]
+position = Vector2(9, 121)
+texture = ExtResource("2_t17cx")
+
+[node name="UniHair" type="Sprite2D" parent="PartsSkeletonContainer/Parts/UniHead"]
+z_index = -1
+texture = ExtResource("3_7xmbx")
+
+[node name="UniBody" type="Sprite2D" parent="PartsSkeletonContainer"]
+z_index = -1
+position = Vector2(15, 122)
+texture = ExtResource("1_jp2va")
+
+[node name="UniLHand" type="Sprite2D" parent="PartsSkeletonContainer"]
+z_index = -2
+position = Vector2(9, 121)
+rotation = 0.413129
+scale = Vector2(1, 1)
+texture = ExtResource("5_wr0dm")
+
+[node name="UniRLeg" type="Sprite2D" parent="PartsSkeletonContainer"]
+z_index = -2
+position = Vector2(10, 122)
+texture = ExtResource("6_4b2vt")
+
+[node name="UniRHand" type="Sprite2D" parent="PartsSkeletonContainer"]
+position = Vector2(9, 120)
+texture = ExtResource("3_gxrgv")
+
+[node name="UniLLeg" type="Sprite2D" parent="PartsSkeletonContainer"]
+z_index = -2
+position = Vector2(15, 123)
+rotation = 0.0229188
+texture = ExtResource("8_s23pf")
+
+[node name="UniTail" type="Sprite2D" parent="PartsSkeletonContainer"]
+z_index = -2
+position = Vector2(10, 119)
+texture = ExtResource("9_upwb8")

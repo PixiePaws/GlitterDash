@@ -13,13 +13,15 @@ script = ExtResource("1_pj507")
 
 [node name="HBoxContainer" type="HBoxContainer" parent="."]
 layout_mode = 0
-offset_right = 532.0
+offset_left = 150.0
+offset_right = 682.0
 offset_bottom = 64.0
 scale = Vector2(2.5, 2.5)
 
 [node name="Label" type="Label" parent="HBoxContainer"]
-custom_minimum_size = Vector2(264, 0)
+custom_minimum_size = Vector2(256, 64)
 layout_mode = 2
+size_flags_vertical = 1
 text = "RESOLUTION"
 vertical_alignment = 1
 
