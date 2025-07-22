@@ -1,0 +1,15 @@
+[gd_scene load_steps=3 format=3 uid="uid://v4r3g270k8q0"]
+
+[ext_resource type="Texture2D" uid="uid://t75gsvlhv18t" path="res://icon.svg" id="1_2wc2v"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_k17g5"]
+radius = 61.0328
+
+[node name="BirdProjectile" type="RigidBody2D"]
+gravity_scale = 0.0
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("1_2wc2v")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_k17g5")
