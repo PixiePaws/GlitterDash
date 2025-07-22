@@ -11,7 +11,7 @@
 [ext_resource type="Script" path="res://Game/Portal.cs" id="9_fcygr"]
 [ext_resource type="Texture2D" uid="uid://dxxm417mx0341" path="res://Art/PlaceHolders/GreenBlockPlaceholder.png" id="10_qo015"]
 [ext_resource type="Texture2D" uid="uid://t75gsvlhv18t" path="res://icon.svg" id="11_1ocjo"]
-[ext_resource type="PackedScene" uid="uid://dol5g5hc7xj1e" path="res://Game/DangerZoneFalling.tscn" id="12_t3txc"]
+[ext_resource type="PackedScene" path="res://Game/DangerZoneFalling.tscn" id="12_t3txc"]
 [ext_resource type="Script" path="res://Items/Scripts/GoldEggManager.cs" id="13_j1dfc"]
 [ext_resource type="PackedScene" uid="uid://dsnvu8ioiw0ff" path="res://Items/Scenes/GoldEgg.tscn" id="14_bjsj8"]
 [ext_resource type="Shader" path="res://Game/Black&White.gdshader" id="15_bpjgf"]
@@ -116,32 +116,27 @@ offset_right = 1917.0
 offset_bottom = 1080.0
 texture = ExtResource("5_plxfb")
 
-[node name="PlayerCharacter" parent="." node_paths=PackedStringArray("Filter") instance=ExtResource("6_tpgrd")]
+[node name="PlayerCharacter" parent="." instance=ExtResource("6_tpgrd")]
 position = Vector2(2008, 1960)
 scale = Vector2(0.21, 0.21)
-Filter = NodePath("../BlackWhite")
 
 [node name="UniHead" parent="PlayerCharacter/PartsSkeletonContainer/Parts" index="0"]
 position = Vector2(13.791, 118.078)
-scale = Vector2(0.999834, 0.999834)
 
 [node name="UniBody" parent="PlayerCharacter/PartsSkeletonContainer/Parts" index="1"]
 position = Vector2(16.6768, 119.406)
-scale = Vector2(1, 1)
 
 [node name="UniLHand" parent="PlayerCharacter/PartsSkeletonContainer/Parts" index="2"]
 position = Vector2(10.584, 119)
 
 [node name="UniRLeg" parent="PlayerCharacter/PartsSkeletonContainer/Parts" index="3"]
 position = Vector2(10.0098, 113.561)
-scale = Vector2(0.99985, 0.99985)
 
 [node name="UniRHand" parent="PlayerCharacter/PartsSkeletonContainer/Parts" index="4"]
 position = Vector2(-9.66797, 127.066)
 
 [node name="UniLLeg" parent="PlayerCharacter/PartsSkeletonContainer/Parts" index="5"]
 position = Vector2(6.98828, 118.26)
-scale = Vector2(0.999851, 0.999851)
 
 [node name="CollisionDetector" parent="PlayerCharacter" index="3" node_paths=PackedStringArray("RespawnPoint", "Filter", "_goldeggmanager", "Camera", "player", "_respawner")]
 RespawnPoint = NodePath("../../RespawnPoint")

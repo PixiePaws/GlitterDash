@@ -58,9 +58,16 @@ namespace UnicornGame
                 Godot.Collections.Dictionary<string, Variant> SaveData = CurrentState.SaveGameState();
                 string JsonString = Json.Stringify(SaveData);
                 IGameSaver GameSaver = GetNode<GameLevels>($"/root/{ParentName}/").GameManager.GameSaver;
+                if (GameSaver != null)
+                {
+                    GD.Print("Got Game Saver reference succesfully");    
+                }
+                //GD.Print(GameSaver.DirectoryPath);
+                //GD.Print(GameSaver.FileName);
+                //GD.Print(JsonString);
                 GameSaver.WriteTextToFile(GameSaver.DirectoryPath, GameSaver.FileName, JsonString);
                 _player.GlobalPosition = _respawnPoint.GlobalPosition;
-            }
+                }
             catch (Exception e)
             {
                 GD.PrintErr($"Exception in RespawnPlayer: {e}");

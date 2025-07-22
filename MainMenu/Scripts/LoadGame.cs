@@ -1,5 +1,6 @@
 using Godot;
 using System;
+using System.IO;
 using Godot.Collections;
 using Godot.NativeInterop;
 
@@ -11,8 +12,15 @@ namespace UnicornGame
         private string[] _saveFileList;
         private string _saverScenePath;
         private string _directoryPath;
+        private Button _quitButton;
         public override void _Ready()
         {
+            _quitButton = GetNode<Button>("LoadControl/TabBar/QuitButton");
+            if (_quitButton != null)
+            {
+                GD.Print("Got Quit Button reference in LoadGame");
+            }
+            _quitButton.Pressed += OnQuitButtonPressed;
             string ParentName = GetParent().Name;
             //GD.Print($"Parent name in LoadGame _Ready() :{ParentName}");
             /*IGameSaver GameSaver = GetNode<GameLevels>($"/root/../").GameManager.GameSaver;
@@ -41,7 +49,7 @@ namespace UnicornGame
             {
                 GD.Print("Couldn't get control node");
             }
-            var MarginNode = ControlNode.GetNode<MarginContainer>("MarginContainer");
+            var MarginNode = ControlNode.GetNode<MarginContainer>("TabBar/MarginContainer");
             if (MarginNode != null)
             {
                 GD.Print("Couldn't get margin node node");
@@ -86,19 +94,51 @@ namespace UnicornGame
             {
                 if (_buttonList[i] is Button button)
                 {
-                    button.Pressed += OnButtonPressed;
+                    Button ButtonCopy = button;
+                    button.Pressed += () => OnButtonPressed(ButtonCopy);
                 }
             }
             GD.Print("Signals connected");
         }
-        public void OnButtonPressed()
+        public void OnButtonPressed(Button button)
         {
-            for (int i = 0; i < _saveFileList.Length; i++)
+            /*for (int i = 0; i < _saveFileList.Length; i++)
             {
                 GD.Print(_saveFileList[i]);
-            }
-            GD.Print("OnButtonPressed() was called");
+            }*/
+            int SignalSenderIndex = button.GetIndex();
+            GD.Print($"Button index: {SignalSenderIndex}");
+            //Read the save file dynamically
+            string FilePath = Path.Join(_directoryPath, _saveFileList[SignalSenderIndex]);
+            GD.Print($"File path: {FilePath}");
+            Godot.Collections.Dictionary<string, Variant> LoadedDictionary = GetSaveFileAsDictionary(FilePath);
+            GD.Print(LoadedDictionary);
+            //GD.Print("OnButtonPressed() was called");
+            
         }
+        public Godot.Collections.Dictionary<string, Variant> GetSaveFileAsDictionary(string FilePath)
+        {
+            if (!File.Exists(FilePath))
+            {
+                GD.Print("LoadGame OnButtonPressed() no save file at FilePath exists");
+            }
+            Godot.Collections.Dictionary<string, Variant> LoadedData = new Godot.Collections.Dictionary<string, Variant>();
+            using var SaveFile = Godot.FileAccess.Open(FilePath, Godot.FileAccess.ModeFlags.Read);
+            while (SaveFile.GetPosition() < SaveFile.GetLength())
+            {
+                var JsonString = SaveFile.GetLine();
+                var JsonInstance = new Json();
+                Error error = JsonInstance.Parse(JsonString);
+                if (error != Error.Ok)
+                {
+                    GD.Print(error);
+                    return LoadedData;
+                }
+                LoadedData = (Godot.Collections.Dictionary<string, Variant>)JsonInstance.Data;
+            }
+            return LoadedData;
+        }
+
         public void GetSaveDirectory()
         {
             PackedScene SaverScene = ResourceLoader.Load<PackedScene>(_saverScenePath);
@@ -125,7 +165,7 @@ namespace UnicornGame
             {
                 if (i > SaveFileAmount - 1)
                 {
-                    _buttonList[i].Disabled = true;
+                    //_buttonList[i].Disabled = true;
                     Color NewColor = _buttonList[i].Modulate;
                     NewColor.A = 0.7f;
                     _buttonList[i].Modulate = NewColor;
@@ -136,6 +176,10 @@ namespace UnicornGame
                     _buttonList[i].Text = TempArray[i];
                 }
             }
+        }
+        public void OnQuitButtonPressed()
+        {
+            QueueFree();
         }
     }
 }
