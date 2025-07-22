@@ -11,11 +11,20 @@ namespace UnicornGame
         {
             _birdProjectileScenePath = "res://Obstacles/Scenes/BirdProjectile.tscn";
             _birdProjectileScene = ResourceLoader.Load<PackedScene>(_birdProjectileScenePath);
-
+            if (_birdProjectileScene != null)
+            {
+                GD.Print("Succesfully got bird projectile scene");
+            }
+            ShootBirdProjectile();
         }
         public void ShootBirdProjectile()
         {
             BirdProjectile Bird = (BirdProjectile)_birdProjectileScene.Instantiate();
+            AddChild(Bird);
+            if (Bird != null)
+            {
+                GD.Print("Successfully instantiated bird projectile");
+            }
         }
     }
 }

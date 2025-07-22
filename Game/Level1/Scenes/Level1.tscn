@@ -1,4 +1,4 @@
-[gd_scene load_steps=29 format=4 uid="uid://cuch5yonnwbtt"]
+[gd_scene load_steps=30 format=4 uid="uid://cuch5yonnwbtt"]
 
 [ext_resource type="Script" path="res://Game/Level1/Scripts/Level1.cs" id="1_r7umx"]
 [ext_resource type="Script" path="res://Game/Level1/Scripts/Camera.cs" id="1_ttao5"]
@@ -17,6 +17,7 @@
 [ext_resource type="Script" path="res://Items/Scripts/GoldEggManager.cs" id="14_qnefm"]
 [ext_resource type="Theme" path="res://UI/TextTheme.tres" id="17_rwmuo"]
 [ext_resource type="PackedScene" uid="uid://bun0lpg7lkpq6" path="res://Player/Scenes/PlayerCharacter.tscn" id="18_hg87w"]
+[ext_resource type="PackedScene" uid="uid://cygqq6gsghxm8" path="res://Obstacles/Scenes/BirdCannon.tscn" id="18_k3rmw"]
 
 [sub_resource type="SegmentShape2D" id="SegmentShape2D_oefmr"]
 a = Vector2(-625.5, 13)
@@ -84,7 +85,7 @@ metadata/_edit_horizontal_guides_ = [1080.0, 2160.0, -1080.0, 680.0, 839.0]
 
 [node name="PlayerCharacter" parent="." instance=ExtResource("18_hg87w")]
 z_index = 10
-position = Vector2(96, 223)
+position = Vector2(112, 650)
 scale = Vector2(0.21, 0.21)
 
 [node name="UniHead" parent="PlayerCharacter/PartsSkeletonContainer/Parts" index="0"]
@@ -104,11 +105,11 @@ position = Vector2(10.0092, 113.561)
 scale = Vector2(0.99985, 0.99985)
 
 [node name="UniRHand" parent="PlayerCharacter/PartsSkeletonContainer/Parts" index="4"]
-position = Vector2(-9.66873, 127.067)
+position = Vector2(-9.66876, 127.067)
 scale = Vector2(0.999849, 0.999849)
 
 [node name="UniLLeg" parent="PlayerCharacter/PartsSkeletonContainer/Parts" index="5"]
-position = Vector2(6.98795, 118.259)
+position = Vector2(6.98798, 118.26)
 scale = Vector2(0.999851, 0.999851)
 
 [node name="Head" parent="PlayerCharacter/PartsSkeletonContainer/Skeleton2D/Base/Body" index="1"]
@@ -437,5 +438,8 @@ save Nugget.
 Good luck!"
 horizontal_alignment = 1
 vertical_alignment = 1
+
+[node name="BirdCannon" parent="." instance=ExtResource("18_k3rmw")]
+position = Vector2(936, 646)
 
 [editable path="PlayerCharacter"]
