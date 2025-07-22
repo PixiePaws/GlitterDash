@@ -191,21 +191,20 @@ namespace UnicornGame
 			int wallDirection = GetWallDirection();
 
 			/*
-			int wallLayerId = 2;
-			Vector2I tilePos = TileMap.LocalToMap(GlobalPosition);
-			int wallTileId = TileMap.GetCellSourceId(wallLayerId, tilePos);
+				int wallLayerId = 2;
+				Vector2I tilePos = TileMap.LocalToMap(GlobalPosition);
+				int wallTileId = TileMap.GetCellSourceId(wallLayerId, tilePos);
 
-			// Wall slide
-			if (wallTileId != -1)
-			{ */
-			if (IsNearWall() && !IsOnFloor())
-			{
-				GD.Print("Is near wall and not on the floor");
-				_isWallSliding = true;
-				velocity.Y = Mathf.Min(velocity.Y + Gravity * 0.5f, WallSlideSpeed);
-				_jumpCount = 0;
-				_animatedSprite.Play("WallSlide");
-			}
+				// Wall slide
+				if (wallTileId != -1)
+				{ */
+				if (IsNearWall() && !IsOnFloor())
+				{
+					_isWallSliding = true;
+					velocity.Y = Mathf.Min(velocity.Y + Gravity * 0.5f, WallSlideSpeed);
+					_jumpCount = 0;
+					_animatedSprite.Play("WallSlide");
+				}
 
 			// Wall jump
 			if (_isWallSliding && Input.IsActionJustPressed("Jump"))
@@ -241,14 +240,14 @@ namespace UnicornGame
 				var skeleton = GetNode<Node2D>("PartsSkeletonContainer");
 				skeleton.Scale = new Vector2(-1, 1);
 				//_animatedSprite.FlipH = false; // Facing right
-				GetNode<RayCast2D>("WallChecker").RotationDegrees = 0; // Wall checker fliped
+				GetNode<RayCast2D>("WallChecker").RotationDegrees = 180; // Wall checker fliped
 			}
 			else if (direction == -1)
 			{
 				var skeleton = GetNode<Node2D>("PartsSkeletonContainer");
 				skeleton.Scale = new Vector2(1, 1);
 				//_animatedSprite.FlipH = true; // Facing left
-				GetNode<RayCast2D>("WallChecker").RotationDegrees = 180; // Wall checker fliped
+				GetNode<RayCast2D>("WallChecker").RotationDegrees = 0; // Wall checker fliped
 			}
 		}
 
