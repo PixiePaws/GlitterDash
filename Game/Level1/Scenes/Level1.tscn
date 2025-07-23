@@ -83,10 +83,11 @@ _saveFormat = 1
 metadata/_edit_vertical_guides_ = [3840.0, 5760.0, 1920.0, 433.0, 960.0, 1247.0]
 metadata/_edit_horizontal_guides_ = [1080.0, 2160.0, -1080.0, 680.0, 839.0]
 
-[node name="PlayerCharacter" parent="." instance=ExtResource("18_hg87w")]
+[node name="PlayerCharacter" parent="." node_paths=PackedStringArray("Filter") instance=ExtResource("18_hg87w")]
 z_index = 10
 position = Vector2(112, 650)
 scale = Vector2(0.21, 0.21)
+Filter = NodePath("../BlackWhite")
 
 [node name="UniHead" parent="PlayerCharacter/PartsSkeletonContainer/Parts" index="0"]
 position = Vector2(13.7908, 118.077)
