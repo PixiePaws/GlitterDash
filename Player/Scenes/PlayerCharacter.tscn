@@ -1125,7 +1125,8 @@ position = Vector2(-7, -132)
 polygon = PackedVector2Array(-77, -171, 66, -183, 161, -71, 128, 43, 135, 302, 125, 499, 51.2944, 495.947, 40, 395, -27, 402, -44, 492, -98, 490, -189, 86)
 
 [node name="WallChecker" type="RayCast2D" parent="."]
-target_position = Vector2(64, 0)
+scale = Vector2(5, 5)
+target_position = Vector2(-68.2, 0.8)
 collision_mask = 15
 
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="."]
