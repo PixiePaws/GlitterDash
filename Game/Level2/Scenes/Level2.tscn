@@ -1,25 +1,22 @@
-[gd_scene load_steps=30 format=4 uid="uid://dtna0nd34a7vt"]
+[gd_scene load_steps=29 format=4 uid="uid://bajxr6tykpb5y"]
 
 [ext_resource type="Script" path="res://Game/Level1/Scripts/Level1.cs" id="1_vj158"]
 [ext_resource type="Script" path="res://Game/Respawner.cs" id="2_0pn7e"]
 [ext_resource type="Script" path="res://Game/Level1/Scripts/Camera.cs" id="3_af4u8"]
-[ext_resource type="PackedScene" uid="uid://cvl311e3g082f" path="res://Player/Scenes/PlayerCharacter.tscn" id="3_gq4q2"]
+[ext_resource type="PackedScene" uid="uid://bun0lpg7lkpq6" path="res://Player/Scenes/PlayerCharacter.tscn" id="3_gq4q2"]
 [ext_resource type="Texture2D" uid="uid://uprybvy2gmww" path="res://Art/Items/TheEgg.png" id="4_qf7g4"]
 [ext_resource type="Texture2D" uid="uid://deh5vusrmsqsu" path="res://Art/Backgrounds/UnicornGameBG.png" id="5_f16ya"]
-[ext_resource type="PackedScene" path="res://UI/Scenes/GUI.tscn" id="7_8jcuf"]
-[ext_resource type="PackedScene" path="res://Items/Scenes/Portal.tscn" id="8_qya7y"]
+[ext_resource type="PackedScene" uid="uid://dnx3j4auf00wv" path="res://UI/Scenes/GUI.tscn" id="7_8jcuf"]
+[ext_resource type="PackedScene" uid="uid://breqli4rgs6dk" path="res://Items/Scenes/Portal.tscn" id="8_qya7y"]
 [ext_resource type="Script" path="res://Game/Portal.cs" id="9_qlokc"]
 [ext_resource type="Texture2D" uid="uid://dxxm417mx0341" path="res://Art/PlaceHolders/GreenBlockPlaceholder.png" id="10_ml3u2"]
 [ext_resource type="Texture2D" uid="uid://t75gsvlhv18t" path="res://icon.svg" id="11_ey6m8"]
 [ext_resource type="PackedScene" uid="uid://dol5g5hc7xj1e" path="res://Game/DangerZoneFalling.tscn" id="12_ne7dl"]
 [ext_resource type="Script" path="res://Items/Scripts/GoldEggManager.cs" id="13_3vpso"]
-[ext_resource type="PackedScene" path="res://Items/Scenes/GoldEgg.tscn" id="14_6bruh"]
+[ext_resource type="PackedScene" uid="uid://dsnvu8ioiw0ff" path="res://Items/Scenes/GoldEgg.tscn" id="14_6bruh"]
 [ext_resource type="Shader" path="res://Game/Black&White.gdshader" id="15_206x5"]
 [ext_resource type="PackedScene" uid="uid://b6upcof87f3dd" path="res://Obstacles/Scenes/CircularSaw.tscn" id="16_8s5p2"]
 [ext_resource type="PackedScene" uid="uid://ti05fy42timf" path="res://Obstacles/Scenes/Pendulum.tscn" id="17_ljtf2"]
-
-[sub_resource type="SkeletonModificationStack2D" id="SkeletonModificationStack2D_q0nkf"]
-modification_count = 1
 
 [sub_resource type="SegmentShape2D" id="SegmentShape2D_oefmr"]
 a = Vector2(-625.5, 13)
@@ -84,56 +81,36 @@ RespawnPoint = NodePath("RespawnPoint")
 metadata/_edit_vertical_guides_ = [3840.0, 5760.0, 1920.0]
 metadata/_edit_horizontal_guides_ = [1080.0, 2160.0, -1080.0]
 
-[node name="Respawner" type="Node" parent="." node_paths=PackedStringArray("_respawnPoint", "_scoreLabel", "_player")]
-unique_name_in_owner = true
-script = ExtResource("2_0pn7e")
-_respawnPoint = NodePath("../RespawnPoint")
-_scoreLabel = NodePath("../Camera2D/ScoreLabel")
-_player = NodePath("../PlayerCharacter")
-
-[node name="PlayerCharacter" parent="." node_paths=PackedStringArray("Filter") instance=ExtResource("3_gq4q2")]
-z_index = 10
-position = Vector2(121, -304)
+[node name="PlayerChracter" parent="." node_paths=PackedStringArray("Filter") instance=ExtResource("3_gq4q2")]
+position = Vector2(97, -342)
 scale = Vector2(0.2, 0.2)
 Filter = NodePath("../BlackWhite")
 
-[node name="UniHead" parent="PlayerCharacter/PartsSkeletonContainer/Parts" index="0"]
+[node name="UniHead" parent="PlayerChracter/PartsSkeletonContainer/Parts" index="0"]
 position = Vector2(13.7908, 118.077)
-scale = Vector2(0.999833, 0.999833)
+scale = Vector2(0.999834, 0.999834)
 
-[node name="UniBody" parent="PlayerCharacter/PartsSkeletonContainer/Parts" index="1"]
+[node name="UniBody" parent="PlayerChracter/PartsSkeletonContainer/Parts" index="1"]
 position = Vector2(16.6767, 119.406)
 scale = Vector2(1, 1)
 
-[node name="UniLHand" parent="PlayerCharacter/PartsSkeletonContainer/Parts" index="2"]
-position = Vector2(10.5848, 119)
-scale = Vector2(0.999858, 0.999858)
+[node name="UniLHand" parent="PlayerChracter/PartsSkeletonContainer/Parts" index="2"]
+position = Vector2(10.5845, 119)
+scale = Vector2(0.999856, 0.999856)
 
-[node name="UniRLeg" parent="PlayerCharacter/PartsSkeletonContainer/Parts" index="3"]
-position = Vector2(10.0092, 113.561)
+[node name="UniRLeg" parent="PlayerChracter/PartsSkeletonContainer/Parts" index="3"]
+position = Vector2(10.0091, 113.561)
 scale = Vector2(0.99985, 0.99985)
 
-[node name="UniRHand" parent="PlayerCharacter/PartsSkeletonContainer/Parts" index="4"]
-position = Vector2(-9.6687, 127.067)
-scale = Vector2(0.999849, 0.999849)
+[node name="UniRHand" parent="PlayerChracter/PartsSkeletonContainer/Parts" index="4"]
+position = Vector2(-9.66861, 127.067)
+scale = Vector2(0.999848, 0.999848)
 
-[node name="UniLLeg" parent="PlayerCharacter/PartsSkeletonContainer/Parts" index="5"]
+[node name="UniLLeg" parent="PlayerChracter/PartsSkeletonContainer/Parts" index="5"]
 position = Vector2(6.98792, 118.259)
 scale = Vector2(0.999851, 0.999851)
 
-[node name="Skeleton2D" parent="PlayerCharacter/PartsSkeletonContainer" index="1"]
-modification_stack = SubResource("SkeletonModificationStack2D_q0nkf")
-
-[node name="Head" parent="PlayerCharacter/PartsSkeletonContainer/Skeleton2D/Base/Body" index="1"]
-scale = Vector2(0.999833, 0.999833)
-
-[node name="FrontArm" parent="PlayerCharacter/PartsSkeletonContainer/Skeleton2D/Base/Body" index="2"]
-scale = Vector2(0.999849, 0.999849)
-
-[node name="BackArm" parent="PlayerCharacter/PartsSkeletonContainer/Skeleton2D/Base/Body" index="3"]
-scale = Vector2(0.999858, 0.999858)
-
-[node name="CollisionDetector" parent="PlayerCharacter" index="3" node_paths=PackedStringArray("RespawnPoint", "Filter", "_goldeggmanager", "Camera", "player", "_respawner")]
+[node name="CollisionDetector" parent="PlayerChracter" index="3" node_paths=PackedStringArray("RespawnPoint", "Filter", "_goldeggmanager", "Camera", "player", "_respawner")]
 RespawnPoint = NodePath("../../RespawnPoint")
 Filter = NodePath("../../BlackWhite")
 _goldeggmanager = NodePath("../../GoldEggs")
@@ -141,10 +118,16 @@ Camera = NodePath("../../Camera2D")
 player = NodePath("..")
 _respawner = NodePath("../../Respawner")
 
+[node name="Respawner" type="Node" parent="." node_paths=PackedStringArray("_respawnPoint", "_scoreLabel")]
+unique_name_in_owner = true
+script = ExtResource("2_0pn7e")
+_respawnPoint = NodePath("../RespawnPoint")
+_scoreLabel = NodePath("../Camera2D/ScoreLabel")
+
 [node name="Camera2D" type="Camera2D" parent="." node_paths=PackedStringArray("Player")]
 offset = Vector2(960, 540)
 script = ExtResource("3_af4u8")
-Player = NodePath("../PlayerCharacter")
+Player = NodePath("../PlayerChracter")
 
 [node name="ScoreLabel" type="Label" parent="Camera2D"]
 z_index = 10
@@ -398,4 +381,4 @@ z_index = -1
 position = Vector2(2919, 2111)
 scale = Vector2(0.6, 0.6)
 
-[editable path="PlayerCharacter"]
+[editable path="PlayerChracter"]
