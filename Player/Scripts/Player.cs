@@ -13,7 +13,7 @@ namespace UnicornGame
 		[Export] public float WallJumpPush = 1500f;
 		[Export] public float WallSlideSpeed = 100f;
 		[Export] public float Gravity = 1500f;
-		[Export] public float JumpDuration = 0.2f; 
+		[Export] public float JumpDuration = 0.01f; 
 		[Export] public float DashSpeed = 800f;
 		[Export] public float DashDuration = 0.2f;
 		[Export] public float DashCooldown = 0.5f;
@@ -49,7 +49,6 @@ namespace UnicornGame
 
 		public override void _PhysicsProcess(double delta)
 		{
-
 			if (!_canControl)
 			{
 				// If the player cannot control the character, skip the physics process
@@ -65,26 +64,6 @@ namespace UnicornGame
 			if (_dashCooldownTimer > 0)
 			{
 				_dashCooldownTimer -= (float)delta;
-			}
-
-			HandleDash(inputDirection);
-
-			if (_isDashing)
-			{
-				_dashTimer -= (float)delta;
-
-				if (_dashTimer <= 0)
-				{
-					_isDashing = false;
-				}
-				else
-				{
-					velocity = _dashDirection * DashSpeed;
-					_animatedSprite.Play("Dash");
-					Velocity = velocity;
-					MoveAndSlide();
-					return;
-				}
 			}
 
 			if (_justWallJumpedTimer > 0)
@@ -109,6 +88,26 @@ namespace UnicornGame
 			}
 
 			WallSlidingWallJumping(ref velocity, inputDirection, (float)delta);
+
+			if (_isDashing)
+			{
+				_dashTimer -= (float)delta;
+
+				if (_dashTimer <= 0)
+				{
+					_isDashing = false;
+				}
+				else
+				{
+					velocity = new Vector2(_dashDirection.X * DashSpeed, 0);
+					_animatedSprite.Play("Dash");
+					Velocity = velocity;
+					MoveAndSlide();
+					return;
+				}
+			}
+
+			HandleDash(inputDirection);
 
 			// Updates the velocity based on the current state
 			Velocity = velocity;
@@ -184,10 +183,12 @@ namespace UnicornGame
 			}
 
 			if (!IsOnFloor() && !_isWallSliding && !_justJumped && _jumpTimer <= 0)
+			{
+				if (_animatedSprite.CurrentAnimation != "Falling")
 				{
-					if (_animatedSprite.CurrentAnimation != "Falling")
-						_animatedSprite.Play("Falling");
+					_animatedSprite.Play("Falling");
 				}
+			}
 		}
 
 		/// <summary>
@@ -313,7 +314,7 @@ namespace UnicornGame
 
 				// Dashing on and initialize timers
 				_isDashing = true;
-				_dashTimer = DashDuration;
+				_dashTimer = IsOnFloor() ? DashDuration : DashDuration * 0.7f;
 				_dashCooldownTimer = DashCooldown;
 			}
 		}
