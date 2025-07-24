@@ -13,7 +13,7 @@ namespace UnicornGame
 		[Export] public float WallJumpPush = 1500f;
 		[Export] public float WallSlideSpeed = 100f;
 		[Export] public float Gravity = 1500f;
-		[Export] public float JumpDuration = 0.01f; 
+		[Export] public float JumpDuration = 1f; 
 		[Export] public float DashSpeed = 800f;
 		[Export] public float DashDuration = 0.2f;
 		[Export] public float DashCooldown = 0.5f;
@@ -115,6 +115,19 @@ namespace UnicornGame
 			}
 
 			HandleDash(inputDirection);
+
+			if (_jumpTimer > 0)
+			{
+				_jumpTimer -= (float)delta;
+			}
+
+			if (!IsOnFloor() && !_isWallSliding && _jumpTimer <= 0 && Velocity.Y > 0 && !_justWallJumped)
+				{
+					if (_animatedSprite.CurrentAnimation != "Falling")
+					{
+						_animatedSprite.Play("Falling");
+					}
+				}
 
 			// Updates the velocity based on the current state
 			Velocity = velocity;
