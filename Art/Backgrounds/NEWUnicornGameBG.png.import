@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://wht4s5n71udo"
-path="res://.godot/imported/BloodSplatter.png-033398aabe773c89c93d9a9a8ce2eef0.ctex"
+uid="uid://cwcmktxtmsdem"
+path="res://.godot/imported/NEWUnicornGameBG.png-929a1fe08da70a4752c530d53af3db67.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Art/Effects/BloodSplatter.png"
-dest_files=["res://.godot/imported/BloodSplatter.png-033398aabe773c89c93d9a9a8ce2eef0.ctex"]
+source_file="res://Art/Backgrounds/NEWUnicornGameBG.png"
+dest_files=["res://.godot/imported/NEWUnicornGameBG.png-929a1fe08da70a4752c530d53af3db67.ctex"]
 
 [params]
 
