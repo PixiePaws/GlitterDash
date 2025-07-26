@@ -16,6 +16,13 @@ namespace UnicornGame
 
         public Godot.Collections.Dictionary<string, Variant> SaveGameState()
         {
+            return new Godot.Collections.Dictionary<string, Variant>()
+            {
+                { $"{_currentScene.Name}", GetGameDataDictionary()}
+            };
+        }
+        public Godot.Collections.Dictionary<string, Variant> GetGameDataDictionary()
+        {
             /*string File = GetSceneFilePath();
             if (File != null)
             {
