@@ -12,6 +12,7 @@ namespace UnicornGame
         private Sprite2D _sprite;
         private Texture2D _spriteWingsUp;
         private Texture2D _spriteWingsDown;
+        [Export]private float _timerWaitTime;
         public override void _Ready()
         {
             //_impulseVector = new Vector2(-50.0f, 0.0f);
@@ -29,10 +30,16 @@ namespace UnicornGame
             _spriteWingsDown = ResourceLoader.Load<Texture2D>(_spriteWingsDownPath);
             _sprite.Texture = _spriteWingsUp;
             ApplyCentralImpulse(_impulseVector);
+            Timer SpriteTimer = new Timer();
+            AddChild(SpriteTimer);
+            SpriteTimer.WaitTime = 0.1f;
+            SpriteTimer.Timeout += AlternateSprite;
+            SpriteTimer.OneShot = false;
+            SpriteTimer.Start();
         }
         public override void _Process(double delta)
         {
-            AlternateSprite();
+            //AlternateSprite();
         }
 
         public void OnCollisionDetected(Node node)
@@ -53,9 +60,9 @@ namespace UnicornGame
                 _sprite.Texture = _spriteWingsUp;
             }
         }
-        public void CreateTimer()
+        public void TimeoutPrint()
         {
-            Timer AlternatingTimer = new Timer();
+            GD.Print("Timeout");
         }
     }
 }
