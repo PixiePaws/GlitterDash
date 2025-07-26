@@ -11,7 +11,7 @@
 [ext_resource type="Script" path="res://Game/Portal.cs" id="9_qlokc"]
 [ext_resource type="Texture2D" uid="uid://dxxm417mx0341" path="res://Art/PlaceHolders/GreenBlockPlaceholder.png" id="10_ml3u2"]
 [ext_resource type="Texture2D" uid="uid://t75gsvlhv18t" path="res://icon.svg" id="11_ey6m8"]
-[ext_resource type="PackedScene" uid="uid://dol5g5hc7xj1e" path="res://Game/DangerZoneFalling.tscn" id="12_ne7dl"]
+[ext_resource type="PackedScene" path="res://Game/DangerZoneFalling.tscn" id="12_ne7dl"]
 [ext_resource type="Script" path="res://Items/Scripts/GoldEggManager.cs" id="13_3vpso"]
 [ext_resource type="PackedScene" uid="uid://dsnvu8ioiw0ff" path="res://Items/Scenes/GoldEgg.tscn" id="14_6bruh"]
 [ext_resource type="Shader" path="res://Game/Black&White.gdshader" id="15_206x5"]
@@ -86,14 +86,29 @@ position = Vector2(97, -342)
 scale = Vector2(0.2, 0.2)
 Filter = NodePath("../BlackWhite")
 
+[node name="UniHead" parent="PlayerChracter/PartsSkeletonContainer/Parts" index="0"]
+position = Vector2(13.7908, 118.077)
+scale = Vector2(0.999834, 0.999834)
+
+[node name="UniBody" parent="PlayerChracter/PartsSkeletonContainer/Parts" index="1"]
+position = Vector2(16.6767, 119.406)
+scale = Vector2(1, 1)
+
+[node name="UniLHand" parent="PlayerChracter/PartsSkeletonContainer/Parts" index="2"]
+position = Vector2(10.5845, 119)
+scale = Vector2(0.999856, 0.999856)
+
 [node name="UniRLeg" parent="PlayerChracter/PartsSkeletonContainer/Parts" index="3"]
-position = Vector2(10.0091, 113.561)
+position = Vector2(10.0092, 113.561)
+scale = Vector2(0.99985, 0.99985)
 
 [node name="UniRHand" parent="PlayerChracter/PartsSkeletonContainer/Parts" index="4"]
 position = Vector2(-9.66861, 127.067)
+scale = Vector2(0.999848, 0.999848)
 
 [node name="UniLLeg" parent="PlayerChracter/PartsSkeletonContainer/Parts" index="5"]
 position = Vector2(6.98792, 118.259)
+scale = Vector2(0.999851, 0.999851)
 
 [node name="CollisionDetector" parent="PlayerChracter" index="3" node_paths=PackedStringArray("RespawnPoint", "Filter", "_goldeggmanager", "Camera", "player", "_respawner")]
 RespawnPoint = NodePath("../../RespawnPoint")

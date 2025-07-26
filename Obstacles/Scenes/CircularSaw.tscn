@@ -1,6 +1,6 @@
 [gd_scene load_steps=4 format=3 uid="uid://b6upcof87f3dd"]
 
-[ext_resource type="Texture2D" uid="uid://x1md5t8br1ve" path="res://Art/Obstacles/DemoSawBlade.png" id="1_4grcw"]
+[ext_resource type="Texture2D" uid="uid://b5uxp6rcf82v6" path="res://Art/Obstacles/SunFlowerv2.png" id="1_7w00q"]
 [ext_resource type="Script" path="res://Obstacles/Scripts/CircularSaw.cs" id="2_7kiyw"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_kalxr"]
@@ -14,8 +14,8 @@ collision_mask = 4
 shape = SubResource("CircleShape2D_kalxr")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
-scale = Vector2(2, 2)
-texture = ExtResource("1_4grcw")
+scale = Vector2(0.26, 0.26)
+texture = ExtResource("1_7w00q")
 script = ExtResource("2_7kiyw")
 
 [node name="CollisionShape2D2" type="CollisionShape2D" parent="."]
