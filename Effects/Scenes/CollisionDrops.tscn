@@ -1,0 +1,19 @@
+[gd_scene load_steps=3 format=3 uid="uid://13pnhldatw60"]
+
+[ext_resource type="Script" path="res://Effects/Scripts/BloodDroplet.cs" id="1_ll4jl"]
+[ext_resource type="Texture2D" uid="uid://cjhh0bq4448mj" path="res://Art/Effects/BloodStain.png" id="2_jik7m"]
+
+[node name="CollisionDrops" type="Node2D"]
+script = ExtResource("1_ll4jl")
+_RayLength = 10.0
+
+[node name="Droplet" type="Sprite2D" parent="."]
+texture = ExtResource("2_jik7m")
+
+[node name="RayCast2D" type="RayCast2D" parent="."]
+target_position = Vector2(0, 16)
+collision_mask = 2
+collide_with_areas = true
+
+[node name="VisibleOnScreenNotifier2D" type="VisibleOnScreenNotifier2D" parent="."]
+scale = Vector2(0.1, 0.1)

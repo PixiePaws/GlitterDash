@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://wht4s5n71udo"
-path="res://.godot/imported/BloodSplatter.png-033398aabe773c89c93d9a9a8ce2eef0.ctex"
+uid="uid://bbi8xqng11ic8"
+path="res://.godot/imported/SpaceBG.png-25e6fa5804311eedfea4497a51cf398b.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Art/Effects/BloodSplatter.png"
-dest_files=["res://.godot/imported/BloodSplatter.png-033398aabe773c89c93d9a9a8ce2eef0.ctex"]
+source_file="res://Art/Backgrounds/SpaceBG.png"
+dest_files=["res://.godot/imported/SpaceBG.png-25e6fa5804311eedfea4497a51cf398b.ctex"]
 
 [params]
 
