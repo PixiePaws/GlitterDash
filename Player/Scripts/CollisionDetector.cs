@@ -33,7 +33,6 @@ namespace UnicornGame
             if (node.IsInGroup("Obstacles"))
             {
                 GD.Print("Collided with obstacle!");
-                GD.Print("Game over!");
                 DieRestart();
             }
         }
@@ -43,6 +42,7 @@ namespace UnicornGame
         /// </summary>
         public async void DieRestart()
         {
+            player.Die();
             Filter.Visible = true;
             Camera?.ResetCamera("die");
             player?.HandleDanger("dead");

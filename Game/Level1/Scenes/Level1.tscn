@@ -88,32 +88,32 @@ metadata/_edit_horizontal_guides_ = [1080.0, 2160.0, -1080.0, 680.0, 839.0]
 
 [node name="PlayerCharacter" parent="." node_paths=PackedStringArray("Filter") instance=ExtResource("18_hg87w")]
 z_index = 10
-position = Vector2(112, 650)
+position = Vector2(4500, -1000)
 scale = Vector2(0.21, 0.21)
 Filter = NodePath("../BlackWhite")
 
 [node name="UniHead" parent="PlayerCharacter/PartsSkeletonContainer/Parts" index="0"]
-position = Vector2(13.7908, 118.077)
+position = Vector2(13.7891, 118.077)
 scale = Vector2(0.999833, 0.999833)
 
 [node name="UniBody" parent="PlayerCharacter/PartsSkeletonContainer/Parts" index="1"]
-position = Vector2(16.6767, 119.406)
+position = Vector2(16.6758, 119.407)
 scale = Vector2(1, 1)
 
 [node name="UniLHand" parent="PlayerCharacter/PartsSkeletonContainer/Parts" index="2"]
-position = Vector2(10.5848, 119)
+position = Vector2(10.584, 119)
 scale = Vector2(0.999858, 0.999858)
 
 [node name="UniRLeg" parent="PlayerCharacter/PartsSkeletonContainer/Parts" index="3"]
-position = Vector2(10.0092, 113.561)
+position = Vector2(10.0078, 113.561)
 scale = Vector2(0.99985, 0.99985)
 
 [node name="UniRHand" parent="PlayerCharacter/PartsSkeletonContainer/Parts" index="4"]
-position = Vector2(-9.66876, 127.067)
+position = Vector2(-9.66992, 127.067)
 scale = Vector2(0.999849, 0.999849)
 
 [node name="UniLLeg" parent="PlayerCharacter/PartsSkeletonContainer/Parts" index="5"]
-position = Vector2(6.98798, 118.26)
+position = Vector2(6.98633, 118.259)
 scale = Vector2(0.999851, 0.999851)
 
 [node name="Head" parent="PlayerCharacter/PartsSkeletonContainer/Skeleton2D/Base/Body" index="1"]

@@ -113,8 +113,9 @@ namespace UnicornGame
             GD.Print($"File path: {FilePath}");
             Godot.Collections.Dictionary<string, Variant> LoadedDictionary = GetSaveFileAsDictionary(FilePath);
             GD.Print(LoadedDictionary);
+            ChangeSceneToNextLevel(LoadedDictionary);
             //GD.Print("OnButtonPressed() was called");
-            
+
         }
         public Godot.Collections.Dictionary<string, Variant> GetSaveFileAsDictionary(string FilePath)
         {
@@ -181,6 +182,29 @@ namespace UnicornGame
         {
             QueueFree();
         }
+        public void ChangeSceneToNextLevel(Godot.Collections.Dictionary<string, Variant> GameData)
+        {
+            Godot.Collections.Dictionary<string, Variant> LevelData;
+            string GameDataKey = "";
+            foreach (var Key in GameData.Keys)
+            {
+                LevelData = (Godot.Collections.Dictionary<string, Variant>)GameData[Key];
+                if (LevelData.ContainsKey("LevelCompleted") && !(bool)LevelData["LevelCompleted"])
+                {
+                    GameDataKey = Key;
+                }
+            }
+            if (GameDataKey == null)
+            {
+                string DefaultGameDataKey = "Level1";
+                GameDataKey = DefaultGameDataKey;
+            }
+            LevelData = (Godot.Collections.Dictionary<string, Variant>)GameData[GameDataKey];
+            foreach (var Key in LevelData.Keys)
+            {
+                
+            }
+        } 
     }
 }
 
