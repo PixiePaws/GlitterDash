@@ -12,6 +12,7 @@ namespace UnicornGame
         private string[] _saveFileList;
         private string _saverScenePath;
         private string _directoryPath;
+        private string _defaultLevelScenePath = "res://Game/Level1/Scenes/Level1.tscn";
         private Button _quitButton;
         public override void _Ready()
         {
@@ -184,26 +185,45 @@ namespace UnicornGame
         }
         public void ChangeSceneToNextLevel(Godot.Collections.Dictionary<string, Variant> GameData)
         {
+            GD.Print("ChangeSceneToNextLevel was called");
             Godot.Collections.Dictionary<string, Variant> LevelData;
             string GameDataKey = "";
             foreach (var Key in GameData.Keys)
             {
                 LevelData = (Godot.Collections.Dictionary<string, Variant>)GameData[Key];
-                if (LevelData.ContainsKey("LevelCompleted") && !(bool)LevelData["LevelCompleted"])
+                if (LevelData.ContainsKey("LevelCompleted") && (bool)LevelData["LevelCompleted"])
                 {
                     GameDataKey = Key;
                 }
+                else
+                {
+                    break;
+                }
             }
+            GD.Print("GameDataKey = Key");
+            GD.Print(GameDataKey);
             if (GameDataKey == null)
             {
                 string DefaultGameDataKey = "Level1";
                 GameDataKey = DefaultGameDataKey;
             }
             LevelData = (Godot.Collections.Dictionary<string, Variant>)GameData[GameDataKey];
+            GD.Print($"Level data at GameDataKey: {GameData[GameDataKey]}");
+            string LevelScenePath = "";
             foreach (var Key in LevelData.Keys)
             {
-                
+                if (LevelData.ContainsKey("FilePath") && (string)LevelData["FilePath"] != null)
+                {
+                    LevelScenePath = (string)LevelData["FilePath"];
+                    break;
+                }
             }
+            if (LevelScenePath == null)
+            {
+                LevelScenePath = _defaultLevelScenePath;
+            }
+            PackedScene NextLevel = ResourceLoader.Load<PackedScene>(LevelScenePath);
+            GetTree().ChangeSceneToPacked(NextLevel);
         } 
     }
 }
