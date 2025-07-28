@@ -15,10 +15,10 @@
 [ext_resource type="PackedScene" uid="uid://qm3lloa00ldf" path="res://Items/Scenes/FinishLine.tscn" id="8_olng6"]
 [ext_resource type="Texture2D" uid="uid://t75gsvlhv18t" path="res://icon.svg" id="9_2t5gx"]
 [ext_resource type="PackedScene" uid="uid://dsnvu8ioiw0ff" path="res://Items/Scenes/GoldEgg.tscn" id="11_508a1"]
-[ext_resource type="PackedScene" uid="uid://dol5g5hc7xj1e" path="res://Game/DangerZoneFalling.tscn" id="11_v4ol5"]
+[ext_resource type="PackedScene" path="res://Game/DangerZoneFalling.tscn" id="11_v4ol5"]
 [ext_resource type="Shader" path="res://Game/Black&White.gdshader" id="14_cylb3"]
 [ext_resource type="Script" path="res://Items/Scripts/GoldEggManager.cs" id="14_qnefm"]
-[ext_resource type="Theme" uid="uid://toxmj1vwp6m" path="res://UI/TextTheme.tres" id="17_rwmuo"]
+[ext_resource type="Theme" path="res://UI/TextTheme.tres" id="17_rwmuo"]
 [ext_resource type="PackedScene" uid="uid://bun0lpg7lkpq6" path="res://Player/Scenes/PlayerCharacter.tscn" id="18_hg87w"]
 [ext_resource type="PackedScene" uid="uid://cygqq6gsghxm8" path="res://Obstacles/Scenes/BirdCannon.tscn" id="18_k3rmw"]
 

@@ -41,7 +41,6 @@ namespace UnicornGame
         }
         public override void _PhysicsProcess(double delta)
         {
-            //UpdateRotation();
             UpdateRotation();
         }
         public void CalculateInertia()

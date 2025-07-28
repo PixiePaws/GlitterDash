@@ -37,14 +37,14 @@ namespace UnicornGame
         /// </summary>
         public void PortalTransfer()
         {
-            Node currentScene = GetTree().CurrentScene;
+            GameLevels currentScene = (GameLevels)GetTree().CurrentScene;
 
             if (currentScene == null)
             {
                 GD.PrintErr("[ERROR] No active scene found!");
                 return;
             }
-
+            currentScene.CurrentLevelCompleted = true;
             int nextLevel = 0;
 
             // Choosing the next level based on the current scene name.
