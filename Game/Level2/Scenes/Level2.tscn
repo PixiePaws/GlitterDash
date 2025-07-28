@@ -16,7 +16,7 @@
 [ext_resource type="PackedScene" uid="uid://mu1by1prm8kh" path="res://Items/Scenes/GoldEgg.tscn" id="14_6bruh"]
 [ext_resource type="Shader" path="res://Game/Black&White.gdshader" id="15_206x5"]
 [ext_resource type="PackedScene" uid="uid://b6upcof87f3dd" path="res://Obstacles/Scenes/CircularSaw.tscn" id="16_8s5p2"]
-[ext_resource type="PackedScene" uid="uid://ti05fy42timf" path="res://Obstacles/Scenes/Pendulum.tscn" id="17_ljtf2"]
+[ext_resource type="PackedScene" path="res://Obstacles/Scenes/Pendulum.tscn" id="17_ljtf2"]
 
 [sub_resource type="SegmentShape2D" id="SegmentShape2D_oefmr"]
 a = Vector2(-625.5, 13)
@@ -81,12 +81,9 @@ RespawnPoint = NodePath("RespawnPoint")
 metadata/_edit_vertical_guides_ = [3840.0, 5760.0, 1920.0]
 metadata/_edit_horizontal_guides_ = [1080.0, 2160.0, -1080.0]
 
-[node name="PlayerChracter" parent="." node_paths=PackedStringArray("Filter") instance=ExtResource("3_gq4q2")]
+[node name="PlayerChracter" parent="." instance=ExtResource("3_gq4q2")]
 position = Vector2(97, -342)
 scale = Vector2(0.2, 0.2)
-
-[node name="UniRLeg" parent="PlayerChracter/PartsSkeletonContainer/Parts" index="3"]
-position = Vector2(10.0091, 113.561)
 
 [node name="UniRHand" parent="PlayerChracter/PartsSkeletonContainer/Parts" index="4"]
 position = Vector2(-9.66861, 127.067)

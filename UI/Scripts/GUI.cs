@@ -7,11 +7,13 @@ namespace UnicornGame
 	public partial class GUI : Node
 	{
 		// Called when the node enters the scene tree for the first time.
+
 		[Export] private string _settingsScreenScenePath = "res://Settings/Scenes/SettingsScreen.tscn"; // Path to the settings screen scene
 		private Button _quitButton;
 		private Control _settingsScene;
 		private PackedScene _selectSettingsScreenScene;
 		private Button _selectSettings;
+
 
 		public override void _Ready()
 		{
@@ -27,7 +29,7 @@ namespace UnicornGame
 
 		public override void _Input(InputEvent @event)
 		{
-			if (Input.IsActionJustPressed("Settings" ))
+			if (Input.IsActionJustPressed("Settings"))
 			{
 				OnSettingsPressed();
 			}
@@ -39,19 +41,15 @@ namespace UnicornGame
 		}
 		private void OnSettingsPressed() // This will bring settings to the user after pressing settings button
 		{
+
+			if (_selectSettingsScreenScene != null && GetNodeOrNull<Node>("SettingsPanel") == null)
 			{
-				if (_selectSettingsScreenScene != null && GetNodeOrNull<Node>("SettingsPanel") == null)
-				{
-					GD.Print("Settings button pressed in GUI");
-					Node settingsPanel = _selectSettingsScreenScene.Instantiate();
-					settingsPanel.Name = "SettingsPanel"; // IMPORTANT DONT DELETE
-					AddChild(settingsPanel);
-				}
-				else
-				{
-					GD.Print("Settings scene not found");
-				}
+				GD.Print("Settings button pressed in GUI");
+				Node settingsPanel = _selectSettingsScreenScene.Instantiate();
+				settingsPanel.Name = "SettingsPanel"; // IMPORTANT DONT DELETE
+				AddChild(settingsPanel);
 			}
+
 		}
 	}
 }

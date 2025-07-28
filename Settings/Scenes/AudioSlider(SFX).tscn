@@ -1,0 +1,8 @@
+[gd_scene load_steps=2 format=3 uid="uid://dwseimsx5rafn"]
+
+[ext_resource type="PackedScene" uid="uid://e5oe2vcoge8q" path="res://Settings/Scenes/AudioSlider.tscn" id="1_0cqaf"]
+
+[node name="AudioSlider" instance=ExtResource("1_0cqaf")]
+
+[node name="AudioNameLabel" parent="HBoxContainer" index="0"]
+text = "SFX"

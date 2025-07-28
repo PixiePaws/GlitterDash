@@ -9,11 +9,11 @@ namespace UnicornGame
 	{
 		[Export] public float Speed = 200f;
 		[Export] public float JumpVelocity = -600f;
-		[Export] public float WallJumpVelocity = -600f;
-		[Export] public float WallJumpPush = 1500f;
+		[Export] public float WallJumpVelocity = -500f;
+		[Export] public float WallJumpPush = 400f;
 		[Export] public float WallSlideSpeed = 100f;
 		[Export] public float Gravity = 1500f;
-		[Export] public float JumpDuration = 0.01f; 
+		[Export] public float JumpDuration = 0.01f;
 		[Export] public float DashSpeed = 800f;
 		[Export] public float DashDuration = 0.2f;
 		[Export] public float DashCooldown = 0.5f;
@@ -237,10 +237,10 @@ namespace UnicornGame
 						GD.Print("WallDirection: " + wallDirection);
 						if (wallDirection != 0)
 						{
-							// Velocity.X = WallJumpPush * -wallDirection;
-							// Velocity.Y = WallJumpVelocity;
-							Vector2 direction = new Godot.Vector2(-wallDirection, -2).Normalized();
-							velocity = direction * WallJumpPush;
+							velocity.X = WallJumpPush * -wallDirection;
+							velocity.Y = WallJumpVelocity;
+							// Vector2 direction = new Godot.Vector2(-wallDirection, -2).Normalized();
+							// velocity = direction * WallJumpPush;
 							_justWallJumped = true;
 							_justWallJumpedTimer = 0.15f;
 							_animatedSprite.Play("Jump");
@@ -285,7 +285,7 @@ namespace UnicornGame
 		}
         public void Die()
         {
-            //CollisionLayer = 0; // <-- Remove player collision layer so the blood drops don't collide with it 
+            //CollisionLayer = 0; // <-- Remove player collision layer so the blood drops don't collide with it
             // !!!!!!!!!^^^^^^ Might have to change this manually back to CollisionLayer 1 when respawning ^^^^^^^^!!!!!!!!!!!!!!!
 
             // Load and instantiate the blood spray effect
@@ -306,7 +306,7 @@ namespace UnicornGame
 
             // Hide the player <- This works
             Hide();
-            
+
         }
 		/// <summary>
 		/// Gets the direction of the wall the player is currently sliding against.
