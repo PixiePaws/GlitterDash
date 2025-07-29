@@ -1,0 +1,354 @@
+[gd_scene load_steps=31 format=3 uid="uid://cmbws0hamsxpx"]
+
+[ext_resource type="Script" path="res://Game/Level1/Scripts/Level1.cs" id="1_o6k5s"]
+[ext_resource type="PackedScene" uid="uid://bun0lpg7lkpq6" path="res://Player/Scenes/PlayerCharacter.tscn" id="2_hxnt0"]
+[ext_resource type="Script" path="res://Game/Respawner.cs" id="3_77cwm"]
+[ext_resource type="Script" path="res://Game/Level1/Scripts/Camera.cs" id="4_hielb"]
+[ext_resource type="Texture2D" uid="uid://uprybvy2gmww" path="res://Art/Items/TheEgg.png" id="5_5jk7x"]
+[ext_resource type="Texture2D" uid="uid://bbi8xqng11ic8" path="res://Art/Backgrounds/SpaceBG.png" id="6_0oquf"]
+[ext_resource type="Texture2D" uid="uid://cwcmktxtmsdem" path="res://Art/Backgrounds/NEWUnicornGameBG.png" id="7_clo5b"]
+[ext_resource type="Texture2D" uid="uid://ciqy2qp8wkl11" path="res://Art/Backgrounds/CrystalCave.png" id="8_g4yr3"]
+[ext_resource type="PackedScene" uid="uid://dnx3j4auf00wv" path="res://UI/Scenes/GUI.tscn" id="10_swgri"]
+[ext_resource type="PackedScene" uid="uid://qm3lloa00ldf" path="res://Items/Scenes/FinishLine.tscn" id="11_hrbdl"]
+[ext_resource type="PackedScene" uid="uid://breqli4rgs6dk" path="res://Items/Scenes/Portal.tscn" id="12_ha5xm"]
+[ext_resource type="Script" path="res://Game/Portal.cs" id="13_vsv4k"]
+[ext_resource type="Texture2D" uid="uid://dxxm417mx0341" path="res://Art/PlaceHolders/GreenBlockPlaceholder.png" id="14_pfst6"]
+[ext_resource type="Texture2D" uid="uid://t75gsvlhv18t" path="res://icon.svg" id="15_rbciq"]
+[ext_resource type="PackedScene" uid="uid://dol5g5hc7xj1e" path="res://Game/DangerZoneFalling.tscn" id="16_s3ole"]
+[ext_resource type="Script" path="res://Items/Scripts/GoldEggManager.cs" id="17_cuxg3"]
+[ext_resource type="PackedScene" uid="uid://dsnvu8ioiw0ff" path="res://Items/Scenes/GoldEgg.tscn" id="18_hc4lk"]
+[ext_resource type="Shader" path="res://Game/Black&White.gdshader" id="19_0gmyv"]
+[ext_resource type="PackedScene" uid="uid://cygqq6gsghxm8" path="res://Obstacles/Scenes/BirdCannon.tscn" id="21_2g5y7"]
+
+[sub_resource type="SegmentShape2D" id="SegmentShape2D_oefmr"]
+a = Vector2(-625.5, 13)
+b = Vector2(3310.5, 13)
+
+[sub_resource type="SegmentShape2D" id="SegmentShape2D_hwds7"]
+b = Vector2(0, 1118)
+
+[sub_resource type="SegmentShape2D" id="SegmentShape2D_x4gpo"]
+a = Vector2(1918, 1079)
+b = Vector2(1918, 2189)
+
+[sub_resource type="SegmentShape2D" id="SegmentShape2D_ixh7n"]
+a = Vector2(5760, -1139)
+b = Vector2(5761, 2244)
+
+[sub_resource type="SegmentShape2D" id="SegmentShape2D_v0npo"]
+a = Vector2(5819, -1080)
+b = Vector2(3748, -1081)
+
+[sub_resource type="SegmentShape2D" id="SegmentShape2D_i2eaj"]
+a = Vector2(3838, -1102)
+b = Vector2(3838, 1)
+
+[sub_resource type="SegmentShape2D" id="SegmentShape2D_u24kw"]
+a = Vector2(-441.678, -185.393)
+b = Vector2(24.5713, 13.7573)
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_67wqi"]
+resource_name = "Ground"
+texture = ExtResource("14_pfst6")
+texture_region_size = Vector2i(48, 49)
+0:0/0 = 0
+0:0/0/physics_layer_0/polygon_0/points = PackedVector2Array(-24, -24.5, 24, -24.5, 24, 24.5, -24, 24.5)
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_k5m74"]
+resource_name = "Wall"
+texture = ExtResource("15_rbciq")
+texture_region_size = Vector2i(48, 49)
+0:0/0 = 0
+0:0/0/physics_layer_0/polygon_0/points = PackedVector2Array(-24, -24.5, 24, -24.5, 24, 24.5, -24, 24.5)
+1:0/0 = 0
+1:0/0/physics_layer_0/polygon_0/points = PackedVector2Array(-24, -24.5, 24, -24.5, 24, 24.5, -24, 24.5)
+0:1/0 = 0
+0:1/0/physics_layer_0/polygon_0/points = PackedVector2Array(-24, -24.5, 24, -24.5, 24, 24.5, -24, 24.5)
+1:1/0 = 0
+1:1/0/physics_layer_0/polygon_0/points = PackedVector2Array(-24, -24.5, 24, -24.5, 24, 24.5, -24, 24.5)
+
+[sub_resource type="TileSet" id="TileSet_sok5l"]
+tile_size = Vector2i(48, 49)
+physics_layer_0/collision_layer = 2
+sources/0 = SubResource("TileSetAtlasSource_67wqi")
+sources/1 = SubResource("TileSetAtlasSource_k5m74")
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_r5qbd"]
+shader = ExtResource("19_0gmyv")
+
+[node name="Level4" type="Node2D" node_paths=PackedStringArray("RespawnPoint")]
+position = Vector2(3, 0)
+script = ExtResource("1_o6k5s")
+RespawnPoint = NodePath("RespawnPoint")
+_saveFormat = 1
+metadata/_edit_vertical_guides_ = [3840.0, 5760.0, 1920.0, 433.0, 960.0, 1247.0]
+metadata/_edit_horizontal_guides_ = [1080.0, 2160.0, -1080.0, 680.0, 839.0]
+
+[node name="PlayerCharacter" parent="." node_paths=PackedStringArray("Filter") instance=ExtResource("2_hxnt0")]
+z_index = 10
+position = Vector2(5299, 106)
+scale = Vector2(0.21, 0.21)
+Filter = NodePath("../BlackWhite")
+
+[node name="UniHead" parent="PlayerCharacter/PartsSkeletonContainer/Parts" index="0"]
+position = Vector2(13.791, 118.077)
+scale = Vector2(0.999833, 0.999833)
+
+[node name="UniBody" parent="PlayerCharacter/PartsSkeletonContainer/Parts" index="1"]
+position = Vector2(16.6758, 119.406)
+scale = Vector2(1, 1)
+
+[node name="UniLHand" parent="PlayerCharacter/PartsSkeletonContainer/Parts" index="2"]
+position = Vector2(10.584, 119)
+scale = Vector2(0.999858, 0.999858)
+
+[node name="UniRLeg" parent="PlayerCharacter/PartsSkeletonContainer/Parts" index="3"]
+position = Vector2(10.0078, 113.561)
+scale = Vector2(0.99985, 0.99985)
+
+[node name="UniRHand" parent="PlayerCharacter/PartsSkeletonContainer/Parts" index="4"]
+position = Vector2(-9.66992, 127.067)
+scale = Vector2(0.999849, 0.999849)
+
+[node name="UniLLeg" parent="PlayerCharacter/PartsSkeletonContainer/Parts" index="5"]
+position = Vector2(6.98633, 118.259)
+scale = Vector2(0.999851, 0.999851)
+
+[node name="Head" parent="PlayerCharacter/PartsSkeletonContainer/Skeleton2D/Base/Body" index="1"]
+scale = Vector2(0.999833, 0.999833)
+
+[node name="FrontArm" parent="PlayerCharacter/PartsSkeletonContainer/Skeleton2D/Base/Body" index="2"]
+scale = Vector2(0.999849, 0.999849)
+
+[node name="BackArm" parent="PlayerCharacter/PartsSkeletonContainer/Skeleton2D/Base/Body" index="3"]
+scale = Vector2(0.999858, 0.999858)
+
+[node name="CollisionDetector" parent="PlayerCharacter" index="3" node_paths=PackedStringArray("RespawnPoint", "Filter", "_goldeggmanager", "player", "_respawner")]
+RespawnPoint = NodePath("../../RespawnPoint")
+Filter = NodePath("../../BlackWhite")
+_goldeggmanager = NodePath("../../GoldEggs")
+player = NodePath("..")
+_respawner = NodePath("../../Respawner")
+
+[node name="Respawner" type="Node" parent="." node_paths=PackedStringArray("_respawnPoint", "_player")]
+unique_name_in_owner = true
+script = ExtResource("3_77cwm")
+_respawnPoint = NodePath("../RespawnPoint")
+_player = NodePath("../PlayerCharacter")
+
+[node name="Camera2D" type="Camera2D" parent="." node_paths=PackedStringArray("Player")]
+offset = Vector2(960, 540)
+script = ExtResource("4_hielb")
+Player = NodePath("../PlayerCharacter")
+startCameraPosition = Vector2(0, -1080)
+
+[node name="ScoreLabel" type="Label" parent="Camera2D"]
+z_index = 10
+offset_left = 160.0
+offset_top = 28.0
+offset_right = 458.0
+offset_bottom = 135.0
+theme_override_font_sizes/font_size = 78
+text = "0/13"
+
+[node name="GoldEggs" type="TextureRect" parent="Camera2D"]
+z_index = 9
+offset_left = 24.0
+offset_right = 138.0
+offset_bottom = 163.0
+texture = ExtResource("5_5jk7x")
+
+[node name="Clouds" type="TextureRect" parent="Camera2D"]
+z_index = -3
+offset_top = -1080.0
+offset_right = 1920.0
+texture = ExtResource("6_0oquf")
+
+[node name="Ground" type="TextureRect" parent="Camera2D"]
+offset_right = 1920.0
+offset_bottom = 1080.0
+texture = ExtResource("7_clo5b")
+
+[node name="UnderGround" type="TextureRect" parent="Camera2D"]
+z_index = -1
+offset_top = 1080.0
+offset_right = 1920.0
+offset_bottom = 2160.0
+texture = ExtResource("8_g4yr3")
+
+[node name="Map" type="Node" parent="."]
+
+[node name="Panel" type="Panel" parent="Map"]
+visible = false
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Panel2" type="Panel" parent="Map"]
+visible = false
+offset_left = 1920.0
+offset_right = 3840.0
+offset_bottom = 1080.0
+
+[node name="Panel3" type="Panel" parent="Map"]
+visible = false
+offset_left = 3840.0
+offset_right = 5760.0
+offset_bottom = 1080.0
+
+[node name="Panel4" type="Panel" parent="Map"]
+visible = false
+offset_left = 1920.0
+offset_top = 1080.0
+offset_right = 3840.0
+offset_bottom = 2160.0
+
+[node name="Panel5" type="Panel" parent="Map"]
+visible = false
+offset_left = 3840.0
+offset_top = 1080.0
+offset_right = 5760.0
+offset_bottom = 2160.0
+
+[node name="Panel6" type="Panel" parent="Map"]
+visible = false
+offset_left = 3840.0
+offset_top = -1080.0
+offset_right = 5760.0
+
+[node name="Gui" parent="." instance=ExtResource("10_swgri")]
+
+[node name="MapBorders" type="StaticBody2D" parent="."]
+collision_layer = 2
+
+[node name="Top" type="CollisionShape2D" parent="MapBorders"]
+position = Vector2(527.5, -13)
+shape = SubResource("SegmentShape2D_oefmr")
+
+[node name="Left" type="CollisionShape2D" parent="MapBorders"]
+shape = SubResource("SegmentShape2D_hwds7")
+
+[node name="Left3" type="CollisionShape2D" parent="MapBorders"]
+shape = SubResource("SegmentShape2D_x4gpo")
+
+[node name="Right" type="CollisionShape2D" parent="MapBorders"]
+shape = SubResource("SegmentShape2D_ixh7n")
+
+[node name="Top6" type="CollisionShape2D" parent="MapBorders"]
+shape = SubResource("SegmentShape2D_v0npo")
+
+[node name="Left6" type="CollisionShape2D" parent="MapBorders"]
+shape = SubResource("SegmentShape2D_i2eaj")
+
+[node name="Middle" type="CollisionShape2D" parent="MapBorders"]
+position = Vector2(-58, -28)
+rotation = 3.14159
+shape = SubResource("SegmentShape2D_u24kw")
+one_way_collision = true
+
+[node name="Middle2" type="CollisionShape2D" parent="MapBorders"]
+position = Vector2(5170, -5)
+rotation = 5.87951
+shape = SubResource("SegmentShape2D_u24kw")
+one_way_collision = true
+
+[node name="RespawnPoint" type="Node2D" parent="."]
+position = Vector2(95, 231)
+
+[node name="FinishLine" parent="." instance=ExtResource("11_hrbdl")]
+z_index = 10
+position = Vector2(4300, -900)
+
+[node name="Portal" parent="." instance=ExtResource("12_ha5xm")]
+position = Vector2(5572, -925)
+script = ExtResource("13_vsv4k")
+
+[node name="MainTileMap" type="TileMapLayer" parent="."]
+position = Vector2(-3, -47)
+tile_set = SubResource("TileSet_sok5l")
+
+[node name="DangerZoneFalling" parent="MainTileMap" node_paths=PackedStringArray("_goldeggmanager", "_respawner") instance=ExtResource("16_s3ole")]
+position = Vector2(0, 47)
+collision_layer = 7
+monitorable = true
+_goldeggmanager = NodePath("../../GoldEggs")
+_respawner = NodePath("../../Respawner")
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="MainTileMap/DangerZoneFalling"]
+position = Vector2(-41, 43)
+polygon = PackedVector2Array(36, 2288, 30, 1048, 1953, 1042, 1953, 2121, 5804, 2118, 5804, 2281)
+
+[node name="GoldEggs" type="Node" parent="." node_paths=PackedStringArray("_respawner")]
+script = ExtResource("17_cuxg3")
+_respawner = NodePath("../Respawner")
+GoldEggScene = ExtResource("18_hc4lk")
+
+[node name="GoldEgg" parent="GoldEggs" node_paths=PackedStringArray("_respawner") instance=ExtResource("18_hc4lk")]
+position = Vector2(1102, 562)
+_respawner = NodePath("../../Respawner")
+
+[node name="GoldEgg2" parent="GoldEggs" node_paths=PackedStringArray("_respawner") instance=ExtResource("18_hc4lk")]
+position = Vector2(4838, 84)
+_respawner = NodePath("../../Respawner")
+
+[node name="GoldEgg3" parent="GoldEggs" node_paths=PackedStringArray("_respawner") instance=ExtResource("18_hc4lk")]
+position = Vector2(1367, 627)
+_respawner = NodePath("../../Respawner")
+
+[node name="GoldEgg4" parent="GoldEggs" node_paths=PackedStringArray("_respawner") instance=ExtResource("18_hc4lk")]
+position = Vector2(3737, 172)
+_respawner = NodePath("../../Respawner")
+
+[node name="GoldEgg5" parent="GoldEggs" node_paths=PackedStringArray("_respawner") instance=ExtResource("18_hc4lk")]
+position = Vector2(4296, 788)
+_respawner = NodePath("../../Respawner")
+
+[node name="GoldEgg6" parent="GoldEggs" node_paths=PackedStringArray("_respawner") instance=ExtResource("18_hc4lk")]
+position = Vector2(4889, -916)
+_respawner = NodePath("../../Respawner")
+
+[node name="GoldEgg7" parent="GoldEggs" node_paths=PackedStringArray("_respawner") instance=ExtResource("18_hc4lk")]
+position = Vector2(3028, 1283)
+_respawner = NodePath("../../Respawner")
+
+[node name="GoldEgg8" parent="GoldEggs" node_paths=PackedStringArray("_respawner") instance=ExtResource("18_hc4lk")]
+position = Vector2(2362, 1404)
+_respawner = NodePath("../../Respawner")
+
+[node name="GoldEgg9" parent="GoldEggs" node_paths=PackedStringArray("_respawner") instance=ExtResource("18_hc4lk")]
+position = Vector2(4133, -424)
+_respawner = NodePath("../../Respawner")
+
+[node name="GoldEgg10" parent="GoldEggs" node_paths=PackedStringArray("_respawner") instance=ExtResource("18_hc4lk")]
+position = Vector2(3900, 1809)
+_respawner = NodePath("../../Respawner")
+
+[node name="GoldEgg11" parent="GoldEggs" node_paths=PackedStringArray("_respawner") instance=ExtResource("18_hc4lk")]
+position = Vector2(4903, 1504)
+_respawner = NodePath("../../Respawner")
+
+[node name="GoldEgg12" parent="GoldEggs" node_paths=PackedStringArray("_respawner") instance=ExtResource("18_hc4lk")]
+position = Vector2(4852, 648)
+_respawner = NodePath("../../Respawner")
+
+[node name="GoldEgg13" parent="GoldEggs" node_paths=PackedStringArray("_respawner") instance=ExtResource("18_hc4lk")]
+position = Vector2(5696, 327)
+_respawner = NodePath("../../Respawner")
+
+[node name="BlackWhite" type="ColorRect" parent="."]
+visible = false
+z_index = 20
+material = SubResource("ShaderMaterial_r5qbd")
+offset_left = -95.0
+offset_top = -1189.0
+offset_right = 5920.0
+offset_bottom = 2295.0
+
+[node name="Traps" type="Node" parent="."]
+
+[node name="BirdCannon" parent="Traps" instance=ExtResource("21_2g5y7")]
+position = Vector2(927, 452)
+
+[editable path="PlayerCharacter"]
