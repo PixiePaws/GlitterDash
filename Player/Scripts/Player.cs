@@ -37,6 +37,8 @@ namespace UnicornGame
 		public AnimationPlayer _animatedSprite; // tarvitaan animaatioita varten
 		public Respawner _respawner;
 
+		[Export] public AnimatedSprite2D AnimatedSprite { get; set; } // tarvitaan animaatioita varten
+
 		public override void _Ready()
 		{
 			_animatedSprite = GetNode<AnimationPlayer>("AnimationPlayer");
@@ -46,8 +48,6 @@ namespace UnicornGame
 			var skeleton = GetNode<Node2D>("PartsSkeletonContainer");
 			skeleton.Scale = new Vector2(-1, 1);
 		}
-        [Export]
-        public AnimatedSprite2D AnimatedSprite { get; set; } // tarvitaan animaatioita varten
 
 
 		public override void _PhysicsProcess(double delta)

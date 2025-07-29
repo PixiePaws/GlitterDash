@@ -13,9 +13,9 @@ namespace UnicornGame
 		private TextureRect UnderGround;
 		private Vector2 originalCloudsPos;
 		private Vector2 originalGroundPos;
-		private Vector2 originalUndeGroundPos;
-
-
+		private Vector2 originalUnderGroundPos;
+		private Vector2 originalCameraPos;
+		[Export] Vector2 startCameraPosition;
 
 		private Vector2I size;
 		private Vector2 targetPosition;
@@ -34,10 +34,10 @@ namespace UnicornGame
 
 			originalCloudsPos = Clouds.GlobalPosition;
 			originalGroundPos = Ground.GlobalPosition;
-			originalUndeGroundPos = UnderGround.GlobalPosition;
+			originalUnderGroundPos = UnderGround.GlobalPosition;
+			originalCameraPos = startCameraPosition;
 
 			size = (Vector2I)GetViewportRect().Size;
-
 			// Updates the camera position based on player's position
 			UpdateCameraPosition();
 
@@ -82,6 +82,7 @@ namespace UnicornGame
 			);
 
 			UpdateBackground(cellY);
+			
 			previousCellY = cellY;
 		}
 
@@ -94,7 +95,6 @@ namespace UnicornGame
 		public async void ResetCamera(string type)
 		{
 			GD.Print("Resetting camera position to start");
-			cameraToStart = true;
 			_pauseCamera = true;
 
 			if (type == "die")
@@ -107,32 +107,34 @@ namespace UnicornGame
 			}
 			_pauseCamera = false;
 
-			UpdateCameraPosition();
-
-			Vector2 offset = targetPosition - new Vector2(0, 0); 
-			
-			Clouds.GlobalPosition = originalCloudsPos + offset;
-			Ground.GlobalPosition = originalGroundPos + offset;
-			UnderGround.GlobalPosition = originalUndeGroundPos + offset;
-
+			ResetToOriginalLocation();
 		}
+
+		/// <summary>
+		/// Moves the camera to start position
+		/// </summary>
+		public void ResetToOriginalLocation()
+		{
+			GlobalPosition = originalCameraPos;//tämä vie kameran väärään paikkaan miten korjataan
+			targetPosition = originalCameraPos;
+			cameraToStart = false;
+		}
+			
+		/// <summary>
+		/// Moves the background based on the character location
+		/// </summary>
+		/// <param name="currentCellY"></param>
 		private void UpdateBackground(int currentCellY)
 		{
 			int shiftAmount = size.Y;
 
-			if (currentCellY != previousCellY)
-			{
-				int direction = currentCellY > previousCellY ? -1 : 1;
+			int shiftInCells = previousCellY - currentCellY;
 
-				Vector2 shift = new Vector2(0, direction * shiftAmount);
+			Vector2 shift = new Vector2(0, shiftInCells * shiftAmount);
 
-				Clouds.GlobalPosition += shift;
-				Ground.GlobalPosition += shift;
-				UnderGround.GlobalPosition += shift;
-
-			}
-
+			Clouds.GlobalPosition += shift;
+			Ground.GlobalPosition += shift;
+			UnderGround.GlobalPosition += shift;
 		}
-
 	}
 }
