@@ -8,6 +8,7 @@ public abstract partial class GameLevels : Node2D
     protected GameState _gameState;
     private PackedScene _gameManagerScene;
     private string _gameManagerScenePath;
+    protected bool _levelCompleted = false;
 
     [Export] private SaveFormat _saveFormat;
 
@@ -16,6 +17,11 @@ public abstract partial class GameLevels : Node2D
         Xml,
         Json,
         None
+    }
+    public bool CurrentLevelCompleted
+    {
+        get { return _levelCompleted; }
+        set { _levelCompleted = value; }
     }
     public GameState CurrentGameState
     {

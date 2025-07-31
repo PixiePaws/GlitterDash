@@ -37,6 +37,8 @@ namespace UnicornGame
 		public AnimationPlayer _animatedSprite; // tarvitaan animaatioita varten
 		public Respawner _respawner;
 
+		[Export] public AnimatedSprite2D AnimatedSprite { get; set; } // tarvitaan animaatioita varten
+
 		public override void _Ready()
 		{
 			_animatedSprite = GetNode<AnimationPlayer>("AnimationPlayer");
@@ -46,8 +48,6 @@ namespace UnicornGame
 			var skeleton = GetNode<Node2D>("PartsSkeletonContainer");
 			skeleton.Scale = new Vector2(-1, 1);
 		}
-        [Export]
-        public AnimatedSprite2D AnimatedSprite { get; set; } // tarvitaan animaatioita varten
 
 
 		public override void _PhysicsProcess(double delta)
@@ -115,6 +115,19 @@ namespace UnicornGame
 			}
 
 			HandleDash(inputDirection);
+
+			if (_jumpTimer > 0)
+			{
+				_jumpTimer -= (float)delta;
+			}
+
+			if (!IsOnFloor() && !_isWallSliding && _jumpTimer <= 0 && Velocity.Y > 0 && !_justWallJumped)
+				{
+					if (_animatedSprite.CurrentAnimation != "Falling")
+					{
+						_animatedSprite.Play("Falling");
+					}
+				}
 
 			// Updates the velocity based on the current state
 			Velocity = velocity;

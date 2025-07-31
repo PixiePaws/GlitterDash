@@ -57,4 +57,8 @@ text = "Settings"
 layout_mode = 2
 text = "Quit"
 
+[node name="LevelSelectButton" type="Button" parent="Control/MarginContainer/VBoxContainer"]
+layout_mode = 2
+text = "Level Select"
+
 [node name="SettingsScene" parent="Control" instance=ExtResource("2_opxph")]

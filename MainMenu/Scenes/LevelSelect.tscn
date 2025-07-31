@@ -1,0 +1,54 @@
+[gd_scene format=3 uid="uid://cgc746tledo06"]
+
+[node name="LevelSelect" type="CanvasLayer"]
+
+[node name="LevelControl" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="TabBar" type="Panel" parent="LevelControl"]
+layout_mode = 1
+anchors_preset = -1
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 100.0
+offset_top = 50.0
+offset_right = -100.0
+offset_bottom = -50.0
+
+[node name="MarginContainer" type="MarginContainer" parent="LevelControl/TabBar"]
+layout_mode = 1
+anchors_preset = -1
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = 100.0
+offset_bottom = -649.0
+
+[node name="LevelVBoxContainer" type="VBoxContainer" parent="LevelControl/TabBar/MarginContainer"]
+layout_mode = 2
+
+[node name="Level1" type="Button" parent="LevelControl/TabBar/MarginContainer/LevelVBoxContainer"]
+layout_mode = 2
+text = "Empty"
+
+[node name="Level2" type="Button" parent="LevelControl/TabBar/MarginContainer/LevelVBoxContainer"]
+layout_mode = 2
+text = "Empty"
+
+[node name="Level3" type="Button" parent="LevelControl/TabBar/MarginContainer/LevelVBoxContainer"]
+layout_mode = 2
+text = "Empty"
+
+[node name="QuitButton" type="Button" parent="LevelControl/TabBar"]
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -76.0
+offset_bottom = 62.0
+grow_horizontal = 0
+text = "Quit"
