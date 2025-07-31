@@ -8,6 +8,7 @@ size = Vector2(239, 227)
 
 [node name="BirdCannon" type="StaticBody2D"]
 position = Vector2(746, 474)
+scale = Vector2(0.5, 0.5)
 collision_layer = 0
 collision_mask = 0
 script = ExtResource("1_c2rrr")
