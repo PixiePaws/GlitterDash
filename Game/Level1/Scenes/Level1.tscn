@@ -11,15 +11,15 @@
 [ext_resource type="Texture2D" uid="uid://ciqy2qp8wkl11" path="res://Art/Backgrounds/CrystalCave.png" id="8_1li2j"]
 [ext_resource type="Texture2D" uid="uid://dxxm417mx0341" path="res://Art/PlaceHolders/GreenBlockPlaceholder.png" id="8_41xka"]
 [ext_resource type="Script" path="res://Game/Portal.cs" id="8_iqa1o"]
-[ext_resource type="PackedScene" path="res://Items/Scenes/FinishLine.tscn" id="8_olng6"]
+[ext_resource type="PackedScene" uid="uid://qm3lloa00ldf" path="res://Items/Scenes/FinishLine.tscn" id="8_olng6"]
 [ext_resource type="Texture2D" uid="uid://t75gsvlhv18t" path="res://icon.svg" id="9_2t5gx"]
-[ext_resource type="PackedScene" uid="uid://mu1by1prm8kh" path="res://Items/Scenes/GoldEgg.tscn" id="11_508a1"]
-[ext_resource type="PackedScene" uid="uid://dol5g5hc7xj1e" path="res://Game/DangerZoneFalling.tscn" id="11_v4ol5"]
+[ext_resource type="PackedScene" uid="uid://dsnvu8ioiw0ff" path="res://Items/Scenes/GoldEgg.tscn" id="11_508a1"]
+[ext_resource type="PackedScene" path="res://Game/DangerZoneFalling.tscn" id="11_v4ol5"]
 [ext_resource type="Shader" path="res://Game/Black&White.gdshader" id="14_cylb3"]
 [ext_resource type="Script" path="res://Items/Scripts/GoldEggManager.cs" id="14_qnefm"]
 [ext_resource type="Theme" path="res://UI/TextTheme.tres" id="17_rwmuo"]
 [ext_resource type="PackedScene" uid="uid://cvl311e3g082f" path="res://Player/Scenes/PlayerCharacter.tscn" id="18_hg87w"]
-[ext_resource type="PackedScene" path="res://Obstacles/Scenes/BirdCannon.tscn" id="18_k3rmw"]
+[ext_resource type="PackedScene" uid="uid://cygqq6gsghxm8" path="res://Obstacles/Scenes/BirdCannon.tscn" id="18_k3rmw"]
 
 [sub_resource type="SegmentShape2D" id="SegmentShape2D_oefmr"]
 a = Vector2(-625.5, 13)
@@ -81,7 +81,6 @@ shader = ExtResource("14_cylb3")
 position = Vector2(3, 0)
 script = ExtResource("1_r7umx")
 RespawnPoint = NodePath("RespawnPoint")
-_saveFormat = 1
 metadata/_edit_vertical_guides_ = [3840.0, 5760.0, 1920.0, 433.0, 960.0, 1247.0]
 metadata/_edit_horizontal_guides_ = [1080.0, 2160.0, -1080.0, 680.0, 839.0]
 
@@ -105,7 +104,7 @@ scale = Vector2(0.999858, 0.999858)
 position = Vector2(10.0078, 113.561)
 
 [node name="UniRHand" parent="PlayerCharacter/PartsSkeletonContainer/Parts" index="4"]
-position = Vector2(-9.66992, 127.066)
+position = Vector2(-9.66992, 127.067)
 scale = Vector2(0.999849, 0.999849)
 
 [node name="UniLLeg" parent="PlayerCharacter/PartsSkeletonContainer/Parts" index="5"]
@@ -458,6 +457,6 @@ vertical_alignment = 1
 [node name="Traps" type="Node" parent="."]
 
 [node name="BirdCannon" parent="Traps" instance=ExtResource("18_k3rmw")]
-position = Vector2(5353, -909)
+position = Vector2(5351, -1206)
 
 [editable path="PlayerCharacter"]

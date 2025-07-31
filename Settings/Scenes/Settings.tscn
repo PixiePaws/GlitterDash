@@ -1,9 +1,9 @@
 [gd_scene load_steps=7 format=3 uid="uid://cnu4eae42h74o"]
 
 [ext_resource type="Script" path="res://Settings/Scripts/SettingsScript.cs" id="1_r7oxh"]
-[ext_resource type="PackedScene" uid="uid://b1kh6r6r608f8" path="res://Settings/Scenes/ScreenMode.tscn" id="2_diy0d"]
-[ext_resource type="PackedScene" uid="uid://8bfhyrrwcngu" path="res://Settings/Scenes/ResolutionMode.tscn" id="3_kx7qs"]
-[ext_resource type="PackedScene" uid="uid://bjjhxwporokha" path="res://Settings/Scenes/HotkeyButton.tscn" id="4_nq00r"]
+[ext_resource type="PackedScene" path="res://Settings/Scenes/ScreenMode.tscn" id="2_diy0d"]
+[ext_resource type="PackedScene" path="res://Settings/Scenes/ResolutionMode.tscn" id="3_kx7qs"]
+[ext_resource type="PackedScene" path="res://Settings/Scenes/HotkeyButton.tscn" id="4_nq00r"]
 [ext_resource type="PackedScene" uid="uid://e5oe2vcoge8q" path="res://Settings/Scenes/AudioSlider.tscn" id="5_fi3mc"]
 [ext_resource type="PackedScene" uid="uid://dwseimsx5rafn" path="res://Settings/Scenes/AudioSlider(SFX).tscn" id="6_6v8ub"]
 

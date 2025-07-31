@@ -45,6 +45,28 @@ namespace UnicornGame
                 return;
             }
             currentScene.CurrentLevelCompleted = true;
+            var ParentName = GetParent().Name;
+            GameState CurrentState = currentScene.CurrentGameState;
+                if (CurrentState != null)
+                {
+                    GD.Print("Got CurrentGameState reference");
+                }
+                else
+                {
+                    GD.Print("Could not get CurrentGameState reference");
+                }
+                Godot.Collections.Dictionary<string, Variant> SaveData = CurrentState.SaveGameState();
+                string JsonString = Json.Stringify(SaveData);
+                IGameSaver GameSaver = GetNode<GameLevels>($"/root/{ParentName}/").GameManager.GameSaver;
+                if (GameSaver != null)
+                {
+                    GD.Print("Got Game Saver reference succesfully");    
+                }
+                //GD.Print(GameSaver.DirectoryPath);
+                //GD.Print(GameSaver.FileName);
+                //GD.Print(JsonString);
+                GameSaver.WriteTextToFile(GameSaver.DirectoryPath, GameSaver.FileName, JsonString);
+
             int nextLevel = 0;
 
             // Choosing the next level based on the current scene name.

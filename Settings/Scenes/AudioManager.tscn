@@ -1,6 +1,10 @@
-[gd_scene load_steps=2 format=3 uid="uid://c7v665nc1pk2o"]
+[gd_scene load_steps=6 format=3 uid="uid://c7v665nc1pk2o"]
 
 [ext_resource type="Script" path="res://Settings/Scripts/AudioManager.cs" id="1_fkiwv"]
+[ext_resource type="AudioStream" uid="uid://ba1inot0edr36" path="res://Audio/Sfx/CircularSaw0.wav" id="2_d575x"]
+[ext_resource type="AudioStream" uid="uid://5mgqiurbdvn8" path="res://Audio/Sfx/WreckingBall0.wav" id="3_drrin"]
+[ext_resource type="AudioStream" uid="uid://ctuoaqhif1dx6" path="res://Audio/Sfx/SpikeTrap1.wav" id="4_e08to"]
+[ext_resource type="AudioStream" uid="uid://cyh1hput8xpc4" path="res://Audio/Sfx/BirdCannon0.wav" id="5_jdod2"]
 
 [node name="AudioManager" type="Control"]
 z_index = -4096
@@ -13,6 +17,18 @@ grow_vertical = 2
 script = ExtResource("1_fkiwv")
 
 [node name="SFX" type="Node" parent="."]
+
+[node name="CircularSawHit" type="AudioStreamPlayer" parent="SFX"]
+stream = ExtResource("2_d575x")
+
+[node name="WreckingBallHit" type="AudioStreamPlayer" parent="SFX"]
+stream = ExtResource("3_drrin")
+
+[node name="SpikeTrapHit" type="AudioStreamPlayer" parent="SFX"]
+stream = ExtResource("4_e08to")
+
+[node name="BirdProjectileHit" type="AudioStreamPlayer" parent="SFX"]
+stream = ExtResource("5_jdod2")
 
 [node name="Music" type="Node" parent="."]
 
