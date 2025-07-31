@@ -45,6 +45,7 @@ namespace UnicornGame
             {
                 GD.Print("got respawner reference in GameState");
             }*/
+            string SystemTime = Time.GetDatetimeStringFromSystem();
             return new Godot.Collections.Dictionary<string, Variant>()
             {
                 { "FilePath", GetParent().GetSceneFilePath()},
@@ -52,7 +53,8 @@ namespace UnicornGame
                 { "PlayerPositionX", GetNode<Player>($"/root/{GetParent().Name}/PlayerCharacter").GlobalPosition.X},
                 { "PlayerPositionY", GetNode<Player>($"/root/{GetParent().Name}/PlayerCharacter").GlobalPosition.Y},
                 { "EggsCollected", GetNode<Respawner>($"/root/{GetParent().Name}/Respawner").Score},
-                { $"LevelCompleted", _currentScene.CurrentLevelCompleted}
+                { $"LevelCompleted", _currentScene.CurrentLevelCompleted},
+                { "TimeStamp", $"{SystemTime}"}
             };
         }
     }

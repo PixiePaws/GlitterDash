@@ -14,10 +14,10 @@ namespace UnicornGame
 		private string _settingsScenePath = "res://Settings/Scenes/Settings.tscn"; // Path to the settings scene
 		private string _selectSaveScenePath = "res://MainMenu/Scenes/LoadGame.tscn";
 		private Button _quitButton;
-		private Button _startButton;
+		private Button _newGameButton;
 		private Button _loadGameButton;
-		// private Button _settingsButton;
 		private Button _settingsButton;
+		private Button _continueButton;
 		public override void _Ready()
 		{
 			int primaryScreen = DisplayServer.GetPrimaryScreen();
@@ -31,21 +31,29 @@ namespace UnicornGame
 			_quitButton = GetNode<Button>("MarginContainer/VBoxContainer/QuitButton");
 			_quitButton.Pressed += OnQuitButtonPressed;
 
-			_startButton = GetNode<Button>("MarginContainer/VBoxContainer/StartButton");
-			_startButton.Pressed += OnStartButtonPressed;
+			_newGameButton = GetNode<Button>("MarginContainer/VBoxContainer/NewGameButton");
+			_newGameButton.Pressed += OnNewGameButtonPressed;
 
 			_loadGameButton = GetNode<Button>("MarginContainer/VBoxContainer/LoadGameButton");
 			_loadGameButton.Pressed += OnLoadGameButtonPressed;
 
 			_settingsButton = GetNode<Button>("MarginContainer/VBoxContainer/SettingsButton");
 			_settingsButton.Pressed += OnSettingsButtonPressed;
+
+			_continueButton = GetNode<Button>("MarginContainer/VBoxContainer/ContinueButton");
+			_continueButton.Pressed += OnContinueButtonPressed;
 		}
 		private void OnQuitButtonPressed()
 		{
 			GetTree().Quit();
 		}
-		private void OnStartButtonPressed()
+		private void OnContinueButtonPressed()
 		{
+
+		}
+		private void OnNewGameButtonPressed()
+		{
+			string SaveFileName;
 			PackedScene selectLevelScene = ResourceLoader.Load<PackedScene>(_levelScenePath);
 			if (selectLevelScene != null)
 			{
