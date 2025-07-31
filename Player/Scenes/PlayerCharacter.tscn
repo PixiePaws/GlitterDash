@@ -1,4 +1,4 @@
-[gd_scene load_steps=20 format=3 uid="uid://bun0lpg7lkpq6"]
+[gd_scene load_steps=20 format=3 uid="uid://cvl311e3g082f"]
 
 [ext_resource type="Script" path="res://Player/Scripts/Player.cs" id="1_lg3jx"]
 [ext_resource type="Texture2D" uid="uid://daub4x8scnsdc" path="res://Art/Character/BodyParts/UniHead.png" id="2_n7x20"]

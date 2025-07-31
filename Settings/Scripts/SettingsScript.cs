@@ -19,7 +19,7 @@ namespace UnicornGame
 			}
 			else
 			{
-				GD.PrintErr("Settings scene not found!");
+				GD.PrintErr("Settings scene not found! SETTINGSSCRIPT");
 			}
 
 		}

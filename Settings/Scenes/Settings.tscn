@@ -1,9 +1,11 @@
-[gd_scene load_steps=5 format=3 uid="uid://cnu4eae42h74o"]
+[gd_scene load_steps=7 format=3 uid="uid://cnu4eae42h74o"]
 
 [ext_resource type="Script" path="res://Settings/Scripts/SettingsScript.cs" id="1_r7oxh"]
-[ext_resource type="PackedScene" path="res://Settings/Scenes/ScreenMode.tscn" id="2_diy0d"]
-[ext_resource type="PackedScene" path="res://Settings/Scenes/ResolutionMode.tscn" id="3_kx7qs"]
-[ext_resource type="PackedScene" path="res://Settings/Scenes/HotkeyButton.tscn" id="4_nq00r"]
+[ext_resource type="PackedScene" uid="uid://b1kh6r6r608f8" path="res://Settings/Scenes/ScreenMode.tscn" id="2_diy0d"]
+[ext_resource type="PackedScene" uid="uid://8bfhyrrwcngu" path="res://Settings/Scenes/ResolutionMode.tscn" id="3_kx7qs"]
+[ext_resource type="PackedScene" uid="uid://bjjhxwporokha" path="res://Settings/Scenes/HotkeyButton.tscn" id="4_nq00r"]
+[ext_resource type="PackedScene" uid="uid://e5oe2vcoge8q" path="res://Settings/Scenes/AudioSlider.tscn" id="5_fi3mc"]
+[ext_resource type="PackedScene" uid="uid://dwseimsx5rafn" path="res://Settings/Scenes/AudioSlider(SFX).tscn" id="6_6v8ub"]
 
 [node name="SettingsScene" type="CanvasLayer"]
 process_mode = 3
@@ -128,34 +130,17 @@ theme_override_constants/margin_top = 24
 theme_override_constants/margin_right = 24
 theme_override_constants/margin_bottom = 24
 
-[node name="VBoxContainer" type="VBoxContainer" parent="Settings/TabContainer/Sounds/MarginContainer"]
+[node name="ScrollContainer" type="ScrollContainer" parent="Settings/TabContainer/Sounds/MarginContainer"]
 layout_mode = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Settings/TabContainer/Sounds/MarginContainer/ScrollContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
 size_flags_vertical = 4
-
-[node name="HSlider" type="HSlider" parent="Settings/TabContainer/Sounds/MarginContainer/VBoxContainer"]
-layout_mode = 2
-
-[node name="Accessibility" type="TabBar" parent="Settings/TabContainer"]
-visible = false
-layout_mode = 2
-metadata/_tab_index = 3
-
-[node name="MarginContainer" type="MarginContainer" parent="Settings/TabContainer/Accessibility"]
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-theme_override_constants/margin_left = 24
-theme_override_constants/margin_top = 24
-theme_override_constants/margin_right = 24
-theme_override_constants/margin_bottom = 24
-
-[node name="VBoxContainer" type="VBoxContainer" parent="Settings/TabContainer/Accessibility/MarginContainer"]
-layout_mode = 2
 theme_override_constants/separation = 64
-alignment = 1
 
-[node name="Label" type="Label" parent="Settings/TabContainer/Accessibility/MarginContainer/VBoxContainer"]
+[node name="AudioSlider" parent="Settings/TabContainer/Sounds/MarginContainer/ScrollContainer/VBoxContainer" instance=ExtResource("5_fi3mc")]
+layout_mode = 2
+
+[node name="AudioSlider2" parent="Settings/TabContainer/Sounds/MarginContainer/ScrollContainer/VBoxContainer" instance=ExtResource("6_6v8ub")]
 layout_mode = 2
