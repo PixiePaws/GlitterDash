@@ -14,11 +14,11 @@
 [ext_resource type="Texture2D" uid="uid://t75gsvlhv18t" path="res://icon.svg" id="11_1ocjo"]
 [ext_resource type="PackedScene" uid="uid://dol5g5hc7xj1e" path="res://Game/DangerZoneFalling.tscn" id="12_t3txc"]
 [ext_resource type="Script" path="res://Items/Scripts/GoldEggManager.cs" id="13_j1dfc"]
-[ext_resource type="PackedScene" uid="uid://mu1by1prm8kh" path="res://Items/Scenes/GoldEgg.tscn" id="14_bjsj8"]
+[ext_resource type="PackedScene" uid="uid://dsnvu8ioiw0ff" path="res://Items/Scenes/GoldEgg.tscn" id="14_bjsj8"]
 [ext_resource type="Shader" path="res://Game/Black&White.gdshader" id="15_bpjgf"]
 [ext_resource type="PackedScene" uid="uid://b6upcof87f3dd" path="res://Obstacles/Scenes/CircularSaw.tscn" id="16_e5qvk"]
-[ext_resource type="PackedScene" path="res://Obstacles/Scenes/Pendulum.tscn" id="17_q7olb"]
-[ext_resource type="PackedScene" uid="uid://cvl311e3g082f" path="res://Player/Scenes/PlayerCharacter.tscn" id="18_20a3l"]
+[ext_resource type="PackedScene" uid="uid://ti05fy42timf" path="res://Obstacles/Scenes/Pendulum.tscn" id="17_q7olb"]
+[ext_resource type="PackedScene" uid="uid://bun0lpg7lkpq6" path="res://Player/Scenes/PlayerCharacter.tscn" id="18_20a3l"]
 
 [sub_resource type="SegmentShape2D" id="SegmentShape2D_oefmr"]
 a = Vector2(-625.5, 13)
@@ -84,32 +84,40 @@ metadata/_edit_vertical_guides_ = [3840.0, 5760.0, 1920.0]
 metadata/_edit_horizontal_guides_ = [1080.0, 2160.0, -1080.0]
 
 [node name="PlayerCharacter" parent="." node_paths=PackedStringArray("Filter") instance=ExtResource("18_20a3l")]
+z_index = 2
 position = Vector2(2020, 1941)
 scale = Vector2(0.2, 0.2)
 Filter = NodePath("../BlackWhite")
 
 [node name="UniHead" parent="PlayerCharacter/PartsSkeletonContainer/Parts" index="0"]
 position = Vector2(13.791, 118.077)
+scale = Vector2(0.999834, 0.999834)
 
 [node name="UniBody" parent="PlayerCharacter/PartsSkeletonContainer/Parts" index="1"]
 position = Vector2(16.6768, 119.406)
+scale = Vector2(1, 1)
 
 [node name="UniLHand" parent="PlayerCharacter/PartsSkeletonContainer/Parts" index="2"]
 position = Vector2(10.585, 119)
+scale = Vector2(0.999856, 0.999856)
 
 [node name="UniRLeg" parent="PlayerCharacter/PartsSkeletonContainer/Parts" index="3"]
 position = Vector2(10.0088, 113.561)
+scale = Vector2(0.99985, 0.99985)
 
 [node name="UniRHand" parent="PlayerCharacter/PartsSkeletonContainer/Parts" index="4"]
 position = Vector2(-9.66895, 127.066)
+scale = Vector2(0.999848, 0.999848)
 
 [node name="UniLLeg" parent="PlayerCharacter/PartsSkeletonContainer/Parts" index="5"]
 position = Vector2(6.98828, 118.26)
+scale = Vector2(0.999851, 0.999851)
 
-[node name="CollisionDetector" parent="PlayerCharacter" index="3" node_paths=PackedStringArray("RespawnPoint", "Filter", "_goldeggmanager", "player", "_respawner")]
+[node name="CollisionDetector" parent="PlayerCharacter" index="3" node_paths=PackedStringArray("RespawnPoint", "Filter", "_goldeggmanager", "Camera", "player", "_respawner")]
 RespawnPoint = NodePath("../../RespawnPoint")
 Filter = NodePath("../../BlackWhite")
 _goldeggmanager = NodePath("../../GoldEggs")
+Camera = NodePath("../../Camera2D")
 player = NodePath("..")
 _respawner = NodePath("../../Respawner")
 
@@ -119,9 +127,11 @@ script = ExtResource("2_8kqly")
 _respawnPoint = NodePath("../RespawnPoint")
 _player = NodePath("../PlayerCharacter")
 
-[node name="Camera2D" type="Camera2D" parent="."]
+[node name="Camera2D" type="Camera2D" parent="." node_paths=PackedStringArray("Player")]
 offset = Vector2(960, 540)
 script = ExtResource("3_rs32f")
+Player = NodePath("../PlayerCharacter")
+startCameraPosition = Vector2(2, -1)
 
 [node name="ScoreLabel" type="Label" parent="Camera2D"]
 z_index = 10
@@ -319,7 +329,7 @@ offset_bottom = 2295.0
 
 [node name="CircularSaw" parent="Traps" instance=ExtResource("16_e5qvk")]
 z_index = -1
-position = Vector2(3408, 1955)
+position = Vector2(3595, 1954)
 scale = Vector2(0.6, 0.6)
 
 [node name="CircularSaw2" parent="Traps" instance=ExtResource("16_e5qvk")]
