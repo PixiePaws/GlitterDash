@@ -1,22 +1,24 @@
-[gd_scene load_steps=29 format=4 uid="uid://qh2ts23dxw1s"]
+[gd_scene load_steps=31 format=4 uid="uid://qh2ts23dxw1s"]
 
 [ext_resource type="Script" path="res://Game/Level1/Scripts/Level1.cs" id="1_g2ow3"]
 [ext_resource type="Script" path="res://Game/Respawner.cs" id="2_8kqly"]
 [ext_resource type="Script" path="res://Game/Level1/Scripts/Camera.cs" id="3_rs32f"]
 [ext_resource type="Texture2D" uid="uid://uprybvy2gmww" path="res://Art/Items/TheEgg.png" id="4_y7dv0"]
-[ext_resource type="Texture2D" uid="uid://deh5vusrmsqsu" path="res://Art/Backgrounds/UnicornGameBG.png" id="5_plxfb"]
+[ext_resource type="Texture2D" uid="uid://bbi8xqng11ic8" path="res://Art/Backgrounds/SpaceBG.png" id="6_uqv7i"]
 [ext_resource type="PackedScene" uid="uid://dnx3j4auf00wv" path="res://UI/Scenes/GUI.tscn" id="7_wp2dp"]
+[ext_resource type="Texture2D" uid="uid://cwcmktxtmsdem" path="res://Art/Backgrounds/NEWUnicornGameBG.png" id="7_xbwaj"]
+[ext_resource type="Texture2D" uid="uid://ciqy2qp8wkl11" path="res://Art/Backgrounds/CrystalCave.png" id="8_5yrq7"]
 [ext_resource type="PackedScene" uid="uid://breqli4rgs6dk" path="res://Items/Scenes/Portal.tscn" id="8_oe5dt"]
 [ext_resource type="Script" path="res://Game/Portal.cs" id="9_fcygr"]
 [ext_resource type="Texture2D" uid="uid://dxxm417mx0341" path="res://Art/PlaceHolders/GreenBlockPlaceholder.png" id="10_qo015"]
 [ext_resource type="Texture2D" uid="uid://t75gsvlhv18t" path="res://icon.svg" id="11_1ocjo"]
 [ext_resource type="PackedScene" uid="uid://dol5g5hc7xj1e" path="res://Game/DangerZoneFalling.tscn" id="12_t3txc"]
 [ext_resource type="Script" path="res://Items/Scripts/GoldEggManager.cs" id="13_j1dfc"]
-[ext_resource type="PackedScene" uid="uid://dsnvu8ioiw0ff" path="res://Items/Scenes/GoldEgg.tscn" id="14_bjsj8"]
+[ext_resource type="PackedScene" uid="uid://mu1by1prm8kh" path="res://Items/Scenes/GoldEgg.tscn" id="14_bjsj8"]
 [ext_resource type="Shader" path="res://Game/Black&White.gdshader" id="15_bpjgf"]
 [ext_resource type="PackedScene" uid="uid://b6upcof87f3dd" path="res://Obstacles/Scenes/CircularSaw.tscn" id="16_e5qvk"]
-[ext_resource type="PackedScene" uid="uid://ti05fy42timf" path="res://Obstacles/Scenes/Pendulum.tscn" id="17_q7olb"]
-[ext_resource type="PackedScene" uid="uid://bun0lpg7lkpq6" path="res://Player/Scenes/PlayerCharacter.tscn" id="18_20a3l"]
+[ext_resource type="PackedScene" path="res://Obstacles/Scenes/Pendulum.tscn" id="17_q7olb"]
+[ext_resource type="PackedScene" uid="uid://cvl311e3g082f" path="res://Player/Scenes/PlayerCharacter.tscn" id="18_20a3l"]
 
 [sub_resource type="SegmentShape2D" id="SegmentShape2D_oefmr"]
 a = Vector2(-625.5, 13)
@@ -114,7 +116,7 @@ scale = Vector2(0.999851, 0.999851)
 RespawnPoint = NodePath("../../RespawnPoint")
 Filter = NodePath("../../BlackWhite")
 _goldeggmanager = NodePath("../../GoldEggs")
-Camera = NodePath("../../Camera2D")
+Camera = NodePath("")
 player = NodePath("..")
 _respawner = NodePath("../../Respawner")
 
@@ -122,14 +124,13 @@ _respawner = NodePath("../../Respawner")
 unique_name_in_owner = true
 script = ExtResource("2_8kqly")
 _respawnPoint = NodePath("../RespawnPoint")
-_scoreLabel = NodePath("../Camera2D/ScoreLabel")
+_scoreLabel = NodePath("")
 _player = NodePath("../PlayerCharacter")
 
 [node name="Camera2D" type="Camera2D" parent="." node_paths=PackedStringArray("Player")]
-scale = Vector2(0.2, 0.2)
 offset = Vector2(960, 540)
 script = ExtResource("3_rs32f")
-Player = NodePath("../PlayerCharacter")
+Player = NodePath("")
 
 [node name="ScoreLabel" type="Label" parent="Camera2D"]
 z_index = 10
@@ -147,11 +148,23 @@ offset_right = 138.0
 offset_bottom = 163.0
 texture = ExtResource("4_y7dv0")
 
-[node name="TextureRect" type="TextureRect" parent="."]
-offset_left = -3.0
-offset_right = 1917.0
+[node name="Clouds" type="TextureRect" parent="Camera2D"]
+z_index = -3
+offset_top = -1080.0
+offset_right = 1920.0
+texture = ExtResource("6_uqv7i")
+
+[node name="Ground" type="TextureRect" parent="Camera2D"]
+offset_right = 1920.0
 offset_bottom = 1080.0
-texture = ExtResource("5_plxfb")
+texture = ExtResource("7_xbwaj")
+
+[node name="UnderGround" type="TextureRect" parent="Camera2D"]
+z_index = -1
+offset_top = 1080.0
+offset_right = 1920.0
+offset_bottom = 2160.0
+texture = ExtResource("8_5yrq7")
 
 [node name="Map" type="Node" parent="."]
 
@@ -240,7 +253,7 @@ position = Vector2(0, 47)
 collision_layer = 7
 monitorable = true
 _goldeggmanager = NodePath("../../GoldEggs")
-Camera = NodePath("../../Camera2D")
+Camera = NodePath("")
 _respawner = NodePath("../../Respawner")
 
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="MainTileMap/DangerZoneFalling"]
