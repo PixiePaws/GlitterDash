@@ -39,8 +39,8 @@ namespace UnicornGame
 		{
 			if (Input.IsActionJustPressed("Settings") && _settingsScenePanel.Visible == true)
 			{
-				this.QueueFree(); // Remove the settings screen from the scene tree
 				GetTree().Paused = false; // Unpause the game
+				this.QueueFree(); // Remove the settings screen from the scene tree
 			}
 			if (Input.IsActionJustPressed("Settings") && _settingsScenePanel.Visible == false)
 			{
@@ -90,7 +90,7 @@ namespace UnicornGame
 			}
 			else
 			{
-				GD.PrintErr("Settings scene not found!");
+				GD.PrintErr("Settings scene not found! SETTINGSSCREEN");
 			}
 		}
 	}
