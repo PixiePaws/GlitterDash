@@ -3,13 +3,12 @@ using System;
 
 namespace UnicornGame
 {
-	public partial class AudioSlider : Node
+	public partial class AudioSliderSFX : Node
 	{
 		// Called when the node enters the scene tree for the first time.
 
 		[Export] public string SliderLabelText = "Volume";
 		private Slider _volumeSlider;
-
 		private Label _audioNameLabel;
 		public override void _Ready()
 		{
@@ -21,8 +20,8 @@ namespace UnicornGame
 
 			if (_volumeSlider != null)
 			{
-				// _volumeSlider.Value = Mathf.DbToLinear(AudioManager.Instance._bgMusic.VolumeDb);
-				// _volumeSlider.ValueChanged += OnVolumeChanged;
+				_volumeSlider.Value = Mathf.DbToLinear(AudioManager.Instance._bgMusic.VolumeDb);
+				_volumeSlider.ValueChanged += OnVolumeChanged;
 			}
 			else
 			{
