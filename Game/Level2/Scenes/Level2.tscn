@@ -14,12 +14,12 @@
 [ext_resource type="Script" path="res://Game/Portal.cs" id="9_qlokc"]
 [ext_resource type="Texture2D" uid="uid://dxxm417mx0341" path="res://Art/PlaceHolders/GreenBlockPlaceholder.png" id="10_ml3u2"]
 [ext_resource type="Texture2D" uid="uid://t75gsvlhv18t" path="res://icon.svg" id="11_ey6m8"]
-[ext_resource type="PackedScene" uid="uid://dol5g5hc7xj1e" path="res://Game/DangerZoneFalling.tscn" id="12_ne7dl"]
+[ext_resource type="PackedScene" path="res://Game/DangerZoneFalling.tscn" id="12_ne7dl"]
 [ext_resource type="Script" path="res://Items/Scripts/GoldEggManager.cs" id="13_3vpso"]
-[ext_resource type="PackedScene" uid="uid://mu1by1prm8kh" path="res://Items/Scenes/GoldEgg.tscn" id="14_6bruh"]
+[ext_resource type="PackedScene" uid="uid://dsnvu8ioiw0ff" path="res://Items/Scenes/GoldEgg.tscn" id="14_6bruh"]
 [ext_resource type="Shader" path="res://Game/Black&White.gdshader" id="15_206x5"]
 [ext_resource type="PackedScene" uid="uid://b6upcof87f3dd" path="res://Obstacles/Scenes/CircularSaw.tscn" id="16_8s5p2"]
-[ext_resource type="PackedScene" path="res://Obstacles/Scenes/Pendulum.tscn" id="17_ljtf2"]
+[ext_resource type="PackedScene" uid="uid://ti05fy42timf" path="res://Obstacles/Scenes/Pendulum.tscn" id="17_ljtf2"]
 
 [sub_resource type="SegmentShape2D" id="SegmentShape2D_oefmr"]
 a = Vector2(-625.5, 13)
@@ -84,7 +84,6 @@ RespawnPoint = NodePath("RespawnPoint")
 metadata/_edit_vertical_guides_ = [3840.0, 5760.0, 1920.0]
 metadata/_edit_horizontal_guides_ = [1080.0, 2160.0, -1080.0]
 
-
 [node name="PlayerChracter" parent="." node_paths=PackedStringArray("Filter") instance=ExtResource("3_gq4q2")]
 position = Vector2(93.0002, -318)
 scale = Vector2(0.2, 0.2)
@@ -132,7 +131,6 @@ _scoreLabel = NodePath("../Camera2D/ScoreLabel")
 offset = Vector2(960, 540)
 script = ExtResource("3_af4u8")
 Player = NodePath("../PlayerChracter")
-startCameraPosition = Vector2(0, -1080)
 metadata/_edit_lock_ = true
 
 [node name="ScoreLabel" type="Label" parent="Camera2D"]

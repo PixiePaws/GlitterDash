@@ -10,7 +10,7 @@ public abstract partial class GameLevels : Node2D
     private string _gameManagerScenePath;
     protected bool _levelCompleted = false;
 
-    [Export] private SaveFormat _saveFormat;
+    [Export] private SaveFormat _saveFormat = SaveFormat.Json;
 
     public enum SaveFormat
     {

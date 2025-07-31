@@ -12,6 +12,7 @@ namespace UnicornGame
         [Export] public GoldEggManager _goldeggmanager;
         [Export] public Camera Camera;
         [Export] public Player player;
+        private AudioManager _audioManager;
         private bool _isPaused = false;
         [Export] private Respawner _respawner;
         //private String _gameOverPath = "";
@@ -20,6 +21,8 @@ namespace UnicornGame
         public override void _Ready()
         {
             //_gameOverScene = ResourceLoader.Load<PackedScene>(_gameOverPath);
+            _audioManager = GetNode<AudioManager>("/root/AudioManager");
+            GD.Print("Succesfully got audio manager reference");
             BodyEntered += OnCollisionDetected;
             _respawner = GetNode<Respawner>($"../../Respawner");
         }
@@ -33,6 +36,7 @@ namespace UnicornGame
             if (node.IsInGroup("Obstacles"))
             {
                 GD.Print("Collided with obstacle!");
+                _audioManager.PlayHitSound(node);
                 DieRestart();
             }
         }
