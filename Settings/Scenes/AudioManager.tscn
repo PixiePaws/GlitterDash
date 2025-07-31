@@ -7,6 +7,7 @@
 [ext_resource type="AudioStream" uid="uid://cyh1hput8xpc4" path="res://Audio/Sfx/BirdCannon0.wav" id="5_jdod2"]
 
 [node name="AudioManager" type="Control"]
+z_index = -4096
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
