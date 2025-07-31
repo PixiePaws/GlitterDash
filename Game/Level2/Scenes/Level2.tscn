@@ -84,35 +84,16 @@ RespawnPoint = NodePath("RespawnPoint")
 metadata/_edit_vertical_guides_ = [3840.0, 5760.0, 1920.0]
 metadata/_edit_horizontal_guides_ = [1080.0, 2160.0, -1080.0]
 
-
 [node name="PlayerChracter" parent="." node_paths=PackedStringArray("Filter") instance=ExtResource("3_gq4q2")]
 position = Vector2(93.0002, -318)
 scale = Vector2(0.2, 0.2)
 Filter = NodePath("../BlackWhite")
 
-[node name="UniHead" parent="PlayerChracter/PartsSkeletonContainer/Parts" index="0"]
-position = Vector2(13.7908, 118.077)
-scale = Vector2(0.999834, 0.999834)
-
-[node name="UniBody" parent="PlayerChracter/PartsSkeletonContainer/Parts" index="1"]
-position = Vector2(16.6767, 119.406)
-scale = Vector2(1, 1)
-
-[node name="UniLHand" parent="PlayerChracter/PartsSkeletonContainer/Parts" index="2"]
-position = Vector2(10.5845, 119)
-scale = Vector2(0.999856, 0.999856)
-
-[node name="UniRLeg" parent="PlayerChracter/PartsSkeletonContainer/Parts" index="3"]
-position = Vector2(10.0092, 113.561)
-scale = Vector2(0.99985, 0.99985)
-
 [node name="UniRHand" parent="PlayerChracter/PartsSkeletonContainer/Parts" index="4"]
 position = Vector2(-9.66861, 127.067)
-scale = Vector2(0.999848, 0.999848)
 
 [node name="UniLLeg" parent="PlayerChracter/PartsSkeletonContainer/Parts" index="5"]
 position = Vector2(6.98792, 118.259)
-scale = Vector2(0.999851, 0.999851)
 
 [node name="CollisionDetector" parent="PlayerChracter" index="3" node_paths=PackedStringArray("RespawnPoint", "Filter", "_goldeggmanager", "Camera", "player", "_respawner")]
 RespawnPoint = NodePath("../../RespawnPoint")
@@ -132,7 +113,6 @@ _scoreLabel = NodePath("../Camera2D/ScoreLabel")
 offset = Vector2(960, 540)
 script = ExtResource("3_af4u8")
 Player = NodePath("../PlayerChracter")
-startCameraPosition = Vector2(0, -1080)
 metadata/_edit_lock_ = true
 
 [node name="ScoreLabel" type="Label" parent="Camera2D"]
