@@ -104,6 +104,7 @@ position = Vector2(5482, -95)
 scale = Vector2(0.2, 0.2)
 Filter = NodePath("../BlackWhite")
 
+
 [node name="UniHead" parent="PlayerChracter/PartsSkeletonContainer/Parts" index="0"]
 position = Vector2(13.791, 118.077)
 scale = Vector2(0.999834, 0.999834)
@@ -146,7 +147,6 @@ _scoreLabel = NodePath("../Camera2D/ScoreLabel")
 offset = Vector2(960, 540)
 script = ExtResource("3_af4u8")
 Player = NodePath("../PlayerChracter")
-startCameraPosition = Vector2(0, -1080)
 metadata/_edit_lock_ = true
 
 [node name="ScoreLabel" type="Label" parent="Camera2D"]

@@ -130,7 +130,7 @@ scale = Vector2(0.999848, 0.999848)
 position = Vector2(6.98804, 118.259)
 scale = Vector2(0.999851, 0.999851)
 
-[node name="CollisionDetector" parent="PlayerCharacter" index="3" node_paths=PackedStringArray("RespawnPoint", "Filter", "_goldeggmanager", "Camera", "player", "_respawner")]
+[node name="CollisionDetector" parent="PlayerCharacter" index="3" node_paths=PackedStringArray("RespawnPoint", "Filter", "_goldeggmanager", "player", "_respawner")]
 RespawnPoint = NodePath("../../RespawnPoint")
 Filter = NodePath("../../BlackWhite")
 _goldeggmanager = NodePath("../../GoldEggs")
@@ -144,12 +144,11 @@ script = ExtResource("2_8kqly")
 _respawnPoint = NodePath("../RespawnPoint")
 _player = NodePath("../PlayerCharacter")
 
-[node name="Camera2D" type="Camera2D" parent="." node_paths=PackedStringArray("Player")]
+[node name="Camera2D" type="Camera2D" parent="."]
 offset = Vector2(960, 540)
 script = ExtResource("3_rs32f")
 Player = NodePath("../PlayerCharacter")
 startCameraPosition = Vector2(2, -1)
-
 [node name="ScoreLabel" type="Label" parent="Camera2D"]
 z_index = 10
 offset_left = 160.0

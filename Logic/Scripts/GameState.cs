@@ -16,6 +16,7 @@ namespace UnicornGame
 
         public Godot.Collections.Dictionary<string, Variant> SaveGameState()
         {
+            _currentScene = (GameLevels)GetTree().CurrentScene;
             return new Godot.Collections.Dictionary<string, Variant>()
             {
                 { $"{_currentScene.Name}", GetGameDataDictionary()}
@@ -44,15 +45,16 @@ namespace UnicornGame
             {
                 GD.Print("got respawner reference in GameState");
             }*/
-            _currentScene = (GameLevels)GetTree().CurrentScene;
+            string SystemTime = Time.GetDatetimeStringFromSystem();
             return new Godot.Collections.Dictionary<string, Variant>()
             {
-                { "Filename", GetSceneFilePath()},
+                { "FilePath", GetParent().GetSceneFilePath()},
                 { "Parent", GetParent().GetPath()},
                 { "PlayerPositionX", GetNode<Player>($"/root/{GetParent().Name}/PlayerCharacter").GlobalPosition.X},
                 { "PlayerPositionY", GetNode<Player>($"/root/{GetParent().Name}/PlayerCharacter").GlobalPosition.Y},
                 { "EggsCollected", GetNode<Respawner>($"/root/{GetParent().Name}/Respawner").Score},
-                { $"{_currentScene} + Completed", _currentScene.CurrentLevelCompleted}
+                { $"LevelCompleted", _currentScene.CurrentLevelCompleted},
+                { "TimeStamp", $"{SystemTime}"}
             };
         }
     }

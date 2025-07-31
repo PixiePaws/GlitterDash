@@ -94,7 +94,6 @@ shader = ExtResource("14_cylb3")
 position = Vector2(3, 0)
 script = ExtResource("1_r7umx")
 RespawnPoint = NodePath("RespawnPoint")
-_saveFormat = 1
 metadata/_edit_vertical_guides_ = [3840.0, 5760.0, 1920.0, 433.0, 960.0, 1247.0]
 metadata/_edit_horizontal_guides_ = [1080.0, 2160.0, -1080.0, 680.0, 839.0]
 
@@ -110,7 +109,6 @@ scale = Vector2(0.999833, 0.999833)
 
 [node name="UniBody" parent="PlayerCharacter/PartsSkeletonContainer/Parts" index="1"]
 position = Vector2(16.6758, 119.406)
-scale = Vector2(1, 1)
 
 [node name="UniLHand" parent="PlayerCharacter/PartsSkeletonContainer/Parts" index="2"]
 position = Vector2(10.584, 119)
@@ -118,10 +116,9 @@ scale = Vector2(0.999858, 0.999858)
 
 [node name="UniRLeg" parent="PlayerCharacter/PartsSkeletonContainer/Parts" index="3"]
 position = Vector2(10.0078, 113.561)
-scale = Vector2(0.99985, 0.99985)
 
 [node name="UniRHand" parent="PlayerCharacter/PartsSkeletonContainer/Parts" index="4"]
-position = Vector2(-9.66992, 127.066)
+position = Vector2(-9.66992, 127.067)
 scale = Vector2(0.999849, 0.999849)
 
 [node name="UniLLeg" parent="PlayerCharacter/PartsSkeletonContainer/Parts" index="5"]
@@ -475,6 +472,6 @@ vertical_alignment = 1
 [node name="Traps" type="Node" parent="."]
 
 [node name="BirdCannon" parent="Traps" instance=ExtResource("18_k3rmw")]
-position = Vector2(5353, -909)
+position = Vector2(5351, -1206)
 
 [editable path="PlayerCharacter"]
