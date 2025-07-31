@@ -94,21 +94,24 @@ position = Vector2(13.791, 118.077)
 scale = Vector2(0.999833, 0.999833)
 
 [node name="UniBody" parent="PlayerCharacter/PartsSkeletonContainer/Parts" index="1"]
-position = Vector2(16.6758, 119.406)
+position = Vector2(16.6758, 119.407)
+scale = Vector2(1, 1)
 
 [node name="UniLHand" parent="PlayerCharacter/PartsSkeletonContainer/Parts" index="2"]
 position = Vector2(10.584, 119)
 scale = Vector2(0.999858, 0.999858)
 
 [node name="UniRLeg" parent="PlayerCharacter/PartsSkeletonContainer/Parts" index="3"]
-position = Vector2(10.0078, 113.561)
+position = Vector2(10.0078, 113.562)
+scale = Vector2(0.99985, 0.99985)
 
 [node name="UniRHand" parent="PlayerCharacter/PartsSkeletonContainer/Parts" index="4"]
 position = Vector2(-9.66992, 127.067)
 scale = Vector2(0.999849, 0.999849)
 
 [node name="UniLLeg" parent="PlayerCharacter/PartsSkeletonContainer/Parts" index="5"]
-position = Vector2(6.98633, 118.259)
+position = Vector2(6.98633, 118.26)
+scale = Vector2(0.999851, 0.999851)
 
 [node name="Head" parent="PlayerCharacter/PartsSkeletonContainer/Skeleton2D/Base/Body" index="1"]
 scale = Vector2(0.999833, 0.999833)

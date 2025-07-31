@@ -18,6 +18,7 @@ namespace UnicornGame
 		[Export] public float DashDuration = 0.2f;
 		[Export] public float DashCooldown = 0.5f;
 		[Export] public ColorRect Filter;
+		[Export] public CollisionDetector _collisionDetector;
 		//[Export] public TileMap TileMap;
 
 		private bool _isWallSliding = false;
@@ -41,6 +42,11 @@ namespace UnicornGame
 
 		public override void _Ready()
 		{
+			_collisionDetector = GetNode<CollisionDetector>("CollisionDetector");
+			if (_collisionDetector != null)
+			{
+				GD.Print("Successfully got collision detector reference");
+			}
 			_animatedSprite = GetNode<AnimationPlayer>("AnimationPlayer");
 			_respawner = GetNode<Respawner>("../Respawner");
 
@@ -296,31 +302,31 @@ namespace UnicornGame
 			var wallChecker = GetNode<RayCast2D>("WallChecker");
 			return wallChecker.IsColliding();
 		}
-        public void Die()
-        {
-            //CollisionLayer = 0; // <-- Remove player collision layer so the blood drops don't collide with it
-            // !!!!!!!!!^^^^^^ Might have to change this manually back to CollisionLayer 1 when respawning ^^^^^^^^!!!!!!!!!!!!!!!
+		public void Die()
+		{
+			//CollisionLayer = 0; // <-- Remove player collision layer so the blood drops don't collide with it
+			// !!!!!!!!!^^^^^^ Might have to change this manually back to CollisionLayer 1 when respawning ^^^^^^^^!!!!!!!!!!!!!!!
 
-            // Load and instantiate the blood spray effect
-            var bloodEffectScene = GD.Load<PackedScene>("res://Effects/Scenes/blood_particle_effect.tscn");
-            var bloodEffect = bloodEffectScene.Instantiate<BloodParticleEffect>();
+			// Load and instantiate the blood spray effect
+			var bloodEffectScene = GD.Load<PackedScene>("res://Effects/Scenes/blood_particle_effect.tscn");
+			var bloodEffect = bloodEffectScene.Instantiate<BloodParticleEffect>();
 
-            // Place the effect at the GlobalPosition of the player
-            bloodEffect.GlobalPosition = GlobalPosition;
+			// Place the effect at the GlobalPosition of the player
+			bloodEffect.GlobalPosition = GlobalPosition;
 
-            // Add it to the scene
-            GetTree().CurrentScene.AddChild(bloodEffect);
+			// Add it to the scene
+			GetTree().CurrentScene.AddChild(bloodEffect);
 
-            // Trigger spray logic
-            bloodEffect.BloodSpray();
+			// Trigger spray logic
+			bloodEffect.BloodSpray();
 
-            // Remove the player (Doesn't work DON'T USE THIS)
-            // QueueFree();
+			// Remove the player (Doesn't work DON'T USE THIS)
+			// QueueFree();
 
-            // Hide the player <- This works
-            Hide();
+			// Hide the player <- This works
+			Hide();
 
-        }
+		}
 		/// <summary>
 		/// Gets the direction of the wall the player is currently sliding against.
 		/// Returns 1 if the wall is on the right, -1 if on the left, and 0 if no wall is detected.
@@ -377,6 +383,7 @@ namespace UnicornGame
 		/// </summary>
 		public async Task HandleDanger(string dangerType)
 		{
+			_collisionDetector.CallDeferred("set_process_mode", (int)ProcessModeEnum.Disabled);
 			GD.Print("Player died");
 			Visible = false;
 			_canControl = false;
@@ -389,7 +396,6 @@ namespace UnicornGame
 			{
 				await ToSignal(GetTree().CreateTimer(1f), Timer.SignalName.Timeout);
 			}
-
 			ResetPlayer();
 		}
 
@@ -401,6 +407,7 @@ namespace UnicornGame
 			var skeleton = GetNode<Node2D>("PartsSkeletonContainer");
 			skeleton.Scale = new Vector2(-1, 1);
 			GlobalPosition = GetNode<Node2D>("../RespawnPoint").GlobalPosition;
+			_collisionDetector.CallDeferred("set_process_mode", (int)ProcessModeEnum.Inherit);
 			Visible = true;
 			_canControl = true;
 			Filter.Visible = false;
@@ -408,13 +415,13 @@ namespace UnicornGame
 
 			// Reset the movements
 			Velocity = Vector2.Zero;
-    		_isDashing = false;
-    		_dashTimer = 0f;
-    		_dashCooldownTimer = 0f;
-    		_justWallJumped = false;
-    		_justWallJumpedTimer = 0f;
-    		_isWallSliding = false;
-    		_justJumped = false;
+			_isDashing = false;
+			_dashTimer = 0f;
+			_dashCooldownTimer = 0f;
+			_justWallJumped = false;
+			_justWallJumpedTimer = 0f;
+			_isWallSliding = false;
+			_justJumped = false;
 
 			_animatedSprite.Play("Falling");
 		}

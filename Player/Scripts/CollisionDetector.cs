@@ -53,17 +53,6 @@ namespace UnicornGame
             //_respawner.RespawnPlayer();
             await ToSignal(GetTree().CreateTimer(5f), "timeout"); // tämä 1 pienempi kun resetcameradie timer niin score resettaa samaan aikaan
             _goldeggmanager.ResetEggs();
-            /*GD.Print("InstantiateGameOverScene() was called");
-            if (_gameOverScene != null)
-            {
-                Node GameOverPanel = _gameOverScene.Instantiate();
-                AddChild(GameOverPanel);
-                GD.Print("Game over scene was instantiated");
-            }
-            else
-            {
-                GD.Print("Game over scene not found!");
-            }*/
         }
     }
 }
