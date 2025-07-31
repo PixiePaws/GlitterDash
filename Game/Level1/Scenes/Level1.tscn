@@ -460,6 +460,6 @@ vertical_alignment = 1
 [node name="Traps" type="Node" parent="."]
 
 [node name="BirdCannon" parent="Traps" instance=ExtResource("18_k3rmw")]
-position = Vector2(5353, -909)
+position = Vector2(5351, -1206)
 
 [editable path="PlayerCharacter"]

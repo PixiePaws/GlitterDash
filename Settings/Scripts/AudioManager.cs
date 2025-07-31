@@ -26,9 +26,10 @@ namespace UnicornGame
 		}
 		public void PlayHitSound(Node node)
 		{
-			GD.Print($"Play hit sound was called in Audiomanager, triggered by {node.Name}");
+			GD.Print($"Play hit sound was called in Audiomanager, triggered by {node.GetType()} {node.Name}");
 			if (node is CircularSaw)
 			{
+				GD.Print("node is CircularSaw in PlayHitSound()");
 				_circularSawHit.Play();
 			}
 			if (node is Pendulum)

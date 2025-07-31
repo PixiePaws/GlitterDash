@@ -360,7 +360,7 @@ scale = Vector2(0.6, 0.6)
 
 [node name="CircularSaw2" parent="Traps" instance=ExtResource("16_8s5p2")]
 z_index = -1
-position = Vector2(1669, -67)
+position = Vector2(1673, -59)
 scale = Vector2(0.6, 0.6)
 
 [node name="CircularSaw3" parent="Traps" instance=ExtResource("16_8s5p2")]
