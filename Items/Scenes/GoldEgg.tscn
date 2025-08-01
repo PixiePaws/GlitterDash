@@ -1,4 +1,4 @@
-[gd_scene load_steps=5 format=3 uid="uid://dsnvu8ioiw0ff"]
+[gd_scene load_steps=6 format=3 uid="uid://dsnvu8ioiw0ff"]
 
 [ext_resource type="Script" path="res://Items/Scripts/GoldEgg.cs" id="1_g52bi"]
 [ext_resource type="Texture2D" uid="uid://uprybvy2gmww" path="res://Art/Items/TheEgg.png" id="2_vc8fw"]
@@ -17,11 +17,16 @@ animations = [{
 [sub_resource type="CircleShape2D" id="CircleShape2D_r2j1v"]
 radius = 72.0278
 
+[sub_resource type="Environment" id="Environment_chmaw"]
+background_mode = 3
+glow_enabled = true
+
 [node name="GoldEgg" type="Area2D"]
 collision_layer = 2
 script = ExtResource("1_g52bi")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+visible = false
 position = Vector2(0, -1)
 sprite_frames = SubResource("SpriteFrames_0lke3")
 autoplay = "default"
@@ -30,5 +35,14 @@ autoplay = "default"
 position = Vector2(0, 1)
 scale = Vector2(0.5, 0.5)
 shape = SubResource("CircleShape2D_r2j1v")
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_chmaw")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+self_modulate = Color(2, 2, 2, 1)
+texture = ExtResource("2_vc8fw")
+
+[node name="ShaderGlobalsOverride" type="ShaderGlobalsOverride" parent="Sprite2D"]
 
 [connection signal="body_entered" from="." to="." method="_on_body_entered"]

@@ -1,0 +1,18 @@
+[gd_scene load_steps=3 format=3 uid="uid://dhyun241fg6n4"]
+
+[ext_resource type="Script" path="res://Obstacles/Scripts/SpikeTrap.cs" id="1_hsbpx"]
+[ext_resource type="Texture2D" uid="uid://bi6gfhj1dr3rv" path="res://Art/Obstacles/OnlyCaneSpikes.png" id="2_jd7ug"]
+
+[node name="SpikeTrap" type="StaticBody2D" groups=["Obstacles"]]
+light_mask = 10
+visibility_layer = 4
+collision_layer = 10
+collision_mask = 4
+script = ExtResource("1_hsbpx")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+scale = Vector2(0.2, 0.2)
+texture = ExtResource("2_jd7ug")
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="."]
+polygon = PackedVector2Array(-70, -68, -23, 93, 32, 94, 69, -70, 24, 91, 11, 91, 37, -65, 5, 92, 0, 90, 2, -70, -5, 91, -26, -96, -13, 91, -20, 89)

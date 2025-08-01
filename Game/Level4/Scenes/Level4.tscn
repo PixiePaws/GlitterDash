@@ -1,4 +1,4 @@
-[gd_scene load_steps=30 format=4 uid="uid://cmbws0hamsxpx"]
+[gd_scene load_steps=31 format=4 uid="uid://cmbws0hamsxpx"]
 
 [ext_resource type="Script" path="res://Game/Level1/Scripts/Level1.cs" id="1_o6k5s"]
 [ext_resource type="PackedScene" uid="uid://bun0lpg7lkpq6" path="res://Player/Scenes/PlayerCharacter.tscn" id="2_hxnt0"]
@@ -17,6 +17,7 @@
 [ext_resource type="Script" path="res://Items/Scripts/GoldEggManager.cs" id="17_cuxg3"]
 [ext_resource type="PackedScene" uid="uid://dsnvu8ioiw0ff" path="res://Items/Scenes/GoldEgg.tscn" id="18_hc4lk"]
 [ext_resource type="Shader" path="res://Game/Black&White.gdshader" id="19_0gmyv"]
+[ext_resource type="PackedScene" uid="uid://dhyun241fg6n4" path="res://Obstacles/Scenes/SpikeTrap2.tscn" id="19_xcrln"]
 [ext_resource type="PackedScene" uid="uid://cygqq6gsghxm8" path="res://Obstacles/Scenes/BirdCannon.tscn" id="21_2g5y7"]
 
 [sub_resource type="SegmentShape2D" id="SegmentShape2D_oefmr"]
@@ -94,12 +95,12 @@ metadata/_edit_horizontal_guides_ = [1080.0, 2160.0, -1080.0, 680.0, 839.0]
 
 [node name="PlayerCharacter" parent="." node_paths=PackedStringArray("Filter") instance=ExtResource("2_hxnt0")]
 z_index = 10
-position = Vector2(4117, 491)
+position = Vector2(4980, -239)
 scale = Vector2(0.21, 0.21)
 Filter = NodePath("../BlackWhite")
 
 [node name="UniHead" parent="PlayerCharacter/PartsSkeletonContainer/Parts" index="0"]
-position = Vector2(13.791, 118.077)
+position = Vector2(13.7891, 118.077)
 scale = Vector2(0.999833, 0.999833)
 
 [node name="UniBody" parent="PlayerCharacter/PartsSkeletonContainer/Parts" index="1"]
@@ -111,15 +112,15 @@ position = Vector2(10.584, 119)
 scale = Vector2(0.999858, 0.999858)
 
 [node name="UniRLeg" parent="PlayerCharacter/PartsSkeletonContainer/Parts" index="3"]
-position = Vector2(10.0078, 113.561)
+position = Vector2(10.0059, 113.561)
 scale = Vector2(0.99985, 0.99985)
 
 [node name="UniRHand" parent="PlayerCharacter/PartsSkeletonContainer/Parts" index="4"]
-position = Vector2(-9.66992, 127.067)
+position = Vector2(-9.67188, 127.067)
 scale = Vector2(0.999849, 0.999849)
 
 [node name="UniLLeg" parent="PlayerCharacter/PartsSkeletonContainer/Parts" index="5"]
-position = Vector2(6.98828, 118.259)
+position = Vector2(6.98633, 118.259)
 scale = Vector2(0.999851, 0.999851)
 
 [node name="Head" parent="PlayerCharacter/PartsSkeletonContainer/Skeleton2D/Base/Body" index="1"]
@@ -131,12 +132,10 @@ scale = Vector2(0.999849, 0.999849)
 [node name="BackArm" parent="PlayerCharacter/PartsSkeletonContainer/Skeleton2D/Base/Body" index="3"]
 scale = Vector2(0.999858, 0.999858)
 
-[node name="CollisionDetector" parent="PlayerCharacter" index="3" node_paths=PackedStringArray("RespawnPoint", "Filter", "_goldeggmanager", "Camera", "player", "_respawner")]
+[node name="CollisionDetector" parent="PlayerCharacter" index="3" node_paths=PackedStringArray("RespawnPoint", "_goldeggmanager", "Camera", "_respawner")]
 RespawnPoint = NodePath("../../RespawnPoint")
-Filter = NodePath("../../BlackWhite")
 _goldeggmanager = NodePath("../../GoldEggs")
 Camera = NodePath("../../Camera2D")
-player = NodePath("..")
 _respawner = NodePath("../../Respawner")
 
 [node name="Respawner" type="Node" parent="." node_paths=PackedStringArray("_respawnPoint", "_player")]
@@ -384,5 +383,73 @@ scale = Vector2(1, 1)
 [node name="BirdCannon7" parent="Traps" instance=ExtResource("21_2g5y7")]
 position = Vector2(2507, 1970)
 scale = Vector2(1, 1)
+
+[node name="SpikeTrap" parent="Traps" instance=ExtResource("19_xcrln")]
+z_index = -1
+position = Vector2(2124, 1097)
+rotation = 3.12864
+
+[node name="SpikeTrap2" parent="Traps" instance=ExtResource("19_xcrln")]
+z_index = -1
+position = Vector2(2285, 1097)
+rotation = 3.12864
+
+[node name="SpikeTrap3" parent="Traps" instance=ExtResource("19_xcrln")]
+z_index = -1
+position = Vector2(2446, 1094)
+rotation = 3.12864
+
+[node name="SpikeTrap4" parent="Traps" instance=ExtResource("19_xcrln")]
+z_index = -1
+position = Vector2(2607, 1091)
+rotation = 3.12864
+
+[node name="SpikeTrap5" parent="Traps" instance=ExtResource("19_xcrln")]
+z_index = -1
+position = Vector2(2768, 1091)
+rotation = 3.12864
+
+[node name="SpikeTrap6" parent="Traps" instance=ExtResource("19_xcrln")]
+z_index = -1
+position = Vector2(2938, 1088)
+rotation = 3.12864
+
+[node name="SpikeTrap7" parent="Traps" instance=ExtResource("19_xcrln")]
+z_index = -1
+position = Vector2(3116, 1085)
+rotation = 3.12864
+
+[node name="SpikeTrap8" parent="Traps" instance=ExtResource("19_xcrln")]
+z_index = -1
+position = Vector2(3286, 1091)
+rotation = 3.12864
+
+[node name="SpikeTrap9" parent="Traps" instance=ExtResource("19_xcrln")]
+z_index = -1
+position = Vector2(3461, 1097)
+rotation = 3.12864
+
+[node name="SpikeTrap10" parent="Traps" instance=ExtResource("19_xcrln")]
+z_index = -1
+position = Vector2(3642, 1100)
+rotation = 3.12864
+
+[node name="SpikeTrap11" parent="Traps" instance=ExtResource("19_xcrln")]
+z_index = -1
+position = Vector2(4166, -748)
+rotation = 2.24106
+scale = Vector2(5, 5)
+
+[node name="SpikeTrap12" parent="Traps" instance=ExtResource("19_xcrln")]
+z_index = -1
+position = Vector2(5490, -856)
+rotation = 3.74538
+scale = Vector2(5, 5)
+
+[node name="SpikeTrap13" parent="Traps" instance=ExtResource("19_xcrln")]
+z_index = -1
+position = Vector2(4850, -804)
+rotation = 3.16016
+scale = Vector2(5, 5)
 
 [editable path="PlayerCharacter"]

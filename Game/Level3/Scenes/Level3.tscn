@@ -1,4 +1,4 @@
-[gd_scene load_steps=32 format=4 uid="uid://qh2ts23dxw1s"]
+[gd_scene load_steps=33 format=4 uid="uid://qh2ts23dxw1s"]
 
 [ext_resource type="Script" path="res://Game/Level1/Scripts/Level1.cs" id="1_g2ow3"]
 [ext_resource type="Script" path="res://Game/Respawner.cs" id="2_8kqly"]
@@ -11,7 +11,7 @@
 [ext_resource type="PackedScene" uid="uid://breqli4rgs6dk" path="res://Items/Scenes/Portal.tscn" id="8_oe5dt"]
 [ext_resource type="Script" path="res://Game/Portal.cs" id="9_fcygr"]
 [ext_resource type="Texture2D" uid="uid://c5pr28c642ewo" path="res://Art/Tilemaps/GrassTiles.png" id="12_rre1p"]
-[ext_resource type="PackedScene" path="res://Game/DangerZoneFalling.tscn" id="12_t3txc"]
+[ext_resource type="PackedScene" uid="uid://dol5g5hc7xj1e" path="res://Game/DangerZoneFalling.tscn" id="12_t3txc"]
 [ext_resource type="Script" path="res://Items/Scripts/GoldEggManager.cs" id="13_j1dfc"]
 [ext_resource type="Texture2D" uid="uid://cer8g5b4atbgh" path="res://Art/Tilemaps/StoneTiles.png" id="13_p5jmy"]
 [ext_resource type="PackedScene" uid="uid://dsnvu8ioiw0ff" path="res://Items/Scenes/GoldEgg.tscn" id="14_bjsj8"]
@@ -20,6 +20,7 @@
 [ext_resource type="PackedScene" uid="uid://ti05fy42timf" path="res://Obstacles/Scenes/Pendulum.tscn" id="17_q7olb"]
 [ext_resource type="PackedScene" uid="uid://bun0lpg7lkpq6" path="res://Player/Scenes/PlayerCharacter.tscn" id="18_20a3l"]
 [ext_resource type="PackedScene" uid="uid://o8w6tkup2gx6" path="res://Obstacles/Scenes/MovingCircularSaw.tscn" id="20_58qqt"]
+[ext_resource type="PackedScene" uid="uid://dhyun241fg6n4" path="res://Obstacles/Scenes/SpikeTrap2.tscn" id="21_wi3pm"]
 
 [sub_resource type="SegmentShape2D" id="SegmentShape2D_oefmr"]
 a = Vector2(-625.5, 13)
@@ -99,32 +100,32 @@ metadata/_edit_horizontal_guides_ = [1080.0, 2160.0, -1080.0]
 
 [node name="PlayerCharacter" parent="." node_paths=PackedStringArray("Filter") instance=ExtResource("18_20a3l")]
 z_index = 2
-position = Vector2(1283, 903)
+position = Vector2(2608, 197)
 scale = Vector2(0.2, 0.2)
 Filter = NodePath("../BlackWhite")
 
 [node name="UniHead" parent="PlayerCharacter/PartsSkeletonContainer/Parts" index="0"]
-position = Vector2(13.7905, 118.078)
+position = Vector2(13.791, 118.077)
 scale = Vector2(0.999834, 0.999834)
 
 [node name="UniBody" parent="PlayerCharacter/PartsSkeletonContainer/Parts" index="1"]
-position = Vector2(16.6763, 119.406)
+position = Vector2(16.6768, 119.406)
 scale = Vector2(1, 1)
 
 [node name="UniLHand" parent="PlayerCharacter/PartsSkeletonContainer/Parts" index="2"]
-position = Vector2(10.5845, 119)
+position = Vector2(10.583, 119)
 scale = Vector2(0.999856, 0.999856)
 
 [node name="UniRLeg" parent="PlayerCharacter/PartsSkeletonContainer/Parts" index="3"]
-position = Vector2(10.0088, 113.561)
+position = Vector2(10.0078, 113.561)
 scale = Vector2(0.99985, 0.99985)
 
 [node name="UniRHand" parent="PlayerCharacter/PartsSkeletonContainer/Parts" index="4"]
-position = Vector2(-9.66895, 127.067)
+position = Vector2(-9.66797, 127.067)
 scale = Vector2(0.999848, 0.999848)
 
 [node name="UniLLeg" parent="PlayerCharacter/PartsSkeletonContainer/Parts" index="5"]
-position = Vector2(6.98779, 118.259)
+position = Vector2(6.9873, 118.26)
 scale = Vector2(0.999851, 0.999851)
 
 [node name="CollisionDetector" parent="PlayerCharacter" index="3" node_paths=PackedStringArray("RespawnPoint", "_goldeggmanager", "_respawner")]
@@ -396,34 +397,45 @@ z_index = -1
 position = Vector2(2687, 539)
 scale = Vector2(0.6, 0.6)
 
-[node name="PendulumHolder" parent="Traps" instance=ExtResource("17_q7olb")]
-position = Vector2(2496, -731)
-
 [node name="PendulumHolder2" parent="Traps" instance=ExtResource("17_q7olb")]
 position = Vector2(2783, -731)
 
 [node name="PendulumHolder3" parent="Traps" instance=ExtResource("17_q7olb")]
-position = Vector2(3072, -731)
-
-[node name="PendulumHolder4" parent="Traps" instance=ExtResource("17_q7olb")]
-position = Vector2(3360, -731)
+position = Vector2(3174, -731)
 
 [node name="PendulumHolder5" parent="Traps" instance=ExtResource("17_q7olb")]
 position = Vector2(3360, -1076)
 
 [node name="PendulumHolder6" parent="Traps" instance=ExtResource("17_q7olb")]
-position = Vector2(3072, -1076)
+position = Vector2(2983, -1076)
 
 [node name="PendulumHolder7" parent="Traps" instance=ExtResource("17_q7olb")]
-position = Vector2(2782, -1076)
-
-[node name="PendulumHolder8" parent="Traps" instance=ExtResource("17_q7olb")]
-position = Vector2(2496, -1076)
+position = Vector2(2602, -1076)
 
 [node name="MovingCircularSaw" parent="Traps" instance=ExtResource("20_58qqt")]
 z_index = -1
 position = Vector2(1833, 1042)
 scale = Vector2(0.6, 0.6)
+
+[node name="SpikeTrap" parent="Traps" instance=ExtResource("21_wi3pm")]
+z_index = -1
+position = Vector2(1856, 91)
+rotation = -1.5728
+
+[node name="SpikeTrap2" parent="Traps" instance=ExtResource("21_wi3pm")]
+z_index = -1
+position = Vector2(1856, 261)
+rotation = -1.5728
+
+[node name="SpikeTrap3" parent="Traps" instance=ExtResource("21_wi3pm")]
+z_index = -1
+position = Vector2(1856, 462)
+rotation = -1.5728
+
+[node name="SpikeTrap4" parent="Traps" instance=ExtResource("21_wi3pm")]
+z_index = -1
+position = Vector2(1856, 638)
+rotation = -1.5728
 
 [editable path="PlayerCharacter"]
 [editable path="Traps/MovingCircularSaw"]
