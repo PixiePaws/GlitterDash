@@ -98,7 +98,7 @@ RespawnPoint = NodePath("RespawnPoint")
 metadata/_edit_vertical_guides_ = [3840.0, 5760.0, 1920.0]
 metadata/_edit_horizontal_guides_ = [1080.0, 2160.0, -1080.0]
 
-[node name="PlayerChracter" parent="." node_paths=PackedStringArray("Filter") instance=ExtResource("3_gq4q2")]
+[node name="PlayerCharacter" parent="." node_paths=PackedStringArray("Filter") instance=ExtResource("3_gq4q2")]
 z_index = 10
 position = Vector2(5482, -95)
 scale = Vector2(0.2, 0.2)
@@ -138,6 +138,7 @@ offset_right = 1920.0
 texture = ExtResource("6_1ycxq")
 
 [node name="Ground" type="TextureRect" parent="Camera2D"]
+z_index = -1
 offset_right = 1920.0
 offset_bottom = 1080.0
 texture = ExtResource("7_ijvs2")

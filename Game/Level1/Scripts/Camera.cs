@@ -28,6 +28,8 @@ namespace UnicornGame
 
 		public override void _Ready()
 		{
+			var ParentLevelPath = GetParent().GetPath();
+			Player = GetNode<Player>($"{ParentLevelPath}/PlayerCharacter");
 			Clouds = GetNode<TextureRect>("Clouds");
 			Ground = GetNode<TextureRect>("Ground");
 			UnderGround = GetNode<TextureRect>("UnderGround");
