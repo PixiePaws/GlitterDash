@@ -1,4 +1,5 @@
-[gd_scene load_steps=33 format=4 uid="uid://cuch5yonnwbtt"]
+[gd_scene load_steps=31 format=4 uid="uid://cuch5yonnwbtt"]
+
 
 [ext_resource type="Script" path="res://Game/Level1/Scripts/Level1.cs" id="1_r7umx"]
 [ext_resource type="Script" path="res://Game/Level1/Scripts/Camera.cs" id="1_ttao5"]
@@ -7,10 +8,9 @@
 [ext_resource type="PackedScene" uid="uid://dnx3j4auf00wv" path="res://UI/Scenes/GUI.tscn" id="5_7vyyi"]
 [ext_resource type="PackedScene" uid="uid://breqli4rgs6dk" path="res://Items/Scenes/Portal.tscn" id="6_0yaxk"]
 [ext_resource type="Texture2D" uid="uid://bbi8xqng11ic8" path="res://Art/Backgrounds/SpaceBG.png" id="6_pvv2c"]
-[ext_resource type="Texture2D" uid="uid://cwcmktxtmsdem" path="res://Art/Backgrounds/NEWUnicornGameBG.png" id="7_ijnh3"]
+[ext_resource type="Texture2D" uid="uid://c3hd8ludbquxr" path="res://Art/Backgrounds/MiddleBG.png" id="7_sac58"]
 [ext_resource type="Texture2D" uid="uid://ciqy2qp8wkl11" path="res://Art/Backgrounds/CrystalCave.png" id="8_1li2j"]
 [ext_resource type="Script" path="res://Game/Portal.cs" id="8_iqa1o"]
-[ext_resource type="PackedScene" uid="uid://qm3lloa00ldf" path="res://Items/Scenes/FinishLine.tscn" id="8_olng6"]
 [ext_resource type="PackedScene" uid="uid://dsnvu8ioiw0ff" path="res://Items/Scenes/GoldEgg.tscn" id="11_508a1"]
 [ext_resource type="PackedScene" path="res://Game/DangerZoneFalling.tscn" id="11_v4ol5"]
 [ext_resource type="Texture2D" uid="uid://c5pr28c642ewo" path="res://Art/Tilemaps/GrassTiles.png" id="13_oypm7"]
@@ -75,11 +75,8 @@ texture_region_size = Vector2i(48, 49)
 0:0/0 = 0
 0:0/0/physics_layer_0/polygon_0/points = PackedVector2Array(-24, -24.5, 24, -24.5, 24, 24.5, -24, 24.5)
 1:0/0 = 0
-1:0/0/physics_layer_0/polygon_0/points = PackedVector2Array(-24, -24.5, 24, -24.5, 24, 24.5, -24, 24.5)
 0:1/0 = 0
-0:1/0/physics_layer_0/polygon_0/points = PackedVector2Array(-24, -24.5, 24, -24.5, 24, 24.5, -24, 24.5)
 1:1/0 = 0
-1:1/0/physics_layer_0/polygon_0/points = PackedVector2Array(-24, -24.5, 24, -24.5, 24, 24.5, -24, 24.5)
 2:0/0 = 0
 
 [sub_resource type="TileSet" id="TileSet_sok5l"]
@@ -100,12 +97,12 @@ metadata/_edit_horizontal_guides_ = [1080.0, 2160.0, -1080.0, 680.0, 839.0]
 
 [node name="PlayerCharacter" parent="." node_paths=PackedStringArray("Filter") instance=ExtResource("18_hg87w")]
 z_index = 10
-position = Vector2(4459, 1755)
+position = Vector2(4963, 75.0001)
 scale = Vector2(0.21, 0.21)
 Filter = NodePath("../BlackWhite")
 
 [node name="UniHead" parent="PlayerCharacter/PartsSkeletonContainer/Parts" index="0"]
-position = Vector2(13.791, 118.078)
+position = Vector2(13.791, 118.077)
 scale = Vector2(0.999833, 0.999833)
 
 [node name="UniBody" parent="PlayerCharacter/PartsSkeletonContainer/Parts" index="1"]
@@ -125,7 +122,7 @@ position = Vector2(-9.66992, 127.066)
 scale = Vector2(0.999849, 0.999849)
 
 [node name="UniLLeg" parent="PlayerCharacter/PartsSkeletonContainer/Parts" index="5"]
-position = Vector2(6.98633, 118.26)
+position = Vector2(6.98633, 118.259)
 scale = Vector2(0.999851, 0.999851)
 
 [node name="Head" parent="PlayerCharacter/PartsSkeletonContainer/Skeleton2D/Base/Body" index="1"]
@@ -173,20 +170,22 @@ offset_bottom = 163.0
 texture = ExtResource("4_8klg8")
 
 [node name="Clouds" type="TextureRect" parent="Camera2D"]
+z_index = -5
 offset_top = -1080.0
 offset_right = 1920.0
 texture = ExtResource("6_pvv2c")
 
 [node name="Ground" type="TextureRect" parent="Camera2D"]
-z_index = -1
+z_index = -5
 offset_right = 1920.0
 offset_bottom = 1080.0
-texture = ExtResource("7_ijnh3")
+texture = ExtResource("7_sac58")
 
 [node name="UnderGround" type="TextureRect" parent="Camera2D"]
-z_index = -1
+z_index = -5
+offset_left = -3.0
 offset_top = 1080.0
-offset_right = 1920.0
+offset_right = 1917.0
 offset_bottom = 2160.0
 texture = ExtResource("8_1li2j")
 
@@ -270,10 +269,6 @@ one_way_collision = true
 
 [node name="RespawnPoint" type="Node2D" parent="."]
 position = Vector2(95, 231)
-
-[node name="FinishLine" parent="." instance=ExtResource("8_olng6")]
-z_index = 10
-position = Vector2(4300, -900)
 
 [node name="Portal" parent="." instance=ExtResource("6_0yaxk")]
 position = Vector2(5572, -925)
