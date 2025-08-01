@@ -11,7 +11,7 @@
 [ext_resource type="Texture2D" uid="uid://ciqy2qp8wkl11" path="res://Art/Backgrounds/CrystalCave.png" id="8_p217b"]
 [ext_resource type="PackedScene" uid="uid://breqli4rgs6dk" path="res://Items/Scenes/Portal.tscn" id="8_qya7y"]
 [ext_resource type="Script" path="res://Game/Portal.cs" id="9_qlokc"]
-[ext_resource type="PackedScene" uid="uid://dol5g5hc7xj1e" path="res://Game/DangerZoneFalling.tscn" id="12_ne7dl"]
+[ext_resource type="PackedScene" path="res://Game/DangerZoneFalling.tscn" id="12_ne7dl"]
 [ext_resource type="Script" path="res://Items/Scripts/GoldEggManager.cs" id="13_3vpso"]
 [ext_resource type="Texture2D" uid="uid://c5pr28c642ewo" path="res://Art/Tilemaps/GrassTiles.png" id="13_rtx4p"]
 [ext_resource type="PackedScene" uid="uid://dsnvu8ioiw0ff" path="res://Items/Scenes/GoldEgg.tscn" id="14_6bruh"]
@@ -94,7 +94,7 @@ RespawnPoint = NodePath("RespawnPoint")
 metadata/_edit_vertical_guides_ = [3840.0, 5760.0, 1920.0]
 metadata/_edit_horizontal_guides_ = [1080.0, 2160.0, -1080.0]
 
-[node name="PlayerChracter" parent="." node_paths=PackedStringArray("Filter") instance=ExtResource("3_gq4q2")]
+[node name="PlayerCharacter" parent="." node_paths=PackedStringArray("Filter") instance=ExtResource("3_gq4q2")]
 z_index = 10
 position = Vector2(2533, -155)
 scale = Vector2(0.2, 0.2)
@@ -137,7 +137,7 @@ unique_name_in_owner = true
 script = ExtResource("2_0pn7e")
 _respawnPoint = NodePath("../RespawnPoint")
 
-[node name="Camera2D" type="Camera2D" parent="." node_paths=PackedStringArray("Player")]
+[node name="Camera2D" type="Camera2D" parent="."]
 offset = Vector2(960, 540)
 script = ExtResource("3_af4u8")
 Player = NodePath("../PlayerChracter")
@@ -406,5 +406,3 @@ scale = Vector2(0.6, 0.6)
 z_index = -1
 position = Vector2(2919, 2108)
 scale = Vector2(0.6, 0.6)
-
-[editable path="PlayerChracter"]

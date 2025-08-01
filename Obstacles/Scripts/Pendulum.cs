@@ -22,7 +22,7 @@ namespace UnicornGame
         public override void _Ready()
         {
             Gravity = ProjectSettings.GetSetting("physics/2d/default_gravity").AsSingle();
-            _pendulumHolder = GetNode<StaticBody2D>("/root/PendulumHolder");
+            _pendulumHolder = (StaticBody2D)GetParent();
             if (_pendulumHolder == null)
             {
                 GD.Print("Pendulum holder is null");

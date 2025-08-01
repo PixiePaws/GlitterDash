@@ -1,5 +1,6 @@
 [gd_scene load_steps=31 format=4 uid="uid://cuch5yonnwbtt"]
 
+
 [ext_resource type="Script" path="res://Game/Level1/Scripts/Level1.cs" id="1_r7umx"]
 [ext_resource type="Script" path="res://Game/Level1/Scripts/Camera.cs" id="1_ttao5"]
 [ext_resource type="Script" path="res://Game/Respawner.cs" id="2_gdrdi"]
@@ -11,14 +12,15 @@
 [ext_resource type="Texture2D" uid="uid://ciqy2qp8wkl11" path="res://Art/Backgrounds/CrystalCave.png" id="8_1li2j"]
 [ext_resource type="Script" path="res://Game/Portal.cs" id="8_iqa1o"]
 [ext_resource type="PackedScene" uid="uid://dsnvu8ioiw0ff" path="res://Items/Scenes/GoldEgg.tscn" id="11_508a1"]
-[ext_resource type="PackedScene" uid="uid://dol5g5hc7xj1e" path="res://Game/DangerZoneFalling.tscn" id="11_v4ol5"]
+[ext_resource type="PackedScene" path="res://Game/DangerZoneFalling.tscn" id="11_v4ol5"]
 [ext_resource type="Texture2D" uid="uid://c5pr28c642ewo" path="res://Art/Tilemaps/GrassTiles.png" id="13_oypm7"]
 [ext_resource type="Shader" path="res://Game/Black&White.gdshader" id="14_cylb3"]
 [ext_resource type="Script" path="res://Items/Scripts/GoldEggManager.cs" id="14_qnefm"]
 [ext_resource type="Texture2D" uid="uid://cer8g5b4atbgh" path="res://Art/Tilemaps/StoneTiles.png" id="14_rhyll"]
-[ext_resource type="Theme" uid="uid://toxmj1vwp6m" path="res://UI/TextTheme.tres" id="17_rwmuo"]
+[ext_resource type="Theme" path="res://UI/TextTheme.tres" id="17_rwmuo"]
 [ext_resource type="PackedScene" uid="uid://bun0lpg7lkpq6" path="res://Player/Scenes/PlayerCharacter.tscn" id="18_hg87w"]
 [ext_resource type="PackedScene" uid="uid://cygqq6gsghxm8" path="res://Obstacles/Scenes/BirdCannon.tscn" id="18_k3rmw"]
+[ext_resource type="PackedScene" uid="uid://cer6xkecwmj1s" path="res://Obstacles/Scenes/SpikeTrap.tscn" id="21_2mg51"]
 
 [sub_resource type="SegmentShape2D" id="SegmentShape2D_oefmr"]
 a = Vector2(-625.5, 13)
@@ -116,7 +118,7 @@ position = Vector2(10.0078, 113.561)
 scale = Vector2(0.99985, 0.99985)
 
 [node name="UniRHand" parent="PlayerCharacter/PartsSkeletonContainer/Parts" index="4"]
-position = Vector2(-9.66992, 127.067)
+position = Vector2(-9.66992, 127.066)
 scale = Vector2(0.999849, 0.999849)
 
 [node name="UniLLeg" parent="PlayerCharacter/PartsSkeletonContainer/Parts" index="5"]
@@ -132,12 +134,10 @@ scale = Vector2(0.999849, 0.999849)
 [node name="BackArm" parent="PlayerCharacter/PartsSkeletonContainer/Skeleton2D/Base/Body" index="3"]
 scale = Vector2(0.999858, 0.999858)
 
-[node name="CollisionDetector" parent="PlayerCharacter" index="3" node_paths=PackedStringArray("RespawnPoint", "Filter", "_goldeggmanager", "Camera", "player", "_respawner")]
+[node name="CollisionDetector" parent="PlayerCharacter" index="3" node_paths=PackedStringArray("RespawnPoint", "_goldeggmanager", "Camera", "_respawner")]
 RespawnPoint = NodePath("../../RespawnPoint")
-Filter = NodePath("../../BlackWhite")
 _goldeggmanager = NodePath("../../GoldEggs")
 Camera = NodePath("../../Camera2D")
-player = NodePath("..")
 _respawner = NodePath("../../Respawner")
 
 [node name="Respawner" type="Node" parent="." node_paths=PackedStringArray("_respawnPoint", "_scoreLabel", "_player")]
@@ -469,6 +469,9 @@ vertical_alignment = 1
 [node name="Traps" type="Node" parent="."]
 
 [node name="BirdCannon" parent="Traps" instance=ExtResource("18_k3rmw")]
-position = Vector2(5353, -909)
+position = Vector2(5312, -1176)
+
+[node name="SpikeTrap" parent="Traps" instance=ExtResource("21_2mg51")]
+position = Vector2(1108, 1030)
 
 [editable path="PlayerCharacter"]

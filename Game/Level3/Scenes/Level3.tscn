@@ -11,7 +11,7 @@
 [ext_resource type="PackedScene" uid="uid://breqli4rgs6dk" path="res://Items/Scenes/Portal.tscn" id="8_oe5dt"]
 [ext_resource type="Script" path="res://Game/Portal.cs" id="9_fcygr"]
 [ext_resource type="Texture2D" uid="uid://c5pr28c642ewo" path="res://Art/Tilemaps/GrassTiles.png" id="12_rre1p"]
-[ext_resource type="PackedScene" uid="uid://dol5g5hc7xj1e" path="res://Game/DangerZoneFalling.tscn" id="12_t3txc"]
+[ext_resource type="PackedScene" path="res://Game/DangerZoneFalling.tscn" id="12_t3txc"]
 [ext_resource type="Script" path="res://Items/Scripts/GoldEggManager.cs" id="13_j1dfc"]
 [ext_resource type="Texture2D" uid="uid://cer8g5b4atbgh" path="res://Art/Tilemaps/StoneTiles.png" id="13_p5jmy"]
 [ext_resource type="PackedScene" uid="uid://dsnvu8ioiw0ff" path="res://Items/Scenes/GoldEgg.tscn" id="14_bjsj8"]
@@ -127,12 +127,9 @@ scale = Vector2(0.999848, 0.999848)
 position = Vector2(6.98779, 118.259)
 scale = Vector2(0.999851, 0.999851)
 
-[node name="CollisionDetector" parent="PlayerCharacter" index="3" node_paths=PackedStringArray("RespawnPoint", "Filter", "_goldeggmanager", "Camera", "player", "_respawner")]
+[node name="CollisionDetector" parent="PlayerCharacter" index="3" node_paths=PackedStringArray("RespawnPoint", "_goldeggmanager", "_respawner")]
 RespawnPoint = NodePath("../../RespawnPoint")
-Filter = NodePath("../../BlackWhite")
 _goldeggmanager = NodePath("../../GoldEggs")
-Camera = NodePath("../../Camera2D")
-player = NodePath("..")
 _respawner = NodePath("../../Respawner")
 
 [node name="Respawner" type="Node" parent="." node_paths=PackedStringArray("_respawnPoint", "_player")]

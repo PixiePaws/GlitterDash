@@ -3,8 +3,9 @@
 [ext_resource type="PackedScene" uid="uid://b6upcof87f3dd" path="res://Obstacles/Scenes/CircularSaw.tscn" id="1_2j6wp"]
 [ext_resource type="Script" path="res://Obstacles/Scripts/MovingSaw.cs" id="1_bst3o"]
 
-[node name="MovingCircularSaw" type="Node2D"]
+[node name="MovingCircularSaw" type="Node2D" node_paths=PackedStringArray("_circularSaw")]
 script = ExtResource("1_bst3o")
+_circularSaw = NodePath("CircularSaw")
 _movementMagnitude = 50.0
 _targetPosition = Vector2(200, 0)
 
