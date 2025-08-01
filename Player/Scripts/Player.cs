@@ -42,6 +42,8 @@ namespace UnicornGame
 
 		public override void _Ready()
 		{
+			var ParentLevelPath = GetParent().GetPath();
+			Filter = GetNode<ColorRect>($"{ParentLevelPath}/BlackWhite");
 			_collisionDetector = GetNode<CollisionDetector>("CollisionDetector");
 			if (_collisionDetector != null)
 			{

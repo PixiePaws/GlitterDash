@@ -1,4 +1,4 @@
-[gd_scene load_steps=32 format=4 uid="uid://cuch5yonnwbtt"]
+[gd_scene load_steps=33 format=4 uid="uid://cuch5yonnwbtt"]
 
 [ext_resource type="Script" path="res://Game/Level1/Scripts/Level1.cs" id="1_r7umx"]
 [ext_resource type="Script" path="res://Game/Level1/Scripts/Camera.cs" id="1_ttao5"]
@@ -20,6 +20,7 @@
 [ext_resource type="Theme" path="res://UI/TextTheme.tres" id="17_rwmuo"]
 [ext_resource type="PackedScene" uid="uid://cvl311e3g082f" path="res://Player/Scenes/PlayerCharacter.tscn" id="18_hg87w"]
 [ext_resource type="PackedScene" uid="uid://cygqq6gsghxm8" path="res://Obstacles/Scenes/BirdCannon.tscn" id="18_k3rmw"]
+[ext_resource type="PackedScene" uid="uid://cer6xkecwmj1s" path="res://Obstacles/Scenes/SpikeTrap.tscn" id="21_2mg51"]
 
 [sub_resource type="SegmentShape2D" id="SegmentShape2D_oefmr"]
 a = Vector2(-625.5, 13)
@@ -460,6 +461,9 @@ vertical_alignment = 1
 [node name="Traps" type="Node" parent="."]
 
 [node name="BirdCannon" parent="Traps" instance=ExtResource("18_k3rmw")]
-position = Vector2(5351, -1206)
+position = Vector2(5312, -1176)
+
+[node name="SpikeTrap" parent="Traps" instance=ExtResource("21_2mg51")]
+position = Vector2(1108, 1030)
 
 [editable path="PlayerCharacter"]
