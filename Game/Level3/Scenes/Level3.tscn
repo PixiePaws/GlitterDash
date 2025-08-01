@@ -11,7 +11,7 @@
 [ext_resource type="PackedScene" uid="uid://breqli4rgs6dk" path="res://Items/Scenes/Portal.tscn" id="8_oe5dt"]
 [ext_resource type="Script" path="res://Game/Portal.cs" id="9_fcygr"]
 [ext_resource type="Texture2D" uid="uid://c5pr28c642ewo" path="res://Art/Tilemaps/GrassTiles.png" id="12_rre1p"]
-[ext_resource type="PackedScene" uid="uid://dol5g5hc7xj1e" path="res://Game/DangerZoneFalling.tscn" id="12_t3txc"]
+[ext_resource type="PackedScene" path="res://Game/DangerZoneFalling.tscn" id="12_t3txc"]
 [ext_resource type="Script" path="res://Items/Scripts/GoldEggManager.cs" id="13_j1dfc"]
 [ext_resource type="Texture2D" uid="uid://cer8g5b4atbgh" path="res://Art/Tilemaps/StoneTiles.png" id="13_p5jmy"]
 [ext_resource type="PackedScene" uid="uid://dsnvu8ioiw0ff" path="res://Items/Scenes/GoldEgg.tscn" id="14_bjsj8"]
@@ -107,11 +107,11 @@ scale = Vector2(0.2, 0.2)
 Filter = NodePath("../BlackWhite")
 
 [node name="UniHead" parent="PlayerCharacter/PartsSkeletonContainer/Parts" index="0"]
-position = Vector2(13.791, 118.077)
+position = Vector2(13.7908, 118.077)
 scale = Vector2(0.999834, 0.999834)
 
 [node name="UniBody" parent="PlayerCharacter/PartsSkeletonContainer/Parts" index="1"]
-position = Vector2(16.6768, 119.406)
+position = Vector2(16.6765, 119.406)
 scale = Vector2(1, 1)
 
 [node name="UniLHand" parent="PlayerCharacter/PartsSkeletonContainer/Parts" index="2"]
@@ -119,23 +119,20 @@ position = Vector2(10.5847, 119)
 scale = Vector2(0.999856, 0.999856)
 
 [node name="UniRLeg" parent="PlayerCharacter/PartsSkeletonContainer/Parts" index="3"]
-position = Vector2(10.0093, 113.561)
+position = Vector2(10.009, 113.561)
 scale = Vector2(0.99985, 0.99985)
 
 [node name="UniRHand" parent="PlayerCharacter/PartsSkeletonContainer/Parts" index="4"]
-position = Vector2(-9.66846, 127.066)
+position = Vector2(-9.6687, 127.067)
 scale = Vector2(0.999848, 0.999848)
 
 [node name="UniLLeg" parent="PlayerCharacter/PartsSkeletonContainer/Parts" index="5"]
-position = Vector2(6.98804, 118.259)
+position = Vector2(6.98779, 118.259)
 scale = Vector2(0.999851, 0.999851)
 
-[node name="CollisionDetector" parent="PlayerCharacter" index="3" node_paths=PackedStringArray("RespawnPoint", "Filter", "_goldeggmanager", "player", "_respawner")]
+[node name="CollisionDetector" parent="PlayerCharacter" index="3" node_paths=PackedStringArray("RespawnPoint", "_goldeggmanager", "_respawner")]
 RespawnPoint = NodePath("../../RespawnPoint")
-Filter = NodePath("../../BlackWhite")
 _goldeggmanager = NodePath("../../GoldEggs")
-Camera = NodePath("../../Camera2D")
-player = NodePath("..")
 _respawner = NodePath("../../Respawner")
 
 [node name="Respawner" type="Node" parent="." node_paths=PackedStringArray("_respawnPoint", "_player")]
@@ -144,11 +141,12 @@ script = ExtResource("2_8kqly")
 _respawnPoint = NodePath("../RespawnPoint")
 _player = NodePath("../PlayerCharacter")
 
-[node name="Camera2D" type="Camera2D" parent="."]
+[node name="Camera2D" type="Camera2D" parent="." node_paths=PackedStringArray("Player")]
 offset = Vector2(960, 540)
 script = ExtResource("3_rs32f")
 Player = NodePath("../PlayerCharacter")
 startCameraPosition = Vector2(2, -1)
+
 [node name="ScoreLabel" type="Label" parent="Camera2D"]
 z_index = 10
 offset_left = 160.0
