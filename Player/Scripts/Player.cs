@@ -9,11 +9,11 @@ namespace UnicornGame
 	{
 		[Export] public float Speed = 200f;
 		[Export] public float JumpVelocity = -600f;
-		[Export] public float WallJumpVelocity = -500f;
+		[Export] public float WallJumpVelocity = -600f;
 		[Export] public float WallJumpPush = 400f;
 		[Export] public float WallSlideSpeed = 100f;
 		[Export] public float Gravity = 1500f;
-		[Export] public float JumpDuration = 0.01f;
+		[Export] public float JumpDuration = 1f; 
 		[Export] public float DashSpeed = 800f;
 		[Export] public float DashDuration = 0.2f;
 		[Export] public float DashCooldown = 0.5f;
@@ -139,7 +139,10 @@ namespace UnicornGame
 
 			// Updates the velocity based on the current state
 			Velocity = velocity;
-			SetDirection(inputDirection); // Update the direction based on input
+			if (_justWallJumpedTimer <= 0)
+			{
+				SetDirection(inputDirection); // Update the direction based on input
+			}
 			MoveAndSlide();
 
 			//GD.Print(IsNearWall());
@@ -151,26 +154,22 @@ namespace UnicornGame
 		/// </summary>
 		private void BasicMovement(ref Godot.Vector2 velocity, float inputDirection)
 		{
-			if (!_justJumped)
+			if (inputDirection != 0)
 			{
-				if (inputDirection != 0)
+				velocity.X = inputDirection * Speed;
+				_lastMoveDirection = inputDirection; // Update last move direction
+				if (IsOnFloor() && !_isWallSliding && !_isDashing)
 				{
-					velocity.X = inputDirection * Speed;
-					_lastMoveDirection = inputDirection; // Update last move direction
-
-					if (IsOnFloor() && !_isWallSliding && !_isDashing)
-					{
-						_animatedSprite.Play("Walk");
-					}
+					_animatedSprite.Play("Walk");
 				}
-				else
-				{
-					velocity.X = Mathf.MoveToward(velocity.X, 0, Speed);
+			}
+			else
+			{
+				velocity.X = Mathf.MoveToward(velocity.X, 0, Speed);
 
-					if (IsOnFloor() && !_isWallSliding && !_isDashing)
-					{
-						_animatedSprite.Play("Idle");
-					}
+				if (IsOnFloor() && !_isWallSliding && !_isDashing)
+				{
+					_animatedSprite.Play("Idle");
 				}
 			}
 		}
@@ -263,10 +262,11 @@ namespace UnicornGame
 							// Vector2 direction = new Godot.Vector2(-wallDirection, -2).Normalized();
 							// velocity = direction * WallJumpPush;
 							_justWallJumped = true;
-							_justWallJumpedTimer = 0.15f;
+							_justWallJumpedTimer = 0.4f;
 							_animatedSprite.Play("Jump");
 						}
 
+						SetDirection(-wallDirection);
 						_isWallSliding = false; // Reset wall sliding state after jumping
 					}
 				}
@@ -304,10 +304,10 @@ namespace UnicornGame
 			var wallChecker = GetNode<RayCast2D>("WallChecker");
 			return wallChecker.IsColliding();
 		}
-		public void Die()
-		{
-			//CollisionLayer = 0; // <-- Remove player collision layer so the blood drops don't collide with it
-			// !!!!!!!!!^^^^^^ Might have to change this manually back to CollisionLayer 1 when respawning ^^^^^^^^!!!!!!!!!!!!!!!
+        public void Die()
+        {
+            //CollisionLayer = 0; // <-- Remove player collision layer so the blood drops don't collide with it 
+            // !!!!!!!!!^^^^^^ Might have to change this manually back to CollisionLayer 1 when respawning ^^^^^^^^!!!!!!!!!!!!!!!
 
 			// Load and instantiate the blood spray effect
 			var bloodEffectScene = GD.Load<PackedScene>("res://Effects/Scenes/blood_particle_effect.tscn");
@@ -325,10 +325,10 @@ namespace UnicornGame
 			// Remove the player (Doesn't work DON'T USE THIS)
 			// QueueFree();
 
-			// Hide the player <- This works
-			Hide();
-
-		}
+            // Hide the player <- This works
+            Hide();
+            
+        }
 		/// <summary>
 		/// Gets the direction of the wall the player is currently sliding against.
 		/// Returns 1 if the wall is on the right, -1 if on the left, and 0 if no wall is detected.
