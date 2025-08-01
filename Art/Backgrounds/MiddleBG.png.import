@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://cwcmktxtmsdem"
-path="res://.godot/imported/NEWUnicornGameBG.png-929a1fe08da70a4752c530d53af3db67.ctex"
+uid="uid://c3hd8ludbquxr"
+path="res://.godot/imported/MiddleBG.png-5d277db4e3cbaf431334b6fbc5d72541.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Art/Backgrounds/NEWUnicornGameBG.png"
-dest_files=["res://.godot/imported/NEWUnicornGameBG.png-929a1fe08da70a4752c530d53af3db67.ctex"]
+source_file="res://Art/Backgrounds/MiddleBG.png"
+dest_files=["res://.godot/imported/MiddleBG.png-5d277db4e3cbaf431334b6fbc5d72541.ctex"]
 
 [params]
 
