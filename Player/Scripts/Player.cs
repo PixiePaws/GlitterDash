@@ -19,7 +19,7 @@ namespace UnicornGame
 		[Export] public float DashCooldown = 0.5f;
 		[Export] public ColorRect Filter;
 		[Export] public CollisionDetector _collisionDetector;
-		//[Export] public TileMap TileMap;
+		[Export] public AnimatedSprite2D AnimatedSprite { get; set; } // tarvitaan animaatioita varten
 
 		private bool _isWallSliding = false;
 		private float _wallJumpDirection = 0;
@@ -38,7 +38,6 @@ namespace UnicornGame
 		public AnimationPlayer _animatedSprite; // tarvitaan animaatioita varten
 		public Respawner _respawner;
 
-		[Export] public AnimatedSprite2D AnimatedSprite { get; set; } // tarvitaan animaatioita varten
 
 		public override void _Ready()
 		{

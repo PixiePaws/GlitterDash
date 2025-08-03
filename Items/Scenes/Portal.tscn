@@ -18,7 +18,7 @@ animations = [{
 }]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_u5l30"]
-size = Vector2(186, 275)
+size = Vector2(100, 210)
 
 [node name="Portal" type="Area2D"]
 
@@ -30,5 +30,5 @@ autoplay = "default"
 frame_progress = 0.457054
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2(-2, 9.5)
+position = Vector2(0, 42)
 shape = SubResource("RectangleShape2D_u5l30")

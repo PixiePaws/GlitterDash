@@ -40,12 +40,12 @@ namespace UnicornGame
 			originalCameraPos = startCameraPosition;
 
 			size = (Vector2I)GetViewportRect().Size;
+			
 			// Updates the camera position based on player's position
 			UpdateCameraPosition();
 
 			// Set the camera to begining position
 			GlobalPosition = targetPosition;
-
 			previousCellY = (int)Mathf.Floor(Player.GlobalPosition.Y / size.Y);
 		}
 
@@ -119,7 +119,7 @@ namespace UnicornGame
 		{
 			GlobalPosition = originalCameraPos;//tämä vie kameran väärään paikkaan miten korjataan
 			targetPosition = originalCameraPos;
-			cameraToStart = false;
+			cameraToStart = true;
 		}
 			
 		/// <summary>
