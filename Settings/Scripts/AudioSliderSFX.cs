@@ -9,12 +9,16 @@ namespace UnicornGame
 
 		[Export] public string SliderLabelText = "Volume";
 		private Slider _volumeSlider;
+
 		private Label _audioNameLabel;
+		private Label _audioNumberLabel;
 		public override void _Ready()
 		{
 			_audioNameLabel = GetNode<Label>("HBoxContainer/AudioNameLabel");
+
 			_audioNameLabel.Text = SliderLabelText;
 
+			_audioNumberLabel = GetNode<Label>("HBoxContainer/AudioNumberLabel");
 
 			_volumeSlider = GetNode<Slider>("HBoxContainer/HSlider");
 
@@ -33,6 +37,13 @@ namespace UnicornGame
 			float db = Mathf.LinearToDb((float)value);
 			AudioManager audio = AudioManager.Instance;
 			audio._bgMusic.VolumeDb = db;
+
+			UpdateAudioNumberLabel(value);
+		}
+		private void UpdateAudioNumberLabel(double value)
+		{
+			int percentage = Mathf.RoundToInt((float)(value * 100));
+			_audioNumberLabel.Text = $"{percentage}";
 		}
 	}
 }
