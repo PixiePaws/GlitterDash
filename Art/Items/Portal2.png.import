@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://pqyhvj8c5kto"
-path="res://.godot/imported/StoneTiles.png-cf08cb4399ffe42d3b31438344c498ae.ctex"
+uid="uid://cpxdu14dvcq3x"
+path="res://.godot/imported/Portal2.png-1419c1f3642976acd63bcf1756640745.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Art/Tilemaps/StoneTiles.png"
-dest_files=["res://.godot/imported/StoneTiles.png-cf08cb4399ffe42d3b31438344c498ae.ctex"]
+source_file="res://Art/Items/Portal2.png"
+dest_files=["res://.godot/imported/Portal2.png-1419c1f3642976acd63bcf1756640745.ctex"]
 
 [params]
 
