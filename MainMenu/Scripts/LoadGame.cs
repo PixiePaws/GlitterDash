@@ -119,6 +119,16 @@ namespace UnicornGame
             //GD.Print("OnButtonPressed() was called");
 
         }
+        public string GetSaveFilePath(string FileName)
+        {
+            string FilePath = "";
+            foreach (string File in _saveFileList)
+            {
+                if(File.Contains(FileName))
+                FilePath = Path.Join(_directoryPath, FileName);
+            }
+            return FilePath;
+        }
         public Godot.Collections.Dictionary<string, Variant> GetSaveFileAsDictionary(string FilePath)
         {
             if (!File.Exists(FilePath))
@@ -163,6 +173,7 @@ namespace UnicornGame
         {
             int SaveFileAmount = DirAccess.GetFilesAt(_directoryPath).Length;
             string[] TempArray = new string[SaveFileAmount];
+            string[] TimeStampArray = new string[SaveFileAmount];
             TempArray = DirAccess.GetFilesAt(_directoryPath);
             for (int i = 0; i < _buttonList.Count; i++)
             {
@@ -176,7 +187,10 @@ namespace UnicornGame
                 }
                 else
                 {
-                    _buttonList[i].Text = TempArray[i];
+                    string SaveFilePath = GetSaveFilePath(TempArray[i]);
+                    var GameDataDict = GetSaveFileAsDictionary(SaveFilePath);
+                    TimeStampArray = GetKeysArrayFromSave(SaveFileAmount, "TimeStamp", GameDataDict);
+                    _buttonList[i].Text = $"{TempArray[i]} {TimeStampArray[i]}";
                 }
             }
         }
@@ -208,6 +222,21 @@ namespace UnicornGame
                 GD.Print(LevelPath);
             }
             return LevelPathArray;
+        }
+        public string[] GetKeysArrayFromSave(int SaveFileAmount, string DataKey, Godot.Collections.Dictionary<string, Variant> GameDataDict)
+        {
+            string[] KeysArray = new string[SaveFileAmount];
+            int index = 0;
+            foreach (var Key in GameDataDict.Keys)
+            {
+                var LevelDataDict = (Godot.Collections.Dictionary<string, Variant>)GameDataDict[Key];
+                if (LevelDataDict.ContainsKey(DataKey))
+                {
+                    KeysArray[index] = (string)LevelDataDict[DataKey];
+                    index++;
+                }
+            }
+            return KeysArray;
         }
         public void ChangeSceneToNextLevel(Godot.Collections.Dictionary<string, Variant> GameData)
         {
