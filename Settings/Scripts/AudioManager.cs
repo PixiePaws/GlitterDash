@@ -11,8 +11,9 @@ namespace UnicornGame
 		public override void _Ready()
 		{
 			Instance = this;
-			_bgMusic = GetNode<AudioStreamPlayer>("Music/bgMusic");
+			_bgMusic = GetNodeOrNull<AudioStreamPlayer>("Music/bgMusic");
 
+			ProcessMode = ProcessModeEnum.Always;
 		}
 	}
 }

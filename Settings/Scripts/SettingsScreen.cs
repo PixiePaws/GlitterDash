@@ -39,16 +39,17 @@ namespace UnicornGame
 		{
 			if (Input.IsActionJustPressed("Settings") && _settingsScenePanel.Visible == true)
 			{
+				GD.Print("TEST - SettinsScreen.cs");
 				GetTree().Paused = false; // Unpause the game
 				this.QueueFree(); // Remove the settings screen from the scene tree
 			}
-			if (Input.IsActionJustPressed("Settings") && _settingsScenePanel.Visible == false)
+			if (Input.IsActionJustPressed("Settings") && _settingsScenePanel.Visible == false) // this makes sure that you can open settings multiple times
 			{
+				GD.Print("TESTIIIIIIIIIIIII - SettinsScreen.cs");
 				_settingsScenePanel.Visible = true;
 			}
 		}
 
-		// Called every frame. 'delta' is the elapsed time since the previous frame.
 		private void OnResumeButtonPressed()
 		{
 			GetTree().Paused = false; // Unpause the game
@@ -59,7 +60,7 @@ namespace UnicornGame
 		private void OnMainMenuButtonPressed()
 		{
 			GetTree().Paused = false; // Unpause the game before changing scenes
-			// Load the main menu scene
+									  // Load the main menu scene
 			PackedScene mainMenuScene = ResourceLoader.Load<PackedScene>("res://MainMenu/Scenes/MainMenu.tscn");
 			if (mainMenuScene != null)
 			{
@@ -77,7 +78,6 @@ namespace UnicornGame
 		}
 		private void OnSettingsButtonPressed()
 		{
-
 			Control settingsPanel = GetNodeOrNull<Control>("SettingsScene/Settings");
 			if (settingsPanel != null)
 			{

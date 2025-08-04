@@ -38,7 +38,7 @@ namespace UnicornGame
 			_loadGameButton.Pressed += OnLoadGameButtonPressed;
 
 			_settingsButton = GetNode<Button>("MarginContainer/VBoxContainer/SettingsButton");
-			_settingsButton.Pressed += OnSettingsButtonPressed;
+			// _settingsButton.Pressed += OnSettingsButtonPressed;
 		}
 		private void OnQuitButtonPressed()
 		{
@@ -56,24 +56,6 @@ namespace UnicornGame
 				GD.Print("Level selection scene not found");
 			}
 		}
-		private void OnSettingsButtonPressed()
-		{
-			Control settingsPanel = GetNodeOrNull<Control>("SettingsScene/Settings");
-			if (settingsPanel != null)
-			{
-				if (settingsPanel.Visible == false)
-				{
-					settingsPanel.Visible = true; // Show settings scene
-					GD.Print("Settings scene opened and game paused");
-				}
-				else
-				{
-					settingsPanel.Visible = false;
-					GD.Print("Settings scene closed, and game unpaused.");
-				}
-			}
-		}
-
 		private void OnLoadGameButtonPressed()
 		{
 			PackedScene SelectSaveScene = ResourceLoader.Load<PackedScene>(_selectSaveScenePath);
@@ -82,14 +64,18 @@ namespace UnicornGame
 		}
 		// private void OnSettingsButtonPressed()
 		// {
-		// 	CanvasLayer settingsScene = GetNode<CanvasLayer>("SettingsScene");
-		// 	if (settingsScene != null)
+		// 	Control settingsPanel = GetNodeOrNull<Control>("SettingsScene/Settings");
+		// 	if (settingsPanel != null)
 		// 	{
-		// 		if (settingsScene.Visible == false)
+		// 		if (settingsPanel.Visible == false)
 		// 		{
-		// 			settingsScene.Visible = true; // Show settings scene
-		// 			GetTree().Paused = true; // Pause the game
+		// 			settingsPanel.Visible = true; // Show settings scene
 		// 			GD.Print("Settings scene opened and game paused");
+		// 		}
+		// 		else
+		// 		{
+		// 			settingsPanel.Visible = false;
+		// 			GD.Print("Settings scene closed, and game unpaused.");
 		// 		}
 		// 	}
 		// }
