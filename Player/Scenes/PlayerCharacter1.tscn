@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=3 uid="uid://cvl311e3g082f"]
+[gd_scene load_steps=13 format=3 uid="uid://dgda6p7vo8e6"]
 
 [ext_resource type="Script" path="res://Player/Scripts/Player.cs" id="1_l5nv5"]
 [ext_resource type="Texture2D" uid="uid://b48y12wyscq7f" path="res://Art/Character/UnicornSmaller.png" id="2_hubrt"]
