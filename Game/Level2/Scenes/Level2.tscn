@@ -14,14 +14,14 @@
 [ext_resource type="PackedScene" uid="uid://dol5g5hc7xj1e" path="res://Game/DangerZoneFalling.tscn" id="12_ne7dl"]
 [ext_resource type="Script" path="res://Items/Scripts/GoldEggManager.cs" id="13_3vpso"]
 [ext_resource type="Texture2D" uid="uid://c5pr28c642ewo" path="res://Art/Tilemaps/GrassTiles.png" id="13_rtx4p"]
-[ext_resource type="PackedScene" uid="uid://dsnvu8ioiw0ff" path="res://Items/Scenes/GoldEgg.tscn" id="14_6bruh"]
+[ext_resource type="PackedScene" uid="uid://mu1by1prm8kh" path="res://Items/Scenes/GoldEgg.tscn" id="14_6bruh"]
 [ext_resource type="Texture2D" uid="uid://cer8g5b4atbgh" path="res://Art/Tilemaps/StoneTiles.png" id="14_e8ljb"]
 [ext_resource type="Shader" path="res://Game/Black&White.gdshader" id="15_206x5"]
 [ext_resource type="PackedScene" uid="uid://b6upcof87f3dd" path="res://Obstacles/Scenes/CircularSaw.tscn" id="16_8s5p2"]
 [ext_resource type="PackedScene" uid="uid://ti05fy42timf" path="res://Obstacles/Scenes/Pendulum.tscn" id="17_ljtf2"]
 [ext_resource type="PackedScene" uid="uid://o8w6tkup2gx6" path="res://Obstacles/Scenes/MovingCircularSaw.tscn" id="21_hrs2a"]
 [ext_resource type="PackedScene" uid="uid://cer6xkecwmj1s" path="res://Obstacles/Scenes/SpikeTrap.tscn" id="21_ocf5a"]
-[ext_resource type="PackedScene" uid="uid://dhyun241fg6n4" path="res://Obstacles/Scenes/SpikeTrap2.tscn" id="22_grio7"]
+[ext_resource type="PackedScene" path="res://Obstacles/Scenes/SpikeTrap2.tscn" id="22_grio7"]
 
 [sub_resource type="SegmentShape2D" id="SegmentShape2D_oefmr"]
 a = Vector2(-625.5, 13)

@@ -28,19 +28,19 @@ namespace UnicornGame
 
 			DisplayServer.WindowSetMode(DisplayServer.WindowMode.Fullscreen);
 
-			_quitButton = GetNode<Button>("MarginContainer/VBoxContainer/QuitButton");
+			_quitButton = GetNode<Button>("Control/MarginContainer/VBoxContainer/QuitButton");
 			_quitButton.Pressed += OnQuitButtonPressed;
 
-			_newGameButton = GetNode<Button>("MarginContainer/VBoxContainer/NewGameButton");
+			_newGameButton = GetNode<Button>("Control/MarginContainer/VBoxContainer/NewGameButton");
 			_newGameButton.Pressed += OnNewGameButtonPressed;
 
-			_loadGameButton = GetNode<Button>("MarginContainer/VBoxContainer/LoadGameButton");
+			_loadGameButton = GetNode<Button>("Control/MarginContainer/VBoxContainer/LoadGameButton");
 			_loadGameButton.Pressed += OnLoadGameButtonPressed;
 
-			_settingsButton = GetNode<Button>("MarginContainer/VBoxContainer/SettingsButton");
+			_settingsButton = GetNode<Button>("Control/MarginContainer/VBoxContainer/SettingsButton");
 			_settingsButton.Pressed += OnSettingsButtonPressed;
 
-			_continueButton = GetNode<Button>("MarginContainer/VBoxContainer/ContinueButton");
+			_continueButton = GetNode<Button>("Control/MarginContainer/VBoxContainer/ContinueButton");
 			_continueButton.Pressed += OnContinueButtonPressed;
 		}
 		private void OnQuitButtonPressed()
@@ -70,23 +70,18 @@ namespace UnicornGame
 			LoadGame LoadGameScene = (LoadGame)SelectSaveScene.Instantiate();
 			AddChild(LoadGameScene);
 		}
-		// private void OnSettingsButtonPressed()
-		// {
-		// 	Control settingsPanel = GetNodeOrNull<Control>("SettingsScene/Settings");
-		// 	if (settingsPanel != null)
-		// 	{
-		// 		if (settingsPanel.Visible == false)
-		// 		{
-		// 			settingsPanel.Visible = true; // Show settings scene
-		// 			GD.Print("Settings scene opened and game paused");
-		// 		}
-		// 		else
-		// 		{
-		// 			settingsPanel.Visible = false;
-		// 			GD.Print("Settings scene closed, and game unpaused.");
-		// 		}
-		// 	}
-		// }
+		private void OnSettingsButtonPressed()
+		{
+			Control settingsPanel = GetNodeOrNull<Control>("SettingsScene/Settings");
+			if (settingsPanel != null)
+			{
+				if (settingsPanel.Visible == false)
+				{
+					settingsPanel.Visible = true; // Show settings scene
+					GD.Print("Settings scene opened and game paused");
+				}
+			}
+		}
 	}
 }
 

@@ -15,7 +15,7 @@
 [ext_resource type="Texture2D" uid="uid://cer8g5b4atbgh" path="res://Art/Tilemaps/StoneTiles.png" id="14_tywfk"]
 [ext_resource type="PackedScene" uid="uid://dol5g5hc7xj1e" path="res://Game/DangerZoneFalling.tscn" id="16_42rqu"]
 [ext_resource type="Script" path="res://Items/Scripts/GoldEggManager.cs" id="17_ww6gv"]
-[ext_resource type="PackedScene" uid="uid://dsnvu8ioiw0ff" path="res://Items/Scenes/GoldEgg.tscn" id="18_jd442"]
+[ext_resource type="PackedScene" uid="uid://mu1by1prm8kh" path="res://Items/Scenes/GoldEgg.tscn" id="18_jd442"]
 [ext_resource type="Shader" path="res://Game/Black&White.gdshader" id="19_4mlds"]
 [ext_resource type="PackedScene" uid="uid://cygqq6gsghxm8" path="res://Obstacles/Scenes/BirdCannon.tscn" id="21_5h3vy"]
 

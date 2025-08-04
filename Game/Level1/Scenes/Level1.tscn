@@ -10,13 +10,13 @@
 [ext_resource type="Texture2D" uid="uid://c3hd8ludbquxr" path="res://Art/Backgrounds/MiddleBG.png" id="7_sac58"]
 [ext_resource type="Texture2D" uid="uid://ciqy2qp8wkl11" path="res://Art/Backgrounds/CrystalCave.png" id="8_1li2j"]
 [ext_resource type="Script" path="res://Game/Portal.cs" id="8_iqa1o"]
-[ext_resource type="PackedScene" uid="uid://dsnvu8ioiw0ff" path="res://Items/Scenes/GoldEgg.tscn" id="11_508a1"]
+[ext_resource type="PackedScene" uid="uid://mu1by1prm8kh" path="res://Items/Scenes/GoldEgg.tscn" id="11_508a1"]
 [ext_resource type="PackedScene" uid="uid://dol5g5hc7xj1e" path="res://Game/DangerZoneFalling.tscn" id="11_v4ol5"]
 [ext_resource type="Texture2D" uid="uid://c5pr28c642ewo" path="res://Art/Tilemaps/GrassTiles.png" id="13_oypm7"]
 [ext_resource type="Shader" path="res://Game/Black&White.gdshader" id="14_cylb3"]
 [ext_resource type="Script" path="res://Items/Scripts/GoldEggManager.cs" id="14_qnefm"]
 [ext_resource type="Texture2D" uid="uid://cer8g5b4atbgh" path="res://Art/Tilemaps/StoneTiles.png" id="14_rhyll"]
-[ext_resource type="Theme" uid="uid://toxmj1vwp6m" path="res://UI/TextTheme.tres" id="17_rwmuo"]
+[ext_resource type="Theme" path="res://UI/TextTheme.tres" id="17_rwmuo"]
 [ext_resource type="PackedScene" uid="uid://bun0lpg7lkpq6" path="res://Player/Scenes/PlayerCharacter.tscn" id="18_hg87w"]
 [ext_resource type="PackedScene" uid="uid://cygqq6gsghxm8" path="res://Obstacles/Scenes/BirdCannon.tscn" id="18_k3rmw"]
 [ext_resource type="PackedScene" uid="uid://cer6xkecwmj1s" path="res://Obstacles/Scenes/SpikeTrap.tscn" id="21_2mg51"]
@@ -94,12 +94,11 @@ RespawnPoint = NodePath("RespawnPoint")
 metadata/_edit_vertical_guides_ = [3840.0, 5760.0, 1920.0, 433.0, 960.0, 1247.0]
 metadata/_edit_horizontal_guides_ = [1080.0, 2160.0, -1080.0, 680.0, 839.0]
 
-[node name="PlayerCharacter" parent="." node_paths=PackedStringArray("Filter", "_collisionDetector") instance=ExtResource("18_hg87w")]
+[node name="PlayerCharacter" parent="." node_paths=PackedStringArray("Filter") instance=ExtResource("18_hg87w")]
 z_index = 10
 position = Vector2(1515, 661)
 scale = Vector2(0.21, 0.21)
 Filter = NodePath("../BlackWhite")
-_collisionDetector = NodePath("CollisionDetector")
 
 [node name="UniHead" parent="PlayerCharacter/PartsSkeletonContainer/Parts" index="0"]
 position = Vector2(13.7905, 118.077)

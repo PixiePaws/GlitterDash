@@ -14,13 +14,13 @@
 [ext_resource type="PackedScene" uid="uid://dol5g5hc7xj1e" path="res://Game/DangerZoneFalling.tscn" id="12_t3txc"]
 [ext_resource type="Script" path="res://Items/Scripts/GoldEggManager.cs" id="13_j1dfc"]
 [ext_resource type="Texture2D" uid="uid://cer8g5b4atbgh" path="res://Art/Tilemaps/StoneTiles.png" id="13_p5jmy"]
-[ext_resource type="PackedScene" uid="uid://dsnvu8ioiw0ff" path="res://Items/Scenes/GoldEgg.tscn" id="14_bjsj8"]
+[ext_resource type="PackedScene" uid="uid://mu1by1prm8kh" path="res://Items/Scenes/GoldEgg.tscn" id="14_bjsj8"]
 [ext_resource type="Shader" path="res://Game/Black&White.gdshader" id="15_bpjgf"]
 [ext_resource type="PackedScene" uid="uid://b6upcof87f3dd" path="res://Obstacles/Scenes/CircularSaw.tscn" id="16_e5qvk"]
 [ext_resource type="PackedScene" uid="uid://ti05fy42timf" path="res://Obstacles/Scenes/Pendulum.tscn" id="17_q7olb"]
 [ext_resource type="PackedScene" uid="uid://bun0lpg7lkpq6" path="res://Player/Scenes/PlayerCharacter.tscn" id="18_20a3l"]
 [ext_resource type="PackedScene" uid="uid://o8w6tkup2gx6" path="res://Obstacles/Scenes/MovingCircularSaw.tscn" id="20_58qqt"]
-[ext_resource type="PackedScene" uid="uid://dhyun241fg6n4" path="res://Obstacles/Scenes/SpikeTrap2.tscn" id="21_wi3pm"]
+[ext_resource type="PackedScene" path="res://Obstacles/Scenes/SpikeTrap2.tscn" id="21_wi3pm"]
 
 [sub_resource type="SegmentShape2D" id="SegmentShape2D_oefmr"]
 a = Vector2(-625.5, 13)
@@ -106,9 +106,11 @@ Filter = NodePath("../BlackWhite")
 
 [node name="UniHead" parent="PlayerCharacter/PartsSkeletonContainer/Parts" index="0"]
 position = Vector2(13.791, 118.077)
+scale = Vector2(0.999834, 0.999834)
 
 [node name="UniBody" parent="PlayerCharacter/PartsSkeletonContainer/Parts" index="1"]
 position = Vector2(16.6768, 119.406)
+scale = Vector2(1, 1)
 
 [node name="UniLHand" parent="PlayerCharacter/PartsSkeletonContainer/Parts" index="2"]
 position = Vector2(10.583, 119)

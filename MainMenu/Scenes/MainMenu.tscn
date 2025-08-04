@@ -5,6 +5,7 @@
 [ext_resource type="Texture2D" uid="uid://dyv6o0rxv58oe" path="res://Art/MainMenu/UnicornGameBG.png" id="3_rc2yd"]
 
 [node name="MainMenu" type="CanvasLayer"]
+script = ExtResource("1_ys428")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 z_index = -2000
@@ -18,7 +19,6 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-script = ExtResource("1_ys428")
 
 [node name="MarginContainer" type="MarginContainer" parent="Control"]
 z_index = -400
