@@ -68,18 +68,26 @@ namespace UnicornGame
                 {
                     GD.Print(Error);
                 }
+                return;
             }
             else
             {
                 Godot.Collections.Dictionary<string, Variant> LoadedDict = GetSaveFileAsDictionary(_savePath);
                 string GameDataKey = "";
-                Godot.Collections.Dictionary<string, Variant> GameDataDict = (Godot.Collections.Dictionary<string, Variant>)GameData;
+                //Godot.Collections.Dictionary<string, Variant> GameDataDict = (Godot.Collections.Dictionary<string, Variant>)GameData;
                 foreach (var Key in LoadedDict.Keys)
                 {
                     if (GameData.Contains(Key))
-
+                    {
+                        GD.Print($"GameData string contains key: {Key} in JsonSaver");
                         GameDataKey = Key;
-
+                    }
+                }
+                if (string.IsNullOrEmpty(GameDataKey))
+                {
+                    GD.Print("GameDataKey is null or empty");
+                    string LoadedDataString = Json.Stringify(LoadedDict);
+                    string CombinedData = Json.ParseString(LoadedDataString, CombinedData)
                 }
             }
         }
