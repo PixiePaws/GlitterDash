@@ -15,7 +15,7 @@
 [ext_resource type="Texture2D" uid="uid://pqyhvj8c5kto" path="res://Art/Tilemaps/StoneTiles.png" id="14_mqt0o"]
 [ext_resource type="PackedScene" uid="uid://dol5g5hc7xj1e" path="res://Game/DangerZoneFalling.tscn" id="16_s3ole"]
 [ext_resource type="Script" path="res://Items/Scripts/GoldEggManager.cs" id="17_cuxg3"]
-[ext_resource type="PackedScene" uid="uid://dsnvu8ioiw0ff" path="res://Items/Scenes/GoldEgg.tscn" id="18_hc4lk"]
+[ext_resource type="PackedScene" uid="uid://mu1by1prm8kh" path="res://Items/Scenes/GoldEgg.tscn" id="18_hc4lk"]
 [ext_resource type="Shader" path="res://Game/Black&White.gdshader" id="19_0gmyv"]
 [ext_resource type="PackedScene" uid="uid://dhyun241fg6n4" path="res://Obstacles/Scenes/SpikeTrap2.tscn" id="19_xcrln"]
 [ext_resource type="Texture2D" uid="uid://d1lubk38foqar" path="res://Art/Items/CartoonRock_FHD.png" id="20_5r7b5"]
@@ -81,25 +81,31 @@ _collisionDetector = NodePath("CollisionDetector")
 
 [node name="UniHead" parent="PlayerCharacter/PartsSkeletonContainer/Parts" index="0"]
 position = Vector2(13.791, 118.077)
+position = Vector2(13.791, 118.077)
 scale = Vector2(0.999833, 0.999833)
 
 [node name="UniBody" parent="PlayerCharacter/PartsSkeletonContainer/Parts" index="1"]
+position = Vector2(16.6777, 119.406)
 position = Vector2(16.6777, 119.406)
 scale = Vector2(1, 1)
 
 [node name="UniLHand" parent="PlayerCharacter/PartsSkeletonContainer/Parts" index="2"]
 position = Vector2(10.5859, 119)
+position = Vector2(10.5859, 119)
 scale = Vector2(0.999858, 0.999858)
 
 [node name="UniRLeg" parent="PlayerCharacter/PartsSkeletonContainer/Parts" index="3"]
+position = Vector2(10.0078, 113.561)
 position = Vector2(10.0078, 113.561)
 scale = Vector2(0.99985, 0.99985)
 
 [node name="UniRHand" parent="PlayerCharacter/PartsSkeletonContainer/Parts" index="4"]
 position = Vector2(-9.66992, 127.067)
+position = Vector2(-9.66992, 127.067)
 scale = Vector2(0.999849, 0.999849)
 
 [node name="UniLLeg" parent="PlayerCharacter/PartsSkeletonContainer/Parts" index="5"]
+position = Vector2(6.98828, 118.259)
 position = Vector2(6.98828, 118.259)
 scale = Vector2(0.999851, 0.999851)
 

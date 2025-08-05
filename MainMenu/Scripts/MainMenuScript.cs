@@ -28,19 +28,19 @@ namespace UnicornGame
 
 			DisplayServer.WindowSetMode(DisplayServer.WindowMode.Fullscreen);
 
-			_quitButton = GetNode<Button>("MarginContainer/VBoxContainer/QuitButton");
+			_quitButton = GetNode<Button>("Control/MarginContainer/VBoxContainer/QuitButton");
 			_quitButton.Pressed += OnQuitButtonPressed;
 
-			_newGameButton = GetNode<Button>("MarginContainer/VBoxContainer/NewGameButton");
+			_newGameButton = GetNode<Button>("Control/MarginContainer/VBoxContainer/NewGameButton");
 			_newGameButton.Pressed += OnNewGameButtonPressed;
 
-			_loadGameButton = GetNode<Button>("MarginContainer/VBoxContainer/LoadGameButton");
+			_loadGameButton = GetNode<Button>("Control/MarginContainer/VBoxContainer/LoadGameButton");
 			_loadGameButton.Pressed += OnLoadGameButtonPressed;
 
-			_settingsButton = GetNode<Button>("MarginContainer/VBoxContainer/SettingsButton");
+			_settingsButton = GetNode<Button>("Control/MarginContainer/VBoxContainer/SettingsButton");
 			_settingsButton.Pressed += OnSettingsButtonPressed;
 
-			_continueButton = GetNode<Button>("MarginContainer/VBoxContainer/ContinueButton");
+			_continueButton = GetNode<Button>("Control/MarginContainer/VBoxContainer/ContinueButton");
 			_continueButton.Pressed += OnContinueButtonPressed;
 		}
 		private void OnQuitButtonPressed()
@@ -64,6 +64,12 @@ namespace UnicornGame
 				GD.Print("Level selection scene not found");
 			}
 		}
+		private void OnLoadGameButtonPressed()
+		{
+			PackedScene SelectSaveScene = ResourceLoader.Load<PackedScene>(_selectSaveScenePath);
+			LoadGame LoadGameScene = (LoadGame)SelectSaveScene.Instantiate();
+			AddChild(LoadGameScene);
+		}
 		private void OnSettingsButtonPressed()
 		{
 			Control settingsPanel = GetNodeOrNull<Control>("SettingsScene/Settings");
@@ -74,33 +80,8 @@ namespace UnicornGame
 					settingsPanel.Visible = true; // Show settings scene
 					GD.Print("Settings scene opened and game paused");
 				}
-				else
-				{
-					settingsPanel.Visible = false;
-					GD.Print("Settings scene closed, and game unpaused.");
-				}
 			}
 		}
-
-		private void OnLoadGameButtonPressed()
-		{
-			PackedScene SelectSaveScene = ResourceLoader.Load<PackedScene>(_selectSaveScenePath);
-			LoadGame LoadGameScene = (LoadGame)SelectSaveScene.Instantiate();
-			AddChild(LoadGameScene);
-		}
-		// private void OnSettingsButtonPressed()
-		// {
-		// 	CanvasLayer settingsScene = GetNode<CanvasLayer>("SettingsScene");
-		// 	if (settingsScene != null)
-		// 	{
-		// 		if (settingsScene.Visible == false)
-		// 		{
-		// 			settingsScene.Visible = true; // Show settings scene
-		// 			GetTree().Paused = true; // Pause the game
-		// 			GD.Print("Settings scene opened and game paused");
-		// 		}
-		// 	}
-		// }
 	}
 }
 
