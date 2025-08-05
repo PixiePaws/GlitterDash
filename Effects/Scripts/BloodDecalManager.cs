@@ -58,4 +58,5 @@ public partial class BloodDecalManager : Node2D
         _DecalCount++;
         //GD.Print("Adding decal at ", position, " to index ", index, ". The current decal count is ", _DecalCount);
     }
+//add multimesh instance count to 0 to reset it between levels. might not work but idk. if not then find a way to destroy the instance and recreate it on new map
 }
