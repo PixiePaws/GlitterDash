@@ -13,7 +13,6 @@ config_version=5
 config/name="UnicornGame"
 run/main_scene="res://MainMenu/Scenes/MainMenu.tscn"
 config/features=PackedStringArray("4.3", "C#", "Forward Plus")
-boot_splash/bg_color=Color(1, 1, 1, 1)
 config/icon="res://icon.svg"
 
 [autoload]
@@ -105,5 +104,5 @@ tester={
 [rendering]
 
 textures/canvas_textures/default_texture_filter=0
-environment/defaults/default_clear_color=Color(1, 1, 1, 1)
+environment/defaults/default_clear_color=Color(0.205117, 0.205117, 0.205117, 1)
 anti_aliasing/quality/msaa_2d=3

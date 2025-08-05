@@ -87,7 +87,7 @@ namespace UnicornGame
                 {
                     GD.Print("GameDataKey is null or empty");
                     string LoadedDataString = Json.Stringify(LoadedDict);
-                    string CombinedData = Json.ParseString(LoadedDataString, CombinedData)
+                    //string CombinedData = Json.ParseString(LoadedDataString, CombinedData)
                 }
             }
         }

@@ -1,12 +1,12 @@
-[gd_scene load_steps=32 format=4 uid="uid://qh2ts23dxw1s"]
+[gd_scene load_steps=33 format=4 uid="uid://qh2ts23dxw1s"]
 
 [ext_resource type="Script" path="res://Game/Level1/Scripts/Level1.cs" id="1_g2ow3"]
 [ext_resource type="Script" path="res://Game/Respawner.cs" id="2_8kqly"]
 [ext_resource type="Script" path="res://Game/Level1/Scripts/Camera.cs" id="3_rs32f"]
 [ext_resource type="Texture2D" uid="uid://uprybvy2gmww" path="res://Art/Items/TheEgg.png" id="4_y7dv0"]
 [ext_resource type="Texture2D" uid="uid://bbi8xqng11ic8" path="res://Art/Backgrounds/SpaceBG.png" id="6_uqv7i"]
+[ext_resource type="Texture2D" uid="uid://c3hd8ludbquxr" path="res://Art/Backgrounds/MiddleBG.png" id="7_7fjb5"]
 [ext_resource type="PackedScene" uid="uid://dnx3j4auf00wv" path="res://UI/Scenes/GUI.tscn" id="7_wp2dp"]
-[ext_resource type="Texture2D" uid="uid://cwcmktxtmsdem" path="res://Art/Backgrounds/NEWUnicornGameBG.png" id="7_xbwaj"]
 [ext_resource type="Texture2D" uid="uid://ciqy2qp8wkl11" path="res://Art/Backgrounds/CrystalCave.png" id="8_5yrq7"]
 [ext_resource type="PackedScene" uid="uid://breqli4rgs6dk" path="res://Items/Scenes/Portal.tscn" id="8_oe5dt"]
 [ext_resource type="Script" path="res://Game/Portal.cs" id="9_fcygr"]
@@ -20,6 +20,7 @@
 [ext_resource type="PackedScene" uid="uid://ti05fy42timf" path="res://Obstacles/Scenes/Pendulum.tscn" id="17_q7olb"]
 [ext_resource type="PackedScene" uid="uid://bun0lpg7lkpq6" path="res://Player/Scenes/PlayerCharacter.tscn" id="18_20a3l"]
 [ext_resource type="PackedScene" uid="uid://o8w6tkup2gx6" path="res://Obstacles/Scenes/MovingCircularSaw.tscn" id="20_58qqt"]
+[ext_resource type="PackedScene" path="res://Obstacles/Scenes/SpikeTrap2.tscn" id="21_wi3pm"]
 
 [sub_resource type="SegmentShape2D" id="SegmentShape2D_oefmr"]
 a = Vector2(-625.5, 13)
@@ -77,11 +78,8 @@ texture_region_size = Vector2i(48, 49)
 0:0/0 = 0
 0:0/0/physics_layer_0/polygon_0/points = PackedVector2Array(-24, -24.5, 24, -24.5, 24, 24.5, -24, 24.5)
 1:0/0 = 0
-1:0/0/physics_layer_0/polygon_0/points = PackedVector2Array(-24, -24.5, 24, -24.5, 24, 24.5, -24, 24.5)
 0:1/0 = 0
-0:1/0/physics_layer_0/polygon_0/points = PackedVector2Array(-24, -24.5, 24, -24.5, 24, 24.5, -24, 24.5)
 1:1/0 = 0
-1:1/0/physics_layer_0/polygon_0/points = PackedVector2Array(-24, -24.5, 24, -24.5, 24, 24.5, -24, 24.5)
 2:0/0 = 0
 
 [sub_resource type="TileSet" id="TileSet_sok5l"]
@@ -102,12 +100,12 @@ metadata/_edit_horizontal_guides_ = [1080.0, 2160.0, -1080.0]
 
 [node name="PlayerCharacter" parent="." node_paths=PackedStringArray("Filter") instance=ExtResource("18_20a3l")]
 z_index = 2
-position = Vector2(2327, -846)
+position = Vector2(2608, 197)
 scale = Vector2(0.2, 0.2)
 Filter = NodePath("../BlackWhite")
 
 [node name="UniHead" parent="PlayerCharacter/PartsSkeletonContainer/Parts" index="0"]
-position = Vector2(13.791, 118.078)
+position = Vector2(13.791, 118.077)
 scale = Vector2(0.999834, 0.999834)
 
 [node name="UniBody" parent="PlayerCharacter/PartsSkeletonContainer/Parts" index="1"]
@@ -119,7 +117,7 @@ position = Vector2(10.583, 119)
 scale = Vector2(0.999856, 0.999856)
 
 [node name="UniRLeg" parent="PlayerCharacter/PartsSkeletonContainer/Parts" index="3"]
-position = Vector2(10.0088, 113.561)
+position = Vector2(10.0078, 113.561)
 scale = Vector2(0.99985, 0.99985)
 
 [node name="UniRHand" parent="PlayerCharacter/PartsSkeletonContainer/Parts" index="4"]
@@ -127,7 +125,7 @@ position = Vector2(-9.66797, 127.067)
 scale = Vector2(0.999848, 0.999848)
 
 [node name="UniLLeg" parent="PlayerCharacter/PartsSkeletonContainer/Parts" index="5"]
-position = Vector2(6.9873, 118.259)
+position = Vector2(6.9873, 118.26)
 scale = Vector2(0.999851, 0.999851)
 
 [node name="CollisionDetector" parent="PlayerCharacter" index="3" node_paths=PackedStringArray("RespawnPoint", "_goldeggmanager", "_respawner")]
@@ -145,7 +143,8 @@ _player = NodePath("../PlayerCharacter")
 offset = Vector2(960, 540)
 script = ExtResource("3_rs32f")
 Player = NodePath("../PlayerCharacter")
-startCameraPosition = Vector2(2, -1)
+startCameraPosition = Vector2(1, 1)
+cameraSpeed = 10000.0
 
 [node name="ScoreLabel" type="Label" parent="Camera2D"]
 z_index = 10
@@ -164,21 +163,22 @@ offset_bottom = 163.0
 texture = ExtResource("4_y7dv0")
 
 [node name="Clouds" type="TextureRect" parent="Camera2D"]
-z_index = -3
+z_index = -5
 offset_top = -1080.0
 offset_right = 1920.0
 texture = ExtResource("6_uqv7i")
 
 [node name="Ground" type="TextureRect" parent="Camera2D"]
-z_index = -3
+z_index = -5
 offset_right = 1920.0
 offset_bottom = 1080.0
-texture = ExtResource("7_xbwaj")
+texture = ExtResource("7_7fjb5")
 
 [node name="UnderGround" type="TextureRect" parent="Camera2D"]
-z_index = -1
+z_index = -5
+offset_left = -3.0
 offset_top = 1080.0
-offset_right = 1920.0
+offset_right = 1917.0
 offset_bottom = 2160.0
 texture = ExtResource("8_5yrq7")
 
@@ -397,33 +397,45 @@ z_index = -1
 position = Vector2(2687, 539)
 scale = Vector2(0.6, 0.6)
 
-[node name="PendulumHolder" parent="Traps" instance=ExtResource("17_q7olb")]
-position = Vector2(2496, -731)
-
 [node name="PendulumHolder2" parent="Traps" instance=ExtResource("17_q7olb")]
 position = Vector2(2783, -731)
 
 [node name="PendulumHolder3" parent="Traps" instance=ExtResource("17_q7olb")]
-position = Vector2(3072, -731)
-
-[node name="PendulumHolder4" parent="Traps" instance=ExtResource("17_q7olb")]
-position = Vector2(3360, -731)
+position = Vector2(3174, -731)
 
 [node name="PendulumHolder5" parent="Traps" instance=ExtResource("17_q7olb")]
 position = Vector2(3360, -1076)
 
 [node name="PendulumHolder6" parent="Traps" instance=ExtResource("17_q7olb")]
-position = Vector2(3072, -1076)
+position = Vector2(2983, -1076)
 
 [node name="PendulumHolder7" parent="Traps" instance=ExtResource("17_q7olb")]
-position = Vector2(2782, -1076)
-
-[node name="PendulumHolder8" parent="Traps" instance=ExtResource("17_q7olb")]
-position = Vector2(2496, -1076)
+position = Vector2(2602, -1076)
 
 [node name="MovingCircularSaw" parent="Traps" instance=ExtResource("20_58qqt")]
 z_index = -1
 position = Vector2(1833, 1042)
 scale = Vector2(0.6, 0.6)
 
+[node name="SpikeTrap" parent="Traps" instance=ExtResource("21_wi3pm")]
+z_index = -1
+position = Vector2(1856, 91)
+rotation = -1.5728
+
+[node name="SpikeTrap2" parent="Traps" instance=ExtResource("21_wi3pm")]
+z_index = -1
+position = Vector2(1856, 261)
+rotation = -1.5728
+
+[node name="SpikeTrap3" parent="Traps" instance=ExtResource("21_wi3pm")]
+z_index = -1
+position = Vector2(1856, 462)
+rotation = -1.5728
+
+[node name="SpikeTrap4" parent="Traps" instance=ExtResource("21_wi3pm")]
+z_index = -1
+position = Vector2(1856, 638)
+rotation = -1.5728
+
 [editable path="PlayerCharacter"]
+[editable path="Traps/MovingCircularSaw"]

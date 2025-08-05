@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://cwcmktxtmsdem"
-path="res://.godot/imported/NEWUnicornGameBG.png-929a1fe08da70a4752c530d53af3db67.ctex"
+uid="uid://bi6gfhj1dr3rv"
+path="res://.godot/imported/OnlyCaneSpikes.png-8d40a632ac8b9812acec9b9ee1fab54a.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Art/Backgrounds/NEWUnicornGameBG.png"
-dest_files=["res://.godot/imported/NEWUnicornGameBG.png-929a1fe08da70a4752c530d53af3db67.ctex"]
+source_file="res://Art/Obstacles/OnlyCaneSpikes.png"
+dest_files=["res://.godot/imported/OnlyCaneSpikes.png-8d40a632ac8b9812acec9b9ee1fab54a.ctex"]
 
 [params]
 
