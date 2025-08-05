@@ -1,6 +1,7 @@
-[gd_scene load_steps=2 format=3 uid="uid://cj5p05kuk4fup"]
+[gd_scene load_steps=3 format=3 uid="uid://cj5p05kuk4fup"]
 
 [ext_resource type="Texture2D" uid="uid://c3hd8ludbquxr" path="res://Art/Backgrounds/MiddleBG.png" id="1_y426v"]
+[ext_resource type="Theme" uid="uid://toxmj1vwp6m" path="res://UI/TextTheme.tres" id="2_xqtui"]
 
 [node name="LevelsCompleted" type="Node2D"]
 
@@ -19,30 +20,39 @@ offset_bottom = 384.0
 
 [node name="VBoxContainer" type="VBoxContainer" parent="Control"]
 layout_mode = 0
-offset_left = -105.0
-offset_right = 495.0
-offset_bottom = 186.0
+offset_left = 77.0
+offset_top = 251.0
+offset_right = 677.0
+offset_bottom = 472.0
 alignment = 1
-
-[node name="Label" type="Label" parent="Control/VBoxContainer"]
-layout_mode = 2
-theme_override_font_sizes/font_size = 100
-text = "All levels completed!
-Congratulations!"
-horizontal_alignment = 1
-vertical_alignment = 1
 
 [node name="LevelSelect" type="Button" parent="Control/VBoxContainer"]
 layout_mode = 2
-theme_override_font_sizes/font_size = 60
+theme = ExtResource("2_xqtui")
+theme_override_font_sizes/font_size = 65
 text = "Level Select"
 
 [node name="MainMenu" type="Button" parent="Control/VBoxContainer"]
 layout_mode = 2
-theme_override_font_sizes/font_size = 60
+theme = ExtResource("2_xqtui")
+theme_override_font_sizes/font_size = 65
 text = "Main Menu"
 
 [node name="Quit" type="Button" parent="Control/VBoxContainer"]
 layout_mode = 2
-theme_override_font_sizes/font_size = 60
+theme = ExtResource("2_xqtui")
+theme_override_font_sizes/font_size = 65
 text = "Quit"
+
+[node name="Label" type="Label" parent="Control"]
+layout_mode = 2
+offset_left = -591.0
+offset_top = -65.0
+offset_right = 1327.0
+offset_bottom = 212.0
+theme = ExtResource("2_xqtui")
+theme_override_font_sizes/font_size = 115
+text = "All levels completed
+Congratulations!"
+horizontal_alignment = 1
+vertical_alignment = 1

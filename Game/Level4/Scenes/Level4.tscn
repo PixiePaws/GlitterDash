@@ -1,9 +1,10 @@
-[gd_scene load_steps=26 format=4 uid="uid://cmbws0hamsxpx"]
+[gd_scene load_steps=27 format=4 uid="uid://cmbws0hamsxpx"]
 
 [ext_resource type="Script" path="res://Game/Level1/Scripts/Level1.cs" id="1_o6k5s"]
 [ext_resource type="PackedScene" uid="uid://bun0lpg7lkpq6" path="res://Player/Scenes/PlayerCharacter.tscn" id="2_hxnt0"]
 [ext_resource type="Script" path="res://Game/Respawner.cs" id="3_77cwm"]
 [ext_resource type="Script" path="res://Game/Level1/Scripts/Camera.cs" id="4_hielb"]
+[ext_resource type="Theme" uid="uid://toxmj1vwp6m" path="res://UI/TextTheme.tres" id="5_2dclh"]
 [ext_resource type="Texture2D" uid="uid://uprybvy2gmww" path="res://Art/Items/TheEgg.png" id="5_5jk7x"]
 [ext_resource type="Texture2D" uid="uid://bbi8xqng11ic8" path="res://Art/Backgrounds/SpaceBG.png" id="6_0oquf"]
 [ext_resource type="Texture2D" uid="uid://c3hd8ludbquxr" path="res://Art/Backgrounds/MiddleBG.png" id="7_yx801"]
@@ -12,10 +13,10 @@
 [ext_resource type="PackedScene" uid="uid://breqli4rgs6dk" path="res://Items/Scenes/Portal.tscn" id="12_ha5xm"]
 [ext_resource type="Texture2D" uid="uid://cr2mrqp8ecys1" path="res://Art/Tilemaps/GrassTiles.png" id="13_jw1h5"]
 [ext_resource type="Script" path="res://Game/Portal.cs" id="13_vsv4k"]
-[ext_resource type="Texture2D" uid="uid://pqyhvj8c5kto" path="res://Art/Tilemaps/StoneTiles.png" id="14_mqt0o"]
+[ext_resource type="Texture2D" uid="uid://tbl74xhn72on" path="res://Art/Tilemaps/StoneTiles.png" id="14_cbj88"]
 [ext_resource type="PackedScene" uid="uid://dol5g5hc7xj1e" path="res://Game/DangerZoneFalling.tscn" id="16_s3ole"]
 [ext_resource type="Script" path="res://Items/Scripts/GoldEggManager.cs" id="17_cuxg3"]
-[ext_resource type="PackedScene" uid="uid://mu1by1prm8kh" path="res://Items/Scenes/GoldEgg.tscn" id="18_hc4lk"]
+[ext_resource type="PackedScene" uid="uid://dsnvu8ioiw0ff" path="res://Items/Scenes/GoldEgg.tscn" id="18_hc4lk"]
 [ext_resource type="Shader" path="res://Game/Black&White.gdshader" id="19_0gmyv"]
 [ext_resource type="PackedScene" uid="uid://dhyun241fg6n4" path="res://Obstacles/Scenes/SpikeTrap2.tscn" id="19_xcrln"]
 [ext_resource type="Texture2D" uid="uid://d1lubk38foqar" path="res://Art/Items/CartoonRock_FHD.png" id="20_5r7b5"]
@@ -43,7 +44,7 @@ texture_region_size = Vector2i(48, 49)
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_k5m74"]
 resource_name = "Stone"
-texture = ExtResource("14_mqt0o")
+texture = ExtResource("14_cbj88")
 texture_region_size = Vector2i(48, 49)
 0:0/0 = 0
 0:0/0/physics_layer_0/polygon_0/points = PackedVector2Array(-24, -24.5, 24, -24.5, 24, 24.5, -24, 24.5)
@@ -81,31 +82,25 @@ _collisionDetector = NodePath("CollisionDetector")
 
 [node name="UniHead" parent="PlayerCharacter/PartsSkeletonContainer/Parts" index="0"]
 position = Vector2(13.791, 118.077)
-position = Vector2(13.791, 118.077)
 scale = Vector2(0.999833, 0.999833)
 
 [node name="UniBody" parent="PlayerCharacter/PartsSkeletonContainer/Parts" index="1"]
-position = Vector2(16.6777, 119.406)
 position = Vector2(16.6777, 119.406)
 scale = Vector2(1, 1)
 
 [node name="UniLHand" parent="PlayerCharacter/PartsSkeletonContainer/Parts" index="2"]
 position = Vector2(10.5859, 119)
-position = Vector2(10.5859, 119)
 scale = Vector2(0.999858, 0.999858)
 
 [node name="UniRLeg" parent="PlayerCharacter/PartsSkeletonContainer/Parts" index="3"]
-position = Vector2(10.0078, 113.561)
 position = Vector2(10.0078, 113.561)
 scale = Vector2(0.99985, 0.99985)
 
 [node name="UniRHand" parent="PlayerCharacter/PartsSkeletonContainer/Parts" index="4"]
 position = Vector2(-9.66992, 127.067)
-position = Vector2(-9.66992, 127.067)
 scale = Vector2(0.999849, 0.999849)
 
 [node name="UniLLeg" parent="PlayerCharacter/PartsSkeletonContainer/Parts" index="5"]
-position = Vector2(6.98828, 118.259)
 position = Vector2(6.98828, 118.259)
 scale = Vector2(0.999851, 0.999851)
 
@@ -126,11 +121,10 @@ Camera = NodePath("../../Camera2D")
 _player = NodePath("..")
 _respawner = NodePath("../../Respawner")
 
-[node name="Respawner" type="Node" parent="." node_paths=PackedStringArray("_respawnPoint", "_scoreLabel", "_player")]
+[node name="Respawner" type="Node" parent="." node_paths=PackedStringArray("_respawnPoint", "_player")]
 unique_name_in_owner = true
 script = ExtResource("3_77cwm")
 _respawnPoint = NodePath("../RespawnPoint")
-_scoreLabel = NodePath("../Camera2D/ScoreLabel")
 _player = NodePath("../PlayerCharacter")
 
 [node name="Camera2D" type="Camera2D" parent="." node_paths=PackedStringArray("Player")]
@@ -142,10 +136,11 @@ cameraSpeed = 10000.0
 [node name="ScoreLabel" type="Label" parent="Camera2D"]
 z_index = 10
 offset_left = 160.0
-offset_top = 28.0
-offset_right = 458.0
-offset_bottom = 135.0
-theme_override_font_sizes/font_size = 78
+offset_top = 50.0
+offset_right = 353.0
+offset_bottom = 148.0
+theme = ExtResource("5_2dclh")
+theme_override_font_sizes/font_size = 100
 text = "0/13"
 
 [node name="GoldEggs" type="TextureRect" parent="Camera2D"]

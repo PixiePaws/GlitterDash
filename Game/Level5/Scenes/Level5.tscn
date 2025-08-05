@@ -1,10 +1,11 @@
-[gd_scene load_steps=27 format=4 uid="uid://bcjru0fi3cbkn"]
+[gd_scene load_steps=28 format=4 uid="uid://bcjru0fi3cbkn"]
 
 [ext_resource type="Script" path="res://Game/Level1/Scripts/Level1.cs" id="1_o40gu"]
 [ext_resource type="PackedScene" uid="uid://bun0lpg7lkpq6" path="res://Player/Scenes/PlayerCharacter.tscn" id="2_tanqe"]
 [ext_resource type="Script" path="res://Game/Respawner.cs" id="3_iciou"]
 [ext_resource type="Script" path="res://Game/Level1/Scripts/Camera.cs" id="4_3i2sk"]
 [ext_resource type="Texture2D" uid="uid://uprybvy2gmww" path="res://Art/Items/TheEgg.png" id="5_obcyq"]
+[ext_resource type="Theme" uid="uid://toxmj1vwp6m" path="res://UI/TextTheme.tres" id="5_pch8d"]
 [ext_resource type="Texture2D" uid="uid://bbi8xqng11ic8" path="res://Art/Backgrounds/SpaceBG.png" id="6_nnpcx"]
 [ext_resource type="Texture2D" uid="uid://c3hd8ludbquxr" path="res://Art/Backgrounds/MiddleBG.png" id="7_60bi0"]
 [ext_resource type="Texture2D" uid="uid://ciqy2qp8wkl11" path="res://Art/Backgrounds/CrystalCave.png" id="8_wh5ji"]
@@ -12,7 +13,7 @@
 [ext_resource type="PackedScene" uid="uid://breqli4rgs6dk" path="res://Items/Scenes/Portal.tscn" id="12_o8m30"]
 [ext_resource type="Texture2D" uid="uid://cr2mrqp8ecys1" path="res://Art/Tilemaps/GrassTiles.png" id="13_4ys67"]
 [ext_resource type="Script" path="res://Game/Portal.cs" id="13_1271g"]
-[ext_resource type="Texture2D" uid="uid://pqyhvj8c5kto" path="res://Art/Tilemaps/StoneTiles.png" id="14_tywfk"]
+[ext_resource type="Texture2D" uid="uid://tbl74xhn72on" path="res://Art/Tilemaps/StoneTiles.png" id="14_3pwg0"]
 [ext_resource type="PackedScene" uid="uid://dol5g5hc7xj1e" path="res://Game/DangerZoneFalling.tscn" id="16_42rqu"]
 [ext_resource type="Script" path="res://Items/Scripts/GoldEggManager.cs" id="17_ww6gv"]
 [ext_resource type="PackedScene" uid="uid://dhyun241fg6n4" path="res://Obstacles/Scenes/SpikeTrap2.tscn" id="18_1113n"]
@@ -44,7 +45,7 @@ texture_region_size = Vector2i(48, 49)
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_k5m74"]
 resource_name = "Stone"
-texture = ExtResource("14_tywfk")
+texture = ExtResource("14_3pwg0")
 texture_region_size = Vector2i(48, 49)
 0:0/0 = 0
 0:0/0/physics_layer_0/polygon_0/points = PackedVector2Array(-24, -24.5, 24, -24.5, 24, 24.5, -24, 24.5)
@@ -80,8 +81,7 @@ Filter = NodePath("../BlackWhite")
 _collisionDetector = NodePath("CollisionDetector")
 
 [node name="UniHead" parent="PlayerCharacter/PartsSkeletonContainer/Parts" index="0"]
-position = Vector2(23.1563, 114.795)
-rotation = -0.21492
+position = Vector2(13.791, 118.077)
 scale = Vector2(0.999832, 0.999832)
 
 [node name="UniBody" parent="PlayerCharacter/PartsSkeletonContainer/Parts" index="1"]
@@ -89,23 +89,19 @@ position = Vector2(16.6758, 119.406)
 scale = Vector2(1, 1)
 
 [node name="UniLHand" parent="PlayerCharacter/PartsSkeletonContainer/Parts" index="2"]
-position = Vector2(-245.732, 178.024)
-rotation = 1.65301
+position = Vector2(10.584, 119)
 scale = Vector2(0.999858, 0.999858)
 
 [node name="UniRLeg" parent="PlayerCharacter/PartsSkeletonContainer/Parts" index="3"]
-position = Vector2(-22.9355, 141.616)
-rotation = -0.429288
+position = Vector2(10.0078, 113.56)
 scale = Vector2(0.99985, 0.99985)
 
 [node name="UniRHand" parent="PlayerCharacter/PartsSkeletonContainer/Parts" index="4"]
-position = Vector2(75.9746, 173.996)
-rotation = -0.687775
+position = Vector2(-9.66992, 127.066)
 scale = Vector2(0.999849, 0.999849)
 
 [node name="UniLLeg" parent="PlayerCharacter/PartsSkeletonContainer/Parts" index="5"]
-position = Vector2(-25.5488, 101.209)
-rotation = -0.262334
+position = Vector2(6.98633, 118.259)
 scale = Vector2(0.999851, 0.999851)
 
 [node name="Head" parent="PlayerCharacter/PartsSkeletonContainer/Skeleton2D/Base/Body" index="1"]
@@ -117,9 +113,6 @@ scale = Vector2(0.999849, 0.999849)
 [node name="BackArm" parent="PlayerCharacter/PartsSkeletonContainer/Skeleton2D/Base/Body" index="3"]
 scale = Vector2(0.999858, 0.999858)
 
-[node name="FrontLeg" parent="PlayerCharacter/PartsSkeletonContainer/Skeleton2D/Base" index="1"]
-scale = Vector2(0.99985, 0.99985)
-
 [node name="CollisionDetector" parent="PlayerCharacter" index="3" node_paths=PackedStringArray("RespawnPoint", "_filter", "_goldeggmanager", "Camera", "_player", "_respawner")]
 RespawnPoint = NodePath("../../RespawnPoint")
 _filter = NodePath("../../BlackWhite")
@@ -128,11 +121,10 @@ Camera = NodePath("../../Camera2D")
 _player = NodePath("..")
 _respawner = NodePath("../../Respawner")
 
-[node name="Respawner" type="Node" parent="." node_paths=PackedStringArray("_respawnPoint", "_scoreLabel", "_player")]
+[node name="Respawner" type="Node" parent="." node_paths=PackedStringArray("_respawnPoint", "_player")]
 unique_name_in_owner = true
 script = ExtResource("3_iciou")
 _respawnPoint = NodePath("../RespawnPoint")
-_scoreLabel = NodePath("../Camera2D/ScoreLabel")
 _player = NodePath("../PlayerCharacter")
 
 [node name="Camera2D" type="Camera2D" parent="." node_paths=PackedStringArray("Player")]
@@ -146,10 +138,11 @@ cameraSpeed = 10000.0
 [node name="ScoreLabel" type="Label" parent="Camera2D"]
 z_index = 10
 offset_left = 160.0
-offset_top = 28.0
-offset_right = 458.0
-offset_bottom = 135.0
-theme_override_font_sizes/font_size = 78
+offset_top = 50.0
+offset_right = 353.0
+offset_bottom = 148.0
+theme = ExtResource("5_pch8d")
+theme_override_font_sizes/font_size = 100
 text = "0/13"
 
 [node name="GoldEggs" type="TextureRect" parent="Camera2D"]

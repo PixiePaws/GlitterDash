@@ -1,4 +1,4 @@
-[gd_scene load_steps=32 format=4 uid="uid://cuch5yonnwbtt"]
+[gd_scene load_steps=33 format=4 uid="uid://cuch5yonnwbtt"]
 
 [ext_resource type="Script" path="res://Game/Level1/Scripts/Level1.cs" id="1_r7umx"]
 [ext_resource type="Script" path="res://Game/Level1/Scripts/Camera.cs" id="1_ttao5"]
@@ -10,14 +10,15 @@
 [ext_resource type="Texture2D" uid="uid://c3hd8ludbquxr" path="res://Art/Backgrounds/MiddleBG.png" id="7_sac58"]
 [ext_resource type="Texture2D" uid="uid://ciqy2qp8wkl11" path="res://Art/Backgrounds/CrystalCave.png" id="8_1li2j"]
 [ext_resource type="Script" path="res://Game/Portal.cs" id="8_iqa1o"]
-[ext_resource type="PackedScene" uid="uid://mu1by1prm8kh" path="res://Items/Scenes/GoldEgg.tscn" id="11_508a1"]
+[ext_resource type="PackedScene" uid="uid://dsnvu8ioiw0ff" path="res://Items/Scenes/GoldEgg.tscn" id="11_508a1"]
 [ext_resource type="PackedScene" uid="uid://dol5g5hc7xj1e" path="res://Game/DangerZoneFalling.tscn" id="11_v4ol5"]
 [ext_resource type="Texture2D" uid="uid://cr2mrqp8ecys1" path="res://Art/Tilemaps/GrassTiles.png" id="13_oypm7"]
+[ext_resource type="Texture2D" uid="uid://tbl74xhn72on" path="res://Art/Tilemaps/StoneTiles.png" id="14_2k5b1"]
 [ext_resource type="Shader" path="res://Game/Black&White.gdshader" id="14_cylb3"]
 [ext_resource type="Script" path="res://Items/Scripts/GoldEggManager.cs" id="14_qnefm"]
-[ext_resource type="Texture2D" uid="uid://pqyhvj8c5kto" path="res://Art/Tilemaps/StoneTiles.png" id="14_rhyll"]
 [ext_resource type="Theme" uid="uid://toxmj1vwp6m" path="res://UI/TextTheme.tres" id="17_rwmuo"]
 [ext_resource type="PackedScene" uid="uid://bun0lpg7lkpq6" path="res://Player/Scenes/PlayerCharacter.tscn" id="18_hg87w"]
+[ext_resource type="FontFile" uid="uid://dmdmmrdgoemai" path="res://Art/UI/Fonts/Milk Mango.ttf" id="19_5k66e"]
 [ext_resource type="Texture2D" uid="uid://d1lubk38foqar" path="res://Art/Items/CartoonRock_FHD.png" id="20_41q5b"]
 [ext_resource type="PackedScene" uid="uid://cer6xkecwmj1s" path="res://Obstacles/Scenes/SpikeTrap.tscn" id="21_2mg51"]
 [ext_resource type="Texture2D" uid="uid://betwd4u35upvc" path="res://Art/Items/CartoonBush_FHD.png" id="21_m6pb5"]
@@ -66,7 +67,7 @@ texture_region_size = Vector2i(48, 49)
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_k5m74"]
 resource_name = "Stone"
-texture = ExtResource("14_rhyll")
+texture = ExtResource("14_2k5b1")
 texture_region_size = Vector2i(48, 49)
 0:0/0 = 0
 0:0/0/physics_layer_0/polygon_0/points = PackedVector2Array(-24, -24.5, 24, -24.5, 24, 24.5, -24, 24.5)
@@ -95,22 +96,23 @@ RespawnPoint = NodePath("RespawnPoint")
 metadata/_edit_vertical_guides_ = [3840.0, 5760.0, 1920.0]
 metadata/_edit_horizontal_guides_ = [1080.0, 2160.0, -1080.0]
 
-[node name="PlayerCharacter" parent="." node_paths=PackedStringArray("Filter") instance=ExtResource("18_hg87w")]
+[node name="PlayerCharacter" parent="." node_paths=PackedStringArray("Filter", "_collisionDetector") instance=ExtResource("18_hg87w")]
 z_index = 10
-position = Vector2(5330, -876)
+position = Vector2(4418, 1745)
 scale = Vector2(0.21, 0.21)
 Filter = NodePath("../BlackWhite")
+_collisionDetector = NodePath("CollisionDetector")
 
 [node name="UniHead" parent="PlayerCharacter/PartsSkeletonContainer/Parts" index="0"]
 position = Vector2(13.791, 118.077)
 scale = Vector2(0.999833, 0.999833)
 
 [node name="UniBody" parent="PlayerCharacter/PartsSkeletonContainer/Parts" index="1"]
-position = Vector2(16.6758, 119.407)
+position = Vector2(16.6758, 119.406)
 scale = Vector2(1, 1)
 
 [node name="UniLHand" parent="PlayerCharacter/PartsSkeletonContainer/Parts" index="2"]
-position = Vector2(10.584, 119.001)
+position = Vector2(10.584, 119)
 scale = Vector2(0.999858, 0.999858)
 
 [node name="UniRLeg" parent="PlayerCharacter/PartsSkeletonContainer/Parts" index="3"]
@@ -118,7 +120,7 @@ position = Vector2(10.0078, 113.561)
 scale = Vector2(0.99985, 0.99985)
 
 [node name="UniRHand" parent="PlayerCharacter/PartsSkeletonContainer/Parts" index="4"]
-position = Vector2(-9.66992, 127.067)
+position = Vector2(-9.66992, 127.066)
 scale = Vector2(0.999849, 0.999849)
 
 [node name="UniLLeg" parent="PlayerCharacter/PartsSkeletonContainer/Parts" index="5"]
@@ -158,10 +160,11 @@ cameraSpeed = 10000.0
 [node name="ScoreLabel" type="Label" parent="Camera2D"]
 z_index = 10
 offset_left = 160.0
-offset_top = 28.0
-offset_right = 458.0
-offset_bottom = 135.0
-theme_override_font_sizes/font_size = 78
+offset_top = 50.0
+offset_right = 353.0
+offset_bottom = 160.0
+theme = ExtResource("17_rwmuo")
+theme_override_font_sizes/font_size = 100
 text = "0/13"
 
 [node name="GoldEggs" type="TextureRect" parent="Camera2D"]
@@ -360,21 +363,23 @@ offset_top = 47.0
 offset_right = 1921.0
 offset_bottom = 164.0
 theme = ExtResource("17_rwmuo")
+theme_override_fonts/font = ExtResource("19_5k66e")
 theme_override_font_sizes/font_size = 50
 text = "Tutorial"
 horizontal_alignment = 1
 vertical_alignment = 1
 
 [node name="Goal" type="Label" parent="Tutorial"]
-offset_top = 157.0
+offset_top = 120.0
 offset_right = 1920.0
-offset_bottom = 334.0
+offset_bottom = 297.0
 theme = ExtResource("17_rwmuo")
 theme_override_font_sizes/font_size = 30
-text = "Follow the gold egg to Nugget 
+text = "Follow the gold eggs
 but watch out the journey 
 is very dangerous."
 horizontal_alignment = 1
+vertical_alignment = 1
 
 [node name="Jump" type="Label" parent="Tutorial"]
 offset_left = 411.0
@@ -444,10 +449,18 @@ offset_top = 1619.0
 offset_right = 4991.0
 offset_bottom = 1913.0
 theme = ExtResource("17_rwmuo")
-text = "Final move wall 
+text = "Final move:  wall 
 jump! Give it a try!"
 horizontal_alignment = 1
 vertical_alignment = 1
+
+[node name="Almost" type="Label" parent="Tutorial"]
+offset_left = 5223.0
+offset_top = 530.0
+offset_right = 5374.0
+offset_bottom = 555.0
+theme = ExtResource("17_rwmuo")
+text = "Almost there!"
 
 [node name="Final" type="Label" parent="Tutorial"]
 offset_left = 4919.0
