@@ -1,4 +1,4 @@
-[gd_scene load_steps=3 format=3 uid="uid://dhyun241fg6n4"]
+[gd_scene load_steps=3 format=3 uid="uid://blyq0l1uus6rn"]
 
 [ext_resource type="Script" path="res://Obstacles/Scripts/SpikeTrap.cs" id="1_hsbpx"]
 [ext_resource type="Texture2D" uid="uid://bi6gfhj1dr3rv" path="res://Art/Obstacles/OnlyCaneSpikes.png" id="2_jd7ug"]
@@ -6,7 +6,7 @@
 [node name="SpikeTrap" type="StaticBody2D" groups=["Obstacles"]]
 light_mask = 10
 visibility_layer = 4
-collision_layer = 10
+collision_layer = 40
 collision_mask = 4
 script = ExtResource("1_hsbpx")
 

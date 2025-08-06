@@ -21,7 +21,7 @@
 [ext_resource type="PackedScene" uid="uid://ti05fy42timf" path="res://Obstacles/Scenes/Pendulum.tscn" id="17_ljtf2"]
 [ext_resource type="PackedScene" uid="uid://o8w6tkup2gx6" path="res://Obstacles/Scenes/MovingCircularSaw.tscn" id="21_hrs2a"]
 [ext_resource type="PackedScene" uid="uid://cer6xkecwmj1s" path="res://Obstacles/Scenes/SpikeTrap.tscn" id="21_ocf5a"]
-[ext_resource type="PackedScene" path="res://Obstacles/Scenes/SpikeTrap2.tscn" id="22_grio7"]
+[ext_resource type="PackedScene" uid="uid://blyq0l1uus6rn" path="res://Obstacles/Scenes/SpikeTrap2.tscn" id="22_grio7"]
 
 [sub_resource type="SegmentShape2D" id="SegmentShape2D_oefmr"]
 a = Vector2(-625.5, 13)
@@ -82,7 +82,7 @@ texture_region_size = Vector2i(48, 49)
 
 [sub_resource type="TileSet" id="TileSet_sok5l"]
 tile_size = Vector2i(48, 49)
-physics_layer_0/collision_layer = 2
+physics_layer_0/collision_layer = 34
 sources/0 = SubResource("TileSetAtlasSource_67wqi")
 sources/1 = SubResource("TileSetAtlasSource_k5m74")
 

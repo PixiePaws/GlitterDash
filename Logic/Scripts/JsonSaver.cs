@@ -73,21 +73,34 @@ namespace UnicornGame
             else
             {
                 Godot.Collections.Dictionary<string, Variant> LoadedDict = GetSaveFileAsDictionary(_savePath);
-                string GameDataKey = "";
-                //Godot.Collections.Dictionary<string, Variant> GameDataDict = (Godot.Collections.Dictionary<string, Variant>)GameData;
+                Godot.Collections.Dictionary<string, Variant> NewLevelDict = (Godot.Collections.Dictionary<string, Variant>)Json.ParseString(GameData);
+                //string GameDataKey = "";
                 foreach (var Key in LoadedDict.Keys)
                 {
-                    if (GameData.Contains(Key))
+                    //GameDataKey = Key as string;
+                    if (NewLevelDict.ContainsKey(Key))
                     {
                         GD.Print($"GameData string contains key: {Key} in JsonSaver");
-                        GameDataKey = Key;
+                        LoadedDict[Key] = NewLevelDict[Key];
+                        GD.Print($"Replaced LoadedDict[{Key}] with GameData[{Key}]");
+                        break;
+                    }
+                    else
+                    {
+                        LoadedDict[Key] = NewLevelDict[Key];
+                        GD.Print($"Added key LoadedDict[{Key}] containing GameData[{Key}]");
+                        break;
                     }
                 }
-                if (string.IsNullOrEmpty(GameDataKey))
+                string UpdatedDictString = Json.Stringify(LoadedDict);
+                try
                 {
-                    GD.Print("GameDataKey is null or empty");
-                    string LoadedDataString = Json.Stringify(LoadedDict);
-                    //string CombinedData = Json.ParseString(LoadedDataString, CombinedData)
+                    File.WriteAllText(_savePath, UpdatedDictString);
+                    GD.Print($"Wrote UpdatedDictString into {_savePath}");
+                }
+                catch (Exception Error)
+                {
+                    GD.Print(Error);
                 }
             }
         }

@@ -80,7 +80,7 @@ texture_region_size = Vector2i(48, 49)
 
 [sub_resource type="TileSet" id="TileSet_sok5l"]
 tile_size = Vector2i(48, 49)
-physics_layer_0/collision_layer = 2
+physics_layer_0/collision_layer = 34
 sources/0 = SubResource("TileSetAtlasSource_67wqi")
 sources/1 = SubResource("TileSetAtlasSource_k5m74")
 
@@ -98,6 +98,8 @@ metadata/_edit_horizontal_guides_ = [1080.0, 2160.0, -1080.0, 680.0, 839.0]
 z_index = 10
 position = Vector2(1515, 661)
 scale = Vector2(0.21, 0.21)
+DashSpeed = 1000.0
+DashDuration = 0.3
 Filter = NodePath("../BlackWhite")
 _collisionDetector = NodePath("CollisionDetector")
 
@@ -107,6 +109,7 @@ scale = Vector2(0.999833, 0.999833)
 
 [node name="UniBody" parent="PlayerCharacter/PartsSkeletonContainer/Parts" index="1"]
 position = Vector2(16.6768, 119.407)
+scale = Vector2(1, 1)
 
 [node name="UniLHand" parent="PlayerCharacter/PartsSkeletonContainer/Parts" index="2"]
 position = Vector2(10.585, 119.001)
@@ -114,6 +117,7 @@ scale = Vector2(0.999858, 0.999858)
 
 [node name="UniRLeg" parent="PlayerCharacter/PartsSkeletonContainer/Parts" index="3"]
 position = Vector2(10.0093, 113.561)
+scale = Vector2(0.99985, 0.99985)
 
 [node name="UniRHand" parent="PlayerCharacter/PartsSkeletonContainer/Parts" index="4"]
 position = Vector2(-9.66846, 127.067)
@@ -121,6 +125,7 @@ scale = Vector2(0.999849, 0.999849)
 
 [node name="UniLLeg" parent="PlayerCharacter/PartsSkeletonContainer/Parts" index="5"]
 position = Vector2(6.98779, 118.26)
+scale = Vector2(0.999851, 0.999851)
 
 [node name="Head" parent="PlayerCharacter/PartsSkeletonContainer/Skeleton2D/Base/Body" index="1"]
 scale = Vector2(0.999833, 0.999833)

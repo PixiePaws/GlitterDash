@@ -13,7 +13,7 @@
 [ext_resource type="Texture2D" uid="uid://c5pr28c642ewo" path="res://Art/Tilemaps/GrassTiles.png" id="13_4ys67"]
 [ext_resource type="Script" path="res://Game/Portal.cs" id="13_1271g"]
 [ext_resource type="Texture2D" uid="uid://cer8g5b4atbgh" path="res://Art/Tilemaps/StoneTiles.png" id="14_tywfk"]
-[ext_resource type="PackedScene" uid="uid://dol5g5hc7xj1e" path="res://Game/DangerZoneFalling.tscn" id="16_42rqu"]
+[ext_resource type="PackedScene" path="res://Game/DangerZoneFalling.tscn" id="16_42rqu"]
 [ext_resource type="Script" path="res://Items/Scripts/GoldEggManager.cs" id="17_ww6gv"]
 [ext_resource type="PackedScene" uid="uid://dsnvu8ioiw0ff" path="res://Items/Scenes/GoldEgg.tscn" id="18_jd442"]
 [ext_resource type="Shader" path="res://Game/Black&White.gdshader" id="19_4mlds"]
@@ -78,7 +78,7 @@ texture_region_size = Vector2i(48, 49)
 
 [sub_resource type="TileSet" id="TileSet_sok5l"]
 tile_size = Vector2i(48, 49)
-physics_layer_0/collision_layer = 2
+physics_layer_0/collision_layer = 34
 sources/0 = SubResource("TileSetAtlasSource_67wqi")
 sources/1 = SubResource("TileSetAtlasSource_k5m74")
 
