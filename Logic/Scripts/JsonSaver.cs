@@ -10,6 +10,7 @@ namespace UnicornGame
         [Export] private string _directoryPath;
         [Export] private string _savePath;
         [Export] private string _fileName;
+        [Export] private int _saveSlotsAmount = 3;
         private string _defaultFileName = "Save1.json";
 
         public string DirectoryPath
@@ -42,7 +43,7 @@ namespace UnicornGame
             {
                 _fileName = _defaultFileName;
             }
-            else
+            else if(FileCount < _saveSlotsAmount)
             {
                 _fileName = $"{FileBodyName}{SaveNumberString}{FileExtensionString}";
             }
