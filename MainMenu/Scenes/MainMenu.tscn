@@ -1,13 +1,17 @@
-[gd_scene load_steps=4 format=3 uid="uid://cc7i1823faagj"]
+[gd_scene load_steps=6 format=3 uid="uid://cc7i1823faagj"]
 
 [ext_resource type="Script" path="res://MainMenu/Scripts/MainMenuScript.cs" id="1_ys428"]
 [ext_resource type="PackedScene" uid="uid://cnu4eae42h74o" path="res://Settings/Scenes/Settings.tscn" id="2_opxph"]
+[ext_resource type="Theme" path="res://UI/TextTheme.tres" id="3_gvyjg"]
 [ext_resource type="Texture2D" uid="uid://dyv6o0rxv58oe" path="res://Art/MainMenu/UnicornGameBG.png" id="3_rc2yd"]
+[ext_resource type="FontFile" uid="uid://dmdmmrdgoemai" path="res://Art/UI/Fonts/Milk Mango.ttf" id="5_y13pf"]
 
 [node name="MainMenu" type="CanvasLayer"]
+script = ExtResource("1_ys428")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
-position = Vector2(960, 540)
+z_index = -2000
+position = Vector2(960, 541)
 texture = ExtResource("3_rc2yd")
 
 [node name="Control" type="Control" parent="."]
@@ -15,44 +19,72 @@ layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
+offset_top = 210.0
+offset_bottom = 210.0
 grow_horizontal = 2
 grow_vertical = 2
-script = ExtResource("1_ys428")
 
 [node name="MarginContainer" type="MarginContainer" parent="Control"]
+z_index = -400
 layout_mode = 1
 anchors_preset = 2
 anchor_top = 1.0
 anchor_bottom = 1.0
-offset_top = -101.0
-offset_right = 70.0
+offset_left = 766.0
+offset_top = -682.0
+offset_right = 1059.0
+offset_bottom = -441.0
 grow_vertical = 0
+scale = Vector2(1.2, 1.2)
 
 [node name="VBoxContainer" type="VBoxContainer" parent="Control/MarginContainer"]
 layout_mode = 2
 
 [node name="NewGameButton" type="Button" parent="Control/MarginContainer/VBoxContainer"]
 layout_mode = 2
+theme = ExtResource("3_gvyjg")
+theme_override_font_sizes/font_size = 40
 text = "New Game"
 
 [node name="ContinueButton" type="Button" parent="Control/MarginContainer/VBoxContainer"]
 layout_mode = 2
+theme = ExtResource("3_gvyjg")
+theme_override_font_sizes/font_size = 40
 text = "Continue"
 
 [node name="LoadGameButton" type="Button" parent="Control/MarginContainer/VBoxContainer"]
 layout_mode = 2
+theme = ExtResource("3_gvyjg")
+theme_override_font_sizes/font_size = 40
 text = "Load Game"
+
+[node name="LevelSelectButton" type="Button" parent="Control/MarginContainer/VBoxContainer"]
+layout_mode = 2
+theme = ExtResource("3_gvyjg")
+theme_override_font_sizes/font_size = 40
+text = "Level Select"
 
 [node name="SettingsButton" type="Button" parent="Control/MarginContainer/VBoxContainer"]
 layout_mode = 2
+theme = ExtResource("3_gvyjg")
+theme_override_font_sizes/font_size = 40
 text = "Settings"
 
 [node name="QuitButton" type="Button" parent="Control/MarginContainer/VBoxContainer"]
 layout_mode = 2
+theme = ExtResource("3_gvyjg")
+theme_override_font_sizes/font_size = 40
 text = "Quit"
 
-[node name="LevelSelectButton" type="Button" parent="Control/MarginContainer/VBoxContainer"]
-layout_mode = 2
-text = "Level Select"
+[node name="SettingsScene" parent="." instance=ExtResource("2_opxph")]
 
-[node name="SettingsScene" parent="Control" instance=ExtResource("2_opxph")]
+[node name="Label" type="Label" parent="."]
+offset_left = -4.0
+offset_top = 192.0
+offset_right = 1922.0
+offset_bottom = 343.0
+theme_override_fonts/font = ExtResource("5_y13pf")
+theme_override_font_sizes/font_size = 155
+text = "Unicorn Dash"
+horizontal_alignment = 1
+vertical_alignment = 1

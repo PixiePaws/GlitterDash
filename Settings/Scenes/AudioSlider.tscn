@@ -1,6 +1,7 @@
-[gd_scene load_steps=2 format=3 uid="uid://e5oe2vcoge8q"]
+[gd_scene load_steps=3 format=3 uid="uid://e5oe2vcoge8q"]
 
 [ext_resource type="Script" path="res://Settings/Scripts/AudioSlider.cs" id="1_u32e8"]
+[ext_resource type="Theme" uid="uid://toxmj1vwp6m" path="res://UI/TextTheme.tres" id="2_kq8l5"]
 
 [node name="AudioSlider" type="Control"]
 layout_mode = 3
@@ -16,6 +17,7 @@ layout_mode = 0
 offset_left = 335.0
 offset_right = 1311.0
 offset_bottom = 45.0
+theme = ExtResource("2_kq8l5")
 theme_override_constants/separation = 42
 
 [node name="AudioNameLabel" type="Label" parent="HBoxContainer"]
@@ -41,4 +43,4 @@ layout_mode = 2
 custom_minimum_size = Vector2(300, 0)
 layout_mode = 2
 theme_override_font_sizes/font_size = 32
-text = "99-.2"
+text = "100"
