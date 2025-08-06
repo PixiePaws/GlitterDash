@@ -191,6 +191,12 @@ namespace UnicornGame
 						walking = true;
 					}
 				}
+				else if (!IsOnFloor())
+				{
+					GD.Print("Not on floor, stopping walk sound");
+					AudioManager.StopSound(walkSound);
+					walking = false;
+				}
 			}
 			else
 			{
