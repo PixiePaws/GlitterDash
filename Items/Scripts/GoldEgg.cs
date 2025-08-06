@@ -7,9 +7,14 @@ namespace UnicornGame
 	public partial class GoldEgg : Area2D
 	{
 		[Export] private Respawner _respawner;
+		private AudioManager _audioManager;
+		private AudioStream collectSound;
 
 		public override void _Ready()
 		{
+			_audioManager = GetNode<AudioManager>("/root/AudioManager");
+			collectSound = GD.Load<AudioStream>("res://Audio/Sfx/collectcoin.wav");
+			
 			_respawner = GetNode<Respawner>("../../Respawner");
 			BodyEntered += OnBodyEntered;
 		}
@@ -23,6 +28,8 @@ namespace UnicornGame
 		public void OnBodyEntered(Node body)
 		{
 			_respawner.AddScore();
+			AudioManager.PlaySound2(collectSound);
+            //_audioManager.PlayCollectSound();
 			QueueFree();
 		}
 

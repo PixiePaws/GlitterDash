@@ -50,6 +50,7 @@ namespace UnicornGame
 					}
 				}
 
+				// If there is no egg it adds one
 				if (!hasEgg)
 				{
 					GoldEgg newEgg = GoldEggScene.Instantiate<GoldEgg>();
