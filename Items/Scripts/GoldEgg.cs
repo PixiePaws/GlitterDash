@@ -10,8 +10,6 @@ namespace UnicornGame
 		private AudioManager _audioManager;
 		private AudioStream collectSound;
 
-
-
 		public override void _Ready()
 		{
 			_audioManager = GetNode<AudioManager>("/root/AudioManager");
