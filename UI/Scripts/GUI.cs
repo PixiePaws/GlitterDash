@@ -21,9 +21,6 @@ namespace UnicornGame
 
 			_quitButton = GetNode<Button>("QuitButton");
 			_quitButton.Pressed += OnQuitButtonPressed;
-
-			// _selectSettings = GetNode<Button>("SettingsButton");
-			// _selectSettings.Pressed += OnSettingsPressed;
 		}
 
 
@@ -49,7 +46,6 @@ namespace UnicornGame
 				settingsPanel.Name = "SettingsPanel"; // IMPORTANT DONT DELETE
 				AddChild(settingsPanel);
 			}
-
 		}
 	}
 }

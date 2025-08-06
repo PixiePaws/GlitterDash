@@ -40,12 +40,12 @@ namespace UnicornGame
 			originalCameraPos = startCameraPosition;
 
 			size = (Vector2I)GetViewportRect().Size;
+			
 			// Updates the camera position based on player's position
 			UpdateCameraPosition();
 
 			// Set the camera to begining position
 			GlobalPosition = targetPosition;
-
 			previousCellY = (int)Mathf.Floor(Player.GlobalPosition.Y / size.Y);
 		}
 
@@ -101,7 +101,7 @@ namespace UnicornGame
 
 			if (type == "die")
 			{
-				await ToSignal(GetTree().CreateTimer(6f), "timeout");
+				await ToSignal(GetTree().CreateTimer(5f), "timeout");
 			}
 			else if (type == "fall")
 			{
@@ -117,9 +117,9 @@ namespace UnicornGame
 		/// </summary>
 		public void ResetToOriginalLocation()
 		{
-			GlobalPosition = originalCameraPos;//tämä vie kameran väärään paikkaan miten korjataan
+			GlobalPosition = originalCameraPos;
 			targetPosition = originalCameraPos;
-			cameraToStart = false;
+			cameraToStart = true;
 		}
 			
 		/// <summary>

@@ -7,19 +7,26 @@ namespace UnicornGame
 {
 	public partial class Player : CharacterBody2D
 	{
-		[Export] public float Speed = 200f;
-		[Export] public float JumpVelocity = -600f;
-		[Export] public float WallJumpVelocity = -600f;
-		[Export] public float WallJumpPush = 400f;
-		[Export] public float WallSlideSpeed = 100f;
+		[Export] public float Speed = 380f;
+		[Export] public float JumpVelocity = -650f;
+		[Export] public float WallJumpVelocity = -400f;
+		[Export] public float WallJumpPush = 350f;
+		[Export] public float WallSlideSpeed = 200f;
 		[Export] public float Gravity = 1500f;
-		[Export] public float JumpDuration = 1f; 
-		[Export] public float DashSpeed = 800f;
-		[Export] public float DashDuration = 0.2f;
+		[Export] public float JumpDuration = 1f;
+		[Export] public float DashSpeed = 1000f;
+		[Export] public float DashDuration = 0.25f;
 		[Export] public float DashCooldown = 0.5f;
 		[Export] public ColorRect Filter;
 		[Export] public CollisionDetector _collisionDetector;
-		//[Export] public TileMap TileMap;
+		[Export] public AnimatedSprite2D AnimatedSprite { get; set; } // tarvitaan animaatioita varten
+
+		// Sounds 
+		private AudioStream walkSound;
+		private AudioStream jumpSound;
+		private AudioStream fallSound;
+		private AudioStream wallSlideSound;
+
 
 		private bool _isWallSliding = false;
 		private float _wallJumpDirection = 0;
@@ -35,10 +42,13 @@ namespace UnicornGame
 		private Godot.Vector2 _dashDirection = Godot.Vector2.Zero;
 		// private CollisionDetector _collisionDetector;
 		private bool _canControl = true;
+		private bool walking = false;
+		private AudioManager _audioManager;
+
+
 		public AnimationPlayer _animatedSprite; // tarvitaan animaatioita varten
 		public Respawner _respawner;
 
-		[Export] public AnimatedSprite2D AnimatedSprite { get; set; } // tarvitaan animaatioita varten
 
 		public override void _Ready()
 		{
@@ -52,9 +62,24 @@ namespace UnicornGame
 			_animatedSprite = GetNode<AnimationPlayer>("AnimationPlayer");
 			_respawner = GetNode<Respawner>("../Respawner");
 
+			//sounds
+			_audioManager = GetNode<AudioManager>("/root/AudioManager");
+			walkSound = GD.Load<AudioStream>("res://Audio/Sfx/walking-on-grass-quickly.mp3");
+			jumpSound = GD.Load<AudioStream>("res://Audio/Sfx/jumpgrunt.wav");
+
+
+			string currentScene = GetTree().CurrentScene.Name;
 			// set the character facing right
-			var skeleton = GetNode<Node2D>("PartsSkeletonContainer");
-			skeleton.Scale = new Vector2(-1, 1);
+			if (currentScene != "Level4")
+			{
+				var skeleton = GetNode<Node2D>("PartsSkeletonContainer");
+				skeleton.Scale = new Vector2(-1, 1);
+			}
+			else
+			{
+				var skeleton = GetNode<Node2D>("PartsSkeletonContainer");
+				skeleton.Scale = new Vector2(1, 1);
+			}
 		}
 
 
@@ -116,6 +141,7 @@ namespace UnicornGame
 				{
 					velocity = new Vector2(_dashDirection.X * DashSpeed, 0);
 					_animatedSprite.Play("Dash");
+					//_audioManager.PlayDashSound();
 					Velocity = velocity;
 					MoveAndSlide();
 					return;
@@ -130,12 +156,13 @@ namespace UnicornGame
 			}
 
 			if (!IsOnFloor() && !_isWallSliding && _jumpTimer <= 0 && Velocity.Y > 0 && !_justWallJumped)
+			{
+				if (_animatedSprite.CurrentAnimation != "Falling")
 				{
-					if (_animatedSprite.CurrentAnimation != "Falling")
-					{
-						_animatedSprite.Play("Falling");
-					}
+					_animatedSprite.Play("Falling");
+					//_audioManager.PlayFallingSound();
 				}
+			}
 
 			// Updates the velocity based on the current state
 			Velocity = velocity;
@@ -161,6 +188,11 @@ namespace UnicornGame
 				if (IsOnFloor() && !_isWallSliding && !_isDashing)
 				{
 					_animatedSprite.Play("Walk");
+					if (!walking)
+					{
+						AudioManager.PlaySound(walkSound);
+						walking = true;
+					}
 				}
 			}
 			else
@@ -170,6 +202,8 @@ namespace UnicornGame
 				if (IsOnFloor() && !_isWallSliding && !_isDashing)
 				{
 					_animatedSprite.Play("Idle");
+					AudioManager.StopSound(walkSound);
+					walking = false;
 				}
 			}
 		}
@@ -190,6 +224,8 @@ namespace UnicornGame
 				_jumpCount = 2;
 				_animatedSprite.Stop();
 				_animatedSprite.Play("Jump");
+				//AudioManager.PlaySound(jumpSound);
+				//_audioManager.PlayJumpSound();
 				_justJumped = true;
 				_jumpTimer = JumpDuration;
 			}
@@ -199,6 +235,8 @@ namespace UnicornGame
 				velocity.Y = JumpVelocity;
 				_jumpCount = 1;
 				_animatedSprite.Play("Jump");
+				//AudioManager.PlaySound(jumpSound);
+				//_audioManager.PlayJumpSound();
 				_justJumped = true;
 				_jumpTimer = JumpDuration;
 			}
@@ -214,8 +252,14 @@ namespace UnicornGame
 				if (_animatedSprite.CurrentAnimation != "Falling")
 				{
 					_animatedSprite.Play("Falling");
+					//_audioManager.PlayFallingSound();
 				}
 			}
+
+			/*if (_justJumped && Mathf.Abs(Input.GetAxis("Move left", "Move right")) > 0.1f && IsOnFloor())
+			{
+				AudioManager.PlaySound(walkSound);
+			}*/
 		}
 
 		/// <summary>
@@ -242,11 +286,14 @@ namespace UnicornGame
 				velocity.Y = Mathf.Min(velocity.Y + Gravity * 0.5f, WallSlideSpeed);
 				_jumpCount = 0;
 				_animatedSprite.Play("WallSlide");
+				//_audioManager.PlayWallSlideSound();
+
 			}
 			else if (IsNearWall() && !IsOnFloor() && inputDirection == 0)
 			{
 				_isWallSliding = false;
 				_animatedSprite.Play("Falling");
+				//_audioManager.PlayFallingSound();
 			}
 
 			// Wall jump
@@ -255,16 +302,17 @@ namespace UnicornGame
 					// If the player is wall sliding and presses jump while pressing towards the wall
 					{
 						GD.Print("WallDirection: " + wallDirection);
-						if (wallDirection != 0)
-						{
-							velocity.X = WallJumpPush * -wallDirection;
-							velocity.Y = WallJumpVelocity;
-							// Vector2 direction = new Godot.Vector2(-wallDirection, -2).Normalized();
-							// velocity = direction * WallJumpPush;
-							_justWallJumped = true;
-							_justWallJumpedTimer = 0.4f;
-							_animatedSprite.Play("Jump");
-						}
+					if (wallDirection != 0)
+					{
+						velocity.X = WallJumpPush * -wallDirection;
+						velocity.Y = WallJumpVelocity;
+						// Vector2 direction = new Godot.Vector2(-wallDirection, -2).Normalized();
+						// velocity = direction * WallJumpPush;
+						_justWallJumped = true;
+						_justWallJumpedTimer = 0.4f;
+						_animatedSprite.Play("Jump");
+						//_audioManager.PlayJumpSound();
+					}
 
 						SetDirection(-wallDirection);
 						_isWallSliding = false; // Reset wall sliding state after jumping
@@ -306,8 +354,9 @@ namespace UnicornGame
 		}
         public void Die()
         {
-            //CollisionLayer = 0; // <-- Remove player collision layer so the blood drops don't collide with it 
-            // !!!!!!!!!^^^^^^ Might have to change this manually back to CollisionLayer 1 when respawning ^^^^^^^^!!!!!!!!!!!!!!!
+			walking = false;
+            //CollisionLayer = 0; // <-- Remove player collision layer so the blood drops don't collide with it
+			// !!!!!!!!!^^^^^^ Might have to change this manually back to CollisionLayer 1 when respawning ^^^^^^^^!!!!!!!!!!!!!!!
 
 			// Load and instantiate the blood spray effect
 			var bloodEffectScene = GD.Load<PackedScene>("res://Effects/Scenes/blood_particle_effect.tscn");
@@ -327,7 +376,7 @@ namespace UnicornGame
 
             // Hide the player <- This works
             Hide();
-            
+
         }
 		/// <summary>
 		/// Gets the direction of the wall the player is currently sliding against.
@@ -392,7 +441,7 @@ namespace UnicornGame
 
 			if (dangerType == "dead")
 			{
-				await ToSignal(GetTree().CreateTimer(6f), Timer.SignalName.Timeout); // sama aika kun resetcameradie odotus
+				await ToSignal(GetTree().CreateTimer(5f), Timer.SignalName.Timeout); // sama aika kun resetcameradie odotus
 			}
 			else if (dangerType == "fall")
 			{

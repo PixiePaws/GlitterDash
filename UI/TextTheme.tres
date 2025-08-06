@@ -1,5 +1,8 @@
-[gd_resource type="Theme" format=3 uid="uid://toxmj1vwp6m"]
+[gd_resource type="Theme" load_steps=2 format=3 uid="uid://toxmj1vwp6m"]
+
+[ext_resource type="FontFile" uid="uid://do51ncx08dybl" path="res://Art/UI/Fonts/Stanberry.ttf" id="1_hdsyj"]
 
 [resource]
+default_font = ExtResource("1_hdsyj")
 default_font_size = 25
 Label/font_sizes/font_size = 25
