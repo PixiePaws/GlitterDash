@@ -11,7 +11,7 @@ script = ExtResource("1_ys428")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 z_index = -2000
-position = Vector2(960, 540)
+position = Vector2(960, 541)
 texture = ExtResource("3_rc2yd")
 
 [node name="Control" type="Control" parent="."]
@@ -19,10 +19,8 @@ layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_left = 2.0
-offset_top = 68.0
-offset_right = 2.0
-offset_bottom = 68.0
+offset_top = 210.0
+offset_bottom = 210.0
 grow_horizontal = 2
 grow_vertical = 2
 

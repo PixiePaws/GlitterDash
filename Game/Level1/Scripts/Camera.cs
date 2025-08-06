@@ -101,7 +101,7 @@ namespace UnicornGame
 
 			if (type == "die")
 			{
-				await ToSignal(GetTree().CreateTimer(6f), "timeout");
+				await ToSignal(GetTree().CreateTimer(5f), "timeout");
 			}
 			else if (type == "fall")
 			{
@@ -117,7 +117,7 @@ namespace UnicornGame
 		/// </summary>
 		public void ResetToOriginalLocation()
 		{
-			GlobalPosition = originalCameraPos;//tämä vie kameran väärään paikkaan miten korjataan
+			GlobalPosition = originalCameraPos;
 			targetPosition = originalCameraPos;
 			cameraToStart = true;
 		}

@@ -11,6 +11,8 @@
 [node name="SettingsScene" type="CanvasLayer"]
 process_mode = 3
 script = ExtResource("1_r7oxh")
+metadata/_edit_vertical_guides_ = [960.0, 1792.0]
+metadata/_edit_horizontal_guides_ = [540.0, 243.0]
 
 [node name="Settings" type="Control" parent="."]
 z_index = 2000
@@ -34,9 +36,10 @@ grow_horizontal = 2
 grow_vertical = 2
 theme = ExtResource("2_uh653")
 tab_alignment = 1
-current_tab = 0
+current_tab = 3
 
 [node name="Video" type="TabBar" parent="Settings/TabContainer"]
+visible = false
 layout_mode = 2
 metadata/_tab_index = 0
 
@@ -45,6 +48,10 @@ layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
+offset_left = 107.0
+offset_top = 102.0
+offset_right = 107.0
+offset_bottom = 102.0
 grow_horizontal = 2
 grow_vertical = 2
 theme_override_constants/margin_left = 24
@@ -75,6 +82,8 @@ layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
+offset_left = 20.0
+offset_right = 20.0
 grow_horizontal = 2
 grow_vertical = 2
 theme_override_constants/margin_left = 24
@@ -126,6 +135,10 @@ layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
+offset_left = 119.0
+offset_top = 134.0
+offset_right = 119.0
+offset_bottom = 134.0
 grow_horizontal = 2
 grow_vertical = 2
 theme_override_constants/margin_left = 24
@@ -149,7 +162,6 @@ layout_mode = 2
 layout_mode = 2
 
 [node name="Credits" type="TabBar" parent="Settings/TabContainer"]
-visible = false
 layout_mode = 2
 metadata/_tab_index = 3
 
@@ -164,3 +176,9 @@ theme_override_constants/margin_left = 24
 theme_override_constants/margin_top = 24
 theme_override_constants/margin_right = 24
 theme_override_constants/margin_bottom = 24
+
+[node name="Label" type="Label" parent="Settings/TabContainer/Credits/MarginContainer"]
+layout_mode = 2
+text = "JumpGrunt3.wav by Dundalkkirk -- https://freesound.org/s/565886/ -- License: Attribution NonCommercial 3.0
+
+CollectCoin.wav by bradwesson -- https://freesound.org/s/135936/ -- License: Attribution NonCommercial 4.0"

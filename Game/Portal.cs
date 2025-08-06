@@ -11,10 +11,16 @@ namespace UnicornGame
         [Export] public string _level5ScenePath = "res://Game/Level5/Scenes/Level5.tscn";
         [Export] public string _levelsCompletedScenePath = "res://Game/LevelsCompleted.tscn";
 
+		private AudioManager _audioManager;
+		private AudioStream portalSound;
+
         private string _nextLevelPath = "";
         
 		public override void _Ready()
         {
+			_audioManager = GetNode<AudioManager>("/root/AudioManager");
+			portalSound = GD.Load<AudioStream>("res://Audio/Sfx/fast-warp-in.wav");
+
             BodyEntered += OnBodyEntered; // Signal to detect when a body enters the portal area
         }
 
@@ -26,7 +32,7 @@ namespace UnicornGame
         {
             if (body is Player)
             {
-                GD.Print("Player entered the portal, transferring to Level 2.");
+                //GD.Print("Player entered the portal, transferring to Level 2.");
                 CallDeferred(nameof(PortalTransfer));
             }
         }
@@ -102,6 +108,7 @@ namespace UnicornGame
 
             PackedScene nextSceneLevel = (PackedScene)GD.Load(_nextLevelPath);
 
+            AudioManager.PlaySound2(portalSound);
             GetTree().ChangeSceneToPacked(nextSceneLevel);
         }
 
@@ -112,14 +119,14 @@ namespace UnicornGame
 		private string GetLevelScenePath(int nextLevel)
 		{
 			return nextLevel switch
-			{
-				2 => _level2ScenePath,
-				3 => _level3ScenePath,
-				4 => _level4ScenePath,
-				5 => _level5ScenePath,
+            {
+                2 => _level2ScenePath,
+                3 => _level3ScenePath,
+                4 => _level4ScenePath,
+                5 => _level5ScenePath,
                 6 => _levelsCompletedScenePath,
-				_ => string.Empty
-			};
+                _ => string.Empty
+            };
 		}
 	}
 }

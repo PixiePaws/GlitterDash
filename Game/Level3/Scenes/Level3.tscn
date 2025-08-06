@@ -80,33 +80,35 @@ metadata/_edit_horizontal_guides_ = [1080.0, 2160.0, -1080.0]
 
 [node name="PlayerCharacter" parent="." node_paths=PackedStringArray("Filter", "_collisionDetector") instance=ExtResource("18_20a3l")]
 z_index = 2
-position = Vector2(1353, 772)
+position = Vector2(2030, 1919)
 scale = Vector2(0.2, 0.2)
+WallSlideSpeed = 150.0
+DashDuration = 0.3
 Filter = NodePath("../BlackWhite")
 _collisionDetector = NodePath("CollisionDetector")
 
 [node name="UniHead" parent="PlayerCharacter/PartsSkeletonContainer/Parts" index="0"]
-position = Vector2(13.7905, 118.077)
+position = Vector2(13.791, 118.077)
 scale = Vector2(0.999834, 0.999834)
 
 [node name="UniBody" parent="PlayerCharacter/PartsSkeletonContainer/Parts" index="1"]
-position = Vector2(16.6763, 119.406)
+position = Vector2(16.6768, 119.406)
 scale = Vector2(1, 1)
 
 [node name="UniLHand" parent="PlayerCharacter/PartsSkeletonContainer/Parts" index="2"]
-position = Vector2(10.5845, 119)
+position = Vector2(10.585, 119)
 scale = Vector2(0.999856, 0.999856)
 
 [node name="UniRLeg" parent="PlayerCharacter/PartsSkeletonContainer/Parts" index="3"]
-position = Vector2(10.0088, 113.561)
+position = Vector2(10.0088, 113.562)
 scale = Vector2(0.99985, 0.99985)
 
 [node name="UniRHand" parent="PlayerCharacter/PartsSkeletonContainer/Parts" index="4"]
-position = Vector2(-9.66895, 127.067)
+position = Vector2(-9.66797, 127.067)
 scale = Vector2(0.999848, 0.999848)
 
 [node name="UniLLeg" parent="PlayerCharacter/PartsSkeletonContainer/Parts" index="5"]
-position = Vector2(6.98779, 118.259)
+position = Vector2(6.98828, 118.26)
 scale = Vector2(0.999851, 0.999851)
 
 [node name="CollisionDetector" parent="PlayerCharacter" index="3" node_paths=PackedStringArray("RespawnPoint", "_filter", "_goldeggmanager", "Camera", "_player", "_respawner")]
@@ -385,7 +387,6 @@ _targetPosition = Vector2(1150, 1030)
 
 [node name="CircularSaw" parent="Traps/MovingCircularSaw" index="0"]
 position = Vector2(0, -1.66663)
-collision_layer = 8
 
 [node name="SpikeTrap" parent="Traps" instance=ExtResource("21_wi3pm")]
 z_index = -1
