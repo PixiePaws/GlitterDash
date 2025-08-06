@@ -27,7 +27,6 @@ namespace UnicornGame
 		private AudioStream fallSound;
 		private AudioStream wallSlideSound;
 
-
 		private bool _isWallSliding = false;
 		private float _wallJumpDirection = 0;
 		private int _jumpCount = 0;
@@ -69,7 +68,7 @@ namespace UnicornGame
 
 
 			string currentScene = GetTree().CurrentScene.Name;
-			// set the character facing right
+			// set the character facing right but not in level 4
 			if (currentScene != "Level4")
 			{
 				var skeleton = GetNode<Node2D>("PartsSkeletonContainer");
@@ -94,7 +93,6 @@ namespace UnicornGame
 				// If the player cannot control the character, skip the physics process
 				return;
 			}
-			//_collisionDetector = GetNode<CollisionDetector>("res://Player/Scripts/CollisionDetector.cs");
 
 			Godot.Vector2 velocity = Velocity;
 			float inputDirection = Input.GetAxis("Move left", "Move right");
@@ -155,6 +153,7 @@ namespace UnicornGame
 				_jumpTimer -= (float)delta;
 			}
 
+			// if in the air not doing anything then plays the falling animation if not already playing
 			if (!IsOnFloor() && !_isWallSliding && _jumpTimer <= 0 && Velocity.Y > 0 && !_justWallJumped)
 			{
 				if (_animatedSprite.CurrentAnimation != "Falling")
@@ -171,8 +170,6 @@ namespace UnicornGame
 				SetDirection(inputDirection); // Update the direction based on input
 			}
 			MoveAndSlide();
-
-			//GD.Print(IsNearWall());
 		}
 
 		/// <summary>
@@ -217,7 +214,6 @@ namespace UnicornGame
 		private void Jumping(ref Godot.Vector2 velocity, float inputDirection)
 		{
 			// Handle jumping
-
 			if (Input.IsActionJustPressed("Jump") && _jumpCount == 1)
 			{
 				velocity.Y = JumpVelocity;
@@ -241,12 +237,14 @@ namespace UnicornGame
 				_jumpTimer = JumpDuration;
 			}
 
+			// Reset jumping
 			if (!Input.IsActionPressed("Jump") && IsOnFloor())
 			{
 				_jumpCount = 0;
 				_justJumped = false;
 			}
 
+			// When jump ends starts falling animation
 			if (!IsOnFloor() && !_isWallSliding && !_justJumped && _jumpTimer <= 0)
 			{
 				if (_animatedSprite.CurrentAnimation != "Falling")
@@ -272,14 +270,6 @@ namespace UnicornGame
 
 			int wallDirection = GetWallDirection();
 
-			/*
-				int wallLayerId = 2;
-				Vector2I tilePos = TileMap.LocalToMap(GlobalPosition);
-				int wallTileId = TileMap.GetCellSourceId(wallLayerId, tilePos);
-
-				// Wall slide
-				if (wallTileId != -1)
-				{ */
 			if (IsNearWall() && !IsOnFloor() && inputDirection != 0 && MathF.Sign(inputDirection) == GetWallDirection())
 			{
 				_isWallSliding = true;
@@ -306,8 +296,6 @@ namespace UnicornGame
 					{
 						velocity.X = WallJumpPush * -wallDirection;
 						velocity.Y = WallJumpVelocity;
-						// Vector2 direction = new Godot.Vector2(-wallDirection, -2).Normalized();
-						// velocity = direction * WallJumpPush;
 						_justWallJumped = true;
 						_justWallJumpedTimer = 0.4f;
 						_animatedSprite.Play("Jump");
@@ -352,10 +340,12 @@ namespace UnicornGame
 			var wallChecker = GetNode<RayCast2D>("WallChecker");
 			return wallChecker.IsColliding();
 		}
+		
+		
         public void Die()
-        {
+		{
 			walking = false;
-            //CollisionLayer = 0; // <-- Remove player collision layer so the blood drops don't collide with it
+			//CollisionLayer = 0; // <-- Remove player collision layer so the blood drops don't collide with it
 			// !!!!!!!!!^^^^^^ Might have to change this manually back to CollisionLayer 1 when respawning ^^^^^^^^!!!!!!!!!!!!!!!
 
 			// Load and instantiate the blood spray effect
@@ -374,10 +364,11 @@ namespace UnicornGame
 			// Remove the player (Doesn't work DON'T USE THIS)
 			// QueueFree();
 
-            // Hide the player <- This works
-            Hide();
+			// Hide the player <- This works
+			Hide();
+		}
 
-        }
+
 		/// <summary>
 		/// Gets the direction of the wall the player is currently sliding against.
 		/// Returns 1 if the wall is on the right, -1 if on the left, and 0 if no wall is detected.
@@ -439,6 +430,7 @@ namespace UnicornGame
 			Visible = false;
 			_canControl = false;
 
+			// Leaves time to see the death animation
 			if (dangerType == "dead")
 			{
 				await ToSignal(GetTree().CreateTimer(5f), Timer.SignalName.Timeout); // sama aika kun resetcameradie odotus
