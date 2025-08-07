@@ -25,6 +25,7 @@ node_b = NodePath("../Pendulum")
 collision_layer = 8
 collision_mask = 4
 script = ExtResource("1_nwhjw")
+_torqueImpulseMagnitude = 30000.0
 
 [node name="Sprite2D" type="Sprite2D" parent="Pendulum"]
 position = Vector2(3, 160)

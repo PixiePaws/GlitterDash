@@ -7,17 +7,22 @@ namespace UnicornGame
     {
         [Export] private Vector2 _impulseVector = new Vector2(-50.0f, 0.0f);
         [Export] private Area2D _collisionDetector;
+        [Export] private Area2D _soundDetector;
         private string _spriteWingsUpPath;
         private string _spriteWingsDownPath;
         private Sprite2D _sprite;
         private Texture2D _spriteWingsUp;
         private Texture2D _spriteWingsDown;
-        [Export]private float _timerWaitTime;
+        private AudioManager _audioManager;
+        [Export] private float _timerWaitTime;
         public override void _Ready()
         {
             //_impulseVector = new Vector2(-50.0f, 0.0f);
+            _audioManager = GetNode<AudioManager>("/root/AudioManager");
             _collisionDetector = GetNode<Area2D>("CollisionDetector");
             _collisionDetector.BodyEntered += OnCollisionDetected;
+            _soundDetector = GetNode<Area2D>("SoundDetector");
+            _soundDetector.BodyEntered += OnSoundDetected;
             _sprite = GetNode<Sprite2D>("Sprite2D");
             if (_sprite != null)
             {
@@ -46,11 +51,20 @@ namespace UnicornGame
         {
             QueueFree();
         }
+        public void OnSoundDetected(Node node)
+        {
+            GD.Print($"OnCollisionDetected sound in BirdProjectile.cs was triggered by {node}");
+            if (node is Player player)
+            {
+                GD.Print("Playing _birdProjectileFlyBy");
+                _audioManager._birdProjectileFlyBy.Play();
+            }
+        }
         public void AlternateSprite()
         {
             //GD.Print($"bird texture wings up {_sprite.Texture == _spriteWingsUp}");
             //GD.Print($"bird texture wings down {_sprite.Texture == _spriteWingsDown}");
-            
+
             if (_sprite.Texture == _spriteWingsUp)
             {
                 _sprite.Texture = _spriteWingsDown;

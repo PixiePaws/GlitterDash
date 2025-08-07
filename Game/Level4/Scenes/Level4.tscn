@@ -4,7 +4,7 @@
 [ext_resource type="PackedScene" uid="uid://bun0lpg7lkpq6" path="res://Player/Scenes/PlayerCharacter.tscn" id="2_hxnt0"]
 [ext_resource type="Script" path="res://Game/Respawner.cs" id="3_77cwm"]
 [ext_resource type="Script" path="res://Game/Level1/Scripts/Camera.cs" id="4_hielb"]
-[ext_resource type="Theme" uid="uid://toxmj1vwp6m" path="res://UI/TextTheme.tres" id="5_2dclh"]
+[ext_resource type="Theme" path="res://UI/TextTheme.tres" id="5_2dclh"]
 [ext_resource type="Texture2D" uid="uid://uprybvy2gmww" path="res://Art/Items/TheEgg.png" id="5_5jk7x"]
 [ext_resource type="Texture2D" uid="uid://bbi8xqng11ic8" path="res://Art/Backgrounds/SpaceBG.png" id="6_0oquf"]
 [ext_resource type="Texture2D" uid="uid://c3hd8ludbquxr" path="res://Art/Backgrounds/MiddleBG.png" id="7_yx801"]
@@ -14,11 +14,11 @@
 [ext_resource type="Texture2D" uid="uid://cr2mrqp8ecys1" path="res://Art/Tilemaps/GrassTiles.png" id="13_jw1h5"]
 [ext_resource type="Script" path="res://Game/Portal.cs" id="13_vsv4k"]
 [ext_resource type="Texture2D" uid="uid://tbl74xhn72on" path="res://Art/Tilemaps/StoneTiles.png" id="14_cbj88"]
-[ext_resource type="PackedScene" uid="uid://dol5g5hc7xj1e" path="res://Game/DangerZoneFalling.tscn" id="16_s3ole"]
+[ext_resource type="PackedScene" path="res://Game/DangerZoneFalling.tscn" id="16_s3ole"]
 [ext_resource type="Script" path="res://Items/Scripts/GoldEggManager.cs" id="17_cuxg3"]
 [ext_resource type="PackedScene" uid="uid://dsnvu8ioiw0ff" path="res://Items/Scenes/GoldEgg.tscn" id="18_hc4lk"]
 [ext_resource type="Shader" path="res://Game/Black&White.gdshader" id="19_0gmyv"]
-[ext_resource type="PackedScene" uid="uid://dhyun241fg6n4" path="res://Obstacles/Scenes/SpikeTrap2.tscn" id="19_xcrln"]
+[ext_resource type="PackedScene" uid="uid://blyq0l1uus6rn" path="res://Obstacles/Scenes/SpikeTrap2.tscn" id="19_xcrln"]
 [ext_resource type="Texture2D" uid="uid://d1lubk38foqar" path="res://Art/Items/CartoonRock_FHD.png" id="20_5r7b5"]
 [ext_resource type="PackedScene" uid="uid://cygqq6gsghxm8" path="res://Obstacles/Scenes/BirdCannon.tscn" id="21_2g5y7"]
 [ext_resource type="Texture2D" uid="uid://betwd4u35upvc" path="res://Art/Items/CartoonBush_FHD.png" id="21_n4aub"]
@@ -59,7 +59,7 @@ texture_region_size = Vector2i(48, 49)
 
 [sub_resource type="TileSet" id="TileSet_sok5l"]
 tile_size = Vector2i(48, 49)
-physics_layer_0/collision_layer = 2
+physics_layer_0/collision_layer = 34
 sources/0 = SubResource("TileSetAtlasSource_67wqi")
 sources/1 = SubResource("TileSetAtlasSource_k5m74")
 
@@ -87,23 +87,23 @@ position = Vector2(13.7908, 118.077)
 scale = Vector2(0.999833, 0.999833)
 
 [node name="UniBody" parent="PlayerCharacter/PartsSkeletonContainer/Parts" index="1"]
-position = Vector2(16.6765, 119.406)
+position = Vector2(16.6768, 119.406)
 scale = Vector2(1, 1)
 
 [node name="UniLHand" parent="PlayerCharacter/PartsSkeletonContainer/Parts" index="2"]
-position = Vector2(10.5845, 119)
+position = Vector2(10.5847, 119)
 scale = Vector2(0.999858, 0.999858)
 
 [node name="UniRLeg" parent="PlayerCharacter/PartsSkeletonContainer/Parts" index="3"]
-position = Vector2(10.0088, 113.561)
+position = Vector2(10.009, 113.561)
 scale = Vector2(0.99985, 0.99985)
 
 [node name="UniRHand" parent="PlayerCharacter/PartsSkeletonContainer/Parts" index="4"]
-position = Vector2(-9.66919, 127.067)
+position = Vector2(-9.66895, 127.067)
 scale = Vector2(0.999849, 0.999849)
 
 [node name="UniLLeg" parent="PlayerCharacter/PartsSkeletonContainer/Parts" index="5"]
-position = Vector2(6.98755, 118.259)
+position = Vector2(6.98779, 118.259)
 scale = Vector2(0.999851, 0.999851)
 
 [node name="Head" parent="PlayerCharacter/PartsSkeletonContainer/Skeleton2D/Base/Body" index="1"]

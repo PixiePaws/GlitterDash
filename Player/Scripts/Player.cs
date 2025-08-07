@@ -65,6 +65,7 @@ namespace UnicornGame
 			_audioManager = GetNode<AudioManager>("/root/AudioManager");
 			walkSound = GD.Load<AudioStream>("res://Audio/Sfx/walking-on-grass-quickly.mp3");
 			jumpSound = GD.Load<AudioStream>("res://Audio/Sfx/jumpgrunt.wav");
+			wallSlideSound = GD.Load<AudioStream>("res://Audio/Sfx/WallSlide0.wav");
 
 
 			string currentScene = GetTree().CurrentScene.Name;
@@ -191,6 +192,12 @@ namespace UnicornGame
 						walking = true;
 					}
 				}
+				else if (!IsOnFloor())
+				{
+					GD.Print("Not on floor, stopping walk sound");
+					AudioManager.StopSound(walkSound);
+					walking = false;
+				}
 			}
 			else
 			{
@@ -272,13 +279,17 @@ namespace UnicornGame
 
 			if (IsNearWall() && !IsOnFloor() && inputDirection != 0 && MathF.Sign(inputDirection) == GetWallDirection())
 			{
-				_isWallSliding = true;
+				if (!_isWallSliding)
+				{
+					AudioManager.PlaySound(wallSlideSound);
+					_isWallSliding = true;
+				}
 				velocity.Y = Mathf.Min(velocity.Y + Gravity * 0.5f, WallSlideSpeed);
 				_jumpCount = 0;
 				_animatedSprite.Play("WallSlide");
-				//_audioManager.PlayWallSlideSound();
 
 			}
+			
 			else if (IsNearWall() && !IsOnFloor() && inputDirection == 0)
 			{
 				_isWallSliding = false;

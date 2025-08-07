@@ -40,6 +40,7 @@ namespace UnicornGame
             CheckListLengthAndContents();
             ConnectButtonSignals();
             SetButtonVisibilityAndText();
+            GetAllLevelPaths();
         }
         public void PopulateButtonList()
         {
@@ -118,6 +119,16 @@ namespace UnicornGame
             //GD.Print("OnButtonPressed() was called");
 
         }
+        public string GetSaveFilePath(string FileName)
+        {
+            string FilePath = "";
+            foreach (string File in _saveFileList)
+            {
+                if(File.Contains(FileName))
+                FilePath = Path.Join(_directoryPath, FileName);
+            }
+            return FilePath;
+        }
         public Godot.Collections.Dictionary<string, Variant> GetSaveFileAsDictionary(string FilePath)
         {
             if (!File.Exists(FilePath))
@@ -162,6 +173,7 @@ namespace UnicornGame
         {
             int SaveFileAmount = DirAccess.GetFilesAt(_directoryPath).Length;
             string[] TempArray = new string[SaveFileAmount];
+            string[] TimeStampArray = new string[SaveFileAmount];
             TempArray = DirAccess.GetFilesAt(_directoryPath);
             for (int i = 0; i < _buttonList.Count; i++)
             {
@@ -175,13 +187,56 @@ namespace UnicornGame
                 }
                 else
                 {
-                    _buttonList[i].Text = TempArray[i];
+                    string SaveFilePath = GetSaveFilePath(TempArray[i]);
+                    var GameDataDict = GetSaveFileAsDictionary(SaveFilePath);
+                    TimeStampArray = GetKeysArrayFromSave(SaveFileAmount, "TimeStamp", GameDataDict);
+                    _buttonList[i].Text = $"{TempArray[i]} {TimeStampArray[i]}";
                 }
             }
         }
         public void OnQuitButtonPressed()
         {
             QueueFree();
+        }
+        public Godot.Collections.Array GetAllLevelPaths()
+        {
+            Godot.Collections.Array LevelPathArray = new Godot.Collections.Array();
+            String FileSystemPath = "res://Game/";
+            String LevelSceneName = "";
+            String LevelScenePath = "";
+            string[] FileSystemDirectories =  DirAccess.GetDirectoriesAt(FileSystemPath);
+            //int LevelDirAmount = 0;
+            foreach (String Directory in FileSystemDirectories)
+            {
+                GD.Print(Directory);
+                if (Directory.Contains("Level"))
+                {
+                    //LevelDirAmount++;
+                    LevelSceneName = $"{Directory}.tscn";
+                    LevelScenePath = $"{FileSystemPath}/{Directory}/Scenes/{LevelSceneName}";
+                    LevelPathArray.Add(LevelScenePath);
+                }
+            }
+            foreach (string LevelPath in LevelPathArray)
+            {
+                GD.Print(LevelPath);
+            }
+            return LevelPathArray;
+        }
+        public string[] GetKeysArrayFromSave(int SaveFileAmount, string DataKey, Godot.Collections.Dictionary<string, Variant> GameDataDict)
+        {
+            string[] KeysArray = new string[SaveFileAmount];
+            int index = 0;
+            foreach (var Key in GameDataDict.Keys)
+            {
+                var LevelDataDict = (Godot.Collections.Dictionary<string, Variant>)GameDataDict[Key];
+                if (LevelDataDict.ContainsKey(DataKey))
+                {
+                    KeysArray[index] = (string)LevelDataDict[DataKey];
+                    index++;
+                }
+            }
+            return KeysArray;
         }
         public void ChangeSceneToNextLevel(Godot.Collections.Dictionary<string, Variant> GameData)
         {
@@ -190,38 +245,61 @@ namespace UnicornGame
             string GameDataKey = "";
             foreach (var Key in GameData.Keys)
             {
+                GD.Print("Iterating GameData keys");
                 LevelData = (Godot.Collections.Dictionary<string, Variant>)GameData[Key];
                 if (LevelData.ContainsKey("LevelCompleted") && (bool)LevelData["LevelCompleted"])
                 {
+                    //GD.Print($"Key: {Key}");
                     GameDataKey = Key;
+                    //GD.Print(GameDataKey);
+                    //GD.Print("LevelCompleted found and true");
                 }
                 else
                 {
                     break;
                 }
             }
-            GD.Print("GameDataKey = Key");
-            GD.Print(GameDataKey);
-            if (GameDataKey == null)
+            //GD.Print(GameDataKey);
+            //GD.Print($"GameDataKey: {GameDataKey}");
+            if (String.IsNullOrEmpty(GameDataKey))
             {
+                GD.Print("GameDataKey is null");
                 string DefaultGameDataKey = "Level1";
                 GameDataKey = DefaultGameDataKey;
             }
-            LevelData = (Godot.Collections.Dictionary<string, Variant>)GameData[GameDataKey];
-            GD.Print($"Level data at GameDataKey: {GameData[GameDataKey]}");
+            Godot.Collections.Array LevelPathArray = GetAllLevelPaths();
             string LevelScenePath = "";
-            foreach (var Key in LevelData.Keys)
+            bool CurrentLevelFound = false;
+            foreach (String LevelPath in LevelPathArray)
             {
-                if (LevelData.ContainsKey("FilePath") && (string)LevelData["FilePath"] != null)
+                if (LevelPath.Contains(GameDataKey))
                 {
-                    LevelScenePath = (string)LevelData["FilePath"];
+                    GD.Print($"Level path {LevelPath} contains {GameDataKey}");
+                    CurrentLevelFound = true;
+                    continue;
+                }
+                LevelScenePath = LevelPath;
+                if (CurrentLevelFound)
+                {
                     break;
                 }
             }
-            if (LevelScenePath == null)
-            {
-                LevelScenePath = _defaultLevelScenePath;
-            }
+            /*LevelData = (Godot.Collections.Dictionary<string, Variant>)GameData[GameDataKey];
+                GD.Print($"Level data at GameDataKey: {GameData[GameDataKey]}");
+                string LevelScenePath = "";
+                foreach (var Key in LevelData.Keys)
+                {
+                    if (LevelData.ContainsKey("FilePath") && (string)LevelData["FilePath"] != null)
+                    {
+                        LevelScenePath = (string)LevelData["FilePath"];
+                        break;
+                    }
+                }
+                if (LevelScenePath == null)
+                {
+                    LevelScenePath = _defaultLevelScenePath;
+                }*/
+            GD.Print($"Next level path: {LevelScenePath}");
             PackedScene NextLevel = ResourceLoader.Load<PackedScene>(LevelScenePath);
             GetTree().ChangeSceneToPacked(NextLevel);
         } 
