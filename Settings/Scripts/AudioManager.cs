@@ -10,6 +10,7 @@ namespace UnicornGame
 		public AudioStreamPlayer _circularSawHit;
 		public AudioStreamPlayer _wreckingBallHit;
 		public AudioStreamPlayer _birdProjectileHit;
+		public AudioStreamPlayer _birdProjectileFlyBy;
 		public AudioStreamPlayer _spikeTrapHit;
 
 		// player sounds
@@ -36,6 +37,7 @@ namespace UnicornGame
 			_circularSawHit = GetNode<AudioStreamPlayer>("SFX/CircularSawHit");
 			_wreckingBallHit = GetNode<AudioStreamPlayer>("SFX/WreckingBallHit");
 			_birdProjectileHit = GetNode<AudioStreamPlayer>("SFX/BirdProjectileHit");
+			_birdProjectileFlyBy = GetNode<AudioStreamPlayer>("SFX/BirdProjectileFlyBy");
 			_spikeTrapHit = GetNode<AudioStreamPlayer>("SFX/SpikeTrapHit");
 			_jumpSound = GetNode<AudioStreamPlayer>("SFX/Jump");
 			//_fallSound = GetNode<AudioStreamPlayer>("SFX/Falling");

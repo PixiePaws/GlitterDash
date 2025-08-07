@@ -25,6 +25,8 @@ namespace UnicornGame
         public Godot.Collections.Dictionary<string, Variant> GetGameDataDictionary()
         {
             string SystemTime = Time.GetDatetimeStringFromSystem(false, true);
+            DateTime DateTimeNow = DateTime.Now;
+            string DateTimeNowFormatted = DateTimeNow.ToString("yyyy-MM-dd HH:mm:ss");
             long UnixTime = Time.GetUnixTimeFromDatetimeString(SystemTime);
             return new Godot.Collections.Dictionary<string, Variant>()
             {
@@ -34,7 +36,7 @@ namespace UnicornGame
                 { "PlayerPositionY", GetNode<Player>($"/root/{GetParent().Name}/PlayerCharacter").GlobalPosition.Y},
                 { "EggsCollected", GetNode<Respawner>($"/root/{GetParent().Name}/Respawner").Score},
                 { $"LevelCompleted", _currentScene.CurrentLevelCompleted},
-                { "TimeStamp", $"{SystemTime}"},
+                { "TimeStamp", $"{DateTimeNowFormatted}"},
                 { "UnixTime", $"{UnixTime}"}
             };
         }
