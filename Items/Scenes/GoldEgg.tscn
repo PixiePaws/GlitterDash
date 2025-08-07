@@ -18,7 +18,7 @@ animations = [{
 }]
 
 [node name="GoldEgg" type="Area2D"]
-collision_layer = 2
+collision_layer = 64
 script = ExtResource("1_g52bi")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]

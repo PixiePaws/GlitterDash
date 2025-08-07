@@ -494,7 +494,7 @@ position = Vector2(2516, 2110)
 
 [node name="SpikeTrap6" parent="Traps" instance=ExtResource("21_2mg51")]
 z_index = -1
-position = Vector2(3288, 2012)
+position = Vector2(3288, 2019)
 
 [node name="SpikeTrap7" parent="Traps" instance=ExtResource("21_2mg51")]
 z_index = -1
@@ -523,7 +523,7 @@ rotation = -1.59393
 
 [node name="SpikeTrap14" parent="Traps" instance=ExtResource("21_2mg51")]
 z_index = -1
-position = Vector2(5273, -133)
+position = Vector2(5273, -152)
 rotation = -1.59393
 
 [node name="Decor" type="Node" parent="."]

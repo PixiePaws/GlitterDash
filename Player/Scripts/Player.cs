@@ -260,11 +260,6 @@ namespace UnicornGame
 					//_audioManager.PlayFallingSound();
 				}
 			}
-
-			/*if (_justJumped && Mathf.Abs(Input.GetAxis("Move left", "Move right")) > 0.1f && IsOnFloor())
-			{
-				AudioManager.PlaySound(walkSound);
-			}*/
 		}
 
 		/// <summary>
@@ -330,14 +325,12 @@ namespace UnicornGame
 			{
 				var skeleton = GetNode<Node2D>("PartsSkeletonContainer");
 				skeleton.Scale = new Vector2(-1, 1);
-				//_animatedSprite.FlipH = false; // Facing right
 				GetNode<RayCast2D>("WallChecker").RotationDegrees = 180; // Wall checker fliped
 			}
 			else if (direction == -1)
 			{
 				var skeleton = GetNode<Node2D>("PartsSkeletonContainer");
 				skeleton.Scale = new Vector2(1, 1);
-				//_animatedSprite.FlipH = true; // Facing left
 				GetNode<RayCast2D>("WallChecker").RotationDegrees = 0; // Wall checker fliped
 			}
 		}
