@@ -5,6 +5,7 @@ namespace UnicornGame
 {
     public partial class Pendulum : RigidBody2D
     {
+        [Export] private float _torqueImpulseMagnitude = 32000;
         private Node _rootNode;
         private StaticBody2D _pendulumHolder;
         private CollisionShape2D _ball;
@@ -60,12 +61,12 @@ namespace UnicornGame
             if (MovingClockwise)
             {
                 //GD.Print("Clockwise");
-                ApplyTorqueImpulse(-32000);
+                ApplyTorqueImpulse(-_torqueImpulseMagnitude);
             }
             if (!MovingClockwise)
             {
                 //GD.Print("Clockwise");
-                ApplyTorqueImpulse(32000);
+                ApplyTorqueImpulse(_torqueImpulseMagnitude);
                 //GD.Print(TorqueI);
             }
         }

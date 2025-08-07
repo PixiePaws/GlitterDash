@@ -5,14 +5,14 @@
 [ext_resource type="Script" path="res://Game/Level1/Scripts/Camera.cs" id="3_af4u8"]
 [ext_resource type="PackedScene" uid="uid://bun0lpg7lkpq6" path="res://Player/Scenes/PlayerCharacter.tscn" id="3_gq4q2"]
 [ext_resource type="Texture2D" uid="uid://uprybvy2gmww" path="res://Art/Items/TheEgg.png" id="4_qf7g4"]
-[ext_resource type="Theme" uid="uid://toxmj1vwp6m" path="res://UI/TextTheme.tres" id="5_sr3vl"]
+[ext_resource type="Theme" path="res://UI/TextTheme.tres" id="5_sr3vl"]
 [ext_resource type="Texture2D" uid="uid://bbi8xqng11ic8" path="res://Art/Backgrounds/SpaceBG.png" id="6_1ycxq"]
 [ext_resource type="PackedScene" uid="uid://dnx3j4auf00wv" path="res://UI/Scenes/GUI.tscn" id="7_8jcuf"]
 [ext_resource type="Texture2D" uid="uid://c3hd8ludbquxr" path="res://Art/Backgrounds/MiddleBG.png" id="7_74ndy"]
 [ext_resource type="Texture2D" uid="uid://ciqy2qp8wkl11" path="res://Art/Backgrounds/CrystalCave.png" id="8_p217b"]
 [ext_resource type="PackedScene" uid="uid://breqli4rgs6dk" path="res://Items/Scenes/Portal.tscn" id="8_qya7y"]
 [ext_resource type="Script" path="res://Game/Portal.cs" id="9_qlokc"]
-[ext_resource type="PackedScene" uid="uid://dol5g5hc7xj1e" path="res://Game/DangerZoneFalling.tscn" id="12_ne7dl"]
+[ext_resource type="PackedScene" path="res://Game/DangerZoneFalling.tscn" id="12_ne7dl"]
 [ext_resource type="Script" path="res://Items/Scripts/GoldEggManager.cs" id="13_3vpso"]
 [ext_resource type="Texture2D" uid="uid://cr2mrqp8ecys1" path="res://Art/Tilemaps/GrassTiles.png" id="13_rtx4p"]
 [ext_resource type="PackedScene" uid="uid://dsnvu8ioiw0ff" path="res://Items/Scenes/GoldEgg.tscn" id="14_6bruh"]
@@ -22,7 +22,7 @@
 [ext_resource type="PackedScene" uid="uid://ti05fy42timf" path="res://Obstacles/Scenes/Pendulum.tscn" id="17_ljtf2"]
 [ext_resource type="PackedScene" uid="uid://o8w6tkup2gx6" path="res://Obstacles/Scenes/MovingCircularSaw.tscn" id="21_hrs2a"]
 [ext_resource type="PackedScene" uid="uid://cer6xkecwmj1s" path="res://Obstacles/Scenes/SpikeTrap.tscn" id="21_ocf5a"]
-[ext_resource type="PackedScene" uid="uid://dhyun241fg6n4" path="res://Obstacles/Scenes/SpikeTrap2.tscn" id="22_grio7"]
+[ext_resource type="PackedScene" uid="uid://blyq0l1uus6rn" path="res://Obstacles/Scenes/SpikeTrap2.tscn" id="22_grio7"]
 [ext_resource type="Texture2D" uid="uid://d1lubk38foqar" path="res://Art/Items/CartoonRock_FHD.png" id="23_2wwok"]
 [ext_resource type="Texture2D" uid="uid://betwd4u35upvc" path="res://Art/Items/CartoonBush_FHD.png" id="24_vrfdp"]
 
@@ -62,7 +62,7 @@ texture_region_size = Vector2i(48, 49)
 
 [sub_resource type="TileSet" id="TileSet_sok5l"]
 tile_size = Vector2i(48, 49)
-physics_layer_0/collision_layer = 2
+physics_layer_0/collision_layer = 34
 sources/0 = SubResource("TileSetAtlasSource_67wqi")
 sources/1 = SubResource("TileSetAtlasSource_k5m74")
 

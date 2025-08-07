@@ -4,7 +4,7 @@
 [ext_resource type="Texture2D" uid="uid://cp0eqow1xw1rg" path="res://Art/Obstacles/SackOfCanes.png" id="2_umnj2"]
 
 [node name="SpikeTrap" type="StaticBody2D" groups=["Obstacles"]]
-collision_layer = 8
+collision_layer = 40
 collision_mask = 4
 script = ExtResource("1_avmjo")
 
