@@ -471,7 +471,7 @@ vertical_alignment = 1
 [node name="Traps" type="Node" parent="."]
 
 [node name="BirdCannon" parent="Traps" instance=ExtResource("20_jcuu3")]
-position = Vector2(1539, 667)
+position = Vector2(1471, 123)
 
 [node name="SpikeTrap" parent="Traps" instance=ExtResource("21_2mg51")]
 z_index = -3
