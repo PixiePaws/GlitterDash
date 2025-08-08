@@ -1,4 +1,4 @@
-[gd_scene load_steps=33 format=4 uid="uid://cuch5yonnwbtt"]
+[gd_scene load_steps=32 format=4 uid="uid://cuch5yonnwbtt"]
 
 [ext_resource type="Script" path="res://Game/Level1/Scripts/Level1.cs" id="1_r7umx"]
 [ext_resource type="Script" path="res://Game/Level1/Scripts/Camera.cs" id="1_ttao5"]
@@ -11,16 +11,15 @@
 [ext_resource type="Texture2D" uid="uid://ciqy2qp8wkl11" path="res://Art/Backgrounds/CrystalCave.png" id="8_1li2j"]
 [ext_resource type="Script" path="res://Game/Portal.cs" id="8_iqa1o"]
 [ext_resource type="PackedScene" uid="uid://dsnvu8ioiw0ff" path="res://Items/Scenes/GoldEgg.tscn" id="11_508a1"]
-[ext_resource type="PackedScene" path="res://Game/DangerZoneFalling.tscn" id="11_v4ol5"]
+[ext_resource type="PackedScene" uid="uid://dol5g5hc7xj1e" path="res://Game/DangerZoneFalling.tscn" id="11_v4ol5"]
 [ext_resource type="Texture2D" uid="uid://cr2mrqp8ecys1" path="res://Art/Tilemaps/GrassTiles.png" id="13_oypm7"]
 [ext_resource type="Texture2D" uid="uid://tbl74xhn72on" path="res://Art/Tilemaps/StoneTiles.png" id="14_2k5b1"]
 [ext_resource type="Shader" path="res://Game/Black&White.gdshader" id="14_cylb3"]
 [ext_resource type="Script" path="res://Items/Scripts/GoldEggManager.cs" id="14_qnefm"]
-[ext_resource type="Theme" path="res://UI/TextTheme.tres" id="17_rwmuo"]
+[ext_resource type="Theme" uid="uid://toxmj1vwp6m" path="res://UI/TextTheme.tres" id="17_rwmuo"]
 [ext_resource type="PackedScene" uid="uid://bun0lpg7lkpq6" path="res://Player/Scenes/PlayerCharacter.tscn" id="18_hg87w"]
 [ext_resource type="FontFile" uid="uid://dmdmmrdgoemai" path="res://Art/UI/Fonts/Milk Mango.ttf" id="19_5k66e"]
 [ext_resource type="Texture2D" uid="uid://d1lubk38foqar" path="res://Art/Items/CartoonRock_FHD.png" id="20_41q5b"]
-[ext_resource type="PackedScene" uid="uid://cygqq6gsghxm8" path="res://Obstacles/Scenes/BirdCannon.tscn" id="20_jcuu3"]
 [ext_resource type="PackedScene" uid="uid://cer6xkecwmj1s" path="res://Obstacles/Scenes/SpikeTrap.tscn" id="21_2mg51"]
 [ext_resource type="Texture2D" uid="uid://betwd4u35upvc" path="res://Art/Items/CartoonBush_FHD.png" id="21_m6pb5"]
 
@@ -79,7 +78,7 @@ texture_region_size = Vector2i(48, 49)
 
 [sub_resource type="TileSet" id="TileSet_sok5l"]
 tile_size = Vector2i(48, 49)
-physics_layer_0/collision_layer = 34
+physics_layer_0/collision_layer = 2
 sources/0 = SubResource("TileSetAtlasSource_67wqi")
 sources/1 = SubResource("TileSetAtlasSource_k5m74")
 
@@ -95,7 +94,7 @@ metadata/_edit_horizontal_guides_ = [1080.0, 2160.0, -1080.0]
 
 [node name="PlayerCharacter" parent="." node_paths=PackedStringArray("Filter", "_collisionDetector") instance=ExtResource("18_hg87w")]
 z_index = 10
-position = Vector2(140.001, 604)
+position = Vector2(119.001, 268)
 scale = Vector2(0.21, 0.21)
 WallSlideSpeed = 150.0
 DashDuration = 0.3
@@ -107,7 +106,7 @@ position = Vector2(13.7908, 118.077)
 scale = Vector2(0.999833, 0.999833)
 
 [node name="UniBody" parent="PlayerCharacter/PartsSkeletonContainer/Parts" index="1"]
-position = Vector2(16.6766, 119.406)
+position = Vector2(16.6767, 119.406)
 scale = Vector2(1, 1)
 
 [node name="UniLHand" parent="PlayerCharacter/PartsSkeletonContainer/Parts" index="2"]
@@ -469,9 +468,6 @@ horizontal_alignment = 1
 vertical_alignment = 1
 
 [node name="Traps" type="Node" parent="."]
-
-[node name="BirdCannon" parent="Traps" instance=ExtResource("20_jcuu3")]
-position = Vector2(1471, 123)
 
 [node name="SpikeTrap" parent="Traps" instance=ExtResource("21_2mg51")]
 z_index = -3

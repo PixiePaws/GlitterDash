@@ -1,9 +1,11 @@
-[gd_scene load_steps=3 format=3 uid="uid://cj5p05kuk4fup"]
+[gd_scene load_steps=4 format=3 uid="uid://cj5p05kuk4fup"]
 
+[ext_resource type="Script" path="res://Game/LevelsCompleted.cs" id="1_rldxm"]
 [ext_resource type="Texture2D" uid="uid://c3hd8ludbquxr" path="res://Art/Backgrounds/MiddleBG.png" id="1_y426v"]
 [ext_resource type="Theme" uid="uid://toxmj1vwp6m" path="res://UI/TextTheme.tres" id="2_xqtui"]
 
 [node name="LevelsCompleted" type="Node2D"]
+script = ExtResource("1_rldxm")
 
 [node name="TextureRect" type="TextureRect" parent="."]
 offset_right = 1920.0
