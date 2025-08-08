@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" path="res://MainMenu/Scripts/MainMenuScript.cs" id="1_ys428"]
 [ext_resource type="PackedScene" uid="uid://cnu4eae42h74o" path="res://Settings/Scenes/Settings.tscn" id="2_opxph"]
-[ext_resource type="Theme" path="res://UI/TextTheme.tres" id="3_gvyjg"]
+[ext_resource type="Theme" uid="uid://toxmj1vwp6m" path="res://UI/TextTheme.tres" id="3_gvyjg"]
 [ext_resource type="Texture2D" uid="uid://dyv6o0rxv58oe" path="res://Art/MainMenu/UnicornGameBG.png" id="3_rc2yd"]
 [ext_resource type="FontFile" uid="uid://dmdmmrdgoemai" path="res://Art/UI/Fonts/Milk Mango.ttf" id="5_y13pf"]
 
