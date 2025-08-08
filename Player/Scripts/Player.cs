@@ -194,7 +194,7 @@ namespace UnicornGame
 				}
 				else if (!IsOnFloor())
 				{
-					GD.Print("Not on floor, stopping walk sound");
+					//GD.Print("Not on floor, stopping walk sound");
 					AudioManager.StopSound(walkSound);
 					walking = false;
 				}
@@ -272,7 +272,7 @@ namespace UnicornGame
 
 			int wallDirection = GetWallDirection();
 
-			if (IsNearWall() && !IsOnFloor() && inputDirection != 0 && MathF.Sign(inputDirection) == GetWallDirection())
+			if (IsNearWall() && inputDirection != 0 && MathF.Sign(inputDirection) == GetWallDirection())
 			{
 				if (!_isWallSliding)
 				{

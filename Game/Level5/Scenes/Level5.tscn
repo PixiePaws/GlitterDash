@@ -71,7 +71,7 @@ sources/1 = SubResource("TileSetAtlasSource_k5m74")
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_r5qbd"]
 shader = ExtResource("15_bpjgf")
 
-[node name="Level3" type="Node2D" node_paths=PackedStringArray("RespawnPoint")]
+[node name="Level5" type="Node2D" node_paths=PackedStringArray("RespawnPoint")]
 position = Vector2(3, 0)
 script = ExtResource("1_g2ow3")
 RespawnPoint = NodePath("RespawnPoint")
@@ -80,7 +80,7 @@ metadata/_edit_horizontal_guides_ = [1080.0, 2160.0, -1080.0]
 
 [node name="PlayerCharacter" parent="." node_paths=PackedStringArray("Filter", "_collisionDetector") instance=ExtResource("18_20a3l")]
 z_index = 2
-position = Vector2(2252, -208)
+position = Vector2(2366, -525)
 scale = Vector2(0.2, 0.2)
 WallSlideSpeed = 150.0
 DashDuration = 0.3
@@ -108,7 +108,7 @@ position = Vector2(-9.66797, 127.067)
 scale = Vector2(0.999848, 0.999848)
 
 [node name="UniLLeg" parent="PlayerCharacter/PartsSkeletonContainer/Parts" index="5"]
-position = Vector2(6.9873, 118.259)
+position = Vector2(6.9873, 118.26)
 scale = Vector2(0.999851, 0.999851)
 
 [node name="CollisionDetector" parent="PlayerCharacter" index="3" node_paths=PackedStringArray("RespawnPoint", "_filter", "_goldeggmanager", "Camera", "_player", "_respawner")]
@@ -354,14 +354,14 @@ z_index = -1
 position = Vector2(2783, -731)
 
 [node name="Pendulum" parent="Traps/PendulumHolder2" index="2"]
-_torqueImpulseMagnitude = 32000.0
+_torqueImpulseMagnitude = 23000.0
 
 [node name="PendulumHolder3" parent="Traps" instance=ExtResource("17_q7olb")]
 z_index = -1
 position = Vector2(3174, -731)
 
 [node name="Pendulum" parent="Traps/PendulumHolder3" index="2"]
-_torqueImpulseMagnitude = 32000.0
+_torqueImpulseMagnitude = 23000.0
 
 [node name="PendulumHolder5" parent="Traps" instance=ExtResource("17_q7olb")]
 z_index = -1
