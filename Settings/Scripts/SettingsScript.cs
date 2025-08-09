@@ -30,6 +30,7 @@ namespace UnicornGame
 		private void OnSettingsPressed()
 		{
 			Node currentScene = GetTree().CurrentScene;
+			//GD.Print($"CurrentScene: {currentScene.Name}");
 			if (currentScene.Name == "MainMenu")
 			{
 				if (Input.IsActionJustPressed("Settings"))

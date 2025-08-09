@@ -115,7 +115,7 @@ namespace UnicornGame
             GD.Print($"File path: {FilePath}");
             Godot.Collections.Dictionary<string, Variant> LoadedDictionary = GetSaveFileAsDictionary(FilePath);
             GD.Print(LoadedDictionary);
-            ChangeSceneToNextLevel(LoadedDictionary);
+            ChangeSceneToNextLevel(LoadedDictionary, FilePath);
             //GD.Print("OnButtonPressed() was called");
 
         }
@@ -238,7 +238,7 @@ namespace UnicornGame
             }
             return KeysArray;
         }
-        public void ChangeSceneToNextLevel(Godot.Collections.Dictionary<string, Variant> GameData)
+        public void ChangeSceneToNextLevel(Godot.Collections.Dictionary<string, Variant> GameData, string SaveFilePath)
         {
             GD.Print("ChangeSceneToNextLevel was called");
             Godot.Collections.Dictionary<string, Variant> LevelData;
@@ -301,7 +301,22 @@ namespace UnicornGame
                 }*/
             GD.Print($"Next level path: {LevelScenePath}");
             PackedScene NextLevel = ResourceLoader.Load<PackedScene>(LevelScenePath);
-            GetTree().ChangeSceneToPacked(NextLevel);
+            Node CurrentScene = GetTree().CurrentScene;
+            GameLevels NextLevelInstance = (GameLevels)NextLevel.Instantiate();
+            NextLevelInstance.LoadedSaveFile = SaveFilePath;
+            CurrentScene.QueueFree();
+            GetTree().Root.AddChild(NextLevelInstance);
+            GetTree().CurrentScene = NextLevelInstance;
+            //GD.Print($"Current scene after deletion: {GetTree().CurrentScene.Name}");
+            
+            /*GetTree().ChangeSceneToPacked(NextLevel);
+            GameLevels NextLevelInstance = (GameLevels)GetTree().CurrentScene;
+            if (NextLevelInstance != null)
+            {
+                GD.Print("Succesfully got NextLevelInstance in LoadGame");
+            }
+            GD.Print($"Save file path in ChangeSceneToNextLevel() in LoadGame is {SaveFilePath}");
+            NextLevelInstance.LoadedSaveFile = SaveFilePath;*/
         } 
     }
 }

@@ -11,7 +11,9 @@ namespace UnicornGame
         [Export] private string _savePath;
         [Export] private string _fileName;
         [Export] private int _saveSlotsAmount = 3;
+        private string _loadedSaveFile = "";
         private string _defaultFileName = "Save1.json";
+        //private string _currentSaveFile;
 
         public string DirectoryPath
         {
@@ -26,6 +28,11 @@ namespace UnicornGame
         {
             get { return _savePath; }
         }
+        public string LoadedSaveFile
+        {
+            get { return _loadedSaveFile; }
+            set { _loadedSaveFile = value; }
+        }
         public override void _Ready()
         {
             GD.Print("JsonSaver _Ready()");
@@ -39,13 +46,20 @@ namespace UnicornGame
             string FileBodyName = "Save";
             string SaveNumberString = (FileCount + 1).ToString();
             string FileExtensionString = ".json";
-            if (FileCount == 0)
+            bool IsLoadedSaveFileNull = string.IsNullOrEmpty(_loadedSaveFile);
+            GD.Print($"IsLoadedSaveFileNull in JsonSaver: {IsLoadedSaveFileNull}");
+            if (FileCount == 0 && IsLoadedSaveFileNull)
             {
                 _fileName = _defaultFileName;
             }
-            else if(FileCount < _saveSlotsAmount)
+            else if (FileCount < _saveSlotsAmount && IsLoadedSaveFileNull)
             {
                 _fileName = $"{FileBodyName}{SaveNumberString}{FileExtensionString}";
+            }
+            else if (!IsLoadedSaveFileNull)
+            {
+                GD.Print($"_loadedSaveFile in JsonSaver is not null");
+                _fileName = _loadedSaveFile;
             }
             //WriteTextToFile(_directoryPath, _fileName, jsonString);
         }

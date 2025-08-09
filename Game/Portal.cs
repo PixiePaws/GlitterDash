@@ -54,25 +54,26 @@ namespace UnicornGame
             currentScene.CurrentLevelCompleted = true;
             var ParentName = GetParent().Name;
             GameState CurrentState = currentScene.CurrentGameState;
-                if (CurrentState != null)
-                {
-                    GD.Print("Got CurrentGameState reference");
-                }
-                else
-                {
-                    GD.Print("Could not get CurrentGameState reference");
-                }
-                Godot.Collections.Dictionary<string, Variant> SaveData = CurrentState.SaveGameState();
-                string JsonString = Json.Stringify(SaveData);
-                IGameSaver GameSaver = GetNode<GameLevels>($"/root/{ParentName}/").GameManager.GameSaver;
-                if (GameSaver != null)
-                {
-                    GD.Print("Got Game Saver reference succesfully");    
-                }
-                //GD.Print(GameSaver.DirectoryPath);
-                //GD.Print(GameSaver.FileName);
-                //GD.Print(JsonString);
-                GameSaver.WriteTextToFile(GameSaver.DirectoryPath, GameSaver.FileName, JsonString);
+            if (CurrentState != null)
+            {
+                GD.Print("Got CurrentGameState reference");
+            }
+            else
+            {
+                GD.Print("Could not get CurrentGameState reference");
+            }
+            Godot.Collections.Dictionary<string, Variant> SaveData = CurrentState.SaveGameState();
+            string JsonString = Json.Stringify(SaveData);
+            IGameSaver GameSaver = GetNode<GameLevels>($"/root/{ParentName}/").GameManager.GameSaver;
+            if (GameSaver != null)
+            {
+                GD.Print("Got Game Saver reference succesfully");
+            }
+            //GD.Print(GameSaver.DirectoryPath);
+            //GD.Print(GameSaver.FileName);
+            //GD.Print(JsonString);
+            GameSaver.LoadedSaveFile = currentScene.LoadedSaveFile;
+            GameSaver.WriteTextToFile(GameSaver.DirectoryPath, GameSaver.FileName, JsonString);
 
             int nextLevel = 0;
 
@@ -110,6 +111,13 @@ namespace UnicornGame
 
             AudioManager.PlaySound2(portalSound);
             GetTree().ChangeSceneToPacked(nextSceneLevel);
+            GameLevels NextLevelInstance = (GameLevels)GetTree().CurrentScene;
+            if (NextLevelInstance != null)
+            {
+                GD.Print("Succesfully got NextLevelInstance in LoadGame");
+            }
+            GD.Print($"Save file path in PortalTransfer() in Portal is {currentScene.LoadedSaveFile}");
+            NextLevelInstance.LoadedSaveFile = currentScene.LoadedSaveFile;
         }
 
         /// <summary>
