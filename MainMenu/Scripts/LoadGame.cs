@@ -111,11 +111,12 @@ namespace UnicornGame
             int SignalSenderIndex = button.GetIndex();
             GD.Print($"Button index: {SignalSenderIndex}");
             //Read the save file dynamically
-            string FilePath = Path.Join(_directoryPath, _saveFileList[SignalSenderIndex]);
+            string FileName = _saveFileList[SignalSenderIndex];
+            string FilePath = Path.Join(_directoryPath, FileName);
             GD.Print($"File path: {FilePath}");
             Godot.Collections.Dictionary<string, Variant> LoadedDictionary = GetSaveFileAsDictionary(FilePath);
             GD.Print(LoadedDictionary);
-            ChangeSceneToNextLevel(LoadedDictionary, FilePath);
+            ChangeSceneToNextLevel(LoadedDictionary, FileName);
             //GD.Print("OnButtonPressed() was called");
 
         }

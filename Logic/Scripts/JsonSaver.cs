@@ -67,12 +67,14 @@ namespace UnicornGame
         {
             GD.Print("JsonSaver WriteTextToFile");
             GD.Print($"GameData string: {GameData}");
+            GD.Print($"FileName string: {FileName}");
+            GD.Print($"WriteTextToFile() in JasonSaver, _loadedSaveFile: {_loadedSaveFile}");
             if (!Directory.Exists(DirectoryPath))
             {
                 Directory.CreateDirectory(DirectoryPath);
             }
             _savePath = Path.Join(_directoryPath, FileName);
-            GD.Print(_savePath);
+            GD.Print($"JsonSaver _savePath{_savePath}");
             if (!File.Exists(_savePath))
             {
                 try
@@ -89,11 +91,12 @@ namespace UnicornGame
             {
                 Godot.Collections.Dictionary<string, Variant> LoadedDict = GetSaveFileAsDictionary(_savePath);
                 Godot.Collections.Dictionary<string, Variant> NewLevelDict = (Godot.Collections.Dictionary<string, Variant>)Json.ParseString(GameData);
+                GD.Print($"Old dictionary contents: {LoadedDict} New Dictionary contents {NewLevelDict}");
                 //string GameDataKey = "";
-                foreach (var Key in LoadedDict.Keys)
+                foreach (var Key in NewLevelDict.Keys)
                 {
                     //GameDataKey = Key as string;
-                    if (NewLevelDict.ContainsKey(Key))
+                    if (LoadedDict.ContainsKey(Key))
                     {
                         GD.Print($"GameData string contains key: {Key} in JsonSaver");
                         LoadedDict[Key] = NewLevelDict[Key];
@@ -102,12 +105,13 @@ namespace UnicornGame
                     }
                     else
                     {
-                        LoadedDict[Key] = NewLevelDict[Key];
+                        LoadedDict.Add(Key, NewLevelDict[Key]);
                         GD.Print($"Added key LoadedDict[{Key}] containing GameData[{Key}]");
                         break;
                     }
                 }
                 string UpdatedDictString = Json.Stringify(LoadedDict);
+                GD.Print($"UpdatedDictString: {UpdatedDictString}");
                 try
                 {
                     File.WriteAllText(_savePath, UpdatedDictString);

@@ -72,8 +72,10 @@ namespace UnicornGame
             //GD.Print(GameSaver.DirectoryPath);
             //GD.Print(GameSaver.FileName);
             //GD.Print(JsonString);
+            GD.Print($"Current scene LoadedSaveFile value in Portal.cs: {currentScene.LoadedSaveFile}");
             GameSaver.LoadedSaveFile = currentScene.LoadedSaveFile;
-            GameSaver.WriteTextToFile(GameSaver.DirectoryPath, GameSaver.FileName, JsonString);
+            GD.Print($"Set GameSaver LoadedSaveFile value in Portal.cs: {GameSaver.LoadedSaveFile}");
+            GameSaver.WriteTextToFile(GameSaver.DirectoryPath, GameSaver.LoadedSaveFile, JsonString);
 
             int nextLevel = 0;
 
@@ -110,14 +112,17 @@ namespace UnicornGame
             PackedScene nextSceneLevel = (PackedScene)GD.Load(_nextLevelPath);
 
             AudioManager.PlaySound2(portalSound);
-            GetTree().ChangeSceneToPacked(nextSceneLevel);
-            GameLevels NextLevelInstance = (GameLevels)GetTree().CurrentScene;
+            //GetTree().ChangeSceneToPacked(nextSceneLevel);
+            GameLevels NextLevelInstance = (GameLevels)nextSceneLevel.Instantiate();
             if (NextLevelInstance != null)
             {
                 GD.Print("Succesfully got NextLevelInstance in LoadGame");
             }
             GD.Print($"Save file path in PortalTransfer() in Portal is {currentScene.LoadedSaveFile}");
             NextLevelInstance.LoadedSaveFile = currentScene.LoadedSaveFile;
+            GetTree().Root.AddChild(NextLevelInstance);
+            GetTree().CurrentScene = NextLevelInstance;
+            currentScene.QueueFree();
         }
 
         /// <summary>
