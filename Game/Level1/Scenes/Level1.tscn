@@ -10,13 +10,13 @@
 [ext_resource type="Texture2D" uid="uid://c3hd8ludbquxr" path="res://Art/Backgrounds/MiddleBG.png" id="7_sac58"]
 [ext_resource type="Texture2D" uid="uid://ciqy2qp8wkl11" path="res://Art/Backgrounds/CrystalCave.png" id="8_1li2j"]
 [ext_resource type="Script" path="res://Game/Portal.cs" id="8_iqa1o"]
-[ext_resource type="PackedScene" uid="uid://dsnvu8ioiw0ff" path="res://Items/Scenes/GoldEgg.tscn" id="11_508a1"]
+[ext_resource type="PackedScene" uid="uid://mu1by1prm8kh" path="res://Items/Scenes/GoldEgg.tscn" id="11_508a1"]
 [ext_resource type="PackedScene" uid="uid://dol5g5hc7xj1e" path="res://Game/DangerZoneFalling.tscn" id="11_v4ol5"]
 [ext_resource type="Texture2D" uid="uid://cr2mrqp8ecys1" path="res://Art/Tilemaps/GrassTiles.png" id="13_oypm7"]
 [ext_resource type="Texture2D" uid="uid://tbl74xhn72on" path="res://Art/Tilemaps/StoneTiles.png" id="14_2k5b1"]
 [ext_resource type="Shader" path="res://Game/Black&White.gdshader" id="14_cylb3"]
 [ext_resource type="Script" path="res://Items/Scripts/GoldEggManager.cs" id="14_qnefm"]
-[ext_resource type="Theme" uid="uid://toxmj1vwp6m" path="res://UI/TextTheme.tres" id="17_rwmuo"]
+[ext_resource type="Theme" path="res://UI/TextTheme.tres" id="17_rwmuo"]
 [ext_resource type="PackedScene" uid="uid://bun0lpg7lkpq6" path="res://Player/Scenes/PlayerCharacter.tscn" id="18_hg87w"]
 [ext_resource type="FontFile" uid="uid://dmdmmrdgoemai" path="res://Art/UI/Fonts/Milk Mango.ttf" id="19_5k66e"]
 [ext_resource type="Texture2D" uid="uid://d1lubk38foqar" path="res://Art/Items/CartoonRock_FHD.png" id="20_41q5b"]
@@ -107,7 +107,6 @@ scale = Vector2(0.999833, 0.999833)
 
 [node name="UniBody" parent="PlayerCharacter/PartsSkeletonContainer/Parts" index="1"]
 position = Vector2(16.6758, 119.407)
-scale = Vector2(1, 1)
 
 [node name="UniLHand" parent="PlayerCharacter/PartsSkeletonContainer/Parts" index="2"]
 position = Vector2(10.584, 119)
@@ -115,7 +114,6 @@ scale = Vector2(0.999858, 0.999858)
 
 [node name="UniRLeg" parent="PlayerCharacter/PartsSkeletonContainer/Parts" index="3"]
 position = Vector2(10.0078, 113.562)
-scale = Vector2(0.99985, 0.99985)
 
 [node name="UniRHand" parent="PlayerCharacter/PartsSkeletonContainer/Parts" index="4"]
 position = Vector2(-9.66992, 127.067)
@@ -123,7 +121,6 @@ scale = Vector2(0.999849, 0.999849)
 
 [node name="UniLLeg" parent="PlayerCharacter/PartsSkeletonContainer/Parts" index="5"]
 position = Vector2(6.98633, 118.26)
-scale = Vector2(0.999851, 0.999851)
 
 [node name="Head" parent="PlayerCharacter/PartsSkeletonContainer/Skeleton2D/Base/Body" index="1"]
 scale = Vector2(0.999833, 0.999833)

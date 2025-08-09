@@ -4,7 +4,7 @@
 [ext_resource type="Script" path="res://Game/Respawner.cs" id="2_8kqly"]
 [ext_resource type="Script" path="res://Game/Level1/Scripts/Camera.cs" id="3_rs32f"]
 [ext_resource type="Texture2D" uid="uid://uprybvy2gmww" path="res://Art/Items/TheEgg.png" id="4_y7dv0"]
-[ext_resource type="Theme" uid="uid://toxmj1vwp6m" path="res://UI/TextTheme.tres" id="5_7prj7"]
+[ext_resource type="Theme" path="res://UI/TextTheme.tres" id="5_7prj7"]
 [ext_resource type="Texture2D" uid="uid://bbi8xqng11ic8" path="res://Art/Backgrounds/SpaceBG.png" id="6_uqv7i"]
 [ext_resource type="Texture2D" uid="uid://c3hd8ludbquxr" path="res://Art/Backgrounds/MiddleBG.png" id="7_7fjb5"]
 [ext_resource type="PackedScene" uid="uid://dnx3j4auf00wv" path="res://UI/Scenes/GUI.tscn" id="7_wp2dp"]
@@ -14,14 +14,14 @@
 [ext_resource type="Texture2D" uid="uid://cr2mrqp8ecys1" path="res://Art/Tilemaps/GrassTiles.png" id="12_rre1p"]
 [ext_resource type="PackedScene" uid="uid://dol5g5hc7xj1e" path="res://Game/DangerZoneFalling.tscn" id="12_t3txc"]
 [ext_resource type="Script" path="res://Items/Scripts/GoldEggManager.cs" id="13_j1dfc"]
-[ext_resource type="PackedScene" uid="uid://dsnvu8ioiw0ff" path="res://Items/Scenes/GoldEgg.tscn" id="14_bjsj8"]
+[ext_resource type="PackedScene" uid="uid://mu1by1prm8kh" path="res://Items/Scenes/GoldEgg.tscn" id="14_bjsj8"]
 [ext_resource type="Texture2D" uid="uid://tbl74xhn72on" path="res://Art/Tilemaps/StoneTiles.png" id="14_pmcow"]
 [ext_resource type="Shader" path="res://Game/Black&White.gdshader" id="15_bpjgf"]
 [ext_resource type="PackedScene" uid="uid://b6upcof87f3dd" path="res://Obstacles/Scenes/CircularSaw.tscn" id="16_e5qvk"]
 [ext_resource type="PackedScene" uid="uid://ti05fy42timf" path="res://Obstacles/Scenes/Pendulum.tscn" id="17_q7olb"]
 [ext_resource type="PackedScene" uid="uid://bun0lpg7lkpq6" path="res://Player/Scenes/PlayerCharacter.tscn" id="18_20a3l"]
 [ext_resource type="PackedScene" uid="uid://o8w6tkup2gx6" path="res://Obstacles/Scenes/MovingCircularSaw.tscn" id="20_58qqt"]
-[ext_resource type="PackedScene" uid="uid://dhyun241fg6n4" path="res://Obstacles/Scenes/SpikeTrap2.tscn" id="21_wi3pm"]
+[ext_resource type="PackedScene" path="res://Obstacles/Scenes/SpikeTrap2.tscn" id="21_wi3pm"]
 [ext_resource type="Texture2D" uid="uid://d1lubk38foqar" path="res://Art/Items/CartoonRock_FHD.png" id="22_d3aov"]
 [ext_resource type="Texture2D" uid="uid://betwd4u35upvc" path="res://Art/Items/CartoonBush_FHD.png" id="23_y6qej"]
 
@@ -95,18 +95,15 @@ position = Vector2(16.6768, 119.406)
 
 [node name="UniLHand" parent="PlayerCharacter/PartsSkeletonContainer/Parts" index="2"]
 position = Vector2(10.585, 119)
-scale = Vector2(0.999856, 0.999856)
 
 [node name="UniRLeg" parent="PlayerCharacter/PartsSkeletonContainer/Parts" index="3"]
 position = Vector2(10.0088, 113.562)
-scale = Vector2(0.99985, 0.99985)
 
 [node name="UniRHand" parent="PlayerCharacter/PartsSkeletonContainer/Parts" index="4"]
 position = Vector2(-9.66797, 127.067)
 
 [node name="UniLLeg" parent="PlayerCharacter/PartsSkeletonContainer/Parts" index="5"]
 position = Vector2(6.98828, 118.26)
-scale = Vector2(0.999851, 0.999851)
 
 [node name="CollisionDetector" parent="PlayerCharacter" index="3" node_paths=PackedStringArray("RespawnPoint", "_filter", "_goldeggmanager", "Camera", "_player", "_respawner")]
 RespawnPoint = NodePath("../../RespawnPoint")
