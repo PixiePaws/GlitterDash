@@ -69,8 +69,8 @@ namespace UnicornGame
 
 
 			string currentScene = GetTree().CurrentScene.Name;
-			// set the character facing right but not in level 4
-			if (currentScene != "Level4")
+			// set the character facing right but not in level 4 or 6 
+			if (currentScene != "Level2" && currentScene != "Level6")
 			{
 				var skeleton = GetNode<Node2D>("PartsSkeletonContainer");
 				skeleton.Scale = new Vector2(-1, 1);

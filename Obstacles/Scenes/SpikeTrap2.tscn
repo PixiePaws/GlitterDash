@@ -4,7 +4,7 @@
 [ext_resource type="Texture2D" uid="uid://bi6gfhj1dr3rv" path="res://Art/Obstacles/OnlyCaneSpikes.png" id="2_jd7ug"]
 
 [node name="SpikeTrap" type="StaticBody2D" groups=["Obstacles"]]
-light_mask = 8
+light_mask = 40
 visibility_layer = 4
 collision_layer = 40
 collision_mask = 4
