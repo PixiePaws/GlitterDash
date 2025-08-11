@@ -15,8 +15,8 @@ public partial class LevelsCompleted : Node2D
 		_mainMenuButton = GetNode<Button>("Control/VBoxContainer/MainMenu");
 
 		_quitButton.Pressed += OnQuitButtonPressed;
-		// _levelSelectButton += OnLevelSelectButtonPressed;
-		// _mainMenuButton += OnMainMenuButtonPressed;
+		_levelSelectButton.Pressed += OnLevelSelectButtonPressed;
+		_mainMenuButton.Pressed += OnMainMenuButtonPressed;
 	}
 
 	// Called every frame. 'delta' is the elapsed time since the previous frame.
