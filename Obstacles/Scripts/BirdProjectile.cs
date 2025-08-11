@@ -33,6 +33,7 @@ namespace UnicornGame
             _spriteWingsDownPath = "res://Art/Obstacles/Bird_WingDown.png";
             _spriteWingsUp = ResourceLoader.Load<Texture2D>(_spriteWingsUpPath);
             _spriteWingsDown = ResourceLoader.Load<Texture2D>(_spriteWingsDownPath);
+            SetSpriteDirection();
             _sprite.Texture = _spriteWingsUp;
             ApplyCentralImpulse(_impulseVector);
             Timer SpriteTimer = new Timer();
@@ -46,7 +47,11 @@ namespace UnicornGame
         {
             //AlternateSprite();
         }
-
+        public Vector2 ImpulseVector
+        {
+            get { return _impulseVector; }
+            set { _impulseVector = value; }
+        }
         public void OnCollisionDetected(Node node)
         {
             QueueFree();
@@ -72,6 +77,17 @@ namespace UnicornGame
             else
             {
                 _sprite.Texture = _spriteWingsUp;
+            }
+        }
+        public void SetSpriteDirection()
+        {
+            if (_impulseVector.X < 0)
+            {
+                _sprite.FlipH = true;
+            }
+            else
+            {
+                _sprite.FlipH = false;
             }
         }
         public void TimeoutPrint()

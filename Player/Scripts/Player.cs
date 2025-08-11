@@ -188,15 +188,21 @@ namespace UnicornGame
 					_animatedSprite.Play("Walk");
 					if (!walking)
 					{
+						GD.Print("Playing walk sound");
 						AudioManager.PlaySound(walkSound);
 						walking = true;
 					}
 				}
 				else if (!IsOnFloor())
 				{
-					//GD.Print("Not on floor, stopping walk sound");
 					AudioManager.StopSound(walkSound);
 					walking = false;
+				}
+				else if (IsOnFloor() && _isWallSliding)
+				{
+					GD.Print("BasicMovement, setting _isWallSliding to false");
+					_audioManager._wallSlideSound.Stop();
+					_isWallSliding = false;
 				}
 			}
 			else
@@ -268,15 +274,22 @@ namespace UnicornGame
 		/// </summary>
 		private void WallSlidingWallJumping(ref Godot.Vector2 velocity, float inputDirection, float delta)
 		{
-			_isWallSliding = false;
+			if (!IsNearWall())
+			{
+				_isWallSliding = false;
+				_audioManager._wallSlideSound.Stop();
+			}
 
 			int wallDirection = GetWallDirection();
 
-			if (IsNearWall() && inputDirection != 0 && MathF.Sign(inputDirection) == GetWallDirection())
+			if (IsNearWall() && !IsOnFloor() && inputDirection != 0 && MathF.Sign(inputDirection) == GetWallDirection())
 			{
+				GD.Print($"_isWallSliding: {_isWallSliding}");
 				if (!_isWallSliding)
 				{
-					AudioManager.PlaySound(wallSlideSound);
+					GD.Print("Playing wallSlideSound");
+					GD.Print($"if input direction: {inputDirection}");
+					_audioManager._wallSlideSound.Play();
 					_isWallSliding = true;
 				}
 				velocity.Y = Mathf.Min(velocity.Y + Gravity * 0.5f, WallSlideSpeed);
@@ -287,31 +300,32 @@ namespace UnicornGame
 			
 			else if (IsNearWall() && !IsOnFloor() && inputDirection == 0)
 			{
+				GD.Print($"else if input direction: {inputDirection}");
+				GD.Print("Setting wall slide to false in else if (IsNearWall() && !IsOnFloor() && inputDirection == 0)");
 				_isWallSliding = false;
+				_audioManager._wallSlideSound.Stop();
 				_animatedSprite.Play("Falling");
 				//_audioManager.PlayFallingSound();
 			}
 
 			// Wall jump
-				if (_isWallSliding && Input.IsActionJustPressed("Jump"))
+			if (_isWallSliding && Input.IsActionJustPressed("Jump"))
+			{
+				// If the player is wall sliding and presses jump while pressing towards the wall
+				GD.Print("WallDirection: " + wallDirection);
+				if (wallDirection != 0)
 				{
-					// If the player is wall sliding and presses jump while pressing towards the wall
-					{
-						GD.Print("WallDirection: " + wallDirection);
-					if (wallDirection != 0)
-					{
-						velocity.X = WallJumpPush * -wallDirection;
-						velocity.Y = WallJumpVelocity;
-						_justWallJumped = true;
-						_justWallJumpedTimer = 0.4f;
-						_animatedSprite.Play("Jump");
-						//_audioManager.PlayJumpSound();
-					}
-
-						SetDirection(-wallDirection);
-						_isWallSliding = false; // Reset wall sliding state after jumping
-					}
+					velocity.X = WallJumpPush * -wallDirection;
+					velocity.Y = WallJumpVelocity;
+					_justWallJumped = true;
+					_justWallJumpedTimer = 0.4f;
+					_audioManager._wallSlideSound.Stop();
+					_animatedSprite.Play("Jump");
+					//_audioManager.PlayJumpSound();
 				}
+				SetDirection(-wallDirection);
+				_isWallSliding = false; // Reset wall sliding state after jumping
+			}
 		}
 
 		/// <summary>
@@ -403,7 +417,7 @@ namespace UnicornGame
 		{
 			// Checks if the player presses the dash button and is not already dashing
 			// and if the cooldown is over.
-			if (Input.IsActionJustPressed("Dash") && !_isDashing && _dashCooldownTimer <= 0)
+			if (Input.IsActionJustPressed("Dash") && !_isDashing && _dashCooldownTimer <= 0 && !_isWallSliding)
 			{
 				// Dash Direction
 				_dashDirection = new Godot.Vector2(_lastMoveDirection, 0).Normalized();

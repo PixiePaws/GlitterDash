@@ -41,7 +41,7 @@ namespace UnicornGame
 			_spikeTrapHit = GetNode<AudioStreamPlayer>("SFX/SpikeTrapHit");
 			_jumpSound = GetNode<AudioStreamPlayer>("SFX/Jump");
 			//_fallSound = GetNode<AudioStreamPlayer>("SFX/Falling");
-			//_wallSlideSound = GetNode<AudioStreamPlayer>("SFX/WallSlide");
+			_wallSlideSound = GetNode<AudioStreamPlayer>("SFX/WallSlide");
 			_walkSound = GetNode<AudioStreamPlayer>("SFX/Walk");
 			_portalSound = GetNode<AudioStreamPlayer>("SFX/Portal");
 			_collectSound = GetNode<AudioStreamPlayer>("SFX/CollectEgg");

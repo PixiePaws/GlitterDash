@@ -83,6 +83,7 @@ namespace UnicornGame
             }
             GD.Print("Button list populated");
         }
+        //Populates _saveFileList with string filenames of the files found in _directoryPath.
         public void PopulateSaveFileList()
         {
             int SaveFileAmount = DirAccess.GetFilesAt(_directoryPath).Length;
@@ -90,6 +91,7 @@ namespace UnicornGame
             _saveFileList = DirAccess.GetFilesAt(_directoryPath);
             GD.Print("Savefile list populated");
         }
+        //Connects the button signals to OnButtonPressed(ButtonCopy), which carries the information of the button instance, which was pressed.
         public void ConnectButtonSignals()
         {
             for (int i = 0; i < _saveFileList.Length; i++)
@@ -102,6 +104,7 @@ namespace UnicornGame
             }
             GD.Print("Signals connected");
         }
+        //Loads the next uncompleted level according to the save file connected to the button.
         public void OnButtonPressed(Button button)
         {
             /*for (int i = 0; i < _saveFileList.Length; i++)
@@ -111,24 +114,27 @@ namespace UnicornGame
             int SignalSenderIndex = button.GetIndex();
             GD.Print($"Button index: {SignalSenderIndex}");
             //Read the save file dynamically
-            string FilePath = Path.Join(_directoryPath, _saveFileList[SignalSenderIndex]);
+            string FileName = _saveFileList[SignalSenderIndex];
+            string FilePath = Path.Join(_directoryPath, FileName);
             GD.Print($"File path: {FilePath}");
             Godot.Collections.Dictionary<string, Variant> LoadedDictionary = GetSaveFileAsDictionary(FilePath);
             GD.Print(LoadedDictionary);
-            ChangeSceneToNextLevel(LoadedDictionary);
+            ChangeSceneToNextLevel(LoadedDictionary, FileName);
             //GD.Print("OnButtonPressed() was called");
 
         }
+        //Returns the file path of a save file with the name FileName if found in _saveFileList.
         public string GetSaveFilePath(string FileName)
         {
             string FilePath = "";
             foreach (string File in _saveFileList)
             {
-                if(File.Contains(FileName))
-                FilePath = Path.Join(_directoryPath, FileName);
+                if (File.Contains(FileName))
+                    FilePath = Path.Join(_directoryPath, FileName);
             }
             return FilePath;
         }
+        //Returns the contents of a save file at FilePath as a Godot.Collections.Dictionary.
         public Godot.Collections.Dictionary<string, Variant> GetSaveFileAsDictionary(string FilePath)
         {
             if (!File.Exists(FilePath))
@@ -156,6 +162,7 @@ namespace UnicornGame
         {
             PackedScene SaverScene = ResourceLoader.Load<PackedScene>(_saverScenePath);
         }
+        //Prints the amount of buttons in _buttonList and their names and the amount of save files in _saveFileList and their names.
         public void CheckListLengthAndContents()
         {
             GD.Print($"save file list length: {_saveFileList.Length}");
@@ -169,6 +176,10 @@ namespace UnicornGame
                 GD.Print($"_buttonList contains: {_buttonList[i].Name}");
             }
         }
+        /*
+        Sets which buttons are visible and enabled and the text they contain. If a button is disabled and dont connected to a save file
+        it is disabled with the text "Empty". Else, it shows the connected save file's name and the timestamp for when the file was last edited.
+        */
         public void SetButtonVisibilityAndText()
         {
             int SaveFileAmount = DirAccess.GetFilesAt(_directoryPath).Length;
@@ -183,7 +194,7 @@ namespace UnicornGame
                     Color NewColor = _buttonList[i].Modulate;
                     NewColor.A = 0.7f;
                     _buttonList[i].Modulate = NewColor;
-                    GD.Print("Visibility");
+                    //GD.Print("Visibility");
                 }
                 else
                 {
@@ -194,24 +205,24 @@ namespace UnicornGame
                 }
             }
         }
+        //Destroys this scene when quit button is pressed.
         public void OnQuitButtonPressed()
         {
             QueueFree();
         }
+        //Returns an array of the level paths for the levels found in the file system.
         public Godot.Collections.Array GetAllLevelPaths()
         {
             Godot.Collections.Array LevelPathArray = new Godot.Collections.Array();
             String FileSystemPath = "res://Game/";
             String LevelSceneName = "";
             String LevelScenePath = "";
-            string[] FileSystemDirectories =  DirAccess.GetDirectoriesAt(FileSystemPath);
-            //int LevelDirAmount = 0;
+            string[] FileSystemDirectories = DirAccess.GetDirectoriesAt(FileSystemPath);
             foreach (String Directory in FileSystemDirectories)
             {
                 GD.Print(Directory);
                 if (Directory.Contains("Level"))
                 {
-                    //LevelDirAmount++;
                     LevelSceneName = $"{Directory}.tscn";
                     LevelScenePath = $"{FileSystemPath}/{Directory}/Scenes/{LevelSceneName}";
                     LevelPathArray.Add(LevelScenePath);
@@ -223,6 +234,7 @@ namespace UnicornGame
             }
             return LevelPathArray;
         }
+        //Returns an array of the specified key DataKey's values on the second layer of the dictionary specified.
         public string[] GetKeysArrayFromSave(int SaveFileAmount, string DataKey, Godot.Collections.Dictionary<string, Variant> GameDataDict)
         {
             string[] KeysArray = new string[SaveFileAmount];
@@ -238,7 +250,8 @@ namespace UnicornGame
             }
             return KeysArray;
         }
-        public void ChangeSceneToNextLevel(Godot.Collections.Dictionary<string, Variant> GameData)
+        //Checks the save file found in SaveFilePath for the last completed level and instantiates the next uncompleted level
+        public void ChangeSceneToNextLevel(Godot.Collections.Dictionary<string, Variant> GameData, string SaveFilePath)
         {
             GD.Print("ChangeSceneToNextLevel was called");
             Godot.Collections.Dictionary<string, Variant> LevelData;
@@ -284,24 +297,14 @@ namespace UnicornGame
                     break;
                 }
             }
-            /*LevelData = (Godot.Collections.Dictionary<string, Variant>)GameData[GameDataKey];
-                GD.Print($"Level data at GameDataKey: {GameData[GameDataKey]}");
-                string LevelScenePath = "";
-                foreach (var Key in LevelData.Keys)
-                {
-                    if (LevelData.ContainsKey("FilePath") && (string)LevelData["FilePath"] != null)
-                    {
-                        LevelScenePath = (string)LevelData["FilePath"];
-                        break;
-                    }
-                }
-                if (LevelScenePath == null)
-                {
-                    LevelScenePath = _defaultLevelScenePath;
-                }*/
             GD.Print($"Next level path: {LevelScenePath}");
             PackedScene NextLevel = ResourceLoader.Load<PackedScene>(LevelScenePath);
-            GetTree().ChangeSceneToPacked(NextLevel);
+            Node CurrentScene = GetTree().CurrentScene;
+            GameLevels NextLevelInstance = (GameLevels)NextLevel.Instantiate();
+            NextLevelInstance.LoadedSaveFile = SaveFilePath;
+            CurrentScene.QueueFree();
+            GetTree().Root.AddChild(NextLevelInstance);
+            GetTree().CurrentScene = NextLevelInstance;
         } 
     }
 }

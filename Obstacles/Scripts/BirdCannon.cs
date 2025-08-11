@@ -5,6 +5,7 @@ namespace UnicornGame
 {
     public partial class BirdCannon : StaticBody2D
     {
+        [Export] private Vector2 _impulseVector = new Vector2(-500.0f, 0.0f);
         private string _birdProjectileScenePath;
         private PackedScene _birdProjectileScene;
         [Export] bool _shootTimerOneShot = false;
@@ -29,6 +30,7 @@ namespace UnicornGame
         public void ShootBirdProjectile()
         {
             BirdProjectile Bird = (BirdProjectile)_birdProjectileScene.Instantiate();
+            Bird.ImpulseVector = _impulseVector;
             AddChild(Bird);
             if (Bird != null)
             {
