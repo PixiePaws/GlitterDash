@@ -1122,7 +1122,7 @@ script = ExtResource("10_on172")
 
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="CollisionDetector"]
 position = Vector2(-7, -132)
-polygon = PackedVector2Array(-125, -185, 66, -183, 118, -90, 128, 43, 135, 302, 125, 499, -96, 501, -189, 86, -184, -78)
+polygon = PackedVector2Array(104, -224, 128, 43, 143, 238, 125, 499, -96, 501, -189, 86, -141, -220)
 
 [node name="WallChecker" type="RayCast2D" parent="."]
 scale = Vector2(5, 5)
@@ -1132,4 +1132,4 @@ collision_mask = 15
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="."]
 position = Vector2(-15, 3)
 scale = Vector2(1.055, 1)
-polygon = PackedVector2Array(1.89573, -336, 107.109, -288, 153.555, -211, 147.867, -114, 105.213, -34, 140.284, 67, 145.024, 175, 122.275, 224, 126.066, 364, -83.4123, 365, -97.6303, 231, -117.536, 155, -179.147, 147, -156.398, 15, -174.408, -49, -136.493, -128, -132.701, -218, -99.5261, -276)
+polygon = PackedVector2Array(101.422, -355, 140.284, 67, 126.066, 364, -83.4123, 365, -175.355, -49, -134.597, -355)

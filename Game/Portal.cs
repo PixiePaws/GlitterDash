@@ -9,6 +9,8 @@ namespace UnicornGame
         [Export] public string _level3ScenePath = "res://Game/Level3/Scenes/Level3.tscn";
         [Export] public string _level4ScenePath = "res://Game/Level4/Scenes/Level4.tscn";
         [Export] public string _level5ScenePath = "res://Game/Level5/Scenes/Level5.tscn";
+        [Export] public string _level6ScenePath = "res://Game/Level6/Scenes/Level6.tscn";
+
         [Export] public string _levelsCompletedScenePath = "res://Game/LevelsCompleted.tscn";
 
 		private AudioManager _audioManager;
@@ -100,6 +102,9 @@ namespace UnicornGame
                 case "Level5":
                     nextLevel = 6;
                     break;
+                case "Level6":
+                    nextLevel = 7;
+                    break;
 
                 default:
                     GD.PrintErr("[ERROR] No active level found!");
@@ -137,7 +142,8 @@ namespace UnicornGame
                 3 => _level3ScenePath,
                 4 => _level4ScenePath,
                 5 => _level5ScenePath,
-                6 => _levelsCompletedScenePath,
+                6 => _level6ScenePath,
+                7 => _levelsCompletedScenePath,
                 _ => string.Empty
             };
 		}
