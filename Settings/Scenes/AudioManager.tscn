@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=3 uid="uid://c7v665nc1pk2o"]
+[gd_scene load_steps=12 format=3 uid="uid://c7v665nc1pk2o"]
 
 [ext_resource type="Script" path="res://Settings/Scripts/AudioManager.cs" id="1_fkiwv"]
 [ext_resource type="AudioStream" uid="uid://ba1inot0edr36" path="res://Audio/Sfx/CircularSaw0.wav" id="2_d575x"]
@@ -10,6 +10,7 @@
 [ext_resource type="AudioStream" uid="uid://cd36mie5d3htm" path="res://Audio/Sfx/collectcoin.wav" id="8_8rpwj"]
 [ext_resource type="AudioStream" uid="uid://dwab8qqv3ixkj" path="res://Audio/Sfx/jumpgrunt.wav" id="9_rtnop"]
 [ext_resource type="AudioStream" uid="uid://d1xllkxkiow5j" path="res://Audio/Sfx/BirdProjectile0.wav" id="10_p4b0y"]
+[ext_resource type="AudioStream" uid="uid://1xhoeto4e78g" path="res://Audio/Sfx/WallSlide0.wav" id="11_f102q"]
 
 [node name="AudioManager" type="Control"]
 z_index = -4096
@@ -49,6 +50,10 @@ stream = ExtResource("9_rtnop")
 
 [node name="BirdProjectileFlyBy" type="AudioStreamPlayer" parent="SFX"]
 stream = ExtResource("10_p4b0y")
+
+[node name="WallSlide" type="AudioStreamPlayer" parent="SFX"]
+stream = ExtResource("11_f102q")
+volume_db = -9.541
 
 [node name="Music" type="Node" parent="."]
 
