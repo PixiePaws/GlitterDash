@@ -541,3 +541,4 @@ scale = Vector2(0.1, 0.1)
 texture = ExtResource("24_vrfdp")
 
 [editable path="PlayerCharacter"]
+[editable path="Traps/BirdCannon"]
