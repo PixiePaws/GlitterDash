@@ -178,8 +178,5 @@ theme_override_constants/margin_top = 24
 theme_override_constants/margin_right = 24
 theme_override_constants/margin_bottom = 24
 
-[node name="ScrollContainer" type="ScrollContainer" parent="Settings/TabContainer/Credits/MarginContainer"]
-layout_mode = 2
-
-[node name="Credits" parent="Settings/TabContainer/Credits/MarginContainer/ScrollContainer" instance=ExtResource("8_pns7f")]
+[node name="Credits" parent="Settings/TabContainer/Credits/MarginContainer" instance=ExtResource("8_pns7f")]
 layout_mode = 2
