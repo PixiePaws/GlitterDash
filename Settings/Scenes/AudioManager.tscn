@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=3 uid="uid://c7v665nc1pk2o"]
+[gd_scene load_steps=11 format=3 uid="uid://c7v665nc1pk2o"]
 
 [ext_resource type="Script" path="res://Settings/Scripts/AudioManager.cs" id="1_fkiwv"]
 [ext_resource type="AudioStream" uid="uid://ba1inot0edr36" path="res://Audio/Sfx/CircularSaw0.wav" id="2_d575x"]
@@ -9,6 +9,7 @@
 [ext_resource type="AudioStream" uid="uid://cpbx1mnko72gp" path="res://Audio/Sfx/walking-on-grass-quickly.mp3" id="7_b3yd6"]
 [ext_resource type="AudioStream" uid="uid://cd36mie5d3htm" path="res://Audio/Sfx/collectcoin.wav" id="8_8rpwj"]
 [ext_resource type="AudioStream" uid="uid://dwab8qqv3ixkj" path="res://Audio/Sfx/jumpgrunt.wav" id="9_rtnop"]
+[ext_resource type="AudioStream" uid="uid://buhmghcbat4ni" path="res://Audio/BG_Music.mp3" id="10_xhqr6"]
 
 [node name="AudioManager" type="Control"]
 z_index = -4096
@@ -49,3 +50,6 @@ stream = ExtResource("9_rtnop")
 [node name="Music" type="Node" parent="."]
 
 [node name="bgMusic" type="AudioStreamPlayer" parent="Music"]
+stream = ExtResource("10_xhqr6")
+autoplay = true
+parameters/looping = true

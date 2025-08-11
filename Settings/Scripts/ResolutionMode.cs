@@ -27,8 +27,9 @@ namespace UnicornGame
 	{
 		{ 0, new Vector2I(1280, 720) }, // 720p
 		{ 1, new Vector2I(1920, 1080) }, // 1080p
-		{ 2, new Vector2I(2560, 1440) }, // 1440p
-		{ 3, new Vector2I(3840, 2160) }  // 4K
+		// { 2, new Vector2I(1920, 1200) }, // 1080p
+		{ 3, new Vector2I(2560, 1440) }, // 1440p
+		{ 4, new Vector2I(3840, 2160) }  // 4K
 	};
 		private void OnResolutionSelected(long index)
 		{

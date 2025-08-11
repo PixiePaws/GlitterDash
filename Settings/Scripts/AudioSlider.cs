@@ -7,8 +7,8 @@ namespace UnicornGame
 	{
 		// Called when the node enters the scene tree for the first time.
 
-		[Export] public string SliderLabelText = "Volume";
-		private Slider _volumeSlider;
+		[Export] public string SliderLabelText = "Music";
+		private HSlider _volumeSlider;
 
 		private Label _audioNameLabel;
 		private Label _audioNumberLabel;
@@ -20,7 +20,7 @@ namespace UnicornGame
 
 			_audioNumberLabel = GetNode<Label>("HBoxContainer/AudioNumberLabel");
 
-			_volumeSlider = GetNode<Slider>("HBoxContainer/HSlider");
+			_volumeSlider = GetNode<HSlider>("HBoxContainer/HSlider");
 
 			if (_volumeSlider != null)
 			{

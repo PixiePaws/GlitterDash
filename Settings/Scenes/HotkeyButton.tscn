@@ -1,7 +1,7 @@
 [gd_scene load_steps=3 format=3 uid="uid://bjjhxwporokha"]
 
 [ext_resource type="Script" path="res://Settings/Scripts/HotKey.cs" id="1_hxcc2"]
-[ext_resource type="Theme" uid="uid://toxmj1vwp6m" path="res://UI/TextTheme.tres" id="2_75y3b"]
+[ext_resource type="Theme" path="res://UI/TextTheme.tres" id="2_75y3b"]
 
 [node name="HotkeyButton" type="Control" groups=["hotKeyButton"]]
 layout_mode = 3
