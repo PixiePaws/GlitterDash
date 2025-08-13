@@ -1,15 +1,34 @@
-[gd_scene load_steps=3 format=3 uid="uid://breqli4rgs6dk"]
+[gd_scene load_steps=5 format=3 uid="uid://breqli4rgs6dk"]
 
-[ext_resource type="Texture2D" uid="uid://t75gsvlhv18t" path="res://icon.svg" id="1_87pcd"]
+[ext_resource type="Texture2D" uid="uid://df4nlaa26xese" path="res://Art/Items/Portal1.png" id="1_le4pi"]
+[ext_resource type="Texture2D" uid="uid://cpxdu14dvcq3x" path="res://Art/Items/Portal2.png" id="2_1ihwa"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_8ndll"]
+animations = [{
+"frames": [{
+"duration": 2.0,
+"texture": ExtResource("1_le4pi")
+}, {
+"duration": 2.0,
+"texture": ExtResource("2_1ihwa")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_u5l30"]
-size = Vector2(129, 127)
+size = Vector2(100, 210)
 
 [node name="Portal" type="Area2D"]
 
-[node name="Icon" type="Sprite2D" parent="."]
-texture = ExtResource("1_87pcd")
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+position = Vector2(-0.499997, 0)
+scale = Vector2(0.13623, 0.15)
+sprite_frames = SubResource("SpriteFrames_8ndll")
+autoplay = "default"
+frame_progress = 0.457054
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2(-0.5, -0.5)
+position = Vector2(0, 42)
 shape = SubResource("RectangleShape2D_u5l30")

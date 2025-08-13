@@ -8,14 +8,21 @@ public abstract partial class GameLevels : Node2D
     protected GameState _gameState;
     private PackedScene _gameManagerScene;
     private string _gameManagerScenePath;
+    protected string _loadedSaveFile;
+    protected bool _levelCompleted = false;
 
-    [Export] private SaveFormat _saveFormat;
+    [Export] private SaveFormat _saveFormat = SaveFormat.Json;
 
     public enum SaveFormat
     {
         Xml,
         Json,
         None
+    }
+    public bool CurrentLevelCompleted
+    {
+        get { return _levelCompleted; }
+        set { _levelCompleted = value; }
     }
     public GameState CurrentGameState
     {
@@ -28,6 +35,11 @@ public abstract partial class GameLevels : Node2D
     public GameManager GameManager
     {
         get { return _gameManager; }
+    }
+    public string LoadedSaveFile
+    {
+        get { return _loadedSaveFile; }
+        set { _loadedSaveFile = value; }
     }
     public void InstantiateGameManager()
     {

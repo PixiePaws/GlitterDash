@@ -12,6 +12,8 @@ namespace UnicornGame
         public override void _Ready()
         {
             GD.Print("Level1 _Ready()");
+            GD.Print($"parent path: {GetParent().GetPath()}");
+            GD.Print($"scene file path: {GetSceneFilePath()}");
             InstantiateGameManager();
         }
     }

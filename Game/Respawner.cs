@@ -83,6 +83,15 @@ namespace UnicornGame
             GD.Print("Score added");
             string ScoreLabelPath = $"/root/{ParentName}/Camera2D/ScoreLabel";
             _scoreLabel = GetNode<Label>(ScoreLabelPath);
+            if (_scoreLabel == null)
+            {
+                GD.Print($"ScoreLabelPath: {ScoreLabelPath}");
+                GD.Print("_scoreLabel is null");
+            }
+            else
+            {
+                GD.Print("Successfully got _scoreLabel reference");
+            }
             _score += 1;
             _scoreLabel.Text = _score.ToString() + "/13";
         }

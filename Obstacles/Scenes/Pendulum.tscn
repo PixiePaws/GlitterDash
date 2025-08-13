@@ -1,16 +1,16 @@
 [gd_scene load_steps=6 format=3 uid="uid://ti05fy42timf"]
 
-[ext_resource type="Texture2D" uid="uid://bfv3urx4r66il" path="res://Art/Obstacles/DemolishBall_v2.png" id="1_dc2ds"]
 [ext_resource type="Script" path="res://Obstacles/Scripts/Pendulum.cs" id="1_nwhjw"]
+[ext_resource type="Texture2D" uid="uid://bnm0mde1bqt1a" path="res://Art/Obstacles/Lollipop.png" id="2_yr0lg"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_ne8sn"]
 radius = 5.0
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_h3bhn"]
-size = Vector2(2, 270)
+size = Vector2(6, 201)
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_im36p"]
-radius = 25.1794
+radius = 45.0111
 
 [node name="PendulumHolder" type="StaticBody2D"]
 
@@ -25,16 +25,17 @@ node_b = NodePath("../Pendulum")
 collision_layer = 8
 collision_mask = 4
 script = ExtResource("1_nwhjw")
+_torqueImpulseMagnitude = 30000.0
 
 [node name="Sprite2D" type="Sprite2D" parent="Pendulum"]
-position = Vector2(0, 160)
-scale = Vector2(0.8, 0.8)
-texture = ExtResource("1_dc2ds")
+position = Vector2(3, 160)
+scale = Vector2(0.16, 0.16)
+texture = ExtResource("2_yr0lg")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Pendulum"]
-position = Vector2(0, 135)
+position = Vector2(0, 131.5)
 shape = SubResource("RectangleShape2D_h3bhn")
 
 [node name="CollisionShape2D2" type="CollisionShape2D" parent="Pendulum"]
-position = Vector2(0, 295)
+position = Vector2(1, 277)
 shape = SubResource("CircleShape2D_im36p")

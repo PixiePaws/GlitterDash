@@ -1,5 +1,6 @@
-[gd_scene load_steps=2 format=3 uid="uid://b1kh6r6r608f8"]
+[gd_scene load_steps=3 format=3 uid="uid://b1kh6r6r608f8"]
 
+[ext_resource type="Theme" uid="uid://toxmj1vwp6m" path="res://UI/TextTheme.tres" id="1_babk0"]
 [ext_resource type="Script" path="res://Settings/Scripts/ScreenMode.cs" id="1_pj507"]
 
 [node name="ScreenMode" type="Control"]
@@ -9,6 +10,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+theme = ExtResource("1_babk0")
 script = ExtResource("1_pj507")
 
 [node name="HBoxContainer" type="HBoxContainer" parent="."]
@@ -16,7 +18,7 @@ layout_mode = 0
 offset_left = 150.0
 offset_right = 682.0
 offset_bottom = 64.0
-scale = Vector2(2.5, 2.5)
+scale = Vector2(2.2, 2.2)
 
 [node name="Label" type="Label" parent="HBoxContainer"]
 custom_minimum_size = Vector2(256, 64)

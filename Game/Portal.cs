@@ -3,17 +3,26 @@ using System;
 
 namespace UnicornGame
 {
-	public partial class Portal : Area2D
-	{
-		[Export] public string _level2ScenePath = "res://Game/Level2/Scenes/Level2.tscn";
+    public partial class Portal : Area2D
+    {
+        [Export] public string _level2ScenePath = "res://Game/Level2/Scenes/Level2.tscn";
         [Export] public string _level3ScenePath = "res://Game/Level3/Scenes/Level3.tscn";
         [Export] public string _level4ScenePath = "res://Game/Level4/Scenes/Level4.tscn";
         [Export] public string _level5ScenePath = "res://Game/Level5/Scenes/Level5.tscn";
+        [Export] public string _level6ScenePath = "res://Game/Level6/Scenes/Level6.tscn";
+
+        [Export] public string _levelsCompletedScenePath = "res://Game/LevelsCompleted.tscn";
+
+		private AudioManager _audioManager;
+		private AudioStream portalSound;
 
         private string _nextLevelPath = "";
         
 		public override void _Ready()
         {
+			_audioManager = GetNode<AudioManager>("/root/AudioManager");
+			portalSound = GD.Load<AudioStream>("res://Audio/Sfx/fast-warp-in.wav");
+
             BodyEntered += OnBodyEntered; // Signal to detect when a body enters the portal area
         }
 
@@ -25,7 +34,7 @@ namespace UnicornGame
         {
             if (body is Player)
             {
-                GD.Print("Player entered the portal, transferring to Level 2.");
+                //GD.Print("Player entered the portal, transferring to Level 2.");
                 CallDeferred(nameof(PortalTransfer));
             }
         }
@@ -37,13 +46,38 @@ namespace UnicornGame
         /// </summary>
         public void PortalTransfer()
         {
-            Node currentScene = GetTree().CurrentScene;
+            GameLevels currentScene = (GameLevels)GetTree().CurrentScene;
 
             if (currentScene == null)
             {
                 GD.PrintErr("[ERROR] No active scene found!");
                 return;
             }
+            currentScene.CurrentLevelCompleted = true;
+            var ParentName = GetParent().Name;
+            GameState CurrentState = currentScene.CurrentGameState;
+            if (CurrentState != null)
+            {
+                GD.Print("Got CurrentGameState reference");
+            }
+            else
+            {
+                GD.Print("Could not get CurrentGameState reference");
+            }
+            Godot.Collections.Dictionary<string, Variant> SaveData = CurrentState.SaveGameState();
+            string JsonString = Json.Stringify(SaveData);
+            IGameSaver GameSaver = GetNode<GameLevels>($"/root/{ParentName}/").GameManager.GameSaver;
+            if (GameSaver != null)
+            {
+                GD.Print("Got Game Saver reference succesfully");
+            }
+            //GD.Print(GameSaver.DirectoryPath);
+            //GD.Print(GameSaver.FileName);
+            //GD.Print(JsonString);
+            GD.Print($"Current scene LoadedSaveFile value in Portal.cs: {currentScene.LoadedSaveFile}");
+            GameSaver.LoadedSaveFile = currentScene.LoadedSaveFile;
+            GD.Print($"Set GameSaver LoadedSaveFile value in Portal.cs: {GameSaver.LoadedSaveFile}");
+            GameSaver.WriteTextToFile(GameSaver.DirectoryPath, GameSaver.LoadedSaveFile, JsonString);
 
             int nextLevel = 0;
 
@@ -65,6 +99,12 @@ namespace UnicornGame
                 case "Level4":
                     nextLevel = 5;
                     break;
+                case "Level5":
+                    nextLevel = 6;
+                    break;
+                case "Level6":
+                    nextLevel = 7;
+                    break;
 
                 default:
                     GD.PrintErr("[ERROR] No active level found!");
@@ -76,7 +116,18 @@ namespace UnicornGame
 
             PackedScene nextSceneLevel = (PackedScene)GD.Load(_nextLevelPath);
 
-            GetTree().ChangeSceneToPacked(nextSceneLevel);
+            AudioManager.PlaySound2(portalSound);
+            //GetTree().ChangeSceneToPacked(nextSceneLevel);
+            GameLevels NextLevelInstance = (GameLevels)nextSceneLevel.Instantiate();
+            if (NextLevelInstance != null)
+            {
+                GD.Print("Succesfully got NextLevelInstance in LoadGame");
+            }
+            GD.Print($"Save file path in PortalTransfer() in Portal is {currentScene.LoadedSaveFile}");
+            NextLevelInstance.LoadedSaveFile = currentScene.LoadedSaveFile;
+            GetTree().Root.AddChild(NextLevelInstance);
+            GetTree().CurrentScene = NextLevelInstance;
+            currentScene.QueueFree();
         }
 
         /// <summary>
@@ -86,13 +137,15 @@ namespace UnicornGame
 		private string GetLevelScenePath(int nextLevel)
 		{
 			return nextLevel switch
-			{
-				2 => _level2ScenePath,
-				3 => _level3ScenePath,
-				4 => _level4ScenePath,
-				5 => _level5ScenePath,
-				_ => string.Empty
-			};
+            {
+                2 => _level2ScenePath,
+                3 => _level3ScenePath,
+                4 => _level4ScenePath,
+                5 => _level5ScenePath,
+                6 => _level6ScenePath,
+                7 => _levelsCompletedScenePath,
+                _ => string.Empty
+            };
 		}
 	}
 }

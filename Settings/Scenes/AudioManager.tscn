@@ -1,0 +1,60 @@
+[gd_scene load_steps=12 format=3 uid="uid://c7v665nc1pk2o"]
+
+[ext_resource type="Script" path="res://Settings/Scripts/AudioManager.cs" id="1_fkiwv"]
+[ext_resource type="AudioStream" uid="uid://ba1inot0edr36" path="res://Audio/Sfx/CircularSaw0.wav" id="2_d575x"]
+[ext_resource type="AudioStream" uid="uid://5mgqiurbdvn8" path="res://Audio/Sfx/WreckingBall0.wav" id="3_drrin"]
+[ext_resource type="AudioStream" uid="uid://ctuoaqhif1dx6" path="res://Audio/Sfx/SpikeTrap1.wav" id="4_e08to"]
+[ext_resource type="AudioStream" uid="uid://cyh1hput8xpc4" path="res://Audio/Sfx/BirdCannon0.wav" id="5_jdod2"]
+[ext_resource type="AudioStream" uid="uid://r2n5gngrdfom" path="res://Audio/Sfx/fast-warp-in.wav" id="6_vrj8d"]
+[ext_resource type="AudioStream" uid="uid://cpbx1mnko72gp" path="res://Audio/Sfx/walking-on-grass-quickly.mp3" id="7_b3yd6"]
+[ext_resource type="AudioStream" uid="uid://cd36mie5d3htm" path="res://Audio/Sfx/collectcoin.wav" id="8_8rpwj"]
+[ext_resource type="AudioStream" uid="uid://dwab8qqv3ixkj" path="res://Audio/Sfx/jumpgrunt.wav" id="9_rtnop"]
+[ext_resource type="AudioStream" uid="uid://d1xllkxkiow5j" path="res://Audio/Sfx/BirdProjectile0.wav" id="10_p4b0y"]
+[ext_resource type="AudioStream" uid="uid://1xhoeto4e78g" path="res://Audio/Sfx/WallSlide0.wav" id="11_f102q"]
+
+[node name="AudioManager" type="Control"]
+z_index = -4096
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_fkiwv")
+
+[node name="SFX" type="Node" parent="."]
+
+[node name="CircularSawHit" type="AudioStreamPlayer" parent="SFX"]
+stream = ExtResource("2_d575x")
+
+[node name="WreckingBallHit" type="AudioStreamPlayer" parent="SFX"]
+stream = ExtResource("3_drrin")
+
+[node name="SpikeTrapHit" type="AudioStreamPlayer" parent="SFX"]
+stream = ExtResource("4_e08to")
+
+[node name="BirdProjectileHit" type="AudioStreamPlayer" parent="SFX"]
+stream = ExtResource("5_jdod2")
+
+[node name="Portal" type="AudioStreamPlayer" parent="SFX"]
+stream = ExtResource("6_vrj8d")
+
+[node name="Walk" type="AudioStreamPlayer" parent="SFX"]
+stream = ExtResource("7_b3yd6")
+
+[node name="CollectEgg" type="AudioStreamPlayer" parent="SFX"]
+stream = ExtResource("8_8rpwj")
+
+[node name="Jump" type="AudioStreamPlayer" parent="SFX"]
+stream = ExtResource("9_rtnop")
+
+[node name="BirdProjectileFlyBy" type="AudioStreamPlayer" parent="SFX"]
+stream = ExtResource("10_p4b0y")
+
+[node name="WallSlide" type="AudioStreamPlayer" parent="SFX"]
+stream = ExtResource("11_f102q")
+volume_db = -9.541
+
+[node name="Music" type="Node" parent="."]
+
+[node name="bgMusic" type="AudioStreamPlayer" parent="Music"]

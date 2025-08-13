@@ -1,4 +1,4 @@
-[gd_scene load_steps=20 format=3 uid="uid://cvl311e3g082f"]
+[gd_scene load_steps=20 format=3 uid="uid://bun0lpg7lkpq6"]
 
 [ext_resource type="Script" path="res://Player/Scripts/Player.cs" id="1_lg3jx"]
 [ext_resource type="Texture2D" uid="uid://daub4x8scnsdc" path="res://Art/Character/BodyParts/UniHead.png" id="2_n7x20"]
@@ -1122,7 +1122,7 @@ script = ExtResource("10_on172")
 
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="CollisionDetector"]
 position = Vector2(-7, -132)
-polygon = PackedVector2Array(-77, -171, 66, -183, 161, -71, 128, 43, 135, 302, 125, 499, 51.2944, 495.947, 40, 395, -27, 402, -44, 492, -98, 490, -189, 86)
+polygon = PackedVector2Array(104, -224, 128, 43, 143, 238, 125, 499, -96, 501, -189, 86, -141, -220)
 
 [node name="WallChecker" type="RayCast2D" parent="."]
 scale = Vector2(5, 5)
@@ -1130,7 +1130,6 @@ target_position = Vector2(-68.2, 0.8)
 collision_mask = 15
 
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="."]
-visible = false
 position = Vector2(-15, 3)
 scale = Vector2(1.055, 1)
-polygon = PackedVector2Array(1.89573, -336, 107.109, -288, 153.555, -211, 147.867, -114, 105.213, -34, 140.284, 67, 145.024, 175, 122.275, 224, 133.649, 359, 56.872, 361, 42.654, 277, -20.8531, 270, -31.2796, 362, -94.7867, 362, -97.6303, 231, -117.536, 155, -179.147, 147, -156.398, 15, -174.408, -49, -136.493, -128, -132.701, -218, -99.5261, -276)
+polygon = PackedVector2Array(101.422, -355, 140.284, 67, 126.066, 364, -83.4123, 365, -175.355, -49, -134.597, -355)

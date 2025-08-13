@@ -1,16 +1,16 @@
 [gd_scene load_steps=3 format=3 uid="uid://cer6xkecwmj1s"]
 
 [ext_resource type="Script" path="res://Obstacles/Scripts/SpikeTrap.cs" id="1_avmjo"]
-
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_xvl3v"]
-size = Vector2(97, 121)
+[ext_resource type="Texture2D" uid="uid://cp0eqow1xw1rg" path="res://Art/Obstacles/SackOfCanes.png" id="2_umnj2"]
 
 [node name="SpikeTrap" type="StaticBody2D" groups=["Obstacles"]]
-collision_layer = 8
+collision_layer = 40
 collision_mask = 4
 script = ExtResource("1_avmjo")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
+scale = Vector2(0.2, 0.2)
+texture = ExtResource("2_umnj2")
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-shape = SubResource("RectangleShape2D_xvl3v")
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="."]
+polygon = PackedVector2Array(-31, 10, -74, -137, -45, -21, -48, 76, -86, 116, -125, 133, -144, 193, 111, 197, 104, 157, 60, 120, 43, 64, 11, 36, 52, -156, 8, 20, -2, 16, 22, -155, -11, 14, -12, -162, -19, 14, -40, -186, -25, 16)

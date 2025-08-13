@@ -5,6 +5,7 @@ namespace UnicornGame
 {
     public partial class Pendulum : RigidBody2D
     {
+        [Export] private float _torqueImpulseMagnitude = 32000;
         private Node _rootNode;
         private StaticBody2D _pendulumHolder;
         private CollisionShape2D _ball;
@@ -22,7 +23,7 @@ namespace UnicornGame
         public override void _Ready()
         {
             Gravity = ProjectSettings.GetSetting("physics/2d/default_gravity").AsSingle();
-            _pendulumHolder = GetNode<StaticBody2D>("/root/PendulumHolder");
+            _pendulumHolder = (StaticBody2D)GetParent();
             if (_pendulumHolder == null)
             {
                 GD.Print("Pendulum holder is null");
@@ -41,7 +42,6 @@ namespace UnicornGame
         }
         public override void _PhysicsProcess(double delta)
         {
-            //UpdateRotation();
             UpdateRotation();
         }
         public void CalculateInertia()
@@ -61,12 +61,12 @@ namespace UnicornGame
             if (MovingClockwise)
             {
                 //GD.Print("Clockwise");
-                ApplyTorqueImpulse(-32000);
+                ApplyTorqueImpulse(-_torqueImpulseMagnitude);
             }
             if (!MovingClockwise)
             {
                 //GD.Print("Clockwise");
-                ApplyTorqueImpulse(32000);
+                ApplyTorqueImpulse(_torqueImpulseMagnitude);
                 //GD.Print(TorqueI);
             }
         }
