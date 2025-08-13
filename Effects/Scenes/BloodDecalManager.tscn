@@ -1,7 +1,7 @@
 [gd_scene load_steps=5 format=3 uid="uid://bcwxywefha7cb"]
 
 [ext_resource type="Script" path="res://Effects/Scripts/BloodDecalManager.cs" id="1_wvqav"]
-[ext_resource type="Texture2D" uid="uid://cjhh0bq4448mj" path="res://Art/Effects/BloodStain.png" id="2_jhs4i"]
+[ext_resource type="Texture2D" uid="uid://bgx0pt7idam55" path="res://Art/Effects/BloodTexture.png" id="2_kyh6a"]
 
 [sub_resource type="QuadMesh" id="QuadMesh_0f3dl"]
 size = Vector2(10, 10)
@@ -12,8 +12,8 @@ mesh = SubResource("QuadMesh_0f3dl")
 [node name="BloodDecalManager" type="Node2D" node_paths=PackedStringArray("MultiMeshInstance")]
 script = ExtResource("1_wvqav")
 MultiMeshInstance = NodePath("MultiMeshInstance2D")
-BloodTexture = ExtResource("2_jhs4i")
+BloodTexture = ExtResource("2_kyh6a")
 
 [node name="MultiMeshInstance2D" type="MultiMeshInstance2D" parent="."]
 multimesh = SubResource("MultiMesh_lf3ap")
-texture = ExtResource("2_jhs4i")
+texture = ExtResource("2_kyh6a")

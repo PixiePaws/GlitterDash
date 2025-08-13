@@ -58,4 +58,10 @@ public partial class BloodDecalManager : Node2D
         _DecalCount++;
         //GD.Print("Adding decal at ", position, " to index ", index, ". The current decal count is ", _DecalCount);
     }
+    public void ClearBlood()
+    {
+        for (int i = 0; i < MaxDecals; i++)
+            _MultiMesh.SetInstanceTransform2D(i, new Transform2D());
+        _DecalCount = 0;
+    }
 }
