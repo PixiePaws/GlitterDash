@@ -109,7 +109,7 @@ position = Vector2(-9.66797, 127.067)
 scale = Vector2(0.999849, 0.999849)
 
 [node name="UniLLeg" parent="PlayerCharacter/PartsSkeletonContainer/Parts" index="5"]
-position = Vector2(6.99023, 118.259)
+position = Vector2(6.98828, 118.259)
 scale = Vector2(0.999851, 0.999851)
 
 [node name="Head" parent="PlayerCharacter/PartsSkeletonContainer/Skeleton2D/Base/Body" index="1"]
