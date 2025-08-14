@@ -49,7 +49,13 @@ namespace UnicornGame
 		}
 		private void OnContinueButtonPressed()
 		{
-
+			PackedScene SelectSaveScene = ResourceLoader.Load<PackedScene>(_selectSaveScenePath);
+			LoadGame LoadGameScene = (LoadGame)SelectSaveScene.Instantiate();
+			AddChild(LoadGameScene);
+			string LastSavedSavePath = LoadGameScene.GetLastSavedSaveFilePath();
+			GD.Print($"OnContinueButtonPressed(), LastSavedSavePath: {LastSavedSavePath}");
+			Godot.Collections.Dictionary<string, Variant> SaveFileDict = LoadGameScene.GetSaveFileAsDictionary(LastSavedSavePath);
+			LoadGameScene.ChangeSceneToNextLevel(SaveFileDict, LastSavedSavePath);
 		}
 		private void OnNewGameButtonPressed()
 		{

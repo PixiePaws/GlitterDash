@@ -49,17 +49,17 @@ namespace UnicornGame
             var ControlNode = GetNode<Control>("LoadControl");
             if (ControlNode != null)
             {
-                GD.Print("Couldn't get control node");
+                GD.Print("Successfully got control node");
             }
             var MarginNode = ControlNode.GetNode<MarginContainer>("TabBar/MarginContainer");
             if (MarginNode != null)
             {
-                GD.Print("Couldn't get margin node node");
+                GD.Print("Successfully got margin node");
             }
             var Vbox = MarginNode.GetNode<VBoxContainer>("LoadVBoxContainer");
             if (Vbox != null)
             {
-                GD.Print("Couldn't get vbox node");
+                GD.Print("Successfully got vbox node");
             }
             /*var Vbox = GetNode<VBoxContainer>("Control/MarginContainer/VboxContainer");
             if (Vbox != null)
@@ -74,11 +74,11 @@ namespace UnicornGame
             Godot.Collections.Array<Node> tempArray = Vbox.GetChildren();
             foreach (Node node in tempArray)
             {
-                GD.Print("Inside for loop");
+                //GD.Print("Inside for loop");
                 if (node is Button button)
                 {
                     _buttonList.Add(button);
-                    GD.Print("Added button to list");
+                    //GD.Print("Added button to list");
                 }
             }
             GD.Print("Button list populated");
@@ -139,7 +139,7 @@ namespace UnicornGame
         {
             if (!File.Exists(FilePath))
             {
-                GD.Print("LoadGame OnButtonPressed() no save file at FilePath exists");
+                GD.Print("LoadGame GetSaveFileAsDictionary() no save file at FilePath exists");
             }
             Godot.Collections.Dictionary<string, Variant> LoadedData = new Godot.Collections.Dictionary<string, Variant>();
             using var SaveFile = Godot.FileAccess.Open(FilePath, Godot.FileAccess.ModeFlags.Read);
@@ -184,10 +184,11 @@ namespace UnicornGame
         {
             int SaveFileAmount = DirAccess.GetFilesAt(_directoryPath).Length;
             string[] TempArray = new string[SaveFileAmount];
-            string[] TimeStampArray = new string[SaveFileAmount];
+            //string[] TimeStampArray = new string[SaveFileAmount];
             TempArray = DirAccess.GetFilesAt(_directoryPath);
             for (int i = 0; i < _buttonList.Count; i++)
             {
+                GD.Print($"SetButtonVisibilityAndText for loop, i: {i}");
                 if (i > SaveFileAmount - 1)
                 {
                     //_buttonList[i].Disabled = true;
@@ -199,9 +200,13 @@ namespace UnicornGame
                 else
                 {
                     string SaveFilePath = GetSaveFilePath(TempArray[i]);
+                    //GD.Print($"SaveFilePath: {SaveFilePath}");
                     var GameDataDict = GetSaveFileAsDictionary(SaveFilePath);
-                    TimeStampArray = GetKeysArrayFromSave(SaveFileAmount, "TimeStamp", GameDataDict);
-                    _buttonList[i].Text = $"{TempArray[i]} {TimeStampArray[i]}";
+                    //GD.Print($"GameDataDict: {GameDataDict}");
+                    string TimeStamp = GetLatestTimeStampFromSave(GameDataDict);
+                    //GD.Print($"SetButtonVisibilityAndText() TimeStamp: {TimeStamp}");
+                    _buttonList[i].Text = $"{TempArray[i]} {TimeStamp}";
+                    //GD.Print($"_buttonList[i].Text: {_buttonList[i].Text}, TempArray[i]: {TempArray[i]}, TimeStamp: {TimeStamp} ");
                 }
             }
         }
@@ -235,9 +240,9 @@ namespace UnicornGame
             return LevelPathArray;
         }
         //Returns an array of the specified key DataKey's values on the second layer of the dictionary specified.
-        public string[] GetKeysArrayFromSave(int SaveFileAmount, string DataKey, Godot.Collections.Dictionary<string, Variant> GameDataDict)
+        public string[] GetKeysArrayFromSave(string DataKey, Godot.Collections.Dictionary<string, Variant> GameDataDict)
         {
-            string[] KeysArray = new string[SaveFileAmount];
+            string[] KeysArray = new string[GameDataDict.Keys.Count];
             int index = 0;
             foreach (var Key in GameDataDict.Keys)
             {
@@ -249,6 +254,26 @@ namespace UnicornGame
                 }
             }
             return KeysArray;
+        }
+        public string GetLatestTimeStampFromSave(Godot.Collections.Dictionary<string, Variant> GameDataDict)
+        {
+            string TimeStamp = "";
+            long UnixTime = 0;
+            foreach (var Key in GameDataDict.Keys)
+            {
+                GD.Print($"GetTimeStampFromSave() Key: {Key}");
+                var LevelDataDict = (Godot.Collections.Dictionary<string, Variant>)GameDataDict[Key];
+                if (LevelDataDict.ContainsKey("UnixTime"))
+                {
+                    if ((long)LevelDataDict["UnixTime"] > UnixTime)
+                    {
+                        UnixTime = (long)LevelDataDict["UnixTime"];
+                        TimeStamp = (string)LevelDataDict["TimeStamp"];
+                        GD.Print($"UnixTime: {UnixTime}, TimeStamp: {TimeStamp}");
+                    }
+                }
+            }
+            return TimeStamp;
         }
         //Checks the save file found in SaveFilePath for the last completed level and instantiates the next uncompleted level
         public void ChangeSceneToNextLevel(Godot.Collections.Dictionary<string, Variant> GameData, string SaveFilePath)
@@ -305,7 +330,39 @@ namespace UnicornGame
             CurrentScene.QueueFree();
             GetTree().Root.AddChild(NextLevelInstance);
             GetTree().CurrentScene = NextLevelInstance;
-        } 
+        }
+        public string GetLastSavedSaveFilePath()
+        {
+            long UnixTime = 0;
+            string SaveFilePath = "";
+            Godot.Collections.Dictionary<string, Variant> GameDataDict;
+            Godot.Collections.Dictionary<string, Variant> LevelDataDict;
+            foreach (string SaveFile in _saveFileList)
+            {
+                string TempSaveFilePath = GetSaveFilePath(SaveFile);
+                GD.Print($"TempSaveFilePath: {TempSaveFilePath}");
+                GameDataDict = GetSaveFileAsDictionary(TempSaveFilePath);
+                GD.Print($"GameDataDict in LoadGame GetLastSavedSaveFilePath(): {GameDataDict}");
+                foreach (var Key in GameDataDict.Keys)
+                {
+                    GD.Print($"GetLastSavedSaveFilePath() TempSaveFilePath: {TempSaveFilePath}, Key: {Key}");
+                    LevelDataDict = (Godot.Collections.Dictionary<string, Variant>)GameDataDict[Key];
+                    //GD.Print($"LevelDataDict: {LevelDataDict}");
+                    if (LevelDataDict.ContainsKey("UnixTime") && (long)LevelDataDict["UnixTime"] > UnixTime)
+                    {
+                        UnixTime = (long)LevelDataDict["UnixTime"];
+                        SaveFilePath = TempSaveFilePath;
+                        GD.Print($"GetLastSavedSaveFilePath() Key: {Key} UnixTime: {UnixTime}");
+                    }
+                    else
+                    {
+                        GD.Print($"GetLastSavedSaveFilePath() loop else Key: {Key} UnixTime: {UnixTime}");
+                    }
+                    GD.Print($"SaveFilePath: {SaveFilePath}");
+                }
+            }
+            return SaveFilePath;
+        }
     }
 }
 
