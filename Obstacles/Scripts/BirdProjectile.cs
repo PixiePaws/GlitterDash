@@ -17,7 +17,6 @@ namespace UnicornGame
         [Export] private float _timerWaitTime;
         public override void _Ready()
         {
-            //_impulseVector = new Vector2(-50.0f, 0.0f);
             _audioManager = GetNode<AudioManager>("/root/AudioManager");
             _collisionDetector = GetNode<Area2D>("CollisionDetector");
             _collisionDetector.BodyEntered += OnCollisionDetected;
@@ -26,9 +25,9 @@ namespace UnicornGame
             _sprite = GetNode<Sprite2D>("Sprite2D");
             if (_sprite != null)
             {
-                GD.Print("Succesfully got sprite reference in bird projectile");
+                //GD.Print("Succesfully got sprite reference in bird projectile");
             }
-            GD.Print($"Bird projectile texture: {_sprite.Texture}");
+            //GD.Print($"Bird projectile texture: {_sprite.Texture}");
             _spriteWingsUpPath = "res://Art/Obstacles/Bird_WingUp.png";
             _spriteWingsDownPath = "res://Art/Obstacles/Bird_WingDown.png";
             _spriteWingsUp = ResourceLoader.Load<Texture2D>(_spriteWingsUpPath);
@@ -54,14 +53,15 @@ namespace UnicornGame
         }
         public void OnCollisionDetected(Node node)
         {
+            //GD.Print($"BirdProjectile OnCollisionDetected was triggered by {node}, name: {node.Name}, parent: {node.GetParent()}");
             QueueFree();
         }
         public void OnSoundDetected(Node node)
         {
-            GD.Print($"OnCollisionDetected sound in BirdProjectile.cs was triggered by {node}");
+            //GD.Print($"OnCollisionDetected sound in BirdProjectile.cs was triggered by {node}");
             if (node is Player player)
             {
-                GD.Print("Playing _birdProjectileFlyBy");
+                //GD.Print("Playing _birdProjectileFlyBy");
                 _audioManager._birdProjectileFlyBy.Play();
             }
         }

@@ -17,7 +17,7 @@ namespace UnicornGame
             _birdProjectileScene = ResourceLoader.Load<PackedScene>(_birdProjectileScenePath);
             if (_birdProjectileScene != null)
             {
-                GD.Print("Succesfully got bird projectile scene");
+                //GD.Print("Succesfully got bird projectile scene");
             }
             _shootTimer = new Timer();
             AddChild(_shootTimer);
@@ -34,7 +34,7 @@ namespace UnicornGame
             AddChild(Bird);
             if (Bird != null)
             {
-                GD.Print("Successfully instantiated bird projectile");
+                //GD.Print("Successfully instantiated bird projectile");
             }
         }
         public void StartTimer()
