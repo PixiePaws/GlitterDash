@@ -28,8 +28,10 @@ layout_mode = 1
 anchors_preset = -1
 anchor_right = 1.0
 anchor_bottom = 1.0
+offset_left = 400.0
 offset_top = 100.0
-offset_bottom = -649.0
+offset_right = -400.0
+grow_horizontal = 0
 
 [node name="LoadVBoxContainer" type="VBoxContainer" parent="LoadControl/TabBar/MarginContainer"]
 layout_mode = 2
@@ -55,3 +57,20 @@ offset_left = -76.0
 offset_bottom = 62.0
 grow_horizontal = 0
 text = "Quit"
+
+[node name="MarginContainer2" type="MarginContainer" parent="LoadControl/TabBar"]
+visible = false
+layout_mode = 1
+anchors_preset = -1
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 1320.0
+offset_top = 100.0
+offset_right = -200.0
+
+[node name="DeleteVBoxContainer" type="VBoxContainer" parent="LoadControl/TabBar/MarginContainer2"]
+layout_mode = 2
+
+[node name="Button" type="Button" parent="LoadControl/TabBar/MarginContainer2/DeleteVBoxContainer"]
+layout_mode = 2
+text = "gg"

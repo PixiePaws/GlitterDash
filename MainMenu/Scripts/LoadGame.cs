@@ -14,6 +14,7 @@ namespace UnicornGame
         private string _directoryPath;
         private string _defaultLevelScenePath = "res://Game/Level1/Scenes/Level1.tscn";
         private Button _quitButton;
+        private string _delButtonSpritePath = "res://Art/MainMenu/TrashCan3.png";
         public override void _Ready()
         {
             _quitButton = GetNode<Button>("LoadControl/TabBar/QuitButton");
@@ -40,6 +41,7 @@ namespace UnicornGame
             CheckListLengthAndContents();
             ConnectButtonSignals();
             SetButtonVisibilityAndText();
+            InstantiateDeleteButtons();
             GetAllLevelPaths();
         }
         public void PopulateButtonList()
@@ -362,6 +364,24 @@ namespace UnicornGame
                 }
             }
             return SaveFilePath;
+        }
+        public void InstantiateDeleteButtons()
+        {
+            _delButtonSpritePath = "res://Art/MainMenu/TrashCan3.png";
+            Texture2D DelButtonSprite = ResourceLoader.Load<Texture2D>(_delButtonSpritePath);
+            var DeleteVboxContainer = GetNode<VBoxContainer>("LoadControl/TabBar/MarginContainer2/DeleteVBoxContainer");
+            for (int i = 0; i < _buttonList.Count; i++)
+            {
+                TextureButton DelButton = new TextureButton();
+                DelButton.TextureNormal = DelButtonSprite;
+                DelButton.Name = $"DeleteButton{i + 1}";
+                DelButton.Pressed += OnDeleteButtonPressed;
+                DeleteVboxContainer.AddChild(DelButton);
+            }
+        }
+        public void OnDeleteButtonPressed()
+        {
+
         }
     }
 }
