@@ -1,19 +1,11 @@
 [gd_scene format=3 uid="uid://dypdrx4qolpui"]
 
-[node name="SavesFullPrompt" type="CanvasLayer"]
-
-[node name="Control" type="Control" parent="."]
-layout_mode = 3
-anchors_preset = 0
-offset_right = 40.0
-offset_bottom = 40.0
-
-[node name="Panel" type="Panel" parent="Control"]
-layout_mode = 0
-offset_right = 40.0
-offset_bottom = 40.0
-
-[node name="TextureButton" type="TextureButton" parent="Control/Panel"]
-layout_mode = 0
-offset_right = 40.0
-offset_bottom = 40.0
+[node name="SavesFullPrompt" type="ConfirmationDialog"]
+title = "Save slots full!"
+position = Vector2i(760, 440)
+size = Vector2i(400, 200)
+visible = true
+content_scale_mode = 2
+dialog_text = "
+Delete an existing save file before starting a new game."
+dialog_autowrap = true

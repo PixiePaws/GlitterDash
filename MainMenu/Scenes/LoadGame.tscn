@@ -1,9 +1,15 @@
-[gd_scene load_steps=2 format=3 uid="uid://crbd20u7bkgyj"]
+[gd_scene load_steps=3 format=3 uid="uid://crbd20u7bkgyj"]
 
 [ext_resource type="Script" path="res://MainMenu/Scripts/LoadGame.cs" id="1_yl28p"]
+[ext_resource type="PackedScene" uid="uid://dypdrx4qolpui" path="res://MainMenu/Scenes/SavesFullPrompt.tscn" id="2_sboam"]
 
 [node name="LoadGame" type="CanvasLayer"]
 script = ExtResource("1_yl28p")
+
+[node name="SavesFullPrompt" parent="." instance=ExtResource("2_sboam")]
+mode = 3
+content_scale_mode = 1
+content_scale_aspect = 1
 
 [node name="LoadControl" type="Control" parent="."]
 layout_mode = 3

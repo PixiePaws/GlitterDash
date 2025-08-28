@@ -14,15 +14,20 @@ namespace UnicornGame
         private string _directoryPath;
         private string _defaultLevelScenePath = "res://Game/Level1/Scenes/Level1.tscn";
         private Button _quitButton;
+        private Button _okButton;
+        private Button _cancelButton;
+        private ConfirmationDialog _savesFullPrompt;
         private string _delButtonSpritePath = "res://Art/MainMenu/TrashCan3.png";
         public override void _Ready()
         {
+            _savesFullPrompt = GetNode<ConfirmationDialog>("SavesFullPrompt");
+            _okButton = _savesFullPrompt.GetOkButton();
+            _cancelButton = _savesFullPrompt.GetCancelButton();
             _quitButton = GetNode<Button>("LoadControl/TabBar/QuitButton");
             if (_quitButton != null)
             {
                 GD.Print("Got Quit Button reference in LoadGame");
             }
-            _quitButton.Pressed += OnQuitButtonPressed;
             string ParentName = GetParent().Name;
             //GD.Print($"Parent name in LoadGame _Ready() :{ParentName}");
             /*IGameSaver GameSaver = GetNode<GameLevels>($"/root/../").GameManager.GameSaver;
@@ -96,6 +101,9 @@ namespace UnicornGame
         //Connects the button signals to OnButtonPressed(ButtonCopy), which carries the information of the button instance, which was pressed.
         public void ConnectButtonSignals()
         {
+            _quitButton.Pressed += OnQuitButtonPressed;
+            _okButton.Pressed += OnOkButtonPressed;
+            _cancelButton.Pressed += OnCancelButtonPressed;
             for (int i = 0; i < _saveFileList.Length; i++)
             {
                 if (_buttonList[i] is Button button)
@@ -382,6 +390,18 @@ namespace UnicornGame
         public void OnDeleteButtonPressed()
         {
 
+        }
+        public void OnOkButtonPressed()
+        {
+            _savesFullPrompt.Visible = false;
+        }
+        public void OnCancelButtonPressed()
+        {
+            QueueFree();
+        }
+        public bool SavesFullPromptVisibility
+        {
+            set { _savesFullPrompt.Visible = value; }
         }
     }
 }
