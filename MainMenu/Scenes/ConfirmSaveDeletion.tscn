@@ -1,0 +1,61 @@
+[gd_scene format=3 uid="uid://dnmn2ifo0332w"]
+
+[node name="ConfirmSaveDeletion" type="CanvasLayer"]
+
+[node name="Control" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Panel" type="Panel" parent="Control"]
+layout_mode = 1
+anchors_preset = -1
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 500.0
+offset_top = 400.0
+offset_right = -500.0
+offset_bottom = -400.0
+
+[node name="MarginContainer" type="MarginContainer" parent="Control/Panel"]
+layout_mode = 1
+anchors_preset = -1
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 50.0
+offset_top = 50.0
+offset_right = -50.0
+offset_bottom = -50.0
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Control/Panel/MarginContainer"]
+layout_mode = 2
+
+[node name="RichTextLabel" type="RichTextLabel" parent="Control/Panel/MarginContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+bbcode_enabled = true
+text = "
+[center]Are you sure you want to delete the Save file?[/center]"
+
+[node name="HBoxContainer" type="HBoxContainer" parent="Control/Panel/MarginContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_constants/separation = 400
+alignment = 1
+
+[node name="Button" type="Button" parent="Control/Panel/MarginContainer/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+text = "Delete"
+
+[node name="Button2" type="Button" parent="Control/Panel/MarginContainer/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+text = "Cancel"
+
+[node name="MarginContainer2" type="MarginContainer" parent="Control/Panel"]
+layout_mode = 1
+anchors_preset = -1
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = 230.0
