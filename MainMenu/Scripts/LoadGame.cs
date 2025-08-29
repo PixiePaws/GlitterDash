@@ -17,10 +17,12 @@ namespace UnicornGame
         private Button _okButton;
         private Button _cancelButton;
         private ConfirmationDialog _savesFullPrompt;
+        private Prompt _confirmSaveDeletion;
         private string _delButtonSpritePath = "res://Art/MainMenu/TrashCan3.png";
         public override void _Ready()
         {
             _savesFullPrompt = GetNode<ConfirmationDialog>("SavesFullPrompt");
+            _confirmSaveDeletion = GetNode<Prompt>("ConfirmSaveDeletion");
             _okButton = _savesFullPrompt.GetOkButton();
             _cancelButton = _savesFullPrompt.GetCancelButton();
             _quitButton = GetNode<Button>("LoadControl/TabBar/QuitButton");
@@ -383,13 +385,13 @@ namespace UnicornGame
                 TextureButton DelButton = new TextureButton();
                 DelButton.TextureNormal = DelButtonSprite;
                 DelButton.Name = $"DeleteButton{i + 1}";
-                DelButton.Pressed += OnDeleteButtonPressed;
                 DeleteVboxContainer.AddChild(DelButton);
+                DelButton.Pressed += OnDeleteButtonPressed;
             }
         }
         public void OnDeleteButtonPressed()
         {
-
+            _confirmSaveDeletion.Visible = true;
         }
         public void OnOkButtonPressed()
         {

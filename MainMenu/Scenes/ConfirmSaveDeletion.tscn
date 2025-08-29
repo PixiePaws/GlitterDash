@@ -1,6 +1,11 @@
-[gd_scene format=3 uid="uid://dnmn2ifo0332w"]
+[gd_scene load_steps=2 format=3 uid="uid://dnmn2ifo0332w"]
 
-[node name="ConfirmSaveDeletion" type="CanvasLayer"]
+[ext_resource type="Script" path="res://MainMenu/Scripts/Prompt.cs" id="1_bqauo"]
+
+[node name="ConfirmSaveDeletion" type="CanvasLayer" node_paths=PackedStringArray("_okButton", "_cancelButton")]
+script = ExtResource("1_bqauo")
+_okButton = NodePath("Control/Panel/MarginContainer/VBoxContainer/HBoxContainer/DeleteButton")
+_cancelButton = NodePath("Control/Panel/MarginContainer/VBoxContainer/HBoxContainer/CancelButton")
 
 [node name="Control" type="Control" parent="."]
 layout_mode = 3
@@ -45,11 +50,11 @@ layout_mode = 2
 theme_override_constants/separation = 400
 alignment = 1
 
-[node name="Button" type="Button" parent="Control/Panel/MarginContainer/VBoxContainer/HBoxContainer"]
+[node name="DeleteButton" type="Button" parent="Control/Panel/MarginContainer/VBoxContainer/HBoxContainer"]
 layout_mode = 2
 text = "Delete"
 
-[node name="Button2" type="Button" parent="Control/Panel/MarginContainer/VBoxContainer/HBoxContainer"]
+[node name="CancelButton" type="Button" parent="Control/Panel/MarginContainer/VBoxContainer/HBoxContainer"]
 layout_mode = 2
 text = "Cancel"
 

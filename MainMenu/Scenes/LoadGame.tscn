@@ -1,13 +1,15 @@
-[gd_scene load_steps=3 format=3 uid="uid://crbd20u7bkgyj"]
+[gd_scene load_steps=4 format=3 uid="uid://crbd20u7bkgyj"]
 
 [ext_resource type="Script" path="res://MainMenu/Scripts/LoadGame.cs" id="1_yl28p"]
 [ext_resource type="PackedScene" uid="uid://dypdrx4qolpui" path="res://MainMenu/Scenes/SavesFullPrompt.tscn" id="2_sboam"]
+[ext_resource type="PackedScene" uid="uid://dnmn2ifo0332w" path="res://MainMenu/Scenes/ConfirmSaveDeletion.tscn" id="3_68dir"]
 
 [node name="LoadGame" type="CanvasLayer"]
 script = ExtResource("1_yl28p")
 
 [node name="SavesFullPrompt" parent="." instance=ExtResource("2_sboam")]
 mode = 3
+visible = false
 content_scale_mode = 1
 content_scale_aspect = 1
 
@@ -65,7 +67,6 @@ grow_horizontal = 0
 text = "Quit"
 
 [node name="MarginContainer2" type="MarginContainer" parent="LoadControl/TabBar"]
-visible = false
 layout_mode = 1
 anchors_preset = -1
 anchor_right = 1.0
@@ -77,6 +78,5 @@ offset_right = -200.0
 [node name="DeleteVBoxContainer" type="VBoxContainer" parent="LoadControl/TabBar/MarginContainer2"]
 layout_mode = 2
 
-[node name="Button" type="Button" parent="LoadControl/TabBar/MarginContainer2/DeleteVBoxContainer"]
-layout_mode = 2
-text = "gg"
+[node name="ConfirmSaveDeletion" parent="." instance=ExtResource("3_68dir")]
+visible = false

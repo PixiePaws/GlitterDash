@@ -60,6 +60,9 @@ namespace UnicornGame
 		private void OnNewGameButtonPressed()
 		{
 			string SaveFileName;
+			PackedScene SelectSaveScene = ResourceLoader.Load<PackedScene>(_selectSaveScenePath);
+			LoadGame LoadGameScene = (LoadGame)SelectSaveScene.Instantiate();
+			AddChild(LoadGameScene);
 			PackedScene selectLevelScene = ResourceLoader.Load<PackedScene>(_levelScenePath);
 			if (selectLevelScene != null)
 			{
