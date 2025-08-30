@@ -14,14 +14,23 @@ namespace UnicornGame
         private string _directoryPath;
         private string _defaultLevelScenePath = "res://Game/Level1/Scenes/Level1.tscn";
         private Button _quitButton;
+        private Button _okButton;
+        private Button _cancelButton;
+        private ConfirmationDialog _savesFullPrompt;
+        private Prompt _confirmSaveDeletion;
+        private string _delButtonSpritePath = "res://Art/MainMenu/TrashCan3.png";
+        [Export] private int _saveSlotsAmount = 3;
         public override void _Ready()
         {
+            _savesFullPrompt = GetNode<ConfirmationDialog>("SavesFullPrompt");
+            _confirmSaveDeletion = GetNode<Prompt>("ConfirmSaveDeletion");
+            _okButton = _savesFullPrompt.GetOkButton();
+            _cancelButton = _savesFullPrompt.GetCancelButton();
             _quitButton = GetNode<Button>("LoadControl/TabBar/QuitButton");
             if (_quitButton != null)
             {
                 GD.Print("Got Quit Button reference in LoadGame");
             }
-            _quitButton.Pressed += OnQuitButtonPressed;
             string ParentName = GetParent().Name;
             //GD.Print($"Parent name in LoadGame _Ready() :{ParentName}");
             /*IGameSaver GameSaver = GetNode<GameLevels>($"/root/../").GameManager.GameSaver;
@@ -40,7 +49,22 @@ namespace UnicornGame
             CheckListLengthAndContents();
             ConnectButtonSignals();
             SetButtonVisibilityAndText();
+            InstantiateDeleteButtons();
             GetAllLevelPaths();
+            //FileUtil.GetSaveFilesAmount();
+        }
+
+        public string DirectoryPath
+        {
+            get { return _directoryPath; }
+        }
+        public int SaveSlotsAmount
+        {
+            get { return _saveSlotsAmount; }
+        }
+        public ConfirmationDialog SavesFullPrompt
+        {
+            get { return _savesFullPrompt; }
         }
         public void PopulateButtonList()
         {
@@ -94,6 +118,9 @@ namespace UnicornGame
         //Connects the button signals to OnButtonPressed(ButtonCopy), which carries the information of the button instance, which was pressed.
         public void ConnectButtonSignals()
         {
+            _quitButton.Pressed += OnQuitButtonPressed;
+            _okButton.Pressed += OnOkButtonPressed;
+            _cancelButton.Pressed += OnCancelButtonPressed;
             for (int i = 0; i < _saveFileList.Length; i++)
             {
                 if (_buttonList[i] is Button button)
@@ -213,7 +240,8 @@ namespace UnicornGame
         //Destroys this scene when quit button is pressed.
         public void OnQuitButtonPressed()
         {
-            QueueFree();
+            //QueueFree();
+            Visible = false;
         }
         //Returns an array of the level paths for the levels found in the file system.
         public Godot.Collections.Array GetAllLevelPaths()
@@ -362,6 +390,40 @@ namespace UnicornGame
                 }
             }
             return SaveFilePath;
+        }
+        public void InstantiateDeleteButtons()
+        {
+            _delButtonSpritePath = "res://Art/MainMenu/TrashCan3.png";
+            Texture2D DelButtonSprite = ResourceLoader.Load<Texture2D>(_delButtonSpritePath);
+            var DeleteVboxContainer = GetNode<VBoxContainer>("LoadControl/TabBar/MarginContainer2/DeleteVBoxContainer");
+            for (int i = 0; i < _buttonList.Count; i++)
+            {
+                TextureButton DelButton = new TextureButton();
+                DelButton.TextureNormal = DelButtonSprite;
+                DelButton.Name = $"DeleteButton{i + 1}";
+                DeleteVboxContainer.AddChild(DelButton);
+                DelButton.Pressed += OnDeleteButtonPressed;
+            }
+        }
+        public void OnDeleteButtonPressed()
+        {
+            _confirmSaveDeletion.Visible = true;
+        }
+        public void DeleteSaveFile(string FilePath)
+        {
+            GD.Print("Save File Deleted");
+        }
+        public void OnOkButtonPressed()
+        {
+            _savesFullPrompt.Visible = false;
+        }
+        public void OnCancelButtonPressed()
+        {
+            Visible = false;
+        }
+        public bool SavesFullPromptVisibility
+        {
+            set { _savesFullPrompt.Visible = value; }
         }
     }
 }

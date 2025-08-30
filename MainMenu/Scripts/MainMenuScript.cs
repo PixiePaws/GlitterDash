@@ -13,6 +13,7 @@ namespace UnicornGame
 		private string _levelScenePath = "res://Game/Level1/Scenes/Level1.tscn"; // Path to the level scene
 		private string _settingsScenePath = "res://Settings/Scenes/Settings.tscn"; // Path to the settings scene
 		private string _selectSaveScenePath = "res://MainMenu/Scenes/LoadGame.tscn";
+		private LoadGame _loadGameScene;
 		private Button _quitButton;
 		private Button _newGameButton;
 		private Button _loadGameButton;
@@ -28,6 +29,8 @@ namespace UnicornGame
 
 			DisplayServer.WindowSetMode(DisplayServer.WindowMode.Fullscreen);
 
+			InstantiateLoadGameScene();
+
 			_quitButton = GetNode<Button>("Control/MarginContainer/VBoxContainer/QuitButton");
 			_quitButton.Pressed += OnQuitButtonPressed;
 
@@ -42,6 +45,8 @@ namespace UnicornGame
 
 			_continueButton = GetNode<Button>("Control/MarginContainer/VBoxContainer/ContinueButton");
 			_continueButton.Pressed += OnContinueButtonPressed;
+
+
 		}
 		private void OnQuitButtonPressed()
 		{
@@ -59,22 +64,39 @@ namespace UnicornGame
 		}
 		private void OnNewGameButtonPressed()
 		{
-			string SaveFileName;
-			PackedScene selectLevelScene = ResourceLoader.Load<PackedScene>(_levelScenePath);
-			if (selectLevelScene != null)
+			int SaveFileAmount = FileUtil.GetSaveFilesAmount(_loadGameScene.DirectoryPath);
+			GD.Print($"Save file amount in MainMenuScript NewGameButton.Pressed: {SaveFileAmount}");
+			if (SaveFileAmount >= _loadGameScene.SaveSlotsAmount)
 			{
-				GetTree().ChangeSceneToPacked(selectLevelScene);
+				_loadGameScene.Visible = true;
+				_loadGameScene.SavesFullPrompt.Visible = true;
 			}
 			else
 			{
-				GD.Print("Level selection scene not found");
+				/*PackedScene SelectSaveScene = ResourceLoader.Load<PackedScene>(_selectSaveScenePath);
+				LoadGame LoadGameScene = (LoadGame)SelectSaveScene.Instantiate();
+				AddChild(LoadGameScene);*/
+				PackedScene selectLevelScene = ResourceLoader.Load<PackedScene>(_levelScenePath);
+				if (selectLevelScene != null)
+				{
+					GetTree().ChangeSceneToPacked(selectLevelScene);
+				}
+				else
+				{
+					GD.Print("Level selection scene not found");
+				}
 			}
+		}
+		private void InstantiateLoadGameScene()
+		{
+			PackedScene SelectSaveScene = ResourceLoader.Load<PackedScene>(_selectSaveScenePath);
+			_loadGameScene = (LoadGame)SelectSaveScene.Instantiate();
+			_loadGameScene.Visible = false;
+			AddChild(_loadGameScene);
 		}
 		private void OnLoadGameButtonPressed()
 		{
-			PackedScene SelectSaveScene = ResourceLoader.Load<PackedScene>(_selectSaveScenePath);
-			LoadGame LoadGameScene = (LoadGame)SelectSaveScene.Instantiate();
-			AddChild(LoadGameScene);
+			_loadGameScene.Visible = true;
 		}
 		private void OnSettingsButtonPressed()
 		{

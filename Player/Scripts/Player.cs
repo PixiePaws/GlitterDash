@@ -245,7 +245,7 @@ namespace UnicornGame
 				_jumpCount = 1;
 				_animatedSprite.Play("Jump");
 				//AudioManager.PlaySound(jumpSound);
-				//_audioManager.PlayJumpSound();
+				_audioManager._jumpSound.Play();
 				_justJumped = true;
 				_jumpTimer = JumpDuration;
 			}
