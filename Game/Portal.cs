@@ -77,7 +77,8 @@ namespace UnicornGame
             GD.Print($"Current scene LoadedSaveFile value in Portal.cs: {currentScene.LoadedSaveFile}");
             GameSaver.LoadedSaveFile = currentScene.LoadedSaveFile;
             GD.Print($"Set GameSaver LoadedSaveFile value in Portal.cs: {GameSaver.LoadedSaveFile}");
-            GameSaver.WriteTextToFile(GameSaver.DirectoryPath, GameSaver.LoadedSaveFile, JsonString);
+            GD.Print($"GameSaver FileName value in Portal.cs: {GameSaver.FileName}");
+            GameSaver.WriteTextToFile(GameSaver.DirectoryPath, GameSaver.FileName, JsonString);
 
             int nextLevel = 0;
 
