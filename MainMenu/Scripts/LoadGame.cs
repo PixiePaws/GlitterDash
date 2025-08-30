@@ -19,6 +19,7 @@ namespace UnicornGame
         private ConfirmationDialog _savesFullPrompt;
         private Prompt _confirmSaveDeletion;
         private string _delButtonSpritePath = "res://Art/MainMenu/TrashCan3.png";
+        [Export] private int _saveSlotsAmount = 3;
         public override void _Ready()
         {
             _savesFullPrompt = GetNode<ConfirmationDialog>("SavesFullPrompt");
@@ -50,6 +51,20 @@ namespace UnicornGame
             SetButtonVisibilityAndText();
             InstantiateDeleteButtons();
             GetAllLevelPaths();
+            //FileUtil.GetSaveFilesAmount();
+        }
+
+        public string DirectoryPath
+        {
+            get { return _directoryPath; }
+        }
+        public int SaveSlotsAmount
+        {
+            get { return _saveSlotsAmount; }
+        }
+        public ConfirmationDialog SavesFullPrompt
+        {
+            get { return _savesFullPrompt; }
         }
         public void PopulateButtonList()
         {
@@ -225,7 +240,8 @@ namespace UnicornGame
         //Destroys this scene when quit button is pressed.
         public void OnQuitButtonPressed()
         {
-            QueueFree();
+            //QueueFree();
+            Visible = false;
         }
         //Returns an array of the level paths for the levels found in the file system.
         public Godot.Collections.Array GetAllLevelPaths()
@@ -393,13 +409,17 @@ namespace UnicornGame
         {
             _confirmSaveDeletion.Visible = true;
         }
+        public void DeleteSaveFile(string FilePath)
+        {
+            GD.Print("Save File Deleted");
+        }
         public void OnOkButtonPressed()
         {
             _savesFullPrompt.Visible = false;
         }
         public void OnCancelButtonPressed()
         {
-            QueueFree();
+            Visible = false;
         }
         public bool SavesFullPromptVisibility
         {

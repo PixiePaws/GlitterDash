@@ -5,9 +5,9 @@ namespace UnicornGame
 {
     public static class FileUtil
     {
-        static int GetSaveFilesAmount()
+        public static int GetSaveFilesAmount(string DirectoryPath)
         {
-            int SaveFilesAmount = 0;
+            int SaveFilesAmount = DirAccess.GetFilesAt(DirectoryPath).Length;
             return SaveFilesAmount;
         }
     }
