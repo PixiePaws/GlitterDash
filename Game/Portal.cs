@@ -126,6 +126,7 @@ namespace UnicornGame
             }
             GD.Print($"Save file path in PortalTransfer() in Portal is {currentScene.LoadedSaveFile}");
             NextLevelInstance.LoadedSaveFile = currentScene.LoadedSaveFile;
+            BloodDecalManager.Instance.ClearBlood();
             GetTree().Root.AddChild(NextLevelInstance);
             GetTree().CurrentScene = NextLevelInstance;
             currentScene.QueueFree();

@@ -85,6 +85,6 @@ offset_right = 1922.0
 offset_bottom = 343.0
 theme_override_fonts/font = ExtResource("5_y13pf")
 theme_override_font_sizes/font_size = 155
-text = "Unicorn Dash"
+text = "GlitterDash"
 horizontal_alignment = 1
 vertical_alignment = 1
