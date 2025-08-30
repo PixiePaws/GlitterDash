@@ -2,10 +2,8 @@
 
 [ext_resource type="Script" path="res://MainMenu/Scripts/Prompt.cs" id="1_bqauo"]
 
-[node name="ConfirmSaveDeletion" type="CanvasLayer" node_paths=PackedStringArray("_okButton", "_cancelButton")]
+[node name="ConfirmSaveDeletion" type="CanvasLayer"]
 script = ExtResource("1_bqauo")
-_okButton = NodePath("Control/Panel/MarginContainer/VBoxContainer/HBoxContainer/DeleteButton")
-_cancelButton = NodePath("Control/Panel/MarginContainer/VBoxContainer/HBoxContainer/CancelButton")
 
 [node name="Control" type="Control" parent="."]
 layout_mode = 3

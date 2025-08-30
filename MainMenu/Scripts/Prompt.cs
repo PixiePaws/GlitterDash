@@ -13,6 +13,8 @@ namespace UnicornGame
         public override void _Ready()
         {
             _loadGameScene = (LoadGame)GetParent();
+            _okButton = GetNode<Button>("Control/Panel/MarginContainer/VBoxContainer/HBoxContainer/DeleteButton");
+            _cancelButton = GetNode<Button>("Control/Panel/MarginContainer/VBoxContainer/HBoxContainer/CancelButton");
             _okButton.Pressed += OnOkButtonPressed;
             _cancelButton.Pressed += OnCancelButtonPressed;
         }
