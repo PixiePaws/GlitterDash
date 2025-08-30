@@ -9,6 +9,7 @@ namespace UnicornGame
     public partial class LoadGame : CanvasLayer
     {
         Godot.Collections.Array<Button> _buttonList;
+        Godot.Collections.Array<Button> _deleteButtonList;
         private string[] _saveFileList;
         private string _saverScenePath;
         private string _directoryPath;
@@ -142,7 +143,8 @@ namespace UnicornGame
             GD.Print($"Button index: {SignalSenderIndex}");
             //Read the save file dynamically
             string FileName = _saveFileList[SignalSenderIndex];
-            string FilePath = Path.Join(_directoryPath, FileName);
+            //string FilePath = Path.Join(_directoryPath, FileName);
+            string FilePath = GetSaveFilePath(FileName);
             GD.Print($"File path: {FilePath}");
             Godot.Collections.Dictionary<string, Variant> LoadedDictionary = GetSaveFileAsDictionary(FilePath);
             GD.Print(LoadedDictionary);
@@ -218,7 +220,8 @@ namespace UnicornGame
                 GD.Print($"SetButtonVisibilityAndText for loop, i: {i}");
                 if (i > SaveFileAmount - 1)
                 {
-                    //_buttonList[i].Disabled = true;
+                    _buttonList[i].Text = "Empty";
+                    _buttonList[i].Disabled = true;
                     Color NewColor = _buttonList[i].Modulate;
                     NewColor.A = 0.7f;
                     _buttonList[i].Modulate = NewColor;
@@ -396,22 +399,49 @@ namespace UnicornGame
             _delButtonSpritePath = "res://Art/MainMenu/TrashCan3.png";
             Texture2D DelButtonSprite = ResourceLoader.Load<Texture2D>(_delButtonSpritePath);
             var DeleteVboxContainer = GetNode<VBoxContainer>("LoadControl/TabBar/MarginContainer2/DeleteVBoxContainer");
-            for (int i = 0; i < _buttonList.Count; i++)
+            for (int i = 0; i < _saveFileList.Length; i++)
             {
                 TextureButton DelButton = new TextureButton();
                 DelButton.TextureNormal = DelButtonSprite;
                 DelButton.Name = $"DeleteButton{i + 1}";
                 DeleteVboxContainer.AddChild(DelButton);
-                DelButton.Pressed += OnDeleteButtonPressed;
+                TextureButton DelButtonCopy = DelButton;
+                DelButtonCopy.Pressed += () => OnDeleteButtonPressed(DelButtonCopy);
             }
         }
-        public void OnDeleteButtonPressed()
+        public void OnDeleteButtonPressed(TextureButton button)
         {
             _confirmSaveDeletion.Visible = true;
+            int SignalSenderIndex = button.GetIndex();
+            GD.Print($"TextureButton index: {SignalSenderIndex}");
+            string FileName = _saveFileList[SignalSenderIndex];
+            string FilePath = GetSaveFilePath(FileName);
+            _confirmSaveDeletion.SaveFilePath = FilePath;
+            _confirmSaveDeletion.OnDeleteButtonPressedInstance = button;
         }
         public void DeleteSaveFile(string FilePath)
         {
-            GD.Print("Save File Deleted");
+            GD.Print("LoadGame DeleteSaveFile()");
+            GD.Print($"DirectoryPath string: {DirectoryPath}");
+            //GD.Print($"FileName string: {FileName}");
+            GD.Print($"DeleteSaveFile() in LoadGame, save file path: {FilePath}");
+            if (!File.Exists(FilePath))
+            {
+                GD.Print("File not found in DeleteSaveFile() in LoadGame");
+            }
+            else
+            {
+                try
+                {
+                    File.Delete(FilePath);
+                }
+                catch (Exception Error)
+                {
+                    GD.Print(Error);
+                }
+                UpdateScene();
+                return;
+            }
         }
         public void OnOkButtonPressed()
         {
@@ -424,6 +454,14 @@ namespace UnicornGame
         public bool SavesFullPromptVisibility
         {
             set { _savesFullPrompt.Visible = value; }
+        }
+        public void UpdateScene()
+        {
+            PopulateButtonList();
+            PopulateSaveFileList();
+            CheckListLengthAndContents();
+            SetButtonVisibilityAndText();
+            GetAllLevelPaths();
         }
     }
 }

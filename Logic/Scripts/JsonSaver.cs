@@ -50,10 +50,12 @@ namespace UnicornGame
             GD.Print($"IsLoadedSaveFileNull in JsonSaver: {IsLoadedSaveFileNull}");
             if (FileCount == 0 && IsLoadedSaveFileNull)
             {
+                GD.Print("_loadedSaveFile in JsonSaver is null and FileCount is 0");
                 _fileName = _defaultFileName;
             }
             else if (FileCount < _saveSlotsAmount && IsLoadedSaveFileNull)
             {
+                GD.Print("_loadedSaveFile in JsonSaver is null and FileCount < _saveSlotsAmount");
                 _fileName = $"{FileBodyName}{SaveNumberString}{FileExtensionString}";
             }
             else if (!IsLoadedSaveFileNull)
@@ -68,7 +70,7 @@ namespace UnicornGame
             GD.Print("JsonSaver WriteTextToFile");
             GD.Print($"GameData string: {GameData}");
             GD.Print($"FileName string: {FileName}");
-            GD.Print($"WriteTextToFile() in JasonSaver, _loadedSaveFile: {_loadedSaveFile}");
+            GD.Print($"WriteTextToFile() in JsonSaver, _loadedSaveFile: {_loadedSaveFile}");
             if (!Directory.Exists(DirectoryPath))
             {
                 Directory.CreateDirectory(DirectoryPath);
