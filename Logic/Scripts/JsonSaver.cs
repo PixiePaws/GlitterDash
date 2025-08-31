@@ -12,7 +12,7 @@ namespace UnicornGame
         [Export] private string _fileName;
         [Export] private int _saveSlotsAmount = 3;
         private string _loadedSaveFile = "";
-        private string _defaultFileName = "Save1.json";
+        private string _defaultFileName = "Save_1.json";
         //private string _currentSaveFile;
 
         public string DirectoryPath
@@ -43,8 +43,8 @@ namespace UnicornGame
             //string jsonString = Json.Stringify(_saveData);
             _directoryPath = ProjectSettings.GlobalizePath("user://");
             int FileCount = DirAccess.GetFilesAt(_directoryPath).Length;
-            string FileBodyName = "Save";
-            string SaveNumberString = (FileCount + 1).ToString();
+            string FileBodyName = "Save_";
+            string SaveNumberString = (1 + GetLargestSaveID()).ToString();
             string FileExtensionString = ".json";
             bool IsLoadedSaveFileNull = string.IsNullOrEmpty(_loadedSaveFile);
             GD.Print($"IsLoadedSaveFileNull in JsonSaver: {IsLoadedSaveFileNull}");
@@ -146,6 +146,25 @@ namespace UnicornGame
                 LoadedData = (Godot.Collections.Dictionary<string, Variant>)JsonInstance.Data;
             }
             return LoadedData;
+        }
+        public int GetLargestSaveID()
+        {
+            int LargestID = 0;
+            string[] SaveFilesArray = DirAccess.GetFilesAt(_directoryPath);
+
+            foreach (string FileName in SaveFilesArray)
+            {
+                GD.Print($"GetLargestSaveID() current FileName: {FileName}, current LargestID: {LargestID}");
+                string NoExtension = Path.GetFileNameWithoutExtension(FileName);
+                string[] SplitString = NoExtension.Split("_");
+                int IdNumber = int.Parse(SplitString[1]);
+                if (IdNumber > LargestID)
+                {
+                    GD.Print($"IdNumber: {IdNumber} > LargestID: {LargestID}");
+                    LargestID = IdNumber;
+                }
+            }
+            return LargestID;
         }
     }
 }
