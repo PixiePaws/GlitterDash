@@ -188,7 +188,7 @@ namespace UnicornGame
 					_animatedSprite.Play("Walk");
 					if (!walking)
 					{
-						GD.Print("Playing walk sound");
+						//GD.Print("Playing walk sound");
 						AudioManager.PlaySound(walkSound);
 						walking = true;
 					}
@@ -200,7 +200,7 @@ namespace UnicornGame
 				}
 				else if (IsOnFloor() && _isWallSliding)
 				{
-					GD.Print("BasicMovement, setting _isWallSliding to false");
+					//GD.Print("BasicMovement, setting _isWallSliding to false");
 					_audioManager._wallSlideSound.Stop();
 					_isWallSliding = false;
 				}
@@ -284,11 +284,11 @@ namespace UnicornGame
 
 			if (IsNearWall() && !IsOnFloor() && inputDirection != 0 && MathF.Sign(inputDirection) == GetWallDirection())
 			{
-				GD.Print($"_isWallSliding: {_isWallSliding}");
+				//GD.Print($"_isWallSliding: {_isWallSliding}");
 				if (!_isWallSliding)
 				{
-					GD.Print("Playing wallSlideSound");
-					GD.Print($"if input direction: {inputDirection}");
+					//GD.Print("Playing wallSlideSound");
+					//GD.Print($"if input direction: {inputDirection}");
 					_audioManager._wallSlideSound.Play();
 					_isWallSliding = true;
 				}
@@ -300,8 +300,8 @@ namespace UnicornGame
 			
 			else if (IsNearWall() && !IsOnFloor() && inputDirection == 0)
 			{
-				GD.Print($"else if input direction: {inputDirection}");
-				GD.Print("Setting wall slide to false in else if (IsNearWall() && !IsOnFloor() && inputDirection == 0)");
+				//GD.Print($"else if input direction: {inputDirection}");
+				//GD.Print("Setting wall slide to false in else if (IsNearWall() && !IsOnFloor() && inputDirection == 0)");
 				_isWallSliding = false;
 				_audioManager._wallSlideSound.Stop();
 				_animatedSprite.Play("Falling");

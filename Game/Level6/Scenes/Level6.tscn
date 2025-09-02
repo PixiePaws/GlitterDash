@@ -4,7 +4,7 @@
 [ext_resource type="PackedScene" uid="uid://bun0lpg7lkpq6" path="res://Player/Scenes/PlayerCharacter.tscn" id="2_6nb4l"]
 [ext_resource type="Script" path="res://Game/Respawner.cs" id="3_5ksrn"]
 [ext_resource type="Script" path="res://Game/Level1/Scripts/Camera.cs" id="4_2c8vn"]
-[ext_resource type="Theme" uid="uid://toxmj1vwp6m" path="res://UI/TextTheme.tres" id="5_l68ym"]
+[ext_resource type="Theme" path="res://UI/TextTheme.tres" id="5_l68ym"]
 [ext_resource type="Texture2D" uid="uid://uprybvy2gmww" path="res://Art/Items/TheEgg.png" id="6_1qvv2"]
 [ext_resource type="Texture2D" uid="uid://bbi8xqng11ic8" path="res://Art/Backgrounds/SpaceBG.png" id="7_mvtq4"]
 [ext_resource type="Texture2D" uid="uid://c3hd8ludbquxr" path="res://Art/Backgrounds/MiddleBG.png" id="8_hjdgg"]
@@ -14,7 +14,7 @@
 [ext_resource type="Script" path="res://Game/Portal.cs" id="12_x1hmq"]
 [ext_resource type="Texture2D" uid="uid://cr2mrqp8ecys1" path="res://Art/Tilemaps/GrassTiles.png" id="13_lt612"]
 [ext_resource type="Texture2D" uid="uid://tbl74xhn72on" path="res://Art/Tilemaps/StoneTiles.png" id="14_co0ys"]
-[ext_resource type="PackedScene" uid="uid://dol5g5hc7xj1e" path="res://Game/DangerZoneFalling.tscn" id="15_k82iu"]
+[ext_resource type="PackedScene" path="res://Game/DangerZoneFalling.tscn" id="15_k82iu"]
 [ext_resource type="Script" path="res://Items/Scripts/GoldEggManager.cs" id="16_mv187"]
 [ext_resource type="PackedScene" uid="uid://dsnvu8ioiw0ff" path="res://Items/Scenes/GoldEgg.tscn" id="17_41mg6"]
 [ext_resource type="Shader" path="res://Game/Black&White.gdshader" id="18_204xr"]
@@ -109,7 +109,7 @@ position = Vector2(-9.66797, 127.067)
 scale = Vector2(0.999849, 0.999849)
 
 [node name="UniLLeg" parent="PlayerCharacter/PartsSkeletonContainer/Parts" index="5"]
-position = Vector2(6.99023, 118.259)
+position = Vector2(6.98828, 118.259)
 scale = Vector2(0.999851, 0.999851)
 
 [node name="Head" parent="PlayerCharacter/PartsSkeletonContainer/Skeleton2D/Base/Body" index="1"]

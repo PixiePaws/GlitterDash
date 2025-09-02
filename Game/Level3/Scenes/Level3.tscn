@@ -83,14 +83,20 @@ Filter = NodePath("../BlackWhite")
 _collisionDetector = NodePath("CollisionDetector")
 
 [node name="UniHead" parent="PlayerCharacter/PartsSkeletonContainer/Parts" index="0"]
+position = Vector2(13.7908, 118.077)
 scale = Vector2(0.999832, 0.999832)
 
 [node name="UniBody" parent="PlayerCharacter/PartsSkeletonContainer/Parts" index="1"]
 position = Vector2(16.6767, 119.407)
+scale = Vector2(1, 1)
 
 [node name="UniLHand" parent="PlayerCharacter/PartsSkeletonContainer/Parts" index="2"]
 position = Vector2(10.5848, 119)
 scale = Vector2(0.999858, 0.999858)
+
+[node name="UniRLeg" parent="PlayerCharacter/PartsSkeletonContainer/Parts" index="3"]
+position = Vector2(10.0092, 113.561)
+scale = Vector2(0.99985, 0.99985)
 
 [node name="UniRHand" parent="PlayerCharacter/PartsSkeletonContainer/Parts" index="4"]
 position = Vector2(-9.66882, 127.067)
@@ -98,6 +104,7 @@ scale = Vector2(0.999849, 0.999849)
 
 [node name="UniLLeg" parent="PlayerCharacter/PartsSkeletonContainer/Parts" index="5"]
 position = Vector2(6.98792, 118.259)
+scale = Vector2(0.999851, 0.999851)
 
 [node name="Head" parent="PlayerCharacter/PartsSkeletonContainer/Skeleton2D/Base/Body" index="1"]
 scale = Vector2(0.999832, 0.999832)
@@ -116,10 +123,11 @@ Camera = NodePath("../../Camera2D")
 _player = NodePath("..")
 _respawner = NodePath("../../Respawner")
 
-[node name="Respawner" type="Node" parent="." node_paths=PackedStringArray("_respawnPoint", "_player")]
+[node name="Respawner" type="Node" parent="." node_paths=PackedStringArray("_respawnPoint", "_scoreLabel", "_player")]
 unique_name_in_owner = true
 script = ExtResource("3_iciou")
 _respawnPoint = NodePath("../RespawnPoint")
+_scoreLabel = NodePath("../Camera2D/ScoreLabel")
 _player = NodePath("../PlayerCharacter")
 
 [node name="Camera2D" type="Camera2D" parent="." node_paths=PackedStringArray("Player")]

@@ -76,6 +76,7 @@ namespace UnicornGame
             //GD.Print(JsonString);
             GD.Print($"Current scene LoadedSaveFile value in Portal.cs: {currentScene.LoadedSaveFile}");
             GameSaver.LoadedSaveFile = currentScene.LoadedSaveFile;
+            GameSaver.SetFileName();
             GD.Print($"Set GameSaver LoadedSaveFile value in Portal.cs: {GameSaver.LoadedSaveFile}");
             GD.Print($"GameSaver FileName value in Portal.cs: {GameSaver.FileName}");
             GameSaver.WriteTextToFile(GameSaver.DirectoryPath, GameSaver.FileName, JsonString);
@@ -126,6 +127,7 @@ namespace UnicornGame
             }
             GD.Print($"Save file path in PortalTransfer() in Portal is {currentScene.LoadedSaveFile}");
             NextLevelInstance.LoadedSaveFile = currentScene.LoadedSaveFile;
+            BloodDecalManager.Instance.ClearBlood();
             GetTree().Root.AddChild(NextLevelInstance);
             GetTree().CurrentScene = NextLevelInstance;
             currentScene.QueueFree();
