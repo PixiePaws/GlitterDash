@@ -33,6 +33,7 @@ namespace UnicornGame
             get { return _loadedSaveFile; }
             set { _loadedSaveFile = value; }
         }
+
         public override void _Ready()
         {
             GD.Print("JsonSaver _Ready()");
@@ -42,27 +43,6 @@ namespace UnicornGame
 
             //string jsonString = Json.Stringify(_saveData);
             _directoryPath = ProjectSettings.GlobalizePath("user://");
-            int FileCount = DirAccess.GetFilesAt(_directoryPath).Length;
-            string FileBodyName = "Save_";
-            string SaveNumberString = (1 + GetLargestSaveID()).ToString();
-            string FileExtensionString = ".json";
-            bool IsLoadedSaveFileNull = string.IsNullOrEmpty(_loadedSaveFile);
-            GD.Print($"IsLoadedSaveFileNull in JsonSaver: {IsLoadedSaveFileNull}");
-            if (FileCount == 0 && IsLoadedSaveFileNull)
-            {
-                GD.Print("_loadedSaveFile in JsonSaver is null and FileCount is 0");
-                _fileName = _defaultFileName;
-            }
-            else if (FileCount < _saveSlotsAmount && IsLoadedSaveFileNull)
-            {
-                GD.Print("_loadedSaveFile in JsonSaver is null and FileCount < _saveSlotsAmount");
-                _fileName = $"{FileBodyName}{SaveNumberString}{FileExtensionString}";
-            }
-            else if (!IsLoadedSaveFileNull)
-            {
-                GD.Print($"_loadedSaveFile in JsonSaver is not null");
-                _fileName = _loadedSaveFile;
-            }
             //WriteTextToFile(_directoryPath, _fileName, jsonString);
         }
         public void WriteTextToFile(string DirectoryPath, string FileName, string GameData)
@@ -165,6 +145,30 @@ namespace UnicornGame
                 }
             }
             return LargestID;
+        }
+        public void SetFileName()
+        {
+            int FileCount = DirAccess.GetFilesAt(_directoryPath).Length;
+            string FileBodyName = "Save_";
+            string SaveNumberString = (1 + GetLargestSaveID()).ToString();
+            string FileExtensionString = ".json";
+            bool IsLoadedSaveFileNull = string.IsNullOrEmpty(_loadedSaveFile);
+            GD.Print($"IsLoadedSaveFileNull in JsonSaver: {IsLoadedSaveFileNull}");
+            if (FileCount == 0 && IsLoadedSaveFileNull)
+            {
+                GD.Print("_loadedSaveFile in JsonSaver is null and FileCount is 0");
+                _fileName = _defaultFileName;
+            }
+            else if (FileCount < _saveSlotsAmount && IsLoadedSaveFileNull)
+            {
+                GD.Print("_loadedSaveFile in JsonSaver is null and FileCount < _saveSlotsAmount");
+                _fileName = $"{FileBodyName}{SaveNumberString}{FileExtensionString}";
+            }
+            else if (!IsLoadedSaveFileNull)
+            {
+                GD.Print($"_loadedSaveFile in JsonSaver is not null");
+                _fileName = _loadedSaveFile;
+            }
         }
     }
 }

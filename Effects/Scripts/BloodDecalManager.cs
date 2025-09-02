@@ -11,13 +11,20 @@ public partial class BloodDecalManager : Node2D
     private MultiMesh _MultiMesh;
     private int _DecalCount = 0;
     public static BloodDecalManager Instance { get; private set; }
-  
+    private GameLevels _currentLevelScene;
+
+    public GameLevels CurrentLevelScene
+    {
+        get { return _currentLevelScene; }
+        set { _currentLevelScene = value; }
+    }
+
     public override void _Ready()
     {
         // For debugging
         // GD.Print("Is BloodTexture null? ", BloodTexture == null);
         // GD.Print("MultiMeshInstance: ", MultiMeshInstance);
-        
+
         Instance = this;
         if (MultiMeshInstance.Multimesh == null)
         {
@@ -63,5 +70,16 @@ public partial class BloodDecalManager : Node2D
         for (int i = 0; i < MaxDecals; i++)
             _MultiMesh.SetInstanceTransform2D(i, new Transform2D());
         _DecalCount = 0;
+    }
+    public void SetCurrentLevelScene(GameLevels CurrentLevelScene)
+    {
+        _currentLevelScene = CurrentLevelScene;
+        GD.Print($"BloodDecalManager SetCurrentLevelScene() was called, _currentLevelScene: {_currentLevelScene}");
+        _currentLevelScene.TreeExited += OnTreeExited;
+    }
+    public void OnTreeExited()
+    {
+        GD.Print($"BloodDecalManager OnTreeExited() was called");
+        ClearBlood();
     }
 }

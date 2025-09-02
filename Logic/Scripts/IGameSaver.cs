@@ -10,6 +10,7 @@ namespace UnicornGame
         string SavePath { get; }
         string LoadedSaveFile { get; set; }
         public void WriteTextToFile(string DirectoryPath, string FileName, string GameData);
+        public void SetFileName();
     }
 }
 

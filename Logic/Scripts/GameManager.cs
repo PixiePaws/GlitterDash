@@ -30,6 +30,8 @@ namespace UnicornGame
                         _gameSaver = new XmlSaver();
                         break;*/
             }
+            GD.Print($"GameManager parent node name: {_parentNode.Name}");
+            BloodDecalManager.Instance.SetCurrentLevelScene(_parentNode);
         }
         public GameLevels.SaveFormat GetSaveFormat()
         {
